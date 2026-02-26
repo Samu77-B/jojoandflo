@@ -449,9 +449,15 @@
             justify-content: space-between;
             align-items: center;
             font-family: var(--font-freight);
-            font-size: 13px;
-            color: rgba(255,255,255,0.4);
         }
+        .footer-bottom p { font-size: 13px; color: rgba(255,255,255,0.4); }
+        .footer-credit {
+            font-size: 12px;
+            margin-top: 8px;
+            color: rgba(255,255,255,0.5);
+        }
+        .footer-credit a { color: rgba(255,255,255,0.5); }
+        .footer-credit a:hover { color: rgba(255,255,255,0.8); }
         .social-icons { display: flex; gap: 20px; }
         .social-icons a { color: rgba(255,255,255,0.7); font-size: 20px; }
         .social-icons a:hover { color: #fff; }
@@ -721,7 +727,7 @@
             <div class="footer-column">
                 <h4 class="footer-heading">Contact</h4>
                 <ul class="footer-links">
-                    <li><a href="#">123 Oxford Street, London</a></li>
+                    <li><a href="https://maps.google.com/?q=310+Green+Lanes+London+N13+5TT" target="_blank" rel="noopener">310 Green Lanes, London N13 5TT</a></li>
                     <li><a href="#">+44 20 1234 5678</a></li>
                     <li><a href="mailto:hello@jojoandflo.com">hello@jojoandflo.com</a></li>
                 </ul>
@@ -729,14 +735,21 @@
             <div class="footer-column">
                 <h4 class="footer-heading">Hours</h4>
                 <ul class="footer-links">
-                    <li><a href="#">Mon - Fri: 9am - 8pm</a></li>
-                    <li><a href="#">Saturday: 10am - 6pm</a></li>
+                    <li><a href="#">Monday: Closed</a></li>
+                    <li><a href="#">Tuesday: 10am – 6pm</a></li>
+                    <li><a href="#">Wednesday: 10am – 6pm</a></li>
+                    <li><a href="#">Thursday: 10am – 6pm</a></li>
+                    <li><a href="#">Friday: 10am – 6pm</a></li>
+                    <li><a href="#">Saturday: 9am – 6pm</a></li>
                     <li><a href="#">Sunday: Closed</a></li>
                 </ul>
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2024 JOJO & FLO LONDON. All Rights Reserved.</p>
+            <div>
+                <p>&copy; 2025 JOJO & FLO LONDON. All Rights Reserved.</p>
+                <p class="footer-credit">Website by <a href="https://paradigmstudio.net" target="_blank" rel="noopener">paradigmstudio.net</a></p>
+            </div>
             <div class="social-icons">
                 <a href="#"><i class="ri-facebook-circle-fill"></i></a>
                 <a href="#"><i class="ri-instagram-fill"></i></a>
