@@ -147,8 +147,8 @@
             box-shadow: 0 10px 20px rgba(0,0,0,0.1);
         }
 
-        /* About */
-        .about {
+        /* Our Philosophy */
+        .philosophy {
             padding: 120px 200px;
             background-color: var(--secondary-bg);
             text-align: center;
@@ -156,6 +156,24 @@
             flex-direction: column;
             align-items: center;
         }
+        .philosophy-text {
+            font-family: var(--font-freight);
+            font-weight: 300;
+            font-size: 36px;
+            line-height: 1.6;
+            color: var(--text-dark);
+            max-width: 900px;
+            margin-bottom: 40px;
+        }
+        .philosophy-desc {
+            font-family: var(--font-freight);
+            font-size: 16px;
+            line-height: 1.8;
+            color: var(--text-light);
+            max-width: 700px;
+        }
+
+        /* Section shared */
         .section-tag {
             font-family: var(--font-freight);
             font-size: 12px;
@@ -167,22 +185,38 @@
             border-bottom: 1px solid var(--text-light);
             padding-bottom: 5px;
         }
-        .about-text {
+        /* Google Reviews */
+        .google-reviews {
+            padding: 80px 100px;
+            background-color: var(--white);
+            text-align: center;
+        }
+        .google-reviews .reviews-strip {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+        .google-reviews .stars { color: #E8A317; font-size: 24px; margin-bottom: 12px; }
+        .google-reviews .rating-text {
             font-family: var(--font-freight);
+            font-size: 18px;
             font-weight: 300;
-            font-size: 36px;
-            line-height: 1.6;
             color: var(--text-dark);
-            max-width: 900px;
-            margin-bottom: 40px;
         }
-        .about-desc {
+        .google-reviews .review-link {
             font-family: var(--font-freight);
-            font-size: 16px;
-            line-height: 1.8;
+            font-size: 14px;
             color: var(--text-light);
-            max-width: 700px;
+            text-decoration: underline;
+            margin-top: 8px;
+            display: inline-block;
         }
+
+        /* Featured Products */
+        .featured-products { padding: 100px; background-color: var(--primary-bg); }
+        .featured-products .retail-grid { margin-top: 0; }
 
         /* Services */
         .services { padding: 120px 100px; background-color: var(--white); }
@@ -285,25 +319,100 @@
         .gallery-item:hover .gallery-overlay { opacity: 1; }
         .gallery-icon { color: white; font-size: 30px; }
 
-        /* Testimonials */
-        .testimonials { padding: 120px 0; background-color: #EFEBE4; text-align: center; }
-        .quote-container { max-width: 1000px; margin: 0 auto; }
-        .quote-icon { font-size: 60px; color: #D6C6B3; margin-bottom: 30px; font-family: var(--font-freight); font-weight: 300; }
-        .quote-text {
-            font-family: var(--font-freight);
-            font-size: 28px;
-            line-height: 1.6;
-            color: var(--text-dark);
-            margin-bottom: 40px;
-            font-style: italic;
+        /* Treatments */
+        .treatments { padding: 120px 100px; background-color: var(--secondary-bg); }
+        .treatments-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
+
+        /* Weddings */
+        .weddings {
+            padding: 120px 100px;
+            background-color: var(--white);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
         }
-        .quote-author {
+        .weddings-image {
+            width: 100%;
+            height: 450px;
+            object-fit: cover;
+            background-color: #f0f0f0;
+        }
+        .weddings-content .section-title { text-align: left; margin-bottom: 20px; }
+        .weddings-content p {
+            font-family: var(--font-freight);
+            font-size: 16px;
+            color: var(--text-light);
+            line-height: 1.8;
+            margin-bottom: 24px;
+        }
+
+        /* Mens Hair */
+        .mens-hair { padding: 120px 100px; background-color: var(--primary-bg); }
+        .mens-hair-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 60px; align-items: center; }
+        .mens-hair-image {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            background-color: #f0f0f0;
+        }
+        .mens-hair-content p {
+            font-family: var(--font-freight);
+            font-size: 16px;
+            color: var(--text-light);
+            line-height: 1.8;
+            margin-bottom: 24px;
+        }
+
+        /* Discount Sign Up */
+        .discount-signup {
+            padding: 100px 100px;
+            background: linear-gradient(135deg, #2C2C2C 0%, #1a1a1a 100%);
+            color: var(--white);
+            text-align: center;
+        }
+        .discount-signup .section-title { color: var(--white); margin-bottom: 12px; }
+        .discount-signup .section-tag { color: #B0A08C; border-bottom-color: #B0A08C; }
+        .discount-signup p {
+            font-family: var(--font-freight);
+            font-size: 18px;
+            color: rgba(255,255,255,0.8);
+            max-width: 600px;
+            margin: 0 auto 40px;
+            line-height: 1.6;
+        }
+        .discount-form {
+            display: flex;
+            gap: 12px;
+            max-width: 500px;
+            margin: 0 auto;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .discount-form input[type="email"] {
+            flex: 1;
+            min-width: 280px;
+            padding: 18px 24px;
+            border: 1px solid rgba(255,255,255,0.3);
+            background: rgba(255,255,255,0.1);
+            color: var(--white);
+            font-family: var(--font-freight);
+            font-size: 16px;
+        }
+        .discount-form input::placeholder { color: rgba(255,255,255,0.5); }
+        .discount-form button {
+            padding: 18px 40px;
+            background-color: #B0A08C;
+            color: var(--white);
+            border: none;
             font-family: var(--font-freight);
             font-size: 14px;
             letter-spacing: 2px;
             text-transform: uppercase;
-            color: var(--text-light);
+            cursor: pointer;
+            transition: all 0.3s ease;
         }
+        .discount-form button:hover { background-color: #D6C6B3; }
 
         /* Footer */
         footer {
@@ -351,10 +460,15 @@
         @media (max-width: 1024px) {
             .services-grid { grid-template-columns: repeat(2, 1fr); }
             .retail-grid { grid-template-columns: repeat(2, 1fr); }
-            .gallery { grid-template-columns: repeat(2, 1fr); }
-            .gallery-item { height: 300px; }
-            .about { padding: 80px 60px; }
-            .about-text { font-size: 28px; }
+            .philosophy { padding: 80px 60px; }
+            .philosophy-text { font-size: 28px; }
+            .treatments-grid { grid-template-columns: repeat(2, 1fr); }
+            .weddings { grid-template-columns: 1fr; gap: 40px; }
+            .weddings-image { order: -1; height: 350px; }
+            .mens-hair-grid { grid-template-columns: 1fr; }
+            .mens-hair-image { order: -1; height: 300px; }
+            .google-reviews { padding: 60px 40px; }
+            .google-reviews .reviews-strip { flex-direction: column; gap: 24px; }
         }
 
         @media (max-width: 768px) {
@@ -370,11 +484,24 @@
             .hero-btn { padding: 14px 28px; font-size: 12px; }
             .hero-content { padding-top: 0; }
 
-            .about { padding: 60px 24px; }
-            .about-text { font-size: 22px; }
-            .about-desc { font-size: 14px; }
-
+            .philosophy { padding: 60px 24px; }
+            .philosophy-text { font-size: 22px; }
+            .philosophy-desc { font-size: 14px; }
+            .google-reviews { padding: 60px 24px; }
+            .featured-products { padding: 60px 24px; }
             .services { padding: 60px 24px; }
+            .treatments { padding: 60px 24px; }
+            .treatments-grid { grid-template-columns: 1fr; }
+            .weddings { padding: 60px 24px; gap: 32px; }
+            .weddings-image { height: 280px; }
+            .weddings-content .section-title { text-align: center; }
+            .mens-hair { padding: 60px 24px; }
+            .mens-hair-grid { gap: 32px; }
+            .mens-hair-image { height: 250px; }
+            .mens-hair-content .section-title { text-align: center; }
+            .discount-signup { padding: 80px 24px; }
+            .discount-form { flex-direction: column; }
+            .discount-form input[type="email"] { min-width: 100%; }
             .section-header { margin-bottom: 40px; }
             .section-title { font-size: 28px; }
             .services-grid { grid-template-columns: 1fr; gap: 24px; }
@@ -382,32 +509,10 @@
             .service-icon { font-size: 32px; }
             .service-name { font-size: 18px; }
 
-            .retail { padding: 60px 24px; }
             .retail-grid { grid-template-columns: 1fr 1fr; gap: 16px; }
             .product-image { height: 200px; }
             .product-info { padding: 20px; }
             .product-name { font-size: 16px; }
-
-            .gallery {
-                display: flex;
-                overflow-x: auto;
-                gap: 16px;
-                padding: 0 24px 24px;
-                scroll-snap-type: x mandatory;
-                -webkit-overflow-scrolling: touch;
-            }
-            .gallery::-webkit-scrollbar { display: none; }
-            .gallery-item {
-                min-width: 280px;
-                flex-shrink: 0;
-                height: 350px;
-                scroll-snap-align: start;
-            }
-
-            .testimonials { padding: 80px 24px; }
-            .quote-text { font-size: 20px; }
-            .quote-author { font-size: 12px; }
-
             .footer-content { flex-direction: column; gap: 40px; padding-bottom: 40px; }
             .footer-column[style*="flex: 1.5"] { flex: none !important; padding-right: 0 !important; }
             .footer-column { flex: none; }
@@ -429,11 +534,13 @@
         <nav id="mainNav">
             <ul>
                 <li><a href="#">Home</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Services</a></li>
-                <li><a href="#">Retail</a></li>
+                <li><a href="#">About Us</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#products">Products</a></li>
+                <li><a href="#">Portfolio</a></li>
                 <li><a href="#">Gallery</a></li>
-                <li><a href="#">Contact</a></li>
+                <li><a href="#google-reviews">Testimonials</a></li>
+                <li><a href="#contact">Contact Us</a></li>
             </ul>
         </nav>
         <button class="menu-icon" id="menuBtn" aria-label="Menu"><i class="ri-menu-line"></i></button>
@@ -447,44 +554,33 @@
         </div>
     </section>
 
-    <section class="about">
+    <section class="philosophy">
         <span class="section-tag">Our Philosophy</span>
-        <p class="about-text">"Creating beauty that is both effortless and enduring. We believe in enhancing your natural elegance with masterful technique and personalized care."</p>
-        <p class="about-desc">At JOJO & FLO, we combine the precision of London's finest styling with a relaxed, welcoming atmosphere. Our expert team is dedicated to providing you with a transformative experience that leaves you feeling confident and radiant.</p>
+        <p class="philosophy-text">"Creating beauty that is both effortless and enduring. We believe in enhancing your natural elegance with masterful technique and personalized care."</p>
+        <p class="philosophy-desc">At JOJO & FLO, we combine the precision of London's finest styling with a relaxed, welcoming atmosphere. Our expert team is dedicated to providing you with a transformative experience that leaves you feeling confident and radiant.</p>
     </section>
 
-    <section class="services">
-        <div class="section-header">
-            <h2 class="section-title">Our Services</h2>
-            <div class="section-tag" style="border-bottom-color: #D6C6B3; color: #B0A08C;">Curated Hair Experiences</div>
-        </div>
-        <div class="services-grid">
-            <div class="service-card">
-                <i class="ri-scissors-cut-line service-icon"></i>
-                <h3 class="service-name">Precision Cutting</h3>
-                <p class="service-desc">Tailored cuts that complement your face shape and lifestyle, executed with masterful precision.</p>
+    <section class="google-reviews" id="google-reviews">
+        <span class="section-tag">Trusted by Our Clients</span>
+        <h2 class="section-title" style="margin-bottom: 20px;">What Our Clients Say</h2>
+        <div class="reviews-strip">
+            <div>
+                <div class="stars"><i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i></div>
+                <p class="rating-text">"The level of care and expertise at Jojo & Flo is unmatched. I've never felt more confident with my hair."</p>
+                <a href="#" class="review-link">— Sarah J. on Google</a>
             </div>
-            <div class="service-card">
-                <i class="ri-palette-line service-icon"></i>
-                <h3 class="service-name">Bespoke Coloring</h3>
-                <p class="service-desc">From subtle balayage to vibrant transformations, our colorists create the perfect shade for you.</p>
-            </div>
-            <div class="service-card">
-                <i class="ri-sparkling-line service-icon"></i>
-                <h3 class="service-name">Luxury Treatments</h3>
-                <p class="service-desc">Revitalizing hair masks and scalp treatments to restore health and shine to your locks.</p>
-            </div>
-            <div class="service-card">
-                <i class="ri-user-heart-line service-icon"></i>
-                <h3 class="service-name">Bridal Styling</h3>
-                <p class="service-desc">Exquisite styling for your special day, ensuring you look breathtaking from every angle.</p>
+            <div>
+                <div class="stars"><i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i></div>
+                <p class="rating-text">"Absolutely delightful experience from start to finish. Wouldn't go anywhere else."</p>
+                <a href="#" class="review-link">— Emma M. on Google</a>
             </div>
         </div>
+        <a href="#" class="review-link" style="margin-top: 32px;">Read more reviews on Google</a>
     </section>
 
-    <section class="retail">
+    <section class="featured-products" id="products">
         <div class="section-header">
-            <h2 class="section-title">Shop The Collection</h2>
+            <h2 class="section-title">Featured Products</h2>
             <div class="section-tag" style="border-bottom-color: #D6C6B3; color: #B0A08C;">Premium Hair Care</div>
         </div>
         <div class="retail-grid">
@@ -512,34 +608,90 @@
         </div>
     </section>
 
-    <section class="gallery">
-        <div class="gallery-item">
-            <img src="https://images.unsplash.com/photo-1562322140-8baeececf3df?q=80&w=2034&auto=format&fit=crop" alt="Gallery Image 1">
-            <div class="gallery-overlay"><i class="ri-instagram-line gallery-icon"></i></div>
+    <section class="services" id="services">
+        <div class="section-header">
+            <h2 class="section-title">Our Services</h2>
+            <div class="section-tag" style="border-bottom-color: #D6C6B3; color: #B0A08C;">Curated Hair Experiences</div>
         </div>
-        <div class="gallery-item">
-            <img src="https://images.unsplash.com/photo-1580618672591-eb180b1a973f?q=80&w=2069&auto=format&fit=crop" alt="Gallery Image 2">
-            <div class="gallery-overlay"><i class="ri-instagram-line gallery-icon"></i></div>
-        </div>
-        <div class="gallery-item">
-            <img src="https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f?q=80&w=2070&auto=format&fit=crop" alt="Gallery Image 3">
-            <div class="gallery-overlay"><i class="ri-instagram-line gallery-icon"></i></div>
-        </div>
-        <div class="gallery-item">
-            <img src="https://images.unsplash.com/photo-1599305090598-fe179d501227?q=80&w=2087&auto=format&fit=crop" alt="Gallery Image 4">
-            <div class="gallery-overlay"><i class="ri-instagram-line gallery-icon"></i></div>
+        <div class="services-grid">
+            <div class="service-card">
+                <i class="ri-scissors-cut-line service-icon"></i>
+                <h3 class="service-name">Precision Cutting</h3>
+                <p class="service-desc">Tailored cuts that complement your face shape and lifestyle, executed with masterful precision.</p>
+            </div>
+            <div class="service-card">
+                <i class="ri-palette-line service-icon"></i>
+                <h3 class="service-name">Bespoke Coloring</h3>
+                <p class="service-desc">From subtle balayage to vibrant transformations, our colorists create the perfect shade for you.</p>
+            </div>
+            <div class="service-card">
+                <i class="ri-sparkling-line service-icon"></i>
+                <h3 class="service-name">Luxury Treatments</h3>
+                <p class="service-desc">Revitalizing hair masks and scalp treatments to restore health and shine to your locks.</p>
+            </div>
+            <div class="service-card">
+                <i class="ri-brush-3-line service-icon"></i>
+                <h3 class="service-name">Styling & Blow Dry</h3>
+                <p class="service-desc">Expert styling and finishes that bring out the best in your cut and colour.</p>
+            </div>
         </div>
     </section>
 
-    <section class="testimonials">
-        <div class="quote-container">
-            <div class="quote-icon">"</div>
-            <p class="quote-text">The level of care and expertise at Jojo & Flo is unmatched. I've never felt more confident with my hair. An absolutely delightful experience from start to finish.</p>
-            <p class="quote-author">Sarah Jenkins, Vogue UK</p>
+    <section class="treatments" id="treatments">
+        <div class="section-header">
+            <h2 class="section-title">Treatments</h2>
+            <div class="section-tag" style="border-bottom-color: #D6C6B3; color: #B0A08C;">Restorative & Revitalising</div>
+        </div>
+        <div class="treatments-grid">
+            <div class="service-card">
+                <i class="ri-sparkling-line service-icon"></i>
+                <h3 class="service-name">Keratin Treatment</h3>
+                <p class="service-desc">Smoothing and shine-enhancing treatment for frizz-free, manageable hair.</p>
+            </div>
+            <div class="service-card">
+                <i class="ri-heart-pulse-line service-icon"></i>
+                <h3 class="service-name">Deep Conditioning</h3>
+                <p class="service-desc">Intensive hydration and repair for damaged or over-processed hair.</p>
+            </div>
+            <div class="service-card">
+                <i class="ri-hand-sanitizer-line service-icon"></i>
+                <h3 class="service-name">Scalp Therapy</h3>
+                <p class="service-desc">Nourishing scalp treatments for healthier hair from root to tip.</p>
+            </div>
         </div>
     </section>
 
-    <footer>
+    <section class="weddings" id="weddings">
+        <img src="https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=2070&auto=format&fit=crop" alt="Bridal Hair Styling" class="weddings-image">
+        <div class="weddings-content">
+            <span class="section-tag">Special Occasions</span>
+            <h2 class="section-title">Weddings</h2>
+            <p>Exquisite bridal styling for your special day. From trials to the final look, our team ensures you look breathtaking from every angle. We work with you to create the perfect style that complements your dress, venue, and personal vision.</p>
+            <button class="hero-btn">Book a Bridal Consultation</button>
+        </div>
+    </section>
+
+    <section class="mens-hair" id="mens-hair">
+        <div class="mens-hair-content">
+            <span class="section-tag">For Him</span>
+            <h2 class="section-title">Men's Hair</h2>
+            <p>Precision cuts, classic styling, and modern grooming for the discerning gentleman. Our barbers and stylists deliver sharp, tailored looks that suit your lifestyle.</p>
+            <button class="hero-btn">View Men's Services</button>
+        </div>
+        <img src="https://images.unsplash.com/photo-1621605815971-fdf98ee788a3?q=80&w=2080&auto=format&fit=crop" alt="Men's Haircut" class="mens-hair-image">
+    </section>
+
+    <section class="discount-signup" id="signup">
+        <span class="section-tag">Exclusive Offer</span>
+        <h2 class="section-title">Get 10% Off Your First Visit</h2>
+        <p>Sign up to receive our welcome offer and be the first to hear about new services, products, and special events.</p>
+        <form class="discount-form" action="#" method="post">
+            <input type="email" name="email" placeholder="Enter your email address" required>
+            <button type="submit">Sign Up</button>
+        </form>
+    </section>
+
+    <footer id="contact">
         <div class="footer-content">
             <div class="footer-column" style="flex: 1.5; padding-right: 50px;">
                 <div class="footer-logo">
