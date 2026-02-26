@@ -2,3 +2,6 @@
 node_modules
 *.log
 .vercel
+
+# Archive - original/redundant files, not for deploy
+archive/
