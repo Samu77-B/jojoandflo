@@ -89,26 +89,23 @@
             height: 850px;
             overflow: hidden;
             background-color: #d8c0a8;
-            background-image: url('imgs/img01.png');
+            background-image: url('imgs/hero1.PNG');
             background-size: cover;
             background-position: center 20%;
             animation: heroSlide 40s infinite;
         }
         @keyframes heroSlide {
-            0%, 16% {
-                background-image: url('imgs/img01.png');
+            0%, 24% {
+                background-image: url('imgs/hero1.PNG');
             }
-            20%, 36% {
-                background-image: url('imgs/img02.png');
+            25%, 49% {
+                background-image: url('imgs/hero2.PNG');
             }
-            40%, 56% {
-                background-image: url('imgs/img04.png');
+            50%, 74% {
+                background-image: url('imgs/hero3.PNG');
             }
-            60%, 76% {
-                background-image: url('imgs/img05.png');
-            }
-            80%, 100% {
-                background-image: url('imgs/img06.png');
+            75%, 100% {
+                background-image: url('imgs/hero4.PNG');
             }
         }
         .hero::before {
@@ -306,14 +303,19 @@
         }
 
         /* Gallery */
+        .gallery-wrap {
+            padding: 120px 100px 100px;
+            background-color: var(--primary-bg);
+        }
+        .gallery-wrap .section-header { margin-bottom: 50px; }
         .gallery {
-            padding: 0;
             display: grid;
             grid-template-columns: repeat(4, 1fr);
+            gap: 0;
             width: 100%;
         }
         .gallery-item {
-            height: 480px;
+            aspect-ratio: 1;
             position: relative;
             overflow: hidden;
         }
@@ -485,6 +487,8 @@
             .services-grid { grid-template-columns: repeat(2, 1fr); }
             .retail-grid { grid-template-columns: repeat(2, 1fr); }
             .featured-products .retail-grid { grid-template-columns: repeat(2, 1fr); }
+            .gallery { grid-template-columns: repeat(2, 1fr); }
+            .gallery-wrap { padding: 80px 60px; }
             .philosophy { padding: 80px 60px; }
             .philosophy-text { font-size: 28px; }
             .treatments-grid { grid-template-columns: repeat(2, 1fr); }
@@ -514,6 +518,8 @@
             .philosophy-desc { font-size: 14px; }
             .google-reviews { padding: 60px 24px; }
             .featured-products { padding: 60px 24px; }
+            .gallery-wrap { padding: 60px 24px; }
+            .gallery { grid-template-columns: repeat(2, 1fr); }
             .services { padding: 60px 24px; }
             .treatments { padding: 60px 24px; }
             .treatments-grid { grid-template-columns: 1fr; }
@@ -563,7 +569,7 @@
                 <li><a href="#services">Services</a></li>
                 <li><a href="#products">Products</a></li>
                 <li><a href="#">Portfolio</a></li>
-                <li><a href="#">Gallery</a></li>
+                <li><a href="#gallery">Gallery</a></li>
                 <li><a href="#google-reviews">Testimonials</a></li>
                 <li><a href="#contact">Contact Us</a></li>
             </ul>
@@ -669,6 +675,50 @@
         </div>
     </section>
 
+    <section class="gallery-wrap" id="gallery">
+        <div class="section-header">
+            <h2 class="section-title">Gallery</h2>
+            <div class="section-tag" style="border-bottom-color: #D6C6B3; color: #B0A08C;">Our Salon & Work</div>
+        </div>
+        <div class="gallery">
+            <div class="gallery-item"><img src="imgs/hero1.PNG" alt="JoJo & Flo Salon"><div class="gallery-overlay"><i class="ri-image-line gallery-icon"></i></div></div>
+            <div class="gallery-item"><img src="imgs/hero2.PNG" alt="JoJo & Flo Salon"><div class="gallery-overlay"><i class="ri-image-line gallery-icon"></i></div></div>
+            <div class="gallery-item"><img src="imgs/hero3.PNG" alt="JoJo & Flo Salon"><div class="gallery-overlay"><i class="ri-image-line gallery-icon"></i></div></div>
+            <div class="gallery-item"><img src="imgs/hero4.PNG" alt="JoJo & Flo Salon"><div class="gallery-overlay"><i class="ri-image-line gallery-icon"></i></div></div>
+            <div class="gallery-item"><img src="imgs/img01.png" alt="JoJo & Flo"><div class="gallery-overlay"><i class="ri-image-line gallery-icon"></i></div></div>
+            <div class="gallery-item"><img src="imgs/img02.png" alt="JoJo & Flo"><div class="gallery-overlay"><i class="ri-image-line gallery-icon"></i></div></div>
+            <div class="gallery-item"><img src="imgs/img04.png" alt="JoJo & Flo"><div class="gallery-overlay"><i class="ri-image-line gallery-icon"></i></div></div>
+            <div class="gallery-item"><img src="imgs/img05.png" alt="JoJo & Flo"><div class="gallery-overlay"><i class="ri-image-line gallery-icon"></i></div></div>
+            <div class="gallery-item"><img src="imgs/img06.png" alt="JoJo & Flo"><div class="gallery-overlay"><i class="ri-image-line gallery-icon"></i></div></div>
+            <div class="gallery-item"><img src="imgs/IMG_2148.jpg" alt="JoJo & Flo"><div class="gallery-overlay"><i class="ri-image-line gallery-icon"></i></div></div>
+            <div class="gallery-item"><img src="imgs/IMG_2149.jpg" alt="JoJo & Flo"><div class="gallery-overlay"><i class="ri-image-line gallery-icon"></i></div></div>
+            <div class="gallery-item"><img src="imgs/IMG_2150.jpg" alt="JoJo & Flo"><div class="gallery-overlay"><i class="ri-image-line gallery-icon"></i></div></div>
+            <div class="gallery-item"><img src="imgs/IMG_2151.jpg" alt="JoJo & Flo"><div class="gallery-overlay"><i class="ri-image-line gallery-icon"></i></div></div>
+            <div class="gallery-item"><img src="imgs/IMG_2154.PNG" alt="JoJo & Flo"><div class="gallery-overlay"><i class="ri-image-line gallery-icon"></i></div></div>
+            <div class="gallery-item"><img src="imgs/IMG_2155.PNG" alt="JoJo & Flo"><div class="gallery-overlay"><i class="ri-image-line gallery-icon"></i></div></div>
+            <div class="gallery-item"><img src="imgs/IMG_2156.PNG" alt="JoJo & Flo"><div class="gallery-overlay"><i class="ri-image-line gallery-icon"></i></div></div>
+            <div class="gallery-item"><img src="imgs/IMG_2157.PNG" alt="JoJo & Flo"><div class="gallery-overlay"><i class="ri-image-line gallery-icon"></i></div></div>
+            <div class="gallery-item"><img src="imgs/IMG_2158.PNG" alt="JoJo & Flo"><div class="gallery-overlay"><i class="ri-image-line gallery-icon"></i></div></div>
+            <div class="gallery-item"><img src="imgs/IMG_2159.PNG" alt="JoJo & Flo"><div class="gallery-overlay"><i class="ri-image-line gallery-icon"></i></div></div>
+            <div class="gallery-item"><img src="imgs/IMG_2160.PNG" alt="JoJo & Flo"><div class="gallery-overlay"><i class="ri-image-line gallery-icon"></i></div></div>
+            <div class="gallery-item"><img src="imgs/IMG_2161.PNG" alt="JoJo & Flo"><div class="gallery-overlay"><i class="ri-image-line gallery-icon"></i></div></div>
+            <div class="gallery-item"><img src="imgs/IMG_2162.PNG" alt="JoJo & Flo"><div class="gallery-overlay"><i class="ri-image-line gallery-icon"></i></div></div>
+            <div class="gallery-item"><img src="imgs/IMG_2163.PNG" alt="JoJo & Flo"><div class="gallery-overlay"><i class="ri-image-line gallery-icon"></i></div></div>
+            <div class="gallery-item"><img src="imgs/IMG_2164.PNG" alt="JoJo & Flo"><div class="gallery-overlay"><i class="ri-image-line gallery-icon"></i></div></div>
+            <div class="gallery-item"><img src="imgs/IMG_2165.PNG" alt="JoJo & Flo"><div class="gallery-overlay"><i class="ri-image-line gallery-icon"></i></div></div>
+            <div class="gallery-item"><img src="imgs/IMG_2166.PNG" alt="JoJo & Flo"><div class="gallery-overlay"><i class="ri-image-line gallery-icon"></i></div></div>
+            <div class="gallery-item"><img src="imgs/IMG_2167.PNG" alt="JoJo & Flo"><div class="gallery-overlay"><i class="ri-image-line gallery-icon"></i></div></div>
+            <div class="gallery-item"><img src="imgs/IMG_2168.PNG" alt="JoJo & Flo"><div class="gallery-overlay"><i class="ri-image-line gallery-icon"></i></div></div>
+            <div class="gallery-item"><img src="imgs/IMG_2169.PNG" alt="JoJo & Flo"><div class="gallery-overlay"><i class="ri-image-line gallery-icon"></i></div></div>
+            <div class="gallery-item"><img src="imgs/IMG_2170.PNG" alt="JoJo & Flo"><div class="gallery-overlay"><i class="ri-image-line gallery-icon"></i></div></div>
+            <div class="gallery-item"><img src="imgs/IMG_2171.PNG" alt="JoJo & Flo"><div class="gallery-overlay"><i class="ri-image-line gallery-icon"></i></div></div>
+            <div class="gallery-item"><img src="imgs/IMG_2172.PNG" alt="JoJo & Flo"><div class="gallery-overlay"><i class="ri-image-line gallery-icon"></i></div></div>
+            <div class="gallery-item"><img src="imgs/IMG_2173.PNG" alt="JoJo & Flo"><div class="gallery-overlay"><i class="ri-image-line gallery-icon"></i></div></div>
+            <div class="gallery-item"><img src="imgs/IMG_2174.PNG" alt="JoJo & Flo"><div class="gallery-overlay"><i class="ri-image-line gallery-icon"></i></div></div>
+            <div class="gallery-item"><img src="imgs/IMG_2175.PNG" alt="JoJo & Flo"><div class="gallery-overlay"><i class="ri-image-line gallery-icon"></i></div></div>
+        </div>
+    </section>
+
     <section class="treatments" id="treatments">
         <div class="section-header">
             <h2 class="section-title">Treatments</h2>
@@ -739,7 +789,7 @@
                     <li><a href="#">Home</a></li>
                     <li><a href="#">About Us</a></li>
                     <li><a href="#">Services</a></li>
-                    <li><a href="#">Gallery</a></li>
+                    <li><a href="#gallery">Gallery</a></li>
                 </ul>
             </div>
             <div class="footer-column">
