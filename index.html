@@ -89,9 +89,27 @@
             height: 850px;
             overflow: hidden;
             background-color: #d8c0a8;
-            background-image: url('https://images.unsplash.com/photo-1562322140-8baeececf3df?q=80&w=2069&auto=format&fit=crop');
+            background-image: url('imgs/img01.png');
             background-size: cover;
             background-position: center 20%;
+            animation: heroSlide 40s infinite;
+        }
+        @keyframes heroSlide {
+            0%, 16% {
+                background-image: url('imgs/img01.png');
+            }
+            20%, 36% {
+                background-image: url('imgs/img02.png');
+            }
+            40%, 56% {
+                background-image: url('imgs/img04.png');
+            }
+            60%, 76% {
+                background-image: url('imgs/img05.png');
+            }
+            80%, 100% {
+                background-image: url('imgs/img06.png');
+            }
         }
         .hero::before {
             content: '';
