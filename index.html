@@ -360,28 +360,33 @@
             letter-spacing: 1px;
         }
 
-        /* Gallery */
+        /* Gallery - auto-sliding banner, 3 images at a time */
         .gallery-wrap {
             padding: 120px 100px 100px;
             background-color: var(--primary-bg);
         }
         .gallery-wrap .section-header { margin-bottom: 50px; }
         .gallery {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 0;
             width: 100%;
+            overflow: hidden;
+        }
+        .gallery-track {
+            display: flex;
+            width: calc(38 * 100% / 3);
+            transition: transform 0.6s ease;
         }
         .gallery-item {
+            flex: 0 0 calc(100% / 38);
             aspect-ratio: 1;
             position: relative;
             overflow: hidden;
+            min-width: 0;
         }
         .gallery-item img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.6s ease;
+            transition: transform 0.5s ease;
         }
         .gallery-item:hover img { transform: scale(1.05); }
         .gallery-overlay {
@@ -545,7 +550,7 @@
             .services-grid { grid-template-columns: repeat(2, 1fr); }
             .retail-grid { grid-template-columns: repeat(2, 1fr); }
             .featured-products .retail-grid { grid-template-columns: repeat(2, 1fr); }
-            .gallery { grid-template-columns: repeat(2, 1fr); }
+            .gallery-track { width: calc(38 * 100% / 3); }
             .gallery-wrap { padding: 80px 60px; }
             .brands { padding: 80px 60px; }
             .brands-grid { gap: 40px 50px; }
@@ -590,7 +595,6 @@
             .google-reviews { padding: 60px 24px; }
             .featured-products { padding: 60px 24px; }
             .gallery-wrap { padding: 60px 24px; }
-            .gallery { grid-template-columns: repeat(2, 1fr); }
             .brands { padding: 60px 24px; }
             .brands-grid { gap: 32px; flex-direction: column; }
             .brand-logo { height: 64px; }
@@ -771,6 +775,7 @@
             <div class="section-tag" style="border-bottom-color: #D6C6B3; color: #B0A08C;">Our Salon & Work</div>
         </div>
         <div class="gallery">
+            <div class="gallery-track" id="galleryTrack">
             <div class="gallery-item"><img src="imgs/Hero_01.png" alt="JOJO & FLO LONDON storefront"><div class="gallery-overlay"><i class="ri-image-line gallery-icon"></i></div></div>
             <div class="gallery-item"><img src="imgs/hero1.PNG" alt="JoJo & Flo Salon"><div class="gallery-overlay"><i class="ri-image-line gallery-icon"></i></div></div>
             <div class="gallery-item"><img src="imgs/hero2.PNG" alt="JoJo & Flo Salon"><div class="gallery-overlay"><i class="ri-image-line gallery-icon"></i></div></div>
@@ -807,6 +812,10 @@
             <div class="gallery-item"><img src="imgs/IMG_2173.PNG" alt="JoJo & Flo"><div class="gallery-overlay"><i class="ri-image-line gallery-icon"></i></div></div>
             <div class="gallery-item"><img src="imgs/IMG_2174.PNG" alt="JoJo & Flo"><div class="gallery-overlay"><i class="ri-image-line gallery-icon"></i></div></div>
             <div class="gallery-item"><img src="imgs/IMG_2175.PNG" alt="JoJo & Flo"><div class="gallery-overlay"><i class="ri-image-line gallery-icon"></i></div></div>
+            <div class="gallery-item"><img src="imgs/Hero_01.png" alt="JOJO & FLO LONDON storefront"><div class="gallery-overlay"><i class="ri-image-line gallery-icon"></i></div></div>
+            <div class="gallery-item"><img src="imgs/hero1.PNG" alt="JoJo & Flo Salon"><div class="gallery-overlay"><i class="ri-image-line gallery-icon"></i></div></div>
+            <div class="gallery-item"><img src="imgs/hero2.PNG" alt="JoJo & Flo Salon"><div class="gallery-overlay"><i class="ri-image-line gallery-icon"></i></div></div>
+            </div>
         </div>
     </section>
 
@@ -918,18 +927,39 @@
     </footer>
 
     <script>
-        var menuBtn = document.getElementById('menuBtn');
-        var menuIcon = menuBtn.querySelector('i');
-        document.getElementById('menuBtn').addEventListener('click', function() {
-            document.getElementById('mainNav').classList.toggle('open');
-            if (menuIcon.classList.contains('ri-menu-line')) {
-                menuIcon.classList.remove('ri-menu-line');
-                menuIcon.classList.add('ri-close-line');
-            } else {
-                menuIcon.classList.remove('ri-close-line');
-                menuIcon.classList.add('ri-menu-line');
+        (function() {
+            var menuBtn = document.getElementById('menuBtn');
+            var menuIcon = menuBtn && menuBtn.querySelector('i');
+            if (menuBtn) {
+                menuBtn.addEventListener('click', function() {
+                    document.getElementById('mainNav').classList.toggle('open');
+                    if (menuIcon.classList.contains('ri-menu-line')) {
+                        menuIcon.classList.remove('ri-menu-line');
+                        menuIcon.classList.add('ri-close-line');
+                    } else {
+                        menuIcon.classList.remove('ri-close-line');
+                        menuIcon.classList.add('ri-menu-line');
+                    }
+                });
             }
-        });
+
+            var galleryTrack = document.getElementById('galleryTrack');
+            if (galleryTrack) {
+                var galleryIndex = 0;
+                var totalSlides = 35;
+                setInterval(function() {
+                    galleryIndex++;
+                    if (galleryIndex >= totalSlides) {
+                        galleryTrack.style.transition = 'none';
+                        galleryTrack.style.transform = 'translateX(0)';
+                        galleryIndex = 0;
+                        galleryTrack.offsetHeight;
+                        galleryTrack.style.transition = '';
+                    }
+                    galleryTrack.style.transform = 'translateX(-' + (galleryIndex * 100 / 38) + '%)';
+                }, 4500);
+            }
+        })();
     </script>
 </body>
 </html>
