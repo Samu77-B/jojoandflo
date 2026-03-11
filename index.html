@@ -160,8 +160,6 @@
             text-shadow: 0 2px 20px rgba(0,0,0,0.3);
         }
         .hero-btn {
-            display: inline-block;
-            text-decoration: none;
             padding: 18px 45px;
             background-color: rgba(255, 255, 255, 0.9);
             color: var(--text-dark);
@@ -546,45 +544,6 @@
         .social-icons { display: flex; gap: 20px; }
         .social-icons a { color: rgba(255,255,255,0.7); font-size: 20px; }
         .social-icons a:hover { color: #fff; }
-        .booking-url-wrap {
-            margin-top: 24px;
-            padding-top: 24px;
-            border-top: 1px solid rgba(255,255,255,0.1);
-        }
-        .booking-url-wrap .footer-heading { margin-bottom: 12px; }
-        .booking-url-row {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            gap: 12px;
-        }
-        .booking-url-input {
-            flex: 1;
-            min-width: 0;
-            max-width: 100%;
-            padding: 10px 14px;
-            font-family: var(--font-freight);
-            font-size: 13px;
-            color: rgba(255,255,255,0.95);
-            background: rgba(255,255,255,0.08);
-            border: 1px solid rgba(255,255,255,0.2);
-            border-radius: 0;
-        }
-        .booking-url-input:focus { outline: none; border-color: rgba(255,255,255,0.4); }
-        .booking-url-copy {
-            padding: 8px 16px;
-            background: rgba(255,255,255,0.15);
-            color: #fff;
-            border: 1px solid rgba(255,255,255,0.3);
-            font-family: var(--font-freight);
-            font-size: 12px;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            cursor: pointer;
-            transition: background 0.2s ease, border-color 0.2s ease;
-        }
-        .booking-url-copy:hover { background: rgba(255,255,255,0.25); border-color: rgba(255,255,255,0.5); }
-        .booking-url-copy.copied { background: rgba(144,238,144,0.25); border-color: #90EE90; }
 
         /* ========== MOBILE RESPONSIVE ========== */
         @media (max-width: 1024px) {
@@ -703,7 +662,7 @@
         <div class="hero-content">
             <h2 class="hero-subtitle">London's Premier Hair Stylist</h2>
             <h1 class="hero-title">Exquisite Hair Styling</h1>
-            <a id="heroBookBtn" href="#" class="hero-btn" target="_blank" rel="noopener">Book An Appointment</a>
+            <button class="hero-btn">Book An Appointment</button>
         </div>
     </section>
 
@@ -890,7 +849,7 @@
             <span class="section-tag">Special Occasions</span>
             <h2 class="section-title">Weddings</h2>
             <p>Exquisite bridal styling for your special day. From trials to the final look, our team ensures you look breathtaking from every angle. We work with you to create the perfect style that complements your dress, venue, and personal vision.</p>
-            <a id="bridalBookBtn" href="#" class="hero-btn" target="_blank" rel="noopener">Book a Bridal Consultation</a>
+            <button class="hero-btn">Book a Bridal Consultation</button>
         </div>
     </section>
 
@@ -954,15 +913,6 @@
                 </ul>
             </div>
         </div>
-        <div class="booking-url-wrap">
-            <h4 class="footer-heading">Booking page</h4>
-            <p style="color: rgba(255,255,255,0.6); font-size: 13px; margin-bottom: 10px;">Full link to share (click Copy to copy):</p>
-            <div class="booking-url-row">
-                <input type="text" id="bookingUrlDisplay" class="booking-url-input" readonly value="" aria-label="Booking page URL">
-                <button type="button" class="booking-url-copy" id="bookingUrlCopy" aria-label="Copy booking link">Copy link</button>
-            </div>
-            <a id="bookingUrlLink" href="#" target="_blank" rel="noopener" class="booking-url-open" style="display:inline-block; margin-top:8px; font-size:13px; color: #B0A08C;">Open booking page</a>
-        </div>
         <div class="footer-bottom">
             <div>
                 <p>&copy; 2025 JOJO & FLO LONDON. All Rights Reserved.</p>
@@ -978,31 +928,6 @@
 
     <script>
         (function() {
-            // Full booking page URL (must include https:// so the link works when copied).
-            var BOOKING_PAGE_URL = 'https://salonsynk.com/book/jojoandflo';
-
-            var heroBtn = document.getElementById('heroBookBtn');
-            var bridalBtn = document.getElementById('bridalBookBtn');
-            if (heroBtn) heroBtn.href = BOOKING_PAGE_URL;
-            if (bridalBtn) bridalBtn.href = BOOKING_PAGE_URL;
-            var bookingDisplay = document.getElementById('bookingUrlDisplay');
-            var bookingLink = document.getElementById('bookingUrlLink');
-            var copyBtn = document.getElementById('bookingUrlCopy');
-            if (bookingDisplay) bookingDisplay.value = BOOKING_PAGE_URL;
-            if (bookingLink) bookingLink.href = BOOKING_PAGE_URL;
-            if (copyBtn) {
-                copyBtn.addEventListener('click', function() {
-                    navigator.clipboard.writeText(BOOKING_PAGE_URL).then(function() {
-                        copyBtn.textContent = 'Copied';
-                        copyBtn.classList.add('copied');
-                        setTimeout(function() {
-                            copyBtn.textContent = 'Copy link';
-                            copyBtn.classList.remove('copied');
-                        }, 2000);
-                    });
-                });
-            }
-
             var menuBtn = document.getElementById('menuBtn');
             var menuIcon = menuBtn && menuBtn.querySelector('i');
             if (menuBtn) {
