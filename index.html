@@ -160,6 +160,8 @@
             text-shadow: 0 2px 20px rgba(0,0,0,0.3);
         }
         .hero-btn {
+            display: inline-block;
+            text-decoration: none;
             padding: 18px 45px;
             background-color: rgba(255, 255, 255, 0.9);
             color: var(--text-dark);
@@ -544,6 +546,38 @@
         .social-icons { display: flex; gap: 20px; }
         .social-icons a { color: rgba(255,255,255,0.7); font-size: 20px; }
         .social-icons a:hover { color: #fff; }
+        .booking-url-wrap {
+            margin-top: 24px;
+            padding-top: 24px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+        .booking-url-wrap .footer-heading { margin-bottom: 12px; }
+        .booking-url-row {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 12px;
+        }
+        .booking-url-link {
+            font-family: var(--font-freight);
+            font-size: 13px;
+            color: rgba(255,255,255,0.85);
+            word-break: break-all;
+        }
+        .booking-url-copy {
+            padding: 8px 16px;
+            background: rgba(255,255,255,0.15);
+            color: #fff;
+            border: 1px solid rgba(255,255,255,0.3);
+            font-family: var(--font-freight);
+            font-size: 12px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: background 0.2s ease, border-color 0.2s ease;
+        }
+        .booking-url-copy:hover { background: rgba(255,255,255,0.25); border-color: rgba(255,255,255,0.5); }
+        .booking-url-copy.copied { background: rgba(144,238,144,0.25); border-color: #90EE90; }
 
         /* ========== MOBILE RESPONSIVE ========== */
         @media (max-width: 1024px) {
@@ -662,7 +696,7 @@
         <div class="hero-content">
             <h2 class="hero-subtitle">London's Premier Hair Stylist</h2>
             <h1 class="hero-title">Exquisite Hair Styling</h1>
-            <button class="hero-btn">Book An Appointment</button>
+            <a id="heroBookBtn" href="#" class="hero-btn" target="_blank" rel="noopener">Book An Appointment</a>
         </div>
     </section>
 
@@ -849,7 +883,7 @@
             <span class="section-tag">Special Occasions</span>
             <h2 class="section-title">Weddings</h2>
             <p>Exquisite bridal styling for your special day. From trials to the final look, our team ensures you look breathtaking from every angle. We work with you to create the perfect style that complements your dress, venue, and personal vision.</p>
-            <button class="hero-btn">Book a Bridal Consultation</button>
+            <a id="bridalBookBtn" href="#" class="hero-btn" target="_blank" rel="noopener">Book a Bridal Consultation</a>
         </div>
     </section>
 
@@ -913,6 +947,14 @@
                 </ul>
             </div>
         </div>
+        <div class="booking-url-wrap">
+            <h4 class="footer-heading">Booking page</h4>
+            <p style="color: rgba(255,255,255,0.6); font-size: 13px; margin-bottom: 10px;">Copy this link to share your booking page:</p>
+            <div class="booking-url-row">
+                <a id="bookingUrlDisplay" href="#" target="_blank" rel="noopener" class="booking-url-link"></a>
+                <button type="button" class="booking-url-copy" id="bookingUrlCopy" aria-label="Copy booking link">Copy link</button>
+            </div>
+        </div>
         <div class="footer-bottom">
             <div>
                 <p>&copy; 2025 JOJO & FLO LONDON. All Rights Reserved.</p>
@@ -928,6 +970,32 @@
 
     <script>
         (function() {
+            // Set your booking page URL here once the salon is set up (master admin).
+            var BOOKING_PAGE_URL = 'https://example.com/booking/jojoandflo';
+
+            var heroBtn = document.getElementById('heroBookBtn');
+            var bridalBtn = document.getElementById('bridalBookBtn');
+            if (heroBtn) heroBtn.href = BOOKING_PAGE_URL;
+            if (bridalBtn) bridalBtn.href = BOOKING_PAGE_URL;
+            var bookingDisplay = document.getElementById('bookingUrlDisplay');
+            var copyBtn = document.getElementById('bookingUrlCopy');
+            if (bookingDisplay) {
+                bookingDisplay.href = BOOKING_PAGE_URL;
+                bookingDisplay.textContent = BOOKING_PAGE_URL;
+            }
+            if (copyBtn) {
+                copyBtn.addEventListener('click', function() {
+                    navigator.clipboard.writeText(BOOKING_PAGE_URL).then(function() {
+                        copyBtn.textContent = 'Copied';
+                        copyBtn.classList.add('copied');
+                        setTimeout(function() {
+                            copyBtn.textContent = 'Copy link';
+                            copyBtn.classList.remove('copied');
+                        }, 2000);
+                    });
+                });
+            }
+
             var menuBtn = document.getElementById('menuBtn');
             var menuIcon = menuBtn && menuBtn.querySelector('i');
             if (menuBtn) {
