@@ -558,12 +558,19 @@
             align-items: center;
             gap: 12px;
         }
-        .booking-url-link {
+        .booking-url-input {
+            flex: 1;
+            min-width: 0;
+            max-width: 100%;
+            padding: 10px 14px;
             font-family: var(--font-freight);
             font-size: 13px;
-            color: rgba(255,255,255,0.85);
-            word-break: break-all;
+            color: rgba(255,255,255,0.95);
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 0;
         }
+        .booking-url-input:focus { outline: none; border-color: rgba(255,255,255,0.4); }
         .booking-url-copy {
             padding: 8px 16px;
             background: rgba(255,255,255,0.15);
@@ -949,11 +956,12 @@
         </div>
         <div class="booking-url-wrap">
             <h4 class="footer-heading">Booking page</h4>
-            <p style="color: rgba(255,255,255,0.6); font-size: 13px; margin-bottom: 10px;">Copy this link to share your booking page:</p>
+            <p style="color: rgba(255,255,255,0.6); font-size: 13px; margin-bottom: 10px;">Full link to share (click Copy to copy):</p>
             <div class="booking-url-row">
-                <a id="bookingUrlDisplay" href="#" target="_blank" rel="noopener" class="booking-url-link"></a>
+                <input type="text" id="bookingUrlDisplay" class="booking-url-input" readonly value="" aria-label="Booking page URL">
                 <button type="button" class="booking-url-copy" id="bookingUrlCopy" aria-label="Copy booking link">Copy link</button>
             </div>
+            <a id="bookingUrlLink" href="#" target="_blank" rel="noopener" class="booking-url-open" style="display:inline-block; margin-top:8px; font-size:13px; color: #B0A08C;">Open booking page</a>
         </div>
         <div class="footer-bottom">
             <div>
@@ -970,19 +978,18 @@
 
     <script>
         (function() {
-            // Set your booking page URL here once the salon is set up (master admin).
-            var BOOKING_PAGE_URL = 'https://example.com/booking/jojoandflo';
+            // Full booking page URL (must include https:// so the link works when copied).
+            var BOOKING_PAGE_URL = 'https://salonsynk.com/book/jojoandflo';
 
             var heroBtn = document.getElementById('heroBookBtn');
             var bridalBtn = document.getElementById('bridalBookBtn');
             if (heroBtn) heroBtn.href = BOOKING_PAGE_URL;
             if (bridalBtn) bridalBtn.href = BOOKING_PAGE_URL;
             var bookingDisplay = document.getElementById('bookingUrlDisplay');
+            var bookingLink = document.getElementById('bookingUrlLink');
             var copyBtn = document.getElementById('bookingUrlCopy');
-            if (bookingDisplay) {
-                bookingDisplay.href = BOOKING_PAGE_URL;
-                bookingDisplay.textContent = BOOKING_PAGE_URL;
-            }
+            if (bookingDisplay) bookingDisplay.value = BOOKING_PAGE_URL;
+            if (bookingLink) bookingLink.href = BOOKING_PAGE_URL;
             if (copyBtn) {
                 copyBtn.addEventListener('click', function() {
                     navigator.clipboard.writeText(BOOKING_PAGE_URL).then(function() {
