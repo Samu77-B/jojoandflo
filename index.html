@@ -51,11 +51,6 @@
             border-bottom: 1px solid transparent;
             transition: background-color 0.3s ease, border-color 0.3s ease;
         }
-        header.scrolled {
-            background-color: var(--white);
-            border-bottom-color: #EFEBE4;
-        }
-
         .header-top {
             width: 100%;
             display: flex;
@@ -71,9 +66,7 @@
             width: auto;
             object-fit: contain;
             filter: invert(1);
-            transition: filter 0.3s ease;
         }
-        header.scrolled .logo img { filter: invert(1); }
 
         nav {
             width: 100%;
@@ -93,9 +86,7 @@
             letter-spacing: 1.5px;
             color: rgba(255,255,255,0.95);
             position: relative;
-            transition: color 0.3s ease;
         }
-        header.scrolled nav a { color: var(--text-dark); }
         nav a::after {
             content: '';
             position: absolute;
@@ -106,7 +97,6 @@
             background-color: rgba(255,255,255,0.9);
             transition: width 0.3s ease;
         }
-        header.scrolled nav a::after { background-color: var(--text-dark); }
         nav a:hover::after { width: 100%; }
 
         .menu-icon {
@@ -119,9 +109,7 @@
             background: none;
             border: none;
             padding: 4px;
-            transition: color 0.3s ease;
         }
-        header.scrolled .menu-icon { color: var(--text-dark); }
 
         /* Hero */
         .hero {
@@ -939,15 +927,6 @@
 
     <script>
         (function() {
-            var header = document.querySelector('header');
-            if (header) {
-                function updateHeaderScroll() {
-                    header.classList.toggle('scrolled', window.scrollY > 80);
-                }
-                updateHeaderScroll();
-                window.addEventListener('scroll', updateHeaderScroll);
-            }
-
             var menuBtn = document.getElementById('menuBtn');
             var menuIcon = menuBtn && menuBtn.querySelector('i');
             if (menuBtn) {
