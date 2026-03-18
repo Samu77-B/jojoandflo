@@ -38,7 +38,7 @@
         a { text-decoration: none; color: inherit; transition: all 0.3s ease; }
         ul { list-style: none; }
 
-        /* Header - overlays hero when at top, solid when scrolled */
+        /* Header - at top of page content, scrolls with site (not fixed to browser) */
         header {
             width: 100%;
             padding: 24px 60px 20px;
@@ -46,10 +46,7 @@
             flex-direction: column;
             align-items: center;
             background-color: transparent;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
+            position: relative;
             z-index: 1000;
             border-bottom: 1px solid transparent;
             transition: background-color 0.3s ease, border-color 0.3s ease;
