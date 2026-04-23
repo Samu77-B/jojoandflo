@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chronologiste Le Rituel Noir — Kérastase | JOJO &amp; FLO LONDON</title>
+    <link rel="icon" href="../../logos/jojoflo-fav.png" type="image/png">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --font-freight: 'freight-text-pro', 'Source Serif 4', Georgia, serif;
+            --primary-bg: #F9F7F2;
+            --btn: #c5ad84;
+            --btn-hover: #b39d6f;
+            --text-dark: #2C2C2C;
+            --text-light: #6E6860;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+        body {
+            font-family: var(--font-freight);
+            background: var(--primary-bg);
+            color: var(--text-dark);
+        }
+
+        .preview-strip {
+            background: #2C2C2C;
+            color: rgba(255,255,255,0.9);
+            text-align: center;
+            font-size: 12px;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            padding: 10px 16px;
+        }
+
+        header {
+            background: #000;
+            color: #fff;
+            padding: 20px 40px 18px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .header-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 18px;
+        }
+        .header-top { width: 100%; display: flex; justify-content: center; align-items: center; position: relative; }
+        .logo { height: 44px; }
+        .logo img { height: 100%; width: auto; }
+        .menu-icon {
+            display: none; position: absolute; right: 0;
+            background: none; border: none; color: #fff; font-size: 24px; cursor: pointer; padding: 6px;
+        }
+        nav ul { display: flex; flex-wrap: wrap; gap: 28px; justify-content: center; }
+        nav a { font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(255,255,255,0.9); }
+        nav a:hover { color: #fff; }
+        .nav-cta { color: var(--btn) !important; }
+
+        .pdp {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 24px 100px;
+        }
+        .breadcrumb {
+            font-size: 13px;
+            color: var(--text-light);
+            margin-bottom: 40px;
+        }
+        .breadcrumb a { text-decoration: underline; text-underline-offset: 3px; }
+        .breadcrumb a:hover { color: var(--text-dark); }
+
+        .pdp-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: start;
+        }
+        .pdp-visual {
+            background: #fff;
+            padding: 32px;
+            min-height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .pdp-visual img {
+            max-width: 100%;
+            height: auto;
+            object-fit: contain;
+        }
+        .pdp-copy .brand-line {
+            font-size: 12px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--text-light);
+            margin-bottom: 12px;
+        }
+        h1 {
+            font-weight: 300;
+            font-size: clamp(28px, 3.5vw, 40px);
+            line-height: 1.2;
+            margin-bottom: 12px;
+        }
+        .price { font-size: 22px; color: var(--text-dark); margin-bottom: 24px; }
+        .price-note { font-size: 14px; color: var(--text-light); font-weight: 400; }
+        .lead {
+            font-size: 16px;
+            line-height: 1.75;
+            color: var(--text-light);
+            margin-bottom: 32px;
+        }
+        .actions { display: flex; flex-direction: column; gap: 12px; }
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px 32px;
+            font-family: var(--font-freight);
+            font-size: 14px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            border: none;
+            cursor: not-allowed;
+            background: #c4c4c4;
+            color: #5a5a5a;
+        }
+        .btn-hint { font-size: 13px; color: var(--text-light); text-align: left; }
+        .details { margin-top: 48px; padding-top: 32px; border-top: 1px solid #e0d9ce; }
+        .details h2 {
+            font-weight: 300;
+            font-size: 18px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+            color: var(--text-light);
+        }
+        .details ul { padding-left: 0; }
+        .details li {
+            position: relative;
+            padding-left: 18px;
+            margin-bottom: 10px;
+            font-size: 15px;
+            line-height: 1.6;
+            color: var(--text-light);
+        }
+        .details li::before {
+            content: '';
+            position: absolute;
+            left: 0; top: 0.55em;
+            width: 6px; height: 6px;
+            background: var(--text-light);
+            border-radius: 50%;
+            opacity: 0.5;
+        }
+
+        footer {
+            background: #000; color: #fff;
+            padding: 60px 24px 40px;
+        }
+        .footer-inner { max-width: 1200px; margin: 0 auto; text-align: center; }
+        .footer-inner p { font-size: 13px; color: rgba(255,255,255,0.5); }
+
+        @media (max-width: 900px) {
+            .pdp-grid { grid-template-columns: 1fr; gap: 32px; }
+        }
+        @media (max-width: 768px) {
+            header { padding: 16px 20px; }
+            .menu-icon { display: flex; align-items: center; justify-content: center; }
+            nav {
+                display: flex; flex-direction: column; width: 100%;
+                max-height: 0; overflow: hidden; opacity: 0;
+                transition: max-height 0.35s ease, opacity 0.25s ease;
+            }
+            nav.open { max-height: 320px; opacity: 1; margin-top: 8px; }
+            nav ul { flex-direction: column; gap: 16px; align-items: center; }
+        }
+    </style>
+</head>
+<body>
+    <div class="preview-strip">Layout preview — not connected to checkout</div>
+
+    <header>
+        <div class="header-inner">
+            <div class="header-top">
+                <a href="../../index.html" class="logo">
+                    <img src="../../logos/jojoflo_logo-wht.png" alt="JOJO & FLO LONDON">
+                </a>
+                <button class="menu-icon" id="menuBtn" type="button" aria-label="Menu" aria-expanded="false"><i class="ri-menu-line" aria-hidden="true"></i></button>
+            </div>
+            <nav id="mainNav" aria-label="Primary">
+                <ul>
+                    <li><a href="../../index.html">Home</a></li>
+                    <li><a href="index.html">Kérastase</a></li>
+                    <li><a href="../../index.html#contact">Contact</a></li>
+                    <li><a class="nav-cta" href="../../index.html#contact">Book</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <article class="pdp">
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+            <a href="../../index.html">Home</a> <span aria-hidden="true"> / </span>
+            <a href="../">Shop</a> <span aria-hidden="true"> / </span>
+            <a href="index.html">Kérastase</a> <span aria-hidden="true"> / </span>
+            <span>Chronologiste Le Rituel Noir</span>
+        </nav>
+
+        <div class="pdp-grid">
+            <div class="pdp-visual">
+                <img
+                    src="(NEW) Chronologiste/ECOM/ecom01.png"
+                    alt="Kérastase Chronologiste Le Rituel Noir"
+                    width="800"
+                    height="800"
+                >
+            </div>
+            <div class="pdp-copy">
+                <p class="brand-line">Kérastase</p>
+                <h1>Chronologiste Le Rituel Noir</h1>
+                <p class="price">From £TBC <span class="price-note">(example)</span></p>
+                <p class="lead">
+                    A luxury ritual to illustrate the product detail layout: hero image, title, price, short description, and a placeholder buy button. Final copy, pricing, and “Add to bag” would connect to your chosen shop (e.g. Shopify) when you go live.
+                </p>
+                <div class="actions">
+                    <button type="button" class="btn" disabled>Add to bag — coming soon</button>
+                    <p class="btn-hint">This demo is static. Your client can browse from the category to here without leaving your brand site.</p>
+                </div>
+                <div class="details">
+                    <h2>Product details (sample)</h2>
+                    <ul>
+                        <li>Brand: Kérastase · Line: Chronologiste</li>
+                        <li>Replace with official description, size, and ingredients from your final listings.</li>
+                        <li>Available in-salon; online availability to be confirmed.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </article>
+
+    <footer>
+        <div class="footer-inner">
+            <p>&copy; 2025 JOJO &amp; FLO LONDON. Sample product page for client review.</p>
+        </div>
+    </footer>
+
+    <script>
+        (function() {
+            var menuBtn = document.getElementById('menuBtn');
+            var mainNav = document.getElementById('mainNav');
+            if (menuBtn && mainNav) {
+                var icon = menuBtn.querySelector('i');
+                menuBtn.addEventListener('click', function() {
+                    var open = mainNav.classList.toggle('open');
+                    menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+                    if (icon) {
+                        icon.classList.toggle('ri-menu-line', !open);
+                        icon.classList.toggle('ri-close-line', open);
+                    }
+                });
+                mainNav.querySelectorAll('a').forEach(function(link) {
+                    link.addEventListener('click', function() {
+                        mainNav.classList.remove('open');
+                        menuBtn.setAttribute('aria-expanded', 'false');
+                        if (icon) {
+                            icon.classList.add('ri-menu-line');
+                            icon.classList.remove('ri-close-line');
+                        }
+                    });
+                });
+            }
+        })();
+    </script>
+</body>
+</html>
