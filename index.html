@@ -173,6 +173,7 @@
             text-shadow: 0 2px 20px rgba(0,0,0,0.3);
         }
         .hero-btn {
+            display: inline-block;
             padding: 18px 45px;
             background-color: #c5ad84;
             color: var(--text-dark);
@@ -184,11 +185,92 @@
             cursor: pointer;
             transition: all 0.3s ease;
         }
+        a.hero-btn { text-align: center; }
+        button.hero-btn { font: inherit; }
         .hero-btn:hover {
             background-color: #b39d6f;
             transform: translateY(-2px);
             box-shadow: 0 10px 20px rgba(0,0,0,0.1);
         }
+
+        /* Booking modal (<dialog> popup) */
+        .book-dialog {
+            width: min(1000px, 96vw);
+            max-width: 100%;
+            max-height: 92vh;
+            margin: auto;
+            padding: 0;
+            border: none;
+            background: #f9f7f2;
+            color: var(--text-dark);
+            box-shadow: 0 25px 80px rgba(0,0,0,0.35);
+            overflow: hidden;
+        }
+        .book-dialog::backdrop {
+            background: rgba(0,0,0,0.5);
+            -webkit-backdrop-filter: blur(3px);
+            backdrop-filter: blur(3px);
+        }
+        .book-dialog__head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            padding: 14px 16px 14px 20px;
+            background: #2c2c2c;
+            color: #fff;
+            flex-shrink: 0;
+        }
+        .book-dialog__title {
+            font-family: var(--font-freight);
+            font-size: 13px;
+            font-weight: 300;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin: 0;
+        }
+        .book-dialog__close {
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            padding: 0;
+            border: none;
+            background: transparent;
+            color: rgba(255,255,255,0.95);
+            font-size: 24px;
+            cursor: pointer;
+            line-height: 1;
+            transition: color 0.2s ease;
+        }
+        .book-dialog__close:hover { color: #fff; }
+        .book-dialog__body {
+            position: relative;
+            min-height: min(72vh, 800px);
+            background: #fff;
+        }
+        .book-dialog__frame {
+            display: block;
+            width: 100%;
+            height: min(72vh, 800px);
+            border: 0;
+        }
+        .book-dialog__hint {
+            font-family: var(--font-freight);
+            font-size: 13px;
+            text-align: center;
+            padding: 12px 16px 16px;
+            color: var(--text-light);
+            background: #f0ebe3;
+        }
+        .book-dialog__hint a {
+            color: var(--text-dark);
+            text-decoration: underline;
+            text-underline-offset: 2px;
+        }
+        .book-dialog__hint a:hover { color: #000; }
 
         /* Our Philosophy */
         .philosophy {
@@ -734,7 +816,7 @@
         <div class="hero-content">
             <h2 class="hero-subtitle">London's Premier Hair Stylist</h2>
             <h1 class="hero-title">Exquisite Hair Styling</h1>
-            <button class="hero-btn">Book An Appointment</button>
+            <button type="button" class="hero-btn" id="bookOpenBtn" aria-haspopup="dialog" aria-controls="bookDialog">Book An Appointment</button>
         </div>
     </section>
 
@@ -998,8 +1080,50 @@
         </div>
     </footer>
 
+    <dialog id="bookDialog" class="book-dialog" aria-labelledby="bookDialogTitle">
+        <div class="book-dialog__head">
+            <h2 id="bookDialogTitle" class="book-dialog__title">Book an appointment</h2>
+            <button type="button" class="book-dialog__close" id="bookCloseBtn" aria-label="Close booking">
+                <i class="ri-close-line" aria-hidden="true"></i>
+            </button>
+        </div>
+        <div class="book-dialog__body">
+            <iframe
+                id="bookFrame"
+                class="book-dialog__frame"
+                title="Book at JoJo &amp; Flo — SalonSynk"
+                loading="lazy"
+                data-src="https://salonsynk.com/book/jojoandflo"
+            ></iframe>
+        </div>
+        <p class="book-dialog__hint">
+            If the form does not load here (some networks block embeds), <a href="https://salonsynk.com/book/jojoandflo" target="_blank" rel="noopener noreferrer">open booking in a new tab</a>.
+        </p>
+    </dialog>
+
     <script>
         (function() {
+            var bookDialog = document.getElementById('bookDialog');
+            var bookFrame = document.getElementById('bookFrame');
+            var bookOpenBtn = document.getElementById('bookOpenBtn');
+            var bookCloseBtn = document.getElementById('bookCloseBtn');
+            if (bookDialog && typeof bookDialog.showModal === 'function' && bookOpenBtn) {
+                var bookingUrl = bookFrame && bookFrame.getAttribute('data-src');
+                bookOpenBtn.addEventListener('click', function() {
+                    if (bookFrame && bookingUrl && !bookFrame.getAttribute('src')) {
+                        bookFrame.setAttribute('src', bookingUrl);
+                    }
+                    bookDialog.showModal();
+                });
+                if (bookCloseBtn) {
+                    bookCloseBtn.addEventListener('click', function() { bookDialog.close(); });
+                }
+            } else if (bookOpenBtn) {
+                bookOpenBtn.addEventListener('click', function() {
+                    window.open('https://salonsynk.com/book/jojoandflo', 'salonBooking', 'width=520,height=760,scrollbars=yes,resizable=yes');
+                });
+            }
+
             var menuBtn = document.getElementById('menuBtn');
             var menuIcon = menuBtn && menuBtn.querySelector('i');
             if (menuBtn) {
