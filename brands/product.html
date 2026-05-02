@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product | JOJO &amp; FLO LONDON</title>
+    <link rel="icon" href="../logos/jojoflo-fav.png" type="image/png">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --font-freight: 'freight-text-pro', 'Source Serif 4', Georgia, serif;
+            --primary-bg: #F9F7F2;
+            --text-dark: #2C2C2C;
+            --text-light: #6E6860;
+            --white: #FFFFFF;
+            --btn: #c5ad84;
+            --btn-hover: #b39d6f;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+        body { font-family: var(--font-freight); background: var(--primary-bg); color: var(--text-dark); min-height: 100vh; }
+        header {
+            background: #000; color: #fff; padding: 20px 40px 18px; position: sticky; top: 0; z-index: 100;
+        }
+        .header-inner { max-width: 1200px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: 18px; }
+        .header-top { width: 100%; display: flex; justify-content: center; align-items: center; position: relative; }
+        .logo { height: 44px; }
+        .logo img { height: 100%; width: auto; object-fit: contain; }
+        .menu-icon {
+            display: none; position: absolute; right: 0; background: none; border: none; color: #fff;
+            font-size: 24px; cursor: pointer; padding: 6px;
+        }
+        nav ul { display: flex; flex-wrap: wrap; gap: 28px; justify-content: center; }
+        nav a { font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(255,255,255,0.9); }
+        .nav-cta { color: var(--btn) !important; }
+        .pdp-main { max-width: 1100px; margin: 0 auto; padding: 40px 24px 80px; }
+        .breadcrumb { font-size: 13px; color: var(--text-light); margin-bottom: 28px; }
+        .breadcrumb a { text-decoration: underline; text-underline-offset: 3px; color: var(--text-light); }
+        .breadcrumb a:hover { color: var(--text-dark); }
+        .pdp-layout {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start;
+            background: var(--white); padding: 40px; box-shadow: 0 8px 40px rgba(0,0,0,0.04);
+        }
+        .pdp-media {
+            background: #f5f2ed; border-radius: 2px; padding: 24px; text-align: center;
+        }
+        .pdp-media img { max-width: 100%; height: auto; max-height: 480px; object-fit: contain; }
+        .pdp-brand { font-size: 12px; letter-spacing: 2px; text-transform: uppercase; color: var(--text-light); margin-bottom: 10px; }
+        .pdp-title { font-weight: 300; font-size: clamp(26px, 3vw, 36px); line-height: 1.2; margin-bottom: 16px; }
+        .pdp-price { font-size: 22px; color: #8a7a66; margin-bottom: 24px; }
+        .pdp-desc { font-size: 16px; line-height: 1.75; color: var(--text-light); margin-bottom: 28px; }
+        .pdp-actions { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; }
+        .btn-primary {
+            display: inline-block; padding: 14px 28px; background: var(--btn); color: var(--text-dark);
+            font-size: 13px; letter-spacing: 1.5px; text-transform: uppercase; border: none; cursor: pointer;
+            font-family: var(--font-freight); transition: background 0.2s;
+        }
+        .btn-primary:hover { background: var(--btn-hover); }
+        .btn-ghost {
+            display: inline-block; padding: 14px 22px; border: 1px solid #d4cfc4; color: var(--text-light);
+            font-size: 12px; letter-spacing: 1px; text-transform: uppercase;
+        }
+        .btn-ghost[aria-disabled="true"] { opacity: 0.45; cursor: not-allowed; }
+        .pdp-note { font-size: 13px; color: var(--text-light); margin-top: 20px; max-width: 36em; }
+        .pdp-empty { text-align: center; padding: 80px 24px; color: var(--text-light); }
+        footer { background: #000; color: #fff; padding: 48px 24px; text-align: center; }
+        footer p { font-size: 13px; color: rgba(255,255,255,0.5); }
+        footer a { color: rgba(255,255,255,0.7); text-decoration: underline; }
+        @media (max-width: 860px) {
+            .pdp-layout { grid-template-columns: 1fr; padding: 28px 20px; }
+            .menu-icon { display: flex; align-items: center; justify-content: center; }
+            nav { display: flex; flex-direction: column; width: 100%; max-height: 0; overflow: hidden; opacity: 0; transition: max-height 0.35s ease, opacity 0.25s ease; }
+            nav.open { max-height: 400px; opacity: 1; margin-top: 8px; }
+            nav ul { flex-direction: column; gap: 16px; align-items: center; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-inner">
+            <div class="header-top">
+                <a href="../index.html" class="logo"><img src="../logos/jojoflo_logo-wht.png" alt="JOJO & FLO LONDON"></a>
+                <button class="menu-icon" id="menuBtn" type="button" aria-label="Menu"><i class="ri-menu-line" aria-hidden="true"></i></button>
+            </div>
+            <nav id="mainNav" aria-label="Primary">
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="../index.html#products">Products</a></li>
+                    <li><a href="../index.html#brands">Brands</a></li>
+                    <li><a href="../index.html#contact">Contact</a></li>
+                    <li><a class="nav-cta" href="../index.html#contact">Book</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <main class="pdp-main" id="pdpRoot">
+        <div class="pdp-empty" id="pdpEmpty" hidden>Product not found. <a href="../index.html#brands">Browse brands</a></div>
+        <div id="pdpContent" hidden>
+            <nav class="breadcrumb" aria-label="Breadcrumb">
+                <a href="../index.html">Home</a> <span aria-hidden="true"> / </span>
+                <a href="#" id="bcBrand">Brand</a> <span aria-hidden="true"> / </span>
+                <span id="bcTitle">Product</span>
+            </nav>
+            <div class="pdp-layout">
+                <div class="pdp-media">
+                    <img id="pdpImg" src="" alt="">
+                </div>
+                <div class="pdp-detail">
+                    <p class="pdp-brand" id="pdpBrand"></p>
+                    <h1 class="pdp-title" id="pdpTitle"></h1>
+                    <p class="pdp-price" id="pdpPrice"></p>
+                    <p class="pdp-desc" id="pdpDesc"></p>
+                    <div class="pdp-actions">
+                        <a class="btn-primary" id="pdpContact" href="../index.html#contact">Enquire in salon</a>
+                        <span class="btn-ghost" aria-disabled="true" title="Purchase in person at the salon">Add to bag</span>
+                    </div>
+                    <p class="pdp-note">Online checkout is not connected yet — reserve or buy this product by visiting us or calling <a href="tel:+442088826400">020 8882 6400</a>.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2025 JOJO &amp; FLO LONDON</p>
+        <p style="margin-top:10px"><a href="../index.html">Home</a></p>
+    </footer>
+    <script src="../assets/product-catalog.js"></script>
+    <script>
+(function() {
+    var params = new URLSearchParams(window.location.search);
+    var id = params.get('id');
+    var catalog = window.PRODUCT_CATALOG || [];
+    var p = catalog.find(function(x) { return x.id === id; });
+    var empty = document.getElementById('pdpEmpty');
+    var content = document.getElementById('pdpContent');
+    if (!p) {
+        empty.hidden = false;
+        document.title = 'Product not found | JOJO & FLO LONDON';
+        return;
+    }
+    document.title = p.title + ' | JOJO & FLO LONDON';
+    var brandHref = p.brand === 'kerastase' ? 'kerastase.html' : p.brand === 'davines' ? 'davines.html' : 'shu-uemura.html';
+    document.getElementById('bcBrand').href = brandHref;
+    document.getElementById('bcBrand').textContent = p.brandName;
+    document.getElementById('bcTitle').textContent = p.line || p.title;
+    document.getElementById('pdpBrand').textContent = p.brandName;
+    document.getElementById('pdpTitle').textContent = p.title;
+    document.getElementById('pdpPrice').textContent = p.price;
+    document.getElementById('pdpDesc').textContent = p.description;
+    var img = document.getElementById('pdpImg');
+    img.src = '../' + p.image;
+    img.alt = p.title;
+    content.hidden = false;
+    var menuBtn = document.getElementById('menuBtn');
+    var mainNav = document.getElementById('mainNav');
+    if (menuBtn && mainNav) {
+        var icon = menuBtn.querySelector('i');
+        menuBtn.addEventListener('click', function() {
+            var open = mainNav.classList.toggle('open');
+            if (icon) { icon.classList.toggle('ri-menu-line', !open); icon.classList.toggle('ri-close-line', open); }
+        });
+    }
+})();
+    </script>
+</body>
+</html>

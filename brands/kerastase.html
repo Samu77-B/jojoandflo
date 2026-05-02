@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kérastase — Products | JOJO &amp; FLO LONDON</title>
+    <title>Kérastase — Products | JOJO & FLO LONDON</title>
     <link rel="icon" href="../logos/jojoflo-fav.png" type="image/png">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -13,150 +13,64 @@
         :root {
             --font-freight: 'freight-text-pro', 'Source Serif 4', Georgia, serif;
             --primary-bg: #F9F7F2;
-            --secondary-bg: #EFEBE4;
-            --accent: #D6C6B3;
-            --btn: #c5ad84;
-            --btn-hover: #b39d6f;
             --text-dark: #2C2C2C;
             --text-light: #6E6860;
             --white: #FFFFFF;
+            --btn: #c5ad84;
         }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         a { text-decoration: none; color: inherit; transition: color 0.2s ease; }
         ul { list-style: none; }
-        body {
-            font-family: var(--font-freight);
-            background: var(--primary-bg);
-            color: var(--text-dark);
-            min-height: 100vh;
-        }
+        body { font-family: var(--font-freight); background: var(--primary-bg); color: var(--text-dark); min-height: 100vh; }
         header {
-            background: #000;
-            color: #fff;
-            padding: 20px 40px 18px;
-            position: sticky;
-            top: 0;
-            z-index: 100;
+            background: #000; color: #fff; padding: 20px 40px 18px; position: sticky; top: 0; z-index: 100;
         }
         .header-inner {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 18px;
+            max-width: 1200px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: 18px;
         }
-        .header-top {
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            position: relative;
-        }
+        .header-top { width: 100%; display: flex; justify-content: center; align-items: center; position: relative; }
         .logo { height: 44px; }
         .logo img { height: 100%; width: auto; object-fit: contain; }
         .menu-icon {
-            display: none;
-            position: absolute;
-            right: 0;
-            background: none;
-            border: none;
-            color: #fff;
-            font-size: 24px;
-            cursor: pointer;
-            padding: 6px;
+            display: none; position: absolute; right: 0; background: none; border: none; color: #fff;
+            font-size: 24px; cursor: pointer; padding: 6px;
         }
-        nav ul {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 28px;
-            justify-content: center;
-        }
-        nav a {
-            font-size: 12px;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-            color: rgba(255,255,255,0.9);
-        }
+        nav ul { display: flex; flex-wrap: wrap; gap: 28px; justify-content: center; }
+        nav a { font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(255,255,255,0.9); }
         nav a:hover { color: #fff; }
         .nav-cta { color: var(--btn) !important; }
-        .nav-cta:hover { color: #dbc9a0 !important; }
-        .shop-main {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 48px 24px 100px;
-        }
-        .breadcrumb {
-            font-size: 13px;
-            color: var(--text-light);
-            margin-bottom: 32px;
-        }
+        .shop-main { max-width: 1200px; margin: 0 auto; padding: 48px 24px 100px; }
+        .breadcrumb { font-size: 13px; color: var(--text-light); margin-bottom: 32px; }
         .breadcrumb a { text-decoration: underline; text-underline-offset: 3px; }
-        .breadcrumb a:hover { color: var(--text-dark); }
-        .breadcrumb span { color: var(--text-dark); }
         .page-intro { margin-bottom: 48px; text-align: center; }
         .section-tag {
-            display: inline-block;
-            font-size: 12px;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            color: var(--text-light);
-            border-bottom: 1px solid var(--text-light);
-            padding-bottom: 6px;
-            margin-bottom: 20px;
+            display: inline-block; font-size: 12px; letter-spacing: 3px; text-transform: uppercase;
+            color: var(--text-light); border-bottom: 1px solid var(--text-light); padding-bottom: 6px; margin-bottom: 20px;
         }
-        h1 {
-            font-weight: 300;
-            font-size: clamp(32px, 4vw, 48px);
-            letter-spacing: 1px;
-            margin-bottom: 16px;
-        }
-        .intro-desc {
-            max-width: 620px;
-            margin: 0 auto;
-            font-size: 16px;
-            line-height: 1.7;
-            color: var(--text-light);
-        }
+        h1 { font-weight: 300; font-size: clamp(32px, 4vw, 48px); letter-spacing: 1px; margin-bottom: 16px; }
+        .intro-desc { max-width: 620px; margin: 0 auto; font-size: 16px; line-height: 1.7; color: var(--text-light); }
         .retail-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-            gap: 28px;
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 28px;
         }
-        .product-card {
-            background: var(--white);
-            overflow: hidden;
+        a.product-card {
+            display: block; background: var(--white); overflow: hidden;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-        .product-card:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 16px 32px rgba(0,0,0,0.06);
+        a.product-card:hover {
+            transform: translateY(-6px); box-shadow: 0 16px 32px rgba(0,0,0,0.06);
         }
         .product-image {
-            width: 100%;
-            height: 280px;
-            object-fit: contain;
-            background: #f5f2ed;
+            width: 100%; height: 280px; object-fit: contain; background: #f5f2ed;
         }
         .product-info { padding: 20px; text-align: center; }
         .product-name {
-            font-weight: 300;
-            font-size: 16px;
-            line-height: 1.35;
-            color: var(--text-dark);
+            font-weight: 300; font-size: 16px; line-height: 1.35; color: var(--text-dark);
         }
         .product-hint {
-            font-size: 12px;
-            color: var(--text-light);
-            margin-top: 8px;
-            letter-spacing: 0.06em;
-            text-transform: uppercase;
+            font-size: 12px; color: var(--text-light); margin-top: 8px;
+            letter-spacing: 0.06em; text-transform: uppercase;
         }
-        footer {
-            background: #000;
-            color: #fff;
-            padding: 60px 24px 40px;
-        }
+        footer { background: #000; color: #fff; padding: 60px 24px 40px; }
         .footer-inner { max-width: 1200px; margin: 0 auto; text-align: center; }
         .footer-inner p { font-size: 13px; color: rgba(255,255,255,0.5); }
         .footer-inner a { color: rgba(255,255,255,0.7); text-decoration: underline; }
@@ -164,12 +78,7 @@
             header { padding: 16px 20px; }
             .menu-icon { display: flex; align-items: center; justify-content: center; }
             nav {
-                display: flex;
-                flex-direction: column;
-                width: 100%;
-                max-height: 0;
-                overflow: hidden;
-                opacity: 0;
+                display: flex; flex-direction: column; width: 100%; max-height: 0; overflow: hidden; opacity: 0;
                 transition: max-height 0.35s ease, opacity 0.25s ease;
             }
             nav.open { max-height: 400px; opacity: 1; margin-top: 8px; }
@@ -198,252 +107,65 @@
             </nav>
         </div>
     </header>
-
     <main class="shop-main">
         <nav class="breadcrumb" aria-label="Breadcrumb">
             <a href="../index.html">Home</a> <span aria-hidden="true">/</span> <span>Kérastase</span>
         </nav>
-
         <div class="page-intro">
             <span class="section-tag">Salon retail</span>
             <h1>Kérastase</h1>
-            <p class="intro-desc">Luxury hair care rituals we use and retail in salon. Below are representative assets (smaller web-friendly files where available). For pricing and stock, visit us or call.</p>
+            <p class="intro-desc">Luxury hair care we use and retail in salon. Tap a product for a full description — purchase in person or by phone.</p>
         </div>
-
-        <div class="retail-grid">
-            <article class="product-card">
-                <img class="product-image" src="../assets/site-products/Kérastase/(NEW) Travel Sizes/3474637269111_PACKSHOT01.jpeg" alt="Kérastase — Travel Sizes" width="400" height="400" loading="lazy">
-                <div class="product-info">
-                    <h2 class="product-name">Travel Sizes</h2>
-                    <p class="product-hint">Available in salon</p>
-                </div>
-            </article>
-            <article class="product-card">
-                <img class="product-image" src="../assets/site-products/Kérastase/(NEW) Social Media Content/Gloss Mist/KER_GLOSS_25_ECOM_FLOWERS_LE PARFUM_3474637326692_72_1x1 (1) (1).jpg" alt="Kérastase — Gloss Mist" width="400" height="400" loading="lazy">
-                <div class="product-info">
-                    <h2 class="product-name">Gloss Mist</h2>
-                    <p class="product-hint">Available in salon</p>
-                </div>
-            </article>
-            <article class="product-card">
-                <img class="product-image" src="../assets/site-products/Kérastase/(NEW) Travel Sizes/3474637195816_PACKSHOT01.jpeg" alt="Kérastase — Travel Sizes" width="400" height="400" loading="lazy">
-                <div class="product-info">
-                    <h2 class="product-name">Travel Sizes</h2>
-                    <p class="product-hint">Available in salon</p>
-                </div>
-            </article>
-            <article class="product-card">
-                <img class="product-image" src="../assets/site-products/Kérastase/(NEW) Travel Sizes/3474637319687_PACKSHOT01.jpeg" alt="Kérastase — Travel Sizes" width="400" height="400" loading="lazy">
-                <div class="product-info">
-                    <h2 class="product-name">Travel Sizes</h2>
-                    <p class="product-hint">Available in salon</p>
-                </div>
-            </article>
-            <article class="product-card">
-                <img class="product-image" src="../assets/site-products/Kérastase/(NEW) GLOSS ABSOLU CREME/ECOM X Textures/KER_GLOSS_26_ECOM_TEXTURE_MASQUE_3474637303365_72_1x1.jpg" alt="Kérastase — ECOM X Textures" width="400" height="400" loading="lazy">
-                <div class="product-info">
-                    <h2 class="product-name">ECOM X Textures</h2>
-                    <p class="product-hint">Available in salon</p>
-                </div>
-            </article>
-            <article class="product-card">
-                <img class="product-image" src="../assets/site-products/Kérastase/(NEW) ELIXIR ULTIME RESTAGE 2024/In Hand/KER_ELIXIR_2024_IN_HAND_3474637215125_9x16.jpg" alt="Kérastase — In Hand" width="400" height="400" loading="lazy">
-                <div class="product-info">
-                    <h2 class="product-name">In Hand</h2>
-                    <p class="product-hint">Available in salon</p>
-                </div>
-            </article>
-            <article class="product-card">
-                <img class="product-image" src="../assets/site-products/Kérastase/(NEW) GLOSS ABSOLU CREME/ECOM X Textures/KER_GLOSS_26_ECOM_TEXTURE_MASQUE_3474637303365_72_16x9.jpg" alt="Kérastase — ECOM X Textures" width="400" height="400" loading="lazy">
-                <div class="product-info">
-                    <h2 class="product-name">ECOM X Textures</h2>
-                    <p class="product-hint">Available in salon</p>
-                </div>
-            </article>
-            <article class="product-card">
-                <img class="product-image" src="../assets/site-products/Kérastase/(NEW) GLOSS ABSOLU CREME/ECOM X Textures/KER_GLOSS_26_ECOM_TEXTURE_MASQUE_3474637303365_72_4x5.jpg" alt="Kérastase — ECOM X Textures" width="400" height="400" loading="lazy">
-                <div class="product-info">
-                    <h2 class="product-name">ECOM X Textures</h2>
-                    <p class="product-hint">Available in salon</p>
-                </div>
-            </article>
-            <article class="product-card">
-                <img class="product-image" src="../assets/site-products/Kérastase/(NEW) Aromes/KR-C1-26-AROMES-HBP.jpg" alt="Kérastase — Aromes" width="400" height="400" loading="lazy">
-                <div class="product-info">
-                    <h2 class="product-name">Aromes</h2>
-                    <p class="product-hint">Available in salon</p>
-                </div>
-            </article>
-            <article class="product-card">
-                <img class="product-image" src="../assets/site-products/Kérastase/(NEW) GLOSS ABSOLU CREME/In hands/KER_GLOSS_26_IN HANDS_FRIZZ GLAZE_3474637329860_rgb_72_1x1.jpg" alt="Kérastase — In hands" width="400" height="400" loading="lazy">
-                <div class="product-info">
-                    <h2 class="product-name">In hands</h2>
-                    <p class="product-hint">Available in salon</p>
-                </div>
-            </article>
-            <article class="product-card">
-                <img class="product-image" src="../assets/site-products/Kérastase/(NEW) GLOSS ABSOLU CREME/ECOM/KER_GLOSS_26_ECOM_FLOWER_FRIZZ GLAZE_3474637329860_rgb_72_4x5.jpg" alt="Kérastase — ECOM" width="400" height="400" loading="lazy">
-                <div class="product-info">
-                    <h2 class="product-name">ECOM</h2>
-                    <p class="product-hint">Available in salon</p>
-                </div>
-            </article>
-            <article class="product-card">
-                <img class="product-image" src="../assets/site-products/Kérastase/(NEW) GLOSS ABSOLU CREME/In hands/KER_GLOSS_26_IN HANDS_BAIN RICHE_3474637308728_rgb_72_1x1.jpg" alt="Kérastase — In hands" width="400" height="400" loading="lazy">
-                <div class="product-info">
-                    <h2 class="product-name">In hands</h2>
-                    <p class="product-hint">Available in salon</p>
-                </div>
-            </article>
-            <article class="product-card">
-                <img class="product-image" src="../assets/site-products/Kérastase/(NEW) GLOSS ABSOLU CREME/In hands/KER_GLOSS_26_IN HANDS_BAIN RICHE_3474637308728_rgb_72_16x9.jpg" alt="Kérastase — In hands" width="400" height="400" loading="lazy">
-                <div class="product-info">
-                    <h2 class="product-name">In hands</h2>
-                    <p class="product-hint">Available in salon</p>
-                </div>
-            </article>
-            <article class="product-card">
-                <img class="product-image" src="../assets/site-products/Kérastase/(NEW) GLOSS ABSOLU CREME/In hands/KER_GLOSS_26_IN HANDS_FRIZZ GLAZE_3474637329860_rgb_72_16x9.jpg" alt="Kérastase — In hands" width="400" height="400" loading="lazy">
-                <div class="product-info">
-                    <h2 class="product-name">In hands</h2>
-                    <p class="product-hint">Available in salon</p>
-                </div>
-            </article>
-            <article class="product-card">
-                <img class="product-image" src="../assets/site-products/Kérastase/(NEW) Chronologiste/Posts/KER_CHRONOLOGISTE_26_META_CONSIDERATION_CARROUSEL_POST_4_RITUAL_MULTIPLE_EAN_1x1_VA.jpg" alt="Kérastase — Posts" width="400" height="400" loading="lazy">
-                <div class="product-info">
-                    <h2 class="product-name">Posts</h2>
-                    <p class="product-hint">Available in salon</p>
-                </div>
-            </article>
-            <article class="product-card">
-                <img class="product-image" src="../assets/site-products/Kérastase/(NEW) GLOSS ABSOLU CREME/ECOM/KER_GLOSS_26_ECOM_FLOWER_FRIZZ GLAZE_3474637329860_rgb_72_16x9.jpg" alt="Kérastase — ECOM" width="400" height="400" loading="lazy">
-                <div class="product-info">
-                    <h2 class="product-name">ECOM</h2>
-                    <p class="product-hint">Available in salon</p>
-                </div>
-            </article>
-            <article class="product-card">
-                <img class="product-image" src="../assets/site-products/Kérastase/(NEW) GLOSS ABSOLU CREME/ECOM/KER_GLOSS_26_ECOM_FLOWER_FRIZZ GLAZE_3474637329860_rgb_72_1x1.jpg" alt="Kérastase — ECOM" width="400" height="400" loading="lazy">
-                <div class="product-info">
-                    <h2 class="product-name">ECOM</h2>
-                    <p class="product-hint">Available in salon</p>
-                </div>
-            </article>
-            <article class="product-card">
-                <img class="product-image" src="../assets/site-products/Kérastase/(NEW) Travel Sizes/3474637319021_PACKSHOT01.jpeg" alt="Kérastase — Travel Sizes" width="400" height="400" loading="lazy">
-                <div class="product-info">
-                    <h2 class="product-name">Travel Sizes</h2>
-                    <p class="product-hint">Available in salon</p>
-                </div>
-            </article>
-            <article class="product-card">
-                <img class="product-image" src="../assets/site-products/Kérastase/(NEW) GLOSS ABSOLU CREME/In hands/KER_GLOSS_26_IN HANDS_BAIN RICHE_3474637308728_rgb_72_4x5.jpg" alt="Kérastase — In hands" width="400" height="400" loading="lazy">
-                <div class="product-info">
-                    <h2 class="product-name">In hands</h2>
-                    <p class="product-hint">Available in salon</p>
-                </div>
-            </article>
-            <article class="product-card">
-                <img class="product-image" src="../assets/site-products/Kérastase/(NEW) GLOSS ABSOLU CREME/ECOM/KER_GLOSS_26_ECOM_ICECREAM_FRIZZ GLAZE_3474637329860_rgb_300_1x1.jpg" alt="Kérastase — ECOM" width="400" height="400" loading="lazy">
-                <div class="product-info">
-                    <h2 class="product-name">ECOM</h2>
-                    <p class="product-hint">Available in salon</p>
-                </div>
-            </article>
-            <article class="product-card">
-                <img class="product-image" src="../assets/site-products/Kérastase/(NEW) GLOSS ABSOLU CREME/ECOM/KER_GLOSS_26_ECOM_ICECREAM_FRIZZ GLAZE_3474637329860_rgb_72_1x1.jpg" alt="Kérastase — ECOM" width="400" height="400" loading="lazy">
-                <div class="product-info">
-                    <h2 class="product-name">ECOM</h2>
-                    <p class="product-hint">Available in salon</p>
-                </div>
-            </article>
-            <article class="product-card">
-                <img class="product-image" src="../assets/site-products/Kérastase/(NEW) GLOSS ABSOLU CREME/ECOM/KER_GLOSS_26_ECOM_FLOWER_MASQUE_3474637303365_72_16x9.jpg" alt="Kérastase — ECOM" width="400" height="400" loading="lazy">
-                <div class="product-info">
-                    <h2 class="product-name">ECOM</h2>
-                    <p class="product-hint">Available in salon</p>
-                </div>
-            </article>
-            <article class="product-card">
-                <img class="product-image" src="../assets/site-products/Kérastase/(NEW) GLOSS ABSOLU/Product in hand/KER_GLOSS_25_IN_HAND_BOULE_72dpi_1x1.jpg" alt="Kérastase — Product in hand" width="400" height="400" loading="lazy">
-                <div class="product-info">
-                    <h2 class="product-name">Product in hand</h2>
-                    <p class="product-hint">Available in salon</p>
-                </div>
-            </article>
-            <article class="product-card">
-                <img class="product-image" src="../assets/site-products/Kérastase/(NEW) GLOSS ABSOLU CREME/ECOM/KER_GLOSS_26_ECOM_FLOWER_MASQUE_3474637303365_72_1x1.jpg" alt="Kérastase — ECOM" width="400" height="400" loading="lazy">
-                <div class="product-info">
-                    <h2 class="product-name">ECOM</h2>
-                    <p class="product-hint">Available in salon</p>
-                </div>
-            </article>
-            <article class="product-card">
-                <img class="product-image" src="../assets/site-products/Kérastase/(NEW) GLOSS ABSOLU CREME/ECOM/KER_GLOSS_26_ECOM_FLOWER_MASQUE_3474637303365_72_4x5.jpg" alt="Kérastase — ECOM" width="400" height="400" loading="lazy">
-                <div class="product-info">
-                    <h2 class="product-name">ECOM</h2>
-                    <p class="product-hint">Available in salon</p>
-                </div>
-            </article>
-            <article class="product-card">
-                <img class="product-image" src="../assets/site-products/Kérastase/(NEW) GLOSS ABSOLU CREME/ECOM/KER_GLOSS_26_ECOM_ICECREAM_FRIZZ GLAZE_3474637329860_rgb_72_4x5.jpg" alt="Kérastase — ECOM" width="400" height="400" loading="lazy">
-                <div class="product-info">
-                    <h2 class="product-name">ECOM</h2>
-                    <p class="product-hint">Available in salon</p>
-                </div>
-            </article>
-            <article class="product-card">
-                <img class="product-image" src="../assets/site-products/Kérastase/(NEW) GLOSS ABSOLU CREME/ECOM/KER_GLOSS_26_ECOM_ICECREAM_FRIZZ GLAZE_3474637329860_rgb_72_16x9.jpg" alt="Kérastase — ECOM" width="400" height="400" loading="lazy">
-                <div class="product-info">
-                    <h2 class="product-name">ECOM</h2>
-                    <p class="product-hint">Available in salon</p>
-                </div>
-            </article>
-            <article class="product-card">
-                <img class="product-image" src="../assets/site-products/Kérastase/(NEW) GLOSS ABSOLU CREME/In hands/KER_GLOSS_26_IN HANDS_FRIZZ GLAZE_3474637329860_rgb_72_4x5.jpg" alt="Kérastase — In hands" width="400" height="400" loading="lazy">
-                <div class="product-info">
-                    <h2 class="product-name">In hands</h2>
-                    <p class="product-hint">Available in salon</p>
-                </div>
-            </article>
-
-        </div>
+        <div class="retail-grid" id="productGrid"></div>
     </main>
-
     <footer>
         <div class="footer-inner">
-            <p>&copy; 2025 JOJO &amp; FLO LONDON. Product imagery for salon retail — ask in salon for availability.</p>
+            <p>&copy; 2025 JOJO &amp; FLO LONDON. Tap a product for details. Purchase in salon.</p>
             <p style="margin-top:12px"><a href="../index.html">Back to home</a></p>
         </div>
     </footer>
-
+    <script src="../assets/product-catalog.js"></script>
     <script>
-        (function() {
-            var menuBtn = document.getElementById('menuBtn');
-            var mainNav = document.getElementById('mainNav');
-            if (menuBtn && mainNav) {
-                var icon = menuBtn.querySelector('i');
-                menuBtn.addEventListener('click', function() {
-                    var open = mainNav.classList.toggle('open');
-                    menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
-                    if (icon) {
-                        icon.classList.toggle('ri-menu-line', !open);
-                        icon.classList.toggle('ri-close-line', open);
-                    }
-                });
-                mainNav.querySelectorAll('a').forEach(function(link) {
-                    link.addEventListener('click', function() {
-                        mainNav.classList.remove('open');
-                        menuBtn.setAttribute('aria-expanded', 'false');
-                        if (icon) {
-                            icon.classList.add('ri-menu-line');
-                            icon.classList.remove('ri-close-line');
-                        }
-                    });
-                });
+(function() {
+    var BRAND = "kerastase";
+    var grid = document.getElementById('productGrid');
+    var catalog = window.PRODUCT_CATALOG || [];
+    function esc(s) {
+        var d = document.createElement('div');
+        d.textContent = s;
+        return d.innerHTML;
+    }
+    catalog.filter(function(p) { return p.brand === BRAND; }).forEach(function(p) {
+        var a = document.createElement('a');
+        a.className = 'product-card';
+        a.href = 'product.html?id=' + encodeURIComponent(p.id);
+        a.innerHTML =
+            '<img class="product-image" src="../' + esc(p.image) + '" alt="' + esc(p.title) + '" width="400" height="400" loading="lazy">' +
+            '<div class="product-info"><h2 class="product-name">' + esc(p.title) + '</h2>' +
+            '<p class="product-hint">' + esc(p.price) + '</p></div>';
+        grid.appendChild(a);
+    });
+    var menuBtn = document.getElementById('menuBtn');
+    var mainNav = document.getElementById('mainNav');
+    if (menuBtn && mainNav) {
+        var icon = menuBtn.querySelector('i');
+        menuBtn.addEventListener('click', function() {
+            var open = mainNav.classList.toggle('open');
+            menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+            if (icon) {
+                icon.classList.toggle('ri-menu-line', !open);
+                icon.classList.toggle('ri-close-line', open);
             }
-        })();
+        });
+        mainNav.querySelectorAll('a').forEach(function(link) {
+            link.addEventListener('click', function() {
+                mainNav.classList.remove('open');
+                menuBtn.setAttribute('aria-expanded', 'false');
+                if (icon) { icon.classList.add('ri-menu-line'); icon.classList.remove('ri-close-line'); }
+            });
+        });
+    }
+})();
     </script>
 </body>
 </html>

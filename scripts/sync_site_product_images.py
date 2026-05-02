@@ -21,17 +21,36 @@ HTML_FILES = [
     ROOT / "brands" / "kerastase.html",
     ROOT / "brands" / "davines.html",
     ROOT / "brands" / "shu-uemura.html",
+    ROOT / "brands" / "product.html",
 ]
+CATALOG_JS = ROOT / "assets" / "product-catalog.js"
 
 # Matches img src after Products/ or assets/site-products/ (path under brand folders).
 SRC_RE = re.compile(r'src="(?:\.\./)?(?:Products/|assets/site-products/)([^"]+)"')
+# Brand grids load images from product-catalog.js — keep those assets in sync too.
+CATALOG_IMG_RE = re.compile(r'"image"\s*:\s*"assets/site-products/([^"]+)"')
+# Omit lifestyle "in hand" shots from the trimmed site bundle (same rule as build_product_catalog).
+HAND_RE = re.compile(
+    r"(\bhands\b|\bin hands\b|\bin hand\b|\bin_hand\b|product in hand|_in_hand_|/in hands/)",
+    re.I,
+)
+
+
+def is_hand_path(rel: str) -> bool:
+    return bool(HAND_RE.search(rel.replace("\\", "/")))
 
 
 def collect_rel_suffixes() -> list[str]:
     seen: set[str] = set()
     for html in HTML_FILES:
+        if not html.is_file():
+            continue
         text = html.read_text(encoding="utf-8")
         for m in SRC_RE.finditer(text):
+            seen.add(m.group(1).replace("\\", "/"))
+    if CATALOG_JS.is_file():
+        ctext = CATALOG_JS.read_text(encoding="utf-8")
+        for m in CATALOG_IMG_RE.finditer(ctext):
             seen.add(m.group(1).replace("\\", "/"))
     return sorted(seen)
 
@@ -54,6 +73,9 @@ def main() -> int:
     rels = collect_rel_suffixes()
     missing_source: list[str] = []
     for rel in rels:
+        if is_hand_path(rel):
+            print("SKIP hand-related", rel)
+            continue
         dest = DEST_ROOT / Path(rel)
         src = PRODUCTS / Path(rel)
         dest.parent.mkdir(parents=True, exist_ok=True)
