@@ -5,3 +5,6 @@ node_modules
 
 # Archive - original/redundant files, not for deploy
 archive/
+
+# Full brand asset libraries (often huge). The site uses trimmed copies in assets/site-products/
+Products/
