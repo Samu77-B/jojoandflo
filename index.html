@@ -342,6 +342,12 @@
         /* Featured Products */
         .featured-products { padding: 100px; background-color: var(--primary-bg); }
         .featured-products .retail-grid { margin-top: 0; grid-template-columns: repeat(4, 1fr); }
+        .featured-products a.product-card { display: block; color: inherit; }
+        .featured-products .product-image {
+            height: 340px;
+            object-fit: contain;
+            background-color: #faf8f5;
+        }
 
         /* Brands */
         .brands {
@@ -804,6 +810,7 @@
                 <li><a href="#">About Us</a></li>
                 <li><a href="#services">Services</a></li>
                 <li><a href="#products">Products</a></li>
+                <li><a href="#brands">Brands</a></li>
                 <li><a href="#">Portfolio</a></li>
                 <li><a href="#gallery">Gallery</a></li>
                 <li><a href="#google-reviews">Testimonials</a></li>
@@ -850,34 +857,34 @@
             <div class="section-tag" style="border-bottom-color: #D6C6B3; color: #B0A08C;">Premium Hair Care</div>
         </div>
         <div class="retail-grid">
-            <div class="product-card">
-                <img src="https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?q=80&w=1200&auto=format&fit=crop" alt="Silk Repair Shampoo" class="product-image">
+            <a href="brands/shu-uemura.html" class="product-card">
+                <img src="Products/Shu Uemura/Ultimate Reset/3474636610211_EN_1.webp" alt="Shu Uemura Ultimate Reset" class="product-image" width="400" height="400" loading="lazy">
                 <div class="product-info">
-                    <h3 class="product-name">Silk Repair Shampoo</h3>
-                    <p class="product-price">£28.00</p>
+                    <h3 class="product-name">Shu Uemura — Ultimate Reset</h3>
+                    <p class="product-price">In salon</p>
                 </div>
-            </div>
-            <div class="product-card">
-                <img src="https://images.unsplash.com/photo-1571781926291-c477ebfd024b?q=80&w=1200&auto=format&fit=crop" alt="Hair Colour" class="product-image">
+            </a>
+            <a href="brands/shu-uemura.html" class="product-card">
+                <img src="Products/Shu Uemura/Izumi Tonic/3474637136512_EN_1.webp" alt="Shu Uemura Izumi Tonic" class="product-image" width="400" height="400" loading="lazy">
                 <div class="product-info">
-                    <h3 class="product-name">Professional Hair Colour</h3>
-                    <p class="product-price">£42.00</p>
+                    <h3 class="product-name">Shu Uemura — Izumi Tonic</h3>
+                    <p class="product-price">In salon</p>
                 </div>
-            </div>
-            <div class="product-card">
-                <img src="https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?q=80&w=1200&auto=format&fit=crop" alt="Intensive Hydration Mask" class="product-image">
+            </a>
+            <a href="brands/kerastase.html" class="product-card">
+                <img src="Products/Kérastase/(NEW) Travel Sizes/3474637269111_PACKSHOT01.jpeg" alt="Kérastase travel size" class="product-image" width="400" height="400" loading="lazy">
                 <div class="product-info">
-                    <h3 class="product-name">Intensive Hydration Mask</h3>
-                    <p class="product-price">£35.00</p>
+                    <h3 class="product-name">Kérastase — Travel sizes</h3>
+                    <p class="product-price">In salon</p>
                 </div>
-            </div>
-            <div class="product-card">
-                <img src="https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?q=80&w=1200&auto=format&fit=crop" alt="Nourishing Conditioner" class="product-image">
+            </a>
+            <a href="brands/davines.html" class="product-card">
+                <img src="Products/Davines/75111_NOUNOU HAIR MASK 75ML/8004608253402_MAIN.jpg" alt="Davines NOUNOU hair mask" class="product-image" width="400" height="400" loading="lazy">
                 <div class="product-info">
-                    <h3 class="product-name">Nourishing Conditioner</h3>
-                    <p class="product-price">£26.00</p>
+                    <h3 class="product-name">Davines — NOUNOU Hair Mask</h3>
+                    <p class="product-price">In salon</p>
                 </div>
-            </div>
+            </a>
         </div>
     </section>
 
@@ -888,9 +895,9 @@
         </div>
         <p class="brands-desc">We work with and retail a select range of professional hair care brands. Available in-salon and for purchase online.</p>
         <div class="brands-grid">
-            <a href="shop/Kerastase/index.html" class="brand-logo" title="Shop Kérastase (demo)"><img src="logos/Kerastase-logo-500x281.png" alt="Kérastase"></a>
-            <div class="brand-logo"><img src="logos/davines.png" alt="Davines"></div>
-            <div class="brand-logo"><img src="logos/shuuemura.png" alt="Shu Uemura Art of Hair"></div>
+            <a href="brands/kerastase.html" class="brand-logo" title="Kérastase products"><img src="logos/Kerastase-logo-500x281.png" alt="Kérastase"></a>
+            <a href="brands/davines.html" class="brand-logo" title="Davines products"><img src="logos/davines.png" alt="Davines"></a>
+            <a href="brands/shu-uemura.html" class="brand-logo" title="Shu Uemura Art of Hair products"><img src="logos/shuuemura.png" alt="Shu Uemura Art of Hair"></a>
         </div>
     </section>
 
