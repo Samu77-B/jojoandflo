@@ -8,6 +8,7 @@ Run from repo root:  python scripts/build_product_catalog_and_brands.py
 from __future__ import annotations
 
 import hashlib
+import html
 import json
 import re
 import sys
@@ -600,6 +601,17 @@ def write_product_detail_page() -> None:
     print("wrote", path.relative_to(ROOT))
 
 
+def kerastase_featured_pick(catalog: list[dict]) -> dict:
+    rows = [r for r in catalog if r.get("brand") == "kerastase"]
+    if not rows:
+        raise SystemExit("no Kérastase products in catalog for homepage featured")
+    rows.sort(key=lambda r: r["image"])
+    for r in rows:
+        if "PACKSHOT" in r["image"].upper():
+            return r
+    return rows[0]
+
+
 def patch_index_featured(catalog: list[dict]) -> None:
     """Ensure homepage featured cards link to product.html?id=… matching the catalog."""
     index = ROOT / "index.html"
@@ -611,7 +623,6 @@ def patch_index_featured(catalog: list[dict]) -> None:
                 return r["id"]
         raise SystemExit("missing catalog match for " + subpath_contains)
 
-    # Match any current brands/*.html or brands/product.html href, replace id from catalog.
     pairs = [
         (
             r'<a href="brands/[^"]+"(\s+class="product-card">\s*<img src="assets/site-products/Shu Uemura/Ultimate Reset/3474636610211_EN_1\.webp")',
@@ -623,12 +634,6 @@ def patch_index_featured(catalog: list[dict]) -> None:
             r'<a href="brands/[^"]+"(\s+class="product-card">\s*<img src="assets/site-products/Shu Uemura/Izumi Tonic/3474637136512_EN_1\.webp")',
             "<a href=\"brands/product.html?id="
             + pid_for("3474637136512_EN_1.webp")
-            + r'"\1',
-        ),
-        (
-            r'<a href="brands/[^"]+"(\s+class="product-card">\s*<img src="assets/site-products/Kérastase/\(NEW\) Travel Sizes/3474637269111_PACKSHOT01\.jpeg")',
-            "<a href=\"brands/product.html?id="
-            + pid_for("3474637269111_PACKSHOT01.jpeg")
             + r'"\1',
         ),
         (
@@ -644,6 +649,37 @@ def patch_index_featured(catalog: list[dict]) -> None:
         if n != 1:
             raise SystemExit("index.html featured patch failed for pattern: " + pat[:80])
         new_text = new_text2
+
+    kf = kerastase_featured_pick(catalog)
+    new_text2, n = re.subn(
+        r'(<a href="brands/product\.html\?id=)[a-f0-9]+(" class="product-card">\s*<img src=")assets/site-products/Kérastase/[^"]+',
+        r"\1" + kf["id"] + r"\2" + kf["image"],
+        new_text,
+        count=1,
+    )
+    if n != 1:
+        raise SystemExit("index.html: could not patch Kérastase featured card (missing Kérastase img?)")
+    new_text = new_text2
+    safe_alt = html.escape(kf["title"], quote=True)
+    new_text2, n = re.subn(
+        r'(<img src="' + re.escape(kf["image"]) + '" alt=")[^"]*(" class="product-image")',
+        r"\1" + safe_alt + r"\2",
+        new_text,
+        count=1,
+    )
+    if n != 1:
+        raise SystemExit("index.html: could not patch Kérastase featured alt")
+    new_text = new_text2
+    new_text2, n = re.subn(
+        r'(<img src="' + re.escape(kf["image"]) + r'"[^>]*>\s*<div class="product-info">\s*<h3 class="product-name">)[^<]*(</h3>)',
+        r"\1" + html.escape(kf["title"]) + r"\2",
+        new_text,
+        count=1,
+    )
+    if n != 1:
+        raise SystemExit("index.html: could not patch Kérastase featured title")
+    new_text = new_text2
+
     index.write_text(new_text, encoding="utf-8")
     print("patched index.html featured links -> product.html")
 
