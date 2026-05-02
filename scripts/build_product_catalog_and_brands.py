@@ -13,6 +13,8 @@ import re
 import sys
 from pathlib import Path
 
+IMAGE_EXT = {".jpg", ".jpeg", ".png", ".webp", ".gif", ".bmp", ".tif", ".tiff", ".heic"}
+
 ROOT = Path(__file__).resolve().parents[1]
 SITE_PRODUCTS = ROOT / "assets" / "site-products"
 CATALOG_JS = ROOT / "assets" / "product-catalog.js"
@@ -57,10 +59,127 @@ def product_id(rel: str) -> str:
 
 def human_title(brand_name: str, rel: str) -> str:
     line = line_title(rel)
+    parts = rel.replace("\\", "/").split("/")
+    if brand_name == "Kérastase" and "GLOSS ABSOLU CREME" in rel and len(parts) > 2:
+        return f"{brand_name} — {line} — {parts[2]}"
     base = Path(rel).stem
     if len(base) > 40 and base.startswith("KER_"):
         return f"{brand_name} — {line}"
     return f"{brand_name} — {line}"
+
+
+def sha256_file(path: Path) -> str:
+    h = hashlib.sha256()
+    with path.open("rb") as f:
+        for chunk in iter(lambda: f.read(1024 * 1024), b""):
+            h.update(chunk)
+    return h.hexdigest()
+
+
+def kerastase_bucket_key(inner: str) -> tuple[str, str]:
+    """
+    One visible product card per bucket for Kérastase.
+    Travel sizes: keep each distinct filename (SKU packshots).
+    Gloss Absolu: one card per immediate subfolder (ECOM vs ECOM X Textures, etc.).
+    Other ranges: one card per asset folder.
+    """
+    parts = inner.replace("\\", "/").split("/")
+    if len(parts) < 2:
+        return ("misc", inner)
+    tail = "/".join(parts[1:])
+    if "Travel Sizes" in inner:
+        return ("travel", parts[-1])
+    if "GLOSS ABSOLU CREME" in inner or (len(parts) > 1 and "GLOSS" in parts[1]):
+        sub = parts[2] if len(parts) > 2 else ""
+        return ("gloss", sub)
+    if "Social Media" in inner:
+        return ("social", parts[-1])
+    if "Chronologiste" in inner:
+        return ("chrono", parts[-1])
+    if "Aromes" in inner or "Arom" in parts[1]:
+        return ("aromes", parts[-1])
+    return ("misc", inner)
+
+
+def dedupe_catalog_rows(rows: list[dict]) -> list[dict]:
+    """Drop duplicate cards: identical file bytes, then Kérastase bucket collapse."""
+    def img_path(r: dict) -> Path:
+        return ROOT / Path(r["image"])
+
+    # 1) Identical bytes (any brand) — keep smallest file
+    by_hash: dict[str, dict] = {}
+    for r in rows:
+        fp = img_path(r)
+        if not fp.is_file():
+            continue
+        try:
+            digest = sha256_file(fp)
+            sz = fp.stat().st_size
+        except OSError:
+            continue
+        if digest not in by_hash:
+            by_hash[digest] = r
+        else:
+            prev = img_path(by_hash[digest])
+            try:
+                if sz < prev.stat().st_size:
+                    by_hash[digest] = r
+            except OSError:
+                pass
+    rows = list(by_hash.values())
+
+    # 2) Kérastase — one row per bucket (stops many near-identical Gloss ECOM tiles)
+    ker = [r for r in rows if r["brand"] == "kerastase"]
+    other = [r for r in rows if r["brand"] != "kerastase"]
+    buckets: dict[tuple[str, str], dict] = {}
+    for r in ker:
+        inner = r["image"].split("assets/site-products/", 1)[1]
+        key = kerastase_bucket_key(inner)
+        fp = img_path(r)
+        try:
+            sz = fp.stat().st_size
+        except OSError:
+            continue
+        if key not in buckets:
+            buckets[key] = r
+        else:
+            prev = img_path(buckets[key])
+            try:
+                if sz < prev.stat().st_size:
+                    buckets[key] = r
+            except OSError:
+                pass
+    merged = other + list(buckets.values())
+    merged.sort(key=lambda r: (r["brand"], r["title"], r["image"]))
+    return merged
+
+
+def prune_site_products_not_in_catalog(catalog: list[dict]) -> int:
+    """Remove image files under assets/site-products that are no longer in the catalog."""
+    keep: set[str] = set()
+    for r in catalog:
+        img = (r.get("image") or "").replace("\\", "/")
+        prefix = "assets/site-products/"
+        if img.startswith(prefix):
+            keep.add(img[len(prefix) :])
+    removed = 0
+    if not SITE_PRODUCTS.is_dir():
+        return 0
+    for p in list(SITE_PRODUCTS.rglob("*")):
+        if not p.is_file() or p.suffix.lower() not in IMAGE_EXT:
+            continue
+        rel = p.relative_to(SITE_PRODUCTS).as_posix()
+        if rel not in keep:
+            p.unlink()
+            removed += 1
+    # empty dirs
+    for d in sorted(SITE_PRODUCTS.rglob("*"), reverse=True):
+        if d.is_dir():
+            try:
+                next(d.iterdir())
+            except StopIteration:
+                d.rmdir()
+    return removed
 
 
 def delete_hand_assets() -> int:
@@ -110,6 +229,7 @@ def build_catalog() -> list[dict]:
             }
         )
     rows.sort(key=lambda r: (r["brand"], r["title"]))
+    rows = dedupe_catalog_rows(rows)
     return rows
 
 
@@ -481,39 +601,50 @@ def write_product_detail_page() -> None:
 
 
 def patch_index_featured(catalog: list[dict]) -> None:
-    """Point homepage featured cards at product.html by stable image match."""
+    """Ensure homepage featured cards link to product.html?id=… matching the catalog."""
     index = ROOT / "index.html"
     text = index.read_text(encoding="utf-8")
 
     def pid_for(subpath_contains: str) -> str:
         for r in catalog:
-            if subpath_contains in r["image"].replace("\\\\", "/"):
+            if subpath_contains in r["image"].replace("\\", "/"):
                 return r["id"]
         raise SystemExit("missing catalog match for " + subpath_contains)
 
-    repls = [
+    # Match any current brands/*.html or brands/product.html href, replace id from catalog.
+    pairs = [
         (
-            '<a href="brands/shu-uemura.html" class="product-card">\n                <img src="assets/site-products/Shu Uemura/Ultimate Reset/3474636610211_EN_1.webp"',
-            f'<a href="brands/product.html?id={pid_for("3474636610211_EN_1.webp")}" class="product-card">\n                <img src="assets/site-products/Shu Uemura/Ultimate Reset/3474636610211_EN_1.webp"',
+            r'<a href="brands/[^"]+"(\s+class="product-card">\s*<img src="assets/site-products/Shu Uemura/Ultimate Reset/3474636610211_EN_1\.webp")',
+            "<a href=\"brands/product.html?id="
+            + pid_for("3474636610211_EN_1.webp")
+            + r'"\1',
         ),
         (
-            '<a href="brands/shu-uemura.html" class="product-card">\n                <img src="assets/site-products/Shu Uemura/Izumi Tonic/3474637136512_EN_1.webp"',
-            f'<a href="brands/product.html?id={pid_for("3474637136512_EN_1.webp")}" class="product-card">\n                <img src="assets/site-products/Shu Uemura/Izumi Tonic/3474637136512_EN_1.webp"',
+            r'<a href="brands/[^"]+"(\s+class="product-card">\s*<img src="assets/site-products/Shu Uemura/Izumi Tonic/3474637136512_EN_1\.webp")',
+            "<a href=\"brands/product.html?id="
+            + pid_for("3474637136512_EN_1.webp")
+            + r'"\1',
         ),
         (
-            '<a href="brands/kerastase.html" class="product-card">\n                <img src="assets/site-products/Kérastase/(NEW) Travel Sizes/3474637269111_PACKSHOT01.jpeg"',
-            f'<a href="brands/product.html?id={pid_for("3474637269111_PACKSHOT01.jpeg")}" class="product-card">\n                <img src="assets/site-products/Kérastase/(NEW) Travel Sizes/3474637269111_PACKSHOT01.jpeg"',
+            r'<a href="brands/[^"]+"(\s+class="product-card">\s*<img src="assets/site-products/Kérastase/\(NEW\) Travel Sizes/3474637269111_PACKSHOT01\.jpeg")',
+            "<a href=\"brands/product.html?id="
+            + pid_for("3474637269111_PACKSHOT01.jpeg")
+            + r'"\1',
         ),
         (
-            '<a href="brands/davines.html" class="product-card">\n                <img src="assets/site-products/Davines/75111_NOUNOU HAIR MASK 75ML/8004608253402_MAIN.jpg"',
-            f'<a href="brands/product.html?id={pid_for("8004608253402_MAIN.jpg")}" class="product-card">\n                <img src="assets/site-products/Davines/75111_NOUNOU HAIR MASK 75ML/8004608253402_MAIN.jpg"',
+            r'<a href="brands/[^"]+"(\s+class="product-card">\s*<img src="assets/site-products/Davines/75111_NOUNOU HAIR MASK 75ML/8004608253402_MAIN\.jpg")',
+            "<a href=\"brands/product.html?id="
+            + pid_for("8004608253402_MAIN.jpg")
+            + r'"\1',
         ),
     ]
-    for old, new in repls:
-        if old not in text:
-            raise SystemExit("index.html pattern missing: " + old[:60])
-        text = text.replace(old, new, 1)
-    index.write_text(text, encoding="utf-8")
+    new_text = text
+    for pat, repl in pairs:
+        new_text2, n = re.subn(pat, repl, new_text, count=1, flags=re.DOTALL)
+        if n != 1:
+            raise SystemExit("index.html featured patch failed for pattern: " + pat[:80])
+        new_text = new_text2
+    index.write_text(new_text, encoding="utf-8")
     print("patched index.html featured links -> product.html")
 
 
@@ -525,6 +656,9 @@ def main() -> int:
         print("no products in catalog", file=sys.stderr)
         return 1
     write_catalog_js(catalog)
+    n_prune = prune_site_products_not_in_catalog(catalog)
+    if n_prune:
+        print("removed", n_prune, "image(s) from assets/site-products not in catalog")
     (BRANDS / "kerastase.html").write_text(
         brand_listing_html(
             "Kérastase — Products | JOJO & FLO LONDON",

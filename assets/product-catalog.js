@@ -71,112 +71,12 @@ window.PRODUCT_CATALOG = [
     "price": "Price on enquiry"
   },
   {
-    "id": "e29e2f6e392758",
-    "brand": "kerastase",
-    "brandName": "Kérastase",
-    "title": "Kérastase — GLOSS ABSOLU CREME",
-    "line": "GLOSS ABSOLU CREME",
-    "image": "assets/site-products/Kérastase/(NEW) GLOSS ABSOLU CREME/ECOM/KER_GLOSS_26_ECOM_FLOWER_FRIZZ GLAZE_3474637329860_rgb_72_16x9.jpg",
-    "description": "Professional Kérastase care, available at JOJO & FLO LONDON. Our team can advise on suitability for your hair type and how to use it as part of your routine. Purchase in salon.",
-    "price": "Price on enquiry"
-  },
-  {
-    "id": "097597db24b150",
-    "brand": "kerastase",
-    "brandName": "Kérastase",
-    "title": "Kérastase — GLOSS ABSOLU CREME",
-    "line": "GLOSS ABSOLU CREME",
-    "image": "assets/site-products/Kérastase/(NEW) GLOSS ABSOLU CREME/ECOM/KER_GLOSS_26_ECOM_FLOWER_FRIZZ GLAZE_3474637329860_rgb_72_1x1.jpg",
-    "description": "Professional Kérastase care, available at JOJO & FLO LONDON. Our team can advise on suitability for your hair type and how to use it as part of your routine. Purchase in salon.",
-    "price": "Price on enquiry"
-  },
-  {
     "id": "4aac336fc5560f",
     "brand": "kerastase",
     "brandName": "Kérastase",
-    "title": "Kérastase — GLOSS ABSOLU CREME",
+    "title": "Kérastase — GLOSS ABSOLU CREME — ECOM",
     "line": "GLOSS ABSOLU CREME",
     "image": "assets/site-products/Kérastase/(NEW) GLOSS ABSOLU CREME/ECOM/KER_GLOSS_26_ECOM_FLOWER_FRIZZ GLAZE_3474637329860_rgb_72_4x5.jpg",
-    "description": "Professional Kérastase care, available at JOJO & FLO LONDON. Our team can advise on suitability for your hair type and how to use it as part of your routine. Purchase in salon.",
-    "price": "Price on enquiry"
-  },
-  {
-    "id": "6a7d7cc2cb3f29",
-    "brand": "kerastase",
-    "brandName": "Kérastase",
-    "title": "Kérastase — GLOSS ABSOLU CREME",
-    "line": "GLOSS ABSOLU CREME",
-    "image": "assets/site-products/Kérastase/(NEW) GLOSS ABSOLU CREME/ECOM/KER_GLOSS_26_ECOM_FLOWER_MASQUE_3474637303365_72_16x9.jpg",
-    "description": "Professional Kérastase care, available at JOJO & FLO LONDON. Our team can advise on suitability for your hair type and how to use it as part of your routine. Purchase in salon.",
-    "price": "Price on enquiry"
-  },
-  {
-    "id": "68f6d83780caf3",
-    "brand": "kerastase",
-    "brandName": "Kérastase",
-    "title": "Kérastase — GLOSS ABSOLU CREME",
-    "line": "GLOSS ABSOLU CREME",
-    "image": "assets/site-products/Kérastase/(NEW) GLOSS ABSOLU CREME/ECOM/KER_GLOSS_26_ECOM_FLOWER_MASQUE_3474637303365_72_1x1.jpg",
-    "description": "Professional Kérastase care, available at JOJO & FLO LONDON. Our team can advise on suitability for your hair type and how to use it as part of your routine. Purchase in salon.",
-    "price": "Price on enquiry"
-  },
-  {
-    "id": "81ec483dae7b88",
-    "brand": "kerastase",
-    "brandName": "Kérastase",
-    "title": "Kérastase — GLOSS ABSOLU CREME",
-    "line": "GLOSS ABSOLU CREME",
-    "image": "assets/site-products/Kérastase/(NEW) GLOSS ABSOLU CREME/ECOM/KER_GLOSS_26_ECOM_FLOWER_MASQUE_3474637303365_72_4x5.jpg",
-    "description": "Professional Kérastase care, available at JOJO & FLO LONDON. Our team can advise on suitability for your hair type and how to use it as part of your routine. Purchase in salon.",
-    "price": "Price on enquiry"
-  },
-  {
-    "id": "820f76621a96c1",
-    "brand": "kerastase",
-    "brandName": "Kérastase",
-    "title": "Kérastase — GLOSS ABSOLU CREME",
-    "line": "GLOSS ABSOLU CREME",
-    "image": "assets/site-products/Kérastase/(NEW) GLOSS ABSOLU CREME/ECOM/KER_GLOSS_26_ECOM_ICECREAM_FRIZZ GLAZE_3474637329860_rgb_300_1x1.jpg",
-    "description": "Professional Kérastase care, available at JOJO & FLO LONDON. Our team can advise on suitability for your hair type and how to use it as part of your routine. Purchase in salon.",
-    "price": "Price on enquiry"
-  },
-  {
-    "id": "9ba271541c67b7",
-    "brand": "kerastase",
-    "brandName": "Kérastase",
-    "title": "Kérastase — GLOSS ABSOLU CREME",
-    "line": "GLOSS ABSOLU CREME",
-    "image": "assets/site-products/Kérastase/(NEW) GLOSS ABSOLU CREME/ECOM/KER_GLOSS_26_ECOM_ICECREAM_FRIZZ GLAZE_3474637329860_rgb_72_16x9.jpg",
-    "description": "Professional Kérastase care, available at JOJO & FLO LONDON. Our team can advise on suitability for your hair type and how to use it as part of your routine. Purchase in salon.",
-    "price": "Price on enquiry"
-  },
-  {
-    "id": "f04fdc13db2466",
-    "brand": "kerastase",
-    "brandName": "Kérastase",
-    "title": "Kérastase — GLOSS ABSOLU CREME",
-    "line": "GLOSS ABSOLU CREME",
-    "image": "assets/site-products/Kérastase/(NEW) GLOSS ABSOLU CREME/ECOM/KER_GLOSS_26_ECOM_ICECREAM_FRIZZ GLAZE_3474637329860_rgb_72_1x1.jpg",
-    "description": "Professional Kérastase care, available at JOJO & FLO LONDON. Our team can advise on suitability for your hair type and how to use it as part of your routine. Purchase in salon.",
-    "price": "Price on enquiry"
-  },
-  {
-    "id": "fc938f3aecd200",
-    "brand": "kerastase",
-    "brandName": "Kérastase",
-    "title": "Kérastase — GLOSS ABSOLU CREME",
-    "line": "GLOSS ABSOLU CREME",
-    "image": "assets/site-products/Kérastase/(NEW) GLOSS ABSOLU CREME/ECOM/KER_GLOSS_26_ECOM_ICECREAM_FRIZZ GLAZE_3474637329860_rgb_72_4x5.jpg",
-    "description": "Professional Kérastase care, available at JOJO & FLO LONDON. Our team can advise on suitability for your hair type and how to use it as part of your routine. Purchase in salon.",
-    "price": "Price on enquiry"
-  },
-  {
-    "id": "7124d325e5dfbb",
-    "brand": "kerastase",
-    "brandName": "Kérastase",
-    "title": "Kérastase — GLOSS ABSOLU CREME",
-    "line": "GLOSS ABSOLU CREME",
-    "image": "assets/site-products/Kérastase/(NEW) GLOSS ABSOLU CREME/ECOM X Textures/KER_GLOSS_26_ECOM_TEXTURE_MASQUE_3474637303365_72_16x9.jpg",
     "description": "Professional Kérastase care, available at JOJO & FLO LONDON. Our team can advise on suitability for your hair type and how to use it as part of your routine. Purchase in salon.",
     "price": "Price on enquiry"
   },
@@ -184,19 +84,9 @@ window.PRODUCT_CATALOG = [
     "id": "cb1d2dc2f0d2ad",
     "brand": "kerastase",
     "brandName": "Kérastase",
-    "title": "Kérastase — GLOSS ABSOLU CREME",
+    "title": "Kérastase — GLOSS ABSOLU CREME — ECOM X Textures",
     "line": "GLOSS ABSOLU CREME",
     "image": "assets/site-products/Kérastase/(NEW) GLOSS ABSOLU CREME/ECOM X Textures/KER_GLOSS_26_ECOM_TEXTURE_MASQUE_3474637303365_72_1x1.jpg",
-    "description": "Professional Kérastase care, available at JOJO & FLO LONDON. Our team can advise on suitability for your hair type and how to use it as part of your routine. Purchase in salon.",
-    "price": "Price on enquiry"
-  },
-  {
-    "id": "d5422a6357ccc9",
-    "brand": "kerastase",
-    "brandName": "Kérastase",
-    "title": "Kérastase — GLOSS ABSOLU CREME",
-    "line": "GLOSS ABSOLU CREME",
-    "image": "assets/site-products/Kérastase/(NEW) GLOSS ABSOLU CREME/ECOM X Textures/KER_GLOSS_26_ECOM_TEXTURE_MASQUE_3474637303365_72_4x5.jpg",
     "description": "Professional Kérastase care, available at JOJO & FLO LONDON. Our team can advise on suitability for your hair type and how to use it as part of your routine. Purchase in salon.",
     "price": "Price on enquiry"
   },
