@@ -10,11 +10,11 @@
     <!-- <link rel="stylesheet" href="https://use.typekit.net/YOUR_KIT_ID.css"> -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;0,6..96,600;0,6..96,700;1,6..96,400&family=Source+Serif+4:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Source+Serif+4:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
     <style>
         :root {
             --font-freight: 'freight-text-pro', 'Source Serif 4', Georgia, serif;
-            --font-heading: 'Bodoni Moda', Georgia, 'Times New Roman', serif;
+            --font-heading: 'Cinzel', Georgia, 'Times New Roman', serif;
             --primary-bg: #F9F7F2;
             --secondary-bg: #EFEBE4;
             --accent-color: #D6C6B3;
@@ -196,42 +196,74 @@
             box-shadow: 0 10px 20px rgba(0,0,0,0.1);
         }
 
-        /* Book CTA: fixed right, rolls out to reveal full label */
+        /* Book CTA: flush right & bottom of viewport; collapsed shows "BOOK"; rest reveals with eased width/opacity */
         .book-btn-sticky {
             position: fixed;
-            right: max(16px, env(safe-area-inset-right, 0px));
+            right: 0;
             left: auto;
-            top: 50%;
-            transform: translateY(-50%);
+            top: auto;
+            bottom: max(28px, env(safe-area-inset-bottom, 0px));
+            transform: none;
             z-index: 1001;
             background-color: #000;
             color: #fff;
             box-shadow: 0 4px 24px rgba(0, 0, 0, 0.22);
-            padding: 18px 22px;
-            max-width: 7.25rem;
-            overflow: hidden;
+            padding: 18px max(22px, env(safe-area-inset-right, 0px)) 18px 22px;
+            max-width: fit-content;
             white-space: nowrap;
             text-align: left;
+            overflow: hidden;
             transition:
-                max-width 0.45s cubic-bezier(0.4, 0, 0.2, 1),
-                padding 0.45s cubic-bezier(0.4, 0, 0.2, 1),
+                max-width 1.6s cubic-bezier(0.4, 0, 0.2, 1),
+                padding 1.6s cubic-bezier(0.4, 0, 0.2, 1),
                 background-color 0.3s ease,
                 box-shadow 0.3s ease,
                 transform 0.3s ease;
         }
+        .book-btn-sticky__text {
+            display: inline-flex;
+            align-items: baseline;
+            max-width: 100%;
+            column-gap: 0.35em;
+        }
+        .book-btn-sticky__word {
+            flex: 0 0 auto;
+        }
+        .book-btn-sticky__more {
+            flex: 0 1 auto;
+            min-width: 0;
+            max-width: 0;
+            overflow: hidden;
+            opacity: 0;
+            white-space: nowrap;
+            vertical-align: bottom;
+            transition:
+                max-width 1.2s cubic-bezier(0.32, 0.72, 0, 1),
+                opacity 0.65s ease;
+        }
         .book-btn-sticky.is-expanded {
-            max-width: min(calc(100vw - 32px), 22rem);
-            padding: 18px 28px;
+            max-width: min(100vw, 22rem);
+            padding: 18px max(28px, env(safe-area-inset-right, 0px)) 18px 28px;
+        }
+        .book-btn-sticky.is-expanded .book-btn-sticky__more {
+            max-width: 18rem;
+            opacity: 1;
+            transition:
+                max-width 1.6s cubic-bezier(0.32, 0.72, 0, 1),
+                opacity 1.1s ease 0.18s;
         }
         .book-btn-sticky:hover {
             background-color: #222;
             color: #fff;
-            transform: translateY(calc(-50% - 2px));
+            transform: translateY(-2px);
             box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35);
         }
         @media (prefers-reduced-motion: reduce) {
-            .book-btn-sticky {
+            .book-btn-sticky,
+            .book-btn-sticky__more,
+            .book-btn-sticky.is-expanded .book-btn-sticky__more {
                 transition-duration: 0.01ms;
+                transition-delay: 0ms;
             }
         }
 
@@ -785,16 +817,17 @@
             .hero-subtitle { font-size: 14px; letter-spacing: 2px; }
             .hero-btn { padding: 14px 28px; font-size: 12px; }
             .book-btn-sticky {
-                right: max(12px, env(safe-area-inset-right, 0px));
+                right: 0;
                 left: auto;
-                padding: 14px 16px;
+                bottom: max(20px, env(safe-area-inset-bottom, 0px));
+                padding: 14px max(16px, env(safe-area-inset-right, 0px)) 14px 16px;
                 font-size: 11px;
                 letter-spacing: 1.5px;
-                max-width: 5.5rem;
+                max-width: fit-content;
             }
             .book-btn-sticky.is-expanded {
-                max-width: min(calc(100vw - 24px), 19rem);
-                padding: 14px 20px;
+                max-width: min(100vw, 19rem);
+                padding: 14px max(20px, env(safe-area-inset-right, 0px)) 14px 20px;
             }
             .hero-content { padding-top: 0; }
 
@@ -872,7 +905,7 @@
         <div class="hero-content">
             <h2 class="hero-subtitle">London's Premier Hair Stylist</h2>
             <h1 class="hero-title">Exquisite Hair Styling</h1>
-            <button type="button" class="hero-btn book-btn-sticky" id="bookOpenBtn" aria-haspopup="dialog" aria-controls="bookDialog" aria-expanded="false" aria-label="Book an appointment"><span class="book-btn-sticky__text">Book<span class="book-btn-sticky__more"> An Appointment</span></span></button>
+            <button type="button" class="hero-btn book-btn-sticky" id="bookOpenBtn" aria-haspopup="dialog" aria-controls="bookDialog" aria-expanded="false" aria-label="Book an appointment"><span class="book-btn-sticky__text"><span class="book-btn-sticky__word">Book</span><span class="book-btn-sticky__more">An Appointment</span></span></button>
         </div>
     </section>
 
