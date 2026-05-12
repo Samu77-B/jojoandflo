@@ -283,7 +283,8 @@ def brand_listing_html(title: str, h1: str, intro: str, brand_key: str) -> str:
         ul {{ list-style: none; }}
         body {{ font-family: var(--font-freight); background: var(--primary-bg); color: var(--text-dark); min-height: 100vh; }}
         header {{
-            background: #000; color: #fff; padding: 20px 40px 18px; position: sticky; top: 0; z-index: 100;
+            background: #fff; color: var(--text-dark); padding: 20px 40px 18px; position: sticky; top: 0; z-index: 100;
+            border-bottom: 1px solid #EFEBE4;
         }}
         .header-inner {{
             max-width: 1200px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: 18px;
@@ -292,12 +293,12 @@ def brand_listing_html(title: str, h1: str, intro: str, brand_key: str) -> str:
         .logo {{ height: 44px; }}
         .logo img {{ height: 100%; width: auto; object-fit: contain; }}
         .menu-icon {{
-            display: none; position: absolute; right: 0; background: none; border: none; color: #fff;
+            display: none; position: absolute; right: 0; background: none; border: none; color: var(--text-dark);
             font-size: 24px; cursor: pointer; padding: 6px;
         }}
         nav ul {{ display: flex; flex-wrap: wrap; gap: 28px; justify-content: center; }}
-        nav a {{ font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(255,255,255,0.9); }}
-        nav a:hover {{ color: #fff; }}
+        nav a {{ font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(44, 44, 44, 0.88); }}
+        nav a:hover {{ color: var(--text-dark); }}
         .nav-cta {{ color: var(--btn) !important; }}
         .shop-main {{ max-width: 1200px; margin: 0 auto; padding: 48px 24px 100px; }}
         .breadcrumb {{ font-size: 13px; color: var(--text-light); margin-bottom: 32px; }}
@@ -351,7 +352,7 @@ def brand_listing_html(title: str, h1: str, intro: str, brand_key: str) -> str:
         <div class="header-inner">
             <div class="header-top">
                 <a href="../index.html" class="logo">
-                    <img src="../logos/jojoflo_logo-wht.png" alt="JOJO & FLO LONDON">
+                    <img src="../logos/jojoflo_logo-blk.png" alt="JOJO & FLO LONDON">
                 </a>
                 <button class="menu-icon" id="menuBtn" type="button" aria-label="Menu" aria-expanded="false"><i class="ri-menu-line" aria-hidden="true"></i></button>
             </div>
@@ -452,18 +453,20 @@ def write_product_detail_page() -> None:
         ul { list-style: none; }
         body { font-family: var(--font-freight); background: var(--primary-bg); color: var(--text-dark); min-height: 100vh; }
         header {
-            background: #000; color: #fff; padding: 20px 40px 18px; position: sticky; top: 0; z-index: 100;
+            background: #fff; color: var(--text-dark); padding: 20px 40px 18px; position: sticky; top: 0; z-index: 100;
+            border-bottom: 1px solid #EFEBE4;
         }
         .header-inner { max-width: 1200px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: 18px; }
         .header-top { width: 100%; display: flex; justify-content: center; align-items: center; position: relative; }
         .logo { height: 44px; }
         .logo img { height: 100%; width: auto; object-fit: contain; }
         .menu-icon {
-            display: none; position: absolute; right: 0; background: none; border: none; color: #fff;
+            display: none; position: absolute; right: 0; background: none; border: none; color: var(--text-dark);
             font-size: 24px; cursor: pointer; padding: 6px;
         }
         nav ul { display: flex; flex-wrap: wrap; gap: 28px; justify-content: center; }
-        nav a { font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(255,255,255,0.9); }
+        nav a { font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(44, 44, 44, 0.88); }
+        nav a:hover { color: var(--text-dark); }
         .nav-cta { color: var(--btn) !important; }
         .pdp-main { max-width: 1100px; margin: 0 auto; padding: 40px 24px 80px; }
         .breadcrumb { font-size: 13px; color: var(--text-light); margin-bottom: 28px; }
@@ -511,7 +514,7 @@ def write_product_detail_page() -> None:
     <header>
         <div class="header-inner">
             <div class="header-top">
-                <a href="../index.html" class="logo"><img src="../logos/jojoflo_logo-wht.png" alt="JOJO & FLO LONDON"></a>
+                <a href="../index.html" class="logo"><img src="../logos/jojoflo_logo-blk.png" alt="JOJO & FLO LONDON"></a>
                 <button class="menu-icon" id="menuBtn" type="button" aria-label="Menu"><i class="ri-menu-line" aria-hidden="true"></i></button>
             </div>
             <nav id="mainNav" aria-label="Primary">
