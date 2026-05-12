@@ -193,6 +193,24 @@
             box-shadow: 0 10px 20px rgba(0,0,0,0.1);
         }
 
+        /* Book CTA: fixed left rail, stays visible while scrolling */
+        .book-btn-sticky {
+            position: fixed;
+            left: max(16px, env(safe-area-inset-left, 0px));
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 1001;
+            background-color: #000;
+            color: #fff;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.22);
+        }
+        .book-btn-sticky:hover {
+            background-color: #222;
+            color: #fff;
+            transform: translateY(calc(-50% - 2px));
+            box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35);
+        }
+
         /* Booking modal (<dialog> popup) */
         .book-dialog {
             width: min(1000px, 96vw);
@@ -747,6 +765,7 @@
             .hero-title { font-size: 36px; }
             .hero-subtitle { font-size: 14px; letter-spacing: 2px; }
             .hero-btn { padding: 14px 28px; font-size: 12px; }
+            .book-btn-sticky { left: max(12px, env(safe-area-inset-left, 0px)); padding: 14px 20px; font-size: 11px; letter-spacing: 1.5px; }
             .hero-content { padding-top: 0; }
 
             .philosophy { padding: 60px 24px; }
@@ -823,7 +842,7 @@
         <div class="hero-content">
             <h2 class="hero-subtitle">London's Premier Hair Stylist</h2>
             <h1 class="hero-title">Exquisite Hair Styling</h1>
-            <button type="button" class="hero-btn" id="bookOpenBtn" aria-haspopup="dialog" aria-controls="bookDialog">Book An Appointment</button>
+            <button type="button" class="hero-btn book-btn-sticky" id="bookOpenBtn" aria-haspopup="dialog" aria-controls="bookDialog">Book An Appointment</button>
         </div>
     </section>
 
