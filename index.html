@@ -10,10 +10,11 @@
     <!-- <link rel="stylesheet" href="https://use.typekit.net/YOUR_KIT_ID.css"> -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;0,6..96,600;0,6..96,700;1,6..96,400&family=Source+Serif+4:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
     <style>
         :root {
             --font-freight: 'freight-text-pro', 'Source Serif 4', Georgia, serif;
+            --font-heading: 'Bodoni Moda', Georgia, 'Times New Roman', serif;
             --primary-bg: #F9F7F2;
             --secondary-bg: #EFEBE4;
             --accent-color: #D6C6B3;
@@ -24,6 +25,10 @@
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-heading);
+        }
 
         body {
             font-family: var(--font-freight);
@@ -155,7 +160,6 @@
             padding-top: 100px;
         }
         .hero-subtitle {
-            font-family: var(--font-freight);
             font-weight: 300;
             font-size: 18px;
             letter-spacing: 4px;
@@ -164,7 +168,6 @@
             text-shadow: 0 2px 10px rgba(0,0,0,0.2);
         }
         .hero-title {
-            font-family: var(--font-freight);
             font-size: 84px;
             font-weight: 300;
             letter-spacing: 2px;
@@ -193,22 +196,43 @@
             box-shadow: 0 10px 20px rgba(0,0,0,0.1);
         }
 
-        /* Book CTA: fixed left rail, stays visible while scrolling */
+        /* Book CTA: fixed right, rolls out to reveal full label */
         .book-btn-sticky {
             position: fixed;
-            left: max(16px, env(safe-area-inset-left, 0px));
+            right: max(16px, env(safe-area-inset-right, 0px));
+            left: auto;
             top: 50%;
             transform: translateY(-50%);
             z-index: 1001;
             background-color: #000;
             color: #fff;
             box-shadow: 0 4px 24px rgba(0, 0, 0, 0.22);
+            padding: 18px 22px;
+            max-width: 7.25rem;
+            overflow: hidden;
+            white-space: nowrap;
+            text-align: left;
+            transition:
+                max-width 0.45s cubic-bezier(0.4, 0, 0.2, 1),
+                padding 0.45s cubic-bezier(0.4, 0, 0.2, 1),
+                background-color 0.3s ease,
+                box-shadow 0.3s ease,
+                transform 0.3s ease;
+        }
+        .book-btn-sticky.is-expanded {
+            max-width: min(calc(100vw - 32px), 22rem);
+            padding: 18px 28px;
         }
         .book-btn-sticky:hover {
             background-color: #222;
             color: #fff;
             transform: translateY(calc(-50% - 2px));
             box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35);
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .book-btn-sticky {
+                transition-duration: 0.01ms;
+            }
         }
 
         /* Booking modal (<dialog> popup) */
@@ -240,7 +264,6 @@
             flex-shrink: 0;
         }
         .book-dialog__title {
-            font-family: var(--font-freight);
             font-size: 13px;
             font-weight: 300;
             letter-spacing: 2px;
@@ -414,7 +437,6 @@
         .services { padding: 120px 100px; background-color: var(--white); }
         .section-header { text-align: center; margin-bottom: 80px; }
         .section-title {
-            font-family: var(--font-freight);
             font-weight: 300;
             font-size: 48px;
             color: var(--text-dark);
@@ -433,7 +455,6 @@
         }
         .service-icon { font-size: 48px; color: #B0A08C; margin-bottom: 25px; font-weight: 100; }
         .service-name {
-            font-family: var(--font-freight);
             font-weight: 300;
             font-size: 22px;
             margin-bottom: 15px;
@@ -466,7 +487,6 @@
         }
         .product-info { padding: 30px; text-align: center; }
         .product-name {
-            font-family: var(--font-freight);
             font-weight: 300;
             font-size: 20px;
             margin-bottom: 10px;
@@ -632,7 +652,6 @@
         .footer-column { flex: 1; }
         .footer-logo img { height: 40px; margin-bottom: 30px; }
         .footer-heading {
-            font-family: var(--font-freight);
             font-size: 14px;
             letter-spacing: 2px;
             text-transform: uppercase;
@@ -765,7 +784,18 @@
             .hero-title { font-size: 36px; }
             .hero-subtitle { font-size: 14px; letter-spacing: 2px; }
             .hero-btn { padding: 14px 28px; font-size: 12px; }
-            .book-btn-sticky { left: max(12px, env(safe-area-inset-left, 0px)); padding: 14px 20px; font-size: 11px; letter-spacing: 1.5px; }
+            .book-btn-sticky {
+                right: max(12px, env(safe-area-inset-right, 0px));
+                left: auto;
+                padding: 14px 16px;
+                font-size: 11px;
+                letter-spacing: 1.5px;
+                max-width: 5.5rem;
+            }
+            .book-btn-sticky.is-expanded {
+                max-width: min(calc(100vw - 24px), 19rem);
+                padding: 14px 20px;
+            }
             .hero-content { padding-top: 0; }
 
             .philosophy { padding: 60px 24px; }
@@ -842,7 +872,7 @@
         <div class="hero-content">
             <h2 class="hero-subtitle">London's Premier Hair Stylist</h2>
             <h1 class="hero-title">Exquisite Hair Styling</h1>
-            <button type="button" class="hero-btn book-btn-sticky" id="bookOpenBtn" aria-haspopup="dialog" aria-controls="bookDialog">Book An Appointment</button>
+            <button type="button" class="hero-btn book-btn-sticky" id="bookOpenBtn" aria-haspopup="dialog" aria-controls="bookDialog" aria-expanded="false" aria-label="Book an appointment"><span class="book-btn-sticky__text">Book<span class="book-btn-sticky__more"> An Appointment</span></span></button>
         </div>
     </section>
 
@@ -1135,18 +1165,50 @@
             var bookCloseBtn = document.getElementById('bookCloseBtn');
             if (bookDialog && typeof bookDialog.showModal === 'function' && bookOpenBtn) {
                 var bookingUrl = bookFrame && bookFrame.getAttribute('data-src');
-                bookOpenBtn.addEventListener('click', function() {
+                function collapseBookBtn() {
+                    bookOpenBtn.classList.remove('is-expanded');
+                    bookOpenBtn.setAttribute('aria-expanded', 'false');
+                }
+                function expandBookBtn() {
+                    bookOpenBtn.classList.add('is-expanded');
+                    bookOpenBtn.setAttribute('aria-expanded', 'true');
+                }
+                bookOpenBtn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    if (!bookOpenBtn.classList.contains('is-expanded')) {
+                        expandBookBtn();
+                        return;
+                    }
                     if (bookFrame && bookingUrl && !bookFrame.getAttribute('src')) {
                         bookFrame.setAttribute('src', bookingUrl);
                     }
                     bookDialog.showModal();
                 });
+                document.addEventListener('click', function(e) {
+                    if (!bookOpenBtn.classList.contains('is-expanded')) return;
+                    if (bookOpenBtn.contains(e.target)) return;
+                    if (bookDialog.open) return;
+                    collapseBookBtn();
+                });
+                bookDialog.addEventListener('close', collapseBookBtn);
                 if (bookCloseBtn) {
                     bookCloseBtn.addEventListener('click', function() { bookDialog.close(); });
                 }
             } else if (bookOpenBtn) {
-                bookOpenBtn.addEventListener('click', function() {
+                bookOpenBtn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    if (!bookOpenBtn.classList.contains('is-expanded')) {
+                        bookOpenBtn.classList.add('is-expanded');
+                        bookOpenBtn.setAttribute('aria-expanded', 'true');
+                        return;
+                    }
                     window.open('https://salonsynk.com/book/jojoandflo', 'salonBooking', 'width=520,height=760,scrollbars=yes,resizable=yes');
+                });
+                document.addEventListener('click', function(e) {
+                    if (!bookOpenBtn.classList.contains('is-expanded')) return;
+                    if (bookOpenBtn.contains(e.target)) return;
+                    bookOpenBtn.classList.remove('is-expanded');
+                    bookOpenBtn.setAttribute('aria-expanded', 'false');
                 });
             }
 
