@@ -169,10 +169,180 @@
             font-size: 84px;
             font-weight: 300;
             letter-spacing: 2px;
-            margin-bottom: 40px;
+            margin-bottom: 32px;
             line-height: 1.1;
             text-shadow: 0 2px 20px rgba(0,0,0,0.3);
         }
+        .hero-search {
+            width: min(640px, 100%);
+            margin: 0 auto;
+        }
+        .hero-search__bar {
+            display: flex;
+            align-items: stretch;
+            background: rgba(255, 255, 255, 0.92);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+        .hero-search__icon {
+            display: flex;
+            align-items: center;
+            padding: 0 16px;
+            color: var(--text-light);
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+        .hero-search__input {
+            flex: 1;
+            min-width: 0;
+            border: none;
+            background: transparent;
+            padding: 16px 8px;
+            font-family: var(--font-freight);
+            font-size: 16px;
+            color: var(--text-dark);
+        }
+        .hero-search__input::placeholder {
+            color: rgba(110, 104, 96, 0.85);
+        }
+        .hero-search__input:focus {
+            outline: none;
+        }
+        .hero-search__submit {
+            flex-shrink: 0;
+            padding: 16px 24px;
+            border: none;
+            background: var(--text-dark);
+            color: #fff;
+            font-family: var(--font-freight);
+            font-size: 12px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+        .hero-search__submit:hover {
+            background: #000;
+        }
+        .hero-search__filters {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 16px;
+        }
+        .hero-search__filter {
+            padding: 10px 18px;
+            border: 1px solid rgba(255, 255, 255, 0.45);
+            background: rgba(0, 0, 0, 0.35);
+            color: rgba(255, 255, 255, 0.95);
+            font-family: var(--font-freight);
+            font-size: 11px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+        }
+        .hero-search__filter:hover {
+            background: rgba(0, 0, 0, 0.5);
+            border-color: rgba(255, 255, 255, 0.7);
+        }
+        .hero-search__filter.is-active {
+            background: rgba(255, 255, 255, 0.95);
+            border-color: rgba(255, 255, 255, 0.95);
+            color: var(--text-dark);
+        }
+        .visually-hidden {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        /* Product search results (below hero) */
+        .product-search-results {
+            display: none;
+            padding: 60px 100px 80px;
+            background: var(--secondary-bg);
+            border-bottom: 1px solid #e8e2d8;
+        }
+        .product-search-results.is-visible {
+            display: block;
+        }
+        .product-search-results__head {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: baseline;
+            justify-content: space-between;
+            gap: 16px 24px;
+            margin-bottom: 40px;
+        }
+        .product-search-results__title {
+            font-weight: 300;
+            font-size: 36px;
+            color: var(--text-dark);
+        }
+        .product-search-results__meta {
+            font-family: var(--font-freight);
+            font-size: 15px;
+            color: var(--text-light);
+            flex: 1 1 100%;
+        }
+        @media (min-width: 769px) {
+            .product-search-results__meta {
+                flex: 1 1 auto;
+                text-align: right;
+            }
+        }
+        .product-search-results__close {
+            padding: 12px 22px;
+            border: 1px solid var(--text-light);
+            background: transparent;
+            color: var(--text-dark);
+            font-family: var(--font-freight);
+            font-size: 12px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: background 0.2s ease, color 0.2s ease;
+        }
+        .product-search-results__close:hover {
+            background: var(--text-dark);
+            color: #fff;
+        }
+        .product-search-results__grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 32px;
+        }
+        .product-search-results__grid a.product-card {
+            display: block;
+            color: inherit;
+            background: var(--white);
+        }
+        .product-search-results__grid .product-image {
+            width: 100%;
+            height: 260px;
+            object-fit: contain;
+            background: #faf8f5;
+        }
+        .product-search-results__grid .product-info {
+            padding: 20px;
+            text-align: center;
+        }
+        .product-search-results__empty {
+            text-align: center;
+            font-size: 16px;
+            color: var(--text-light);
+            padding: 40px 20px;
+        }
+
         .hero-btn {
             display: inline-block;
             padding: 18px 45px;
@@ -828,6 +998,16 @@
                 padding: 14px max(20px, env(safe-area-inset-right, 0px)) 14px 20px;
             }
             .hero-content { padding-top: 0; }
+            .hero-search { width: 100%; padding: 0 8px; }
+            .hero-search__bar { flex-direction: column; }
+            .hero-search__icon { display: none; }
+            .hero-search__input { padding: 14px 16px; }
+            .hero-search__submit { width: 100%; }
+            .hero-search__filters { gap: 8px; }
+            .product-search-results { padding: 48px 24px 60px; }
+            .product-search-results__title { font-size: 28px; }
+            .product-search-results__grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+            .product-search-results__grid .product-image { height: 180px; }
 
             .philosophy { padding: 60px 24px; }
             .philosophy-text { font-size: 22px; }
@@ -903,7 +1083,37 @@
         <div class="hero-content">
             <h2 class="hero-subtitle">London's Premier Hair Stylist</h2>
             <h1 class="hero-title">Exquisite Hair Styling</h1>
+            <div class="hero-search" role="search">
+                <form class="hero-search__form" id="heroSearchForm">
+                    <label class="visually-hidden" for="heroSearchInput">Search salon products</label>
+                    <div class="hero-search__bar">
+                        <span class="hero-search__icon" aria-hidden="true"><i class="ri-search-line"></i></span>
+                        <input type="search" class="hero-search__input" id="heroSearchInput" name="q" placeholder="Search shampoos, masks, treatments…" autocomplete="off">
+                        <button type="submit" class="hero-search__submit">Search</button>
+                    </div>
+                </form>
+                <div class="hero-search__filters" role="group" aria-label="Filter by product type">
+                    <button type="button" class="hero-search__filter is-active" data-filter="all">All</button>
+                    <button type="button" class="hero-search__filter" data-filter="shampoo">Shampoos</button>
+                    <button type="button" class="hero-search__filter" data-filter="conditioner">Conditioners</button>
+                    <button type="button" class="hero-search__filter" data-filter="mask">Masks</button>
+                    <button type="button" class="hero-search__filter" data-filter="treatment">Oils &amp; serums</button>
+                    <button type="button" class="hero-search__filter" data-filter="styling">Styling</button>
+                </div>
+            </div>
             <button type="button" class="hero-btn book-btn-sticky" id="bookOpenBtn" aria-haspopup="dialog" aria-controls="bookDialog" aria-expanded="false" aria-label="Book an appointment"><span class="book-btn-sticky__text"><span class="book-btn-sticky__word">Book</span><span class="book-btn-sticky__more">An Appointment</span></span></button>
+        </div>
+    </section>
+
+    <section class="product-search-results" id="productSearchResults" aria-labelledby="productSearchTitle" hidden>
+        <div class="product-search-results__inner">
+            <div class="product-search-results__head">
+                <h2 class="product-search-results__title" id="productSearchTitle">Product search</h2>
+                <p class="product-search-results__meta" id="productSearchMeta"></p>
+                <button type="button" class="product-search-results__close" id="productSearchClose">Close results</button>
+            </div>
+            <div class="product-search-results__grid" id="productSearchGrid"></div>
+            <p class="product-search-results__empty" id="productSearchEmpty" hidden>No products match your search. Try another keyword or filter.</p>
         </div>
     </section>
 
@@ -1188,6 +1398,7 @@
         </p>
     </dialog>
 
+    <script src="assets/product-catalog.js"></script>
     <script>
         (function() {
             var bookDialog = document.getElementById('bookDialog');
@@ -1268,6 +1479,121 @@
                         });
                     });
                 }
+            }
+
+            /* Hero product search */
+            var heroSearchForm = document.getElementById('heroSearchForm');
+            var heroSearchInput = document.getElementById('heroSearchInput');
+            var heroSearchFilters = document.querySelectorAll('.hero-search__filter');
+            var productSearchResults = document.getElementById('productSearchResults');
+            var productSearchGrid = document.getElementById('productSearchGrid');
+            var productSearchMeta = document.getElementById('productSearchMeta');
+            var productSearchEmpty = document.getElementById('productSearchEmpty');
+            var productSearchClose = document.getElementById('productSearchClose');
+            var activeFilter = 'all';
+            var catalog = window.PRODUCT_CATALOG || [];
+
+            function escHtml(s) {
+                var d = document.createElement('div');
+                d.textContent = s;
+                return d.innerHTML;
+            }
+
+            function productCategory(p) {
+                var text = ((p.title || '') + ' ' + (p.line || '')).toLowerCase();
+                if (/\b(mask|masque)\b/.test(text)) return 'mask';
+                if (/\bshampoo\b/.test(text)) return 'shampoo';
+                if (/\b(conditioner|conditioning)\b/.test(text)) return 'conditioner';
+                if (/\b(serum|oil|tonic|elixir|essence)\b/.test(text)) return 'treatment';
+                if (/\b(primer|spray|mousse|wax|styling|gel|cream)\b/.test(text)) return 'styling';
+                return 'other';
+            }
+
+            function filterProducts() {
+                var q = (heroSearchInput && heroSearchInput.value || '').trim().toLowerCase();
+                return catalog.filter(function(p) {
+                    if (activeFilter !== 'all' && productCategory(p) !== activeFilter) return false;
+                    if (!q) return activeFilter !== 'all';
+                    var hay = (p.title + ' ' + p.line + ' ' + p.brandName + ' ' + (p.description || '')).toLowerCase();
+                    return hay.indexOf(q) !== -1;
+                });
+            }
+
+            function renderSearchResults() {
+                if (!productSearchGrid || !productSearchResults) return;
+                var items = filterProducts();
+                var showPanel = activeFilter !== 'all' || (heroSearchInput && heroSearchInput.value.trim().length > 0);
+                if (!showPanel) {
+                    productSearchResults.classList.remove('is-visible');
+                    productSearchResults.hidden = true;
+                    return;
+                }
+                productSearchResults.hidden = false;
+                productSearchResults.classList.add('is-visible');
+                productSearchGrid.innerHTML = '';
+                if (productSearchMeta) {
+                    productSearchMeta.textContent = items.length === 1
+                        ? '1 product found'
+                        : items.length + ' products found';
+                }
+                if (items.length === 0) {
+                    if (productSearchEmpty) productSearchEmpty.hidden = false;
+                    return;
+                }
+                if (productSearchEmpty) productSearchEmpty.hidden = true;
+                items.forEach(function(p) {
+                    var a = document.createElement('a');
+                    a.className = 'product-card';
+                    a.href = 'brands/product.html?id=' + encodeURIComponent(p.id);
+                    a.innerHTML =
+                        '<img class="product-image" src="' + escHtml(p.image) + '" alt="' + escHtml(p.title) + '" width="400" height="400" loading="lazy">' +
+                        '<div class="product-info">' +
+                        '<h3 class="product-name">' + escHtml(p.title) + '</h3>' +
+                        '<p class="product-price">' + escHtml(p.price) + '</p>' +
+                        '</div>';
+                    productSearchGrid.appendChild(a);
+                });
+                productSearchResults.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+
+            function setActiveFilter(btn) {
+                heroSearchFilters.forEach(function(b) {
+                    b.classList.toggle('is-active', b === btn);
+                });
+                activeFilter = btn.getAttribute('data-filter') || 'all';
+                renderSearchResults();
+            }
+
+            if (heroSearchForm) {
+                heroSearchForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    renderSearchResults();
+                });
+            }
+            if (heroSearchInput) {
+                heroSearchInput.addEventListener('input', function() {
+                    if (heroSearchInput.value.trim().length >= 2) renderSearchResults();
+                    else if (activeFilter === 'all') {
+                        productSearchResults.classList.remove('is-visible');
+                        productSearchResults.hidden = true;
+                    } else renderSearchResults();
+                });
+            }
+            heroSearchFilters.forEach(function(btn) {
+                btn.addEventListener('click', function() {
+                    setActiveFilter(btn);
+                });
+            });
+            if (productSearchClose) {
+                productSearchClose.addEventListener('click', function() {
+                    productSearchResults.classList.remove('is-visible');
+                    productSearchResults.hidden = true;
+                    if (heroSearchInput) heroSearchInput.value = '';
+                    activeFilter = 'all';
+                    heroSearchFilters.forEach(function(b) {
+                        b.classList.toggle('is-active', b.getAttribute('data-filter') === 'all');
+                    });
+                });
             }
 
             var galleryTrack = document.getElementById('galleryTrack');
