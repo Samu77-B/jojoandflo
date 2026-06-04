@@ -751,20 +751,45 @@
             overflow: hidden;
             border-radius: 4px;
         }
+        .pricelist__placeholder {
+            width: 100%;
+            aspect-ratio: 2/3;
+            background: #faf8f5;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 18px;
+            padding: 60px 40px;
+        }
+        .pricelist__placeholder-header {
+            width: 50%;
+            height: 32px;
+            background: #ede8e1;
+            border-radius: 4px;
+            margin-bottom: 12px;
+        }
+        .pricelist__placeholder-line {
+            width: 70%;
+            height: 14px;
+            background: #ede8e1;
+            border-radius: 3px;
+        }
+        .pricelist__placeholder-line.short { width: 45%; }
+        .pricelist__placeholder-line.medium { width: 58%; }
+        .pricelist__container.is-unlocked .pricelist__placeholder {
+            display: none;
+        }
         .pricelist__image {
             width: 100%;
             height: auto;
-            display: block;
-            transition: filter 0.8s ease;
-            filter: blur(18px) brightness(0.95);
+            display: none;
             user-select: none;
             -webkit-user-select: none;
-            pointer-events: none;
             -webkit-user-drag: none;
         }
         .pricelist__container.is-unlocked .pricelist__image {
-            filter: none;
-            pointer-events: auto;
+            display: block;
         }
         .pricelist__overlay {
             position: absolute;
@@ -1444,7 +1469,18 @@
             <div class="section-tag" style="border-bottom-color: #D6C6B3; color: #B0A08C;">Summer 2026</div>
         </div>
         <div class="pricelist__container" id="pricelistContainer">
-            <img src="imgs/pricelist-summer2026.png" alt="JOJO &amp; FLO LONDON Price List" class="pricelist__image" draggable="false">
+            <div class="pricelist__placeholder" id="pricelistPlaceholder">
+                <div class="pricelist__placeholder-header"></div>
+                <div class="pricelist__placeholder-line"></div>
+                <div class="pricelist__placeholder-line short"></div>
+                <div class="pricelist__placeholder-line"></div>
+                <div class="pricelist__placeholder-line short"></div>
+                <div class="pricelist__placeholder-line"></div>
+                <div class="pricelist__placeholder-line medium"></div>
+                <div class="pricelist__placeholder-line"></div>
+                <div class="pricelist__placeholder-line short"></div>
+            </div>
+            <img alt="JOJO &amp; FLO LONDON Price List" class="pricelist__image" draggable="false" id="pricelistImage" style="display:none;">
             <div class="pricelist__overlay" id="pricelistOverlay">
                 <i class="ri-lock-line pricelist__overlay-icon"></i>
                 <h3 class="pricelist__overlay-title">View Our Price List</h3>
@@ -1458,7 +1494,7 @@
             </div>
         </div>
         <div class="pricelist__actions" id="pricelistActions">
-            <a href="imgs/pricelist-summer2026.png" download="JoJo-and-Flo-Price-List-Summer-2026.png" class="pricelist__save-btn"><i class="ri-download-2-line"></i> Save Price List</a>
+            <a id="pricelistDownload" class="pricelist__save-btn" style="display:none;"><i class="ri-download-2-line"></i> Save Price List</a>
         </div>
     </section>
 
@@ -1843,18 +1879,29 @@
             var plSubmitBtn = document.getElementById('pricelistSubmitBtn');
             var plError = document.getElementById('pricelistError');
             var plActions = document.getElementById('pricelistActions');
+            var plImage = document.getElementById('pricelistImage');
+            var plDownload = document.getElementById('pricelistDownload');
 
-            function isPricelistUnlocked() {
-                try { return localStorage.getItem('jf_pricelist_unlocked') === '1'; } catch(e) { return false; }
+            function getPricelistToken() {
+                try { return localStorage.getItem('jf_pl_token') || ''; } catch(e) { return ''; }
             }
 
-            function unlockPricelist() {
+            function unlockPricelist(token) {
+                if (!plImage || !token) return;
+                plImage.src = '/api/pricelist-image?token=' + encodeURIComponent(token);
+                plImage.style.display = 'block';
                 if (plContainer) plContainer.classList.add('is-unlocked');
                 if (plActions) plActions.style.display = 'flex';
+                if (plDownload) {
+                    plDownload.href = '/api/pricelist-image?token=' + encodeURIComponent(token) + '&dl=1';
+                    plDownload.setAttribute('download', 'JoJo-and-Flo-Price-List-Summer-2026.png');
+                    plDownload.style.display = 'inline-flex';
+                }
             }
 
-            if (isPricelistUnlocked()) {
-                unlockPricelist();
+            var existingToken = getPricelistToken();
+            if (existingToken) {
+                unlockPricelist(existingToken);
             }
 
             if (plForm) {
@@ -1877,9 +1924,10 @@
                         if (!res.ok) throw new Error('Request failed');
                         return res.json();
                     })
-                    .then(function() {
-                        try { localStorage.setItem('jf_pricelist_unlocked', '1'); } catch(e) {}
-                        unlockPricelist();
+                    .then(function(data) {
+                        var token = data.token || '';
+                        try { localStorage.setItem('jf_pl_token', token); } catch(e) {}
+                        unlockPricelist(token);
                     })
                     .catch(function() {
                         if (plError) {

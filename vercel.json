@@ -1,6 +1,7 @@
 {
   "rewrites": [
     { "source": "/", "destination": "/index.html" },
-    { "source": "/mobile", "destination": "/mobile.html" }
+    { "source": "/mobile", "destination": "/mobile.html" },
+    { "source": "/imgs/pricelist-summer2026.png", "destination": "/api/pricelist-image" }
   ]
 }
