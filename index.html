@@ -485,6 +485,73 @@
         }
         .book-dialog__hint a:hover { color: #000; }
 
+        /* About Us */
+        .about-us {
+            padding: 120px 100px;
+            background-color: var(--white);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+            scroll-margin-top: 120px;
+        }
+        .about-us-image {
+            width: 100%;
+            height: 480px;
+            object-fit: cover;
+            background-color: #f0f0f0;
+        }
+        .about-us-content .section-title {
+            text-align: left;
+            margin-bottom: 20px;
+        }
+        .about-us-content p {
+            font-family: var(--font-freight);
+            font-size: 16px;
+            color: var(--text-light);
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+        .about-us-highlights {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px 32px;
+            margin: 32px 0 28px;
+            text-align: left;
+        }
+        .about-us-highlight h3 {
+            font-family: var(--font-heading);
+            font-size: 15px;
+            font-weight: 500;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--text-dark);
+            margin-bottom: 8px;
+        }
+        .about-us-highlight p {
+            font-size: 14px;
+            margin-bottom: 0;
+            line-height: 1.6;
+        }
+        .about-us-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+        }
+        .about-us-actions .hero-btn {
+            display: inline-block;
+        }
+        .about-us-actions a.hero-btn--outline {
+            background: transparent;
+            color: var(--text-dark);
+            border: 1px solid var(--text-light);
+        }
+        .about-us-actions a.hero-btn--outline:hover {
+            background: var(--text-dark);
+            color: var(--white);
+            border-color: var(--text-dark);
+        }
+
         /* Our Philosophy */
         .philosophy {
             padding: 120px 200px;
@@ -939,6 +1006,8 @@
             .philosophy { padding: 80px 60px; }
             .philosophy-text { font-size: 28px; }
             .treatments-grid { grid-template-columns: repeat(2, 1fr); }
+            .about-us { padding: 80px 60px; gap: 48px; }
+            .about-us-image { height: 360px; }
             .weddings { grid-template-columns: 1fr; gap: 40px; }
             .weddings-image { order: -1; height: 350px; }
             .mens-hair-grid { grid-template-columns: 1fr; }
@@ -980,6 +1049,15 @@
             .product-search-results__grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
             .product-search-results__grid .product-image { height: 180px; }
 
+            .about-us {
+                padding: 60px 24px;
+                grid-template-columns: 1fr;
+                gap: 32px;
+            }
+            .about-us-image { height: 280px; order: -1; }
+            .about-us-content .section-title { text-align: center; }
+            .about-us-highlights { grid-template-columns: 1fr; gap: 20px; }
+            .about-us-actions { justify-content: center; }
             .philosophy { padding: 60px 24px; }
             .philosophy-text { font-size: 22px; }
             .philosophy-desc { font-size: 14px; }
@@ -1037,8 +1115,8 @@
         </div>
         <nav id="mainNav">
             <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">About Us</a></li>
+                <li><a href="#top">Home</a></li>
+                <li><a href="#about-us">About Us</a></li>
                 <li><a href="#services">Services</a></li>
                 <li><a href="#products">Products</a></li>
                 <li><a href="#brands">Brands</a></li>
@@ -1050,7 +1128,7 @@
         </nav>
     </header>
 
-    <section class="hero">
+    <section class="hero" id="top">
         <div class="hero-content">
             <h2 class="hero-subtitle">London's Premier Hair Stylist</h2>
             <h1 class="hero-title">Exquisite Hair Styling</h1>
@@ -1077,6 +1155,38 @@
             </div>
             <div class="product-search-results__grid" id="productSearchGrid"></div>
             <p class="product-search-results__empty" id="productSearchEmpty" hidden>No products match your search. Try another keyword.</p>
+        </div>
+    </section>
+
+    <section class="about-us" id="about-us">
+        <img src="imgs/Hero_01a.png" alt="JOJO &amp; FLO LONDON salon on Green Lanes" class="about-us-image" width="900" height="600" loading="lazy">
+        <div class="about-us-content">
+            <span class="section-tag">Who we are</span>
+            <h2 class="section-title">About Us</h2>
+            <p>JOJO &amp; FLO LONDON is a boutique hair salon in Palmers Green, offering refined cutting, colouring, and styling in a calm, welcoming space. Our team combines technical expertise with a personal approach, so every visit feels tailored to you.</p>
+            <p>We work with leading professional brands including Kérastase, Davines, and Shu Uemura Art of Hair — available in-salon and to take home — and pride ourselves on honest advice, beautiful results, and service you will want to return to.</p>
+            <div class="about-us-highlights">
+                <div class="about-us-highlight">
+                    <h3>Expert team</h3>
+                    <p>Skilled stylists and colourists for cuts, colour, treatments, and special-occasion hair.</p>
+                </div>
+                <div class="about-us-highlight">
+                    <h3>Premium products</h3>
+                    <p>Curated retail and in-salon care from brands we trust and use every day.</p>
+                </div>
+                <div class="about-us-highlight">
+                    <h3>Our salon</h3>
+                    <p>310 Green Lanes, London N13 5TT — a relaxed setting in the heart of Palmers Green.</p>
+                </div>
+                <div class="about-us-highlight">
+                    <h3>Your visit</h3>
+                    <p>Consultations, bridal and event styling, and men's grooming by appointment.</p>
+                </div>
+            </div>
+            <div class="about-us-actions">
+                <a href="#contact" class="hero-btn">Contact us</a>
+                <a href="#services" class="hero-btn hero-btn--outline">View services</a>
+            </div>
         </div>
     </section>
 
@@ -1300,9 +1410,9 @@
             <div class="footer-column">
                 <h4 class="footer-heading">Navigation</h4>
                 <ul class="footer-links">
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">About Us</a></li>
-                    <li><a href="#">Services</a></li>
+                    <li><a href="#top">Home</a></li>
+                    <li><a href="#about-us">About Us</a></li>
+                    <li><a href="#services">Services</a></li>
                     <li><a href="#gallery">Gallery</a></li>
                 </ul>
             </div>
@@ -1529,15 +1639,6 @@
                 heroSearchForm.addEventListener('submit', function(e) {
                     e.preventDefault();
                     renderSearchResults();
-                });
-            }
-            if (heroSearchInput) {
-                heroSearchInput.addEventListener('input', function() {
-                    if (heroSearchInput.value.trim().length === 0) {
-                        hideSearchResults();
-                    } else {
-                        renderSearchResults();
-                    }
                 });
             }
             if (productSearchClose) {
