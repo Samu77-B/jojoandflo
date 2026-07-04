@@ -409,16 +409,23 @@
 
         /* Booking modal (<dialog> popup) */
         .book-dialog {
-            width: min(1000px, 96vw);
-            max-width: 100%;
-            max-height: 92vh;
-            margin: auto;
+            width: min(420px, 90vw);
+            max-width: 420px;
+            height: 100vh;
+            max-height: 100vh;
+            margin: 0;
             padding: 0;
             border: none;
             background: #f9f7f2;
             color: var(--text-dark);
-            box-shadow: 0 25px 80px rgba(0,0,0,0.35);
+            box-shadow: 8px 0 40px rgba(0,0,0,0.25);
             overflow: hidden;
+            position: fixed;
+            top: 0;
+            left: 0;
+            border-radius: 0;
+            display: flex;
+            flex-direction: column;
         }
         .book-dialog::backdrop {
             background: rgba(0,0,0,0.5);
@@ -461,13 +468,15 @@
         .book-dialog__close:hover { color: #fff; }
         .book-dialog__body {
             position: relative;
-            min-height: min(72vh, 800px);
+            flex: 1;
+            min-height: 0;
             background: #fff;
+            overflow: hidden;
         }
         .book-dialog__frame {
             display: block;
             width: 100%;
-            height: min(72vh, 800px);
+            height: 100%;
             border: 0;
         }
         .book-dialog__hint {
@@ -477,6 +486,7 @@
             padding: 12px 16px 16px;
             color: var(--text-light);
             background: #f0ebe3;
+            flex-shrink: 0;
         }
         .book-dialog__hint a {
             color: var(--text-dark);
