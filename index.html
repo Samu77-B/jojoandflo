@@ -641,6 +641,31 @@
             max-width: 700px;
         }
 
+        /* As Seen In */
+        .as-seen-in {
+            padding: 80px 100px;
+            background-color: var(--white);
+            text-align: center;
+        }
+        .as-seen-in__logos {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 60px;
+            flex-wrap: wrap;
+            margin-top: 40px;
+        }
+        .as-seen-in__logo {
+            height: 40px;
+            opacity: 0.7;
+            transition: opacity 0.3s ease;
+            filter: grayscale(100%);
+        }
+        .as-seen-in__logo:hover {
+            opacity: 1;
+            filter: grayscale(0%);
+        }
+
         /* Section shared */
         .section-tag {
             font-family: var(--font-freight);
@@ -1241,6 +1266,9 @@
             .about-us-highlights { grid-template-columns: 1fr; gap: 20px; }
             .about-us-actions { justify-content: center; }
             .philosophy { padding: 60px 24px; }
+            .as-seen-in { padding: 48px 24px; }
+            .as-seen-in__logos { gap: 32px; }
+            .as-seen-in__logo { height: 30px; }
             .philosophy-text { font-size: 22px; }
             .philosophy-desc { font-size: 14px; }
             .google-reviews { padding: 60px 24px; }
@@ -1380,6 +1408,16 @@
         <span class="section-tag">Our Philosophy</span>
         <p class="philosophy-text">"Creating beauty that is both effortless and enduring. We believe in enhancing your natural elegance with masterful technique and personalized care."</p>
         <p class="philosophy-desc">At JOJO & FLO, we combine the precision of London's finest styling with a relaxed, welcoming atmosphere. Our expert team is dedicated to providing you with a transformative experience that leaves you feeling confident and radiant.</p>
+    </section>
+
+    <section class="as-seen-in">
+        <span class="section-tag">As Seen In</span>
+        <div class="as-seen-in__logos">
+            <img src="logos/mags/Vogue.png" alt="Vogue" class="as-seen-in__logo">
+            <img src="logos/mags/cosmo.png" alt="Cosmopolitan" class="as-seen-in__logo">
+            <img src="logos/mags/aware.png" alt="Aware Magazine" class="as-seen-in__logo">
+            <img src="logos/mags/john-d-wood.png" alt="John D Wood" class="as-seen-in__logo">
+        </div>
     </section>
 
     <section class="google-reviews" id="google-reviews">
