@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JOJO & FLO LONDON - Exquisite Hair Styling</title>
+    <title>JOJO & FLO LONDON - BeautifulHair Styling</title>
     <link rel="icon" href="logos/jojoflo-fav.png" type="image/png">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css" rel="stylesheet">
     <!-- Uncomment below and add your kit ID from fonts.adobe.com (add Freight Text Pro Light + Book) to use Freight -->
@@ -67,7 +67,7 @@
             justify-content: center;
             align-items: center;
             position: relative;
-            margin-bottom: 20px;
+            margin-bottom: 0;
         }
 
         .logo { height: 50px; }
@@ -78,16 +78,41 @@
         }
 
         nav {
-            width: 100%;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
+            opacity: 0;
+            transform: translateY(-12px);
+            pointer-events: none;
+            max-height: 0;
+            overflow: hidden;
+            transition: opacity 0.25s ease, transform 0.25s ease, max-height 0.35s ease;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: var(--white);
+            padding: 24px 32px;
+            padding-top: 0;
+            padding-bottom: 0;
+            border-bottom: 1px solid transparent;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+        }
+        nav.open {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+            max-height: 420px;
+            padding-top: 24px;
+            padding-bottom: 24px;
+            border-bottom-color: #EFEBE4;
         }
         nav ul {
             display: flex;
-            flex-wrap: wrap;
-            gap: 32px;
-            justify-content: center;
+            flex-direction: column;
+            gap: 16px;
+            align-items: center;
         }
+        nav li { text-align: center; opacity: 0; transform: translateY(8px); }
         nav a {
             font-family: var(--font-freight);
             font-size: 13px;
@@ -95,6 +120,12 @@
             letter-spacing: 1.5px;
             color: rgba(44, 44, 44, 0.92);
             position: relative;
+        }
+        nav.open a {
+            color: var(--text-dark);
+            text-align: center;
+            width: 100%;
+            display: block;
         }
         nav a:hover {
             color: var(--text-dark);
@@ -110,9 +141,27 @@
             transition: width 0.3s ease;
         }
         nav a:hover::after { width: 100%; }
+        nav.open a::after { background-color: var(--text-dark); }
+        nav.open li {
+            opacity: 1;
+            transform: translateY(0);
+            animation: menuItemIn 0.35s ease forwards;
+        }
+        nav.open li:nth-child(1) { animation-delay: 0.03s; }
+        nav.open li:nth-child(2) { animation-delay: 0.08s; }
+        nav.open li:nth-child(3) { animation-delay: 0.13s; }
+        nav.open li:nth-child(4) { animation-delay: 0.18s; }
+        nav.open li:nth-child(5) { animation-delay: 0.23s; }
+        nav.open li:nth-child(6) { animation-delay: 0.28s; }
+        nav.open li:nth-child(7) { animation-delay: 0.33s; }
+        nav.open li:nth-child(8) { animation-delay: 0.38s; }
+        nav.open li:nth-child(9) { animation-delay: 0.43s; }
+        nav.open li:nth-child(10) { animation-delay: 0.48s; }
 
         .menu-icon {
-            display: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             position: absolute;
             right: 0;
             font-size: 24px;
@@ -120,7 +169,9 @@
             color: var(--text-dark);
             background: none;
             border: none;
-            padding: 4px;
+            padding: 8px;
+            min-width: 44px;
+            min-height: 44px;
         }
 
         @keyframes menuItemIn {
@@ -1102,7 +1153,6 @@
 
         /* ========== MOBILE RESPONSIVE ========== */
         @media (max-width: 1024px) {
-            /* Hamburger + overlay menu (matches desktop hero overlay) */
             header {
                 align-items: stretch;
                 position: fixed;
@@ -1111,68 +1161,14 @@
                 right: 0;
                 padding: 20px calc(32px + env(safe-area-inset-right, 0px)) 16px calc(32px + env(safe-area-inset-left, 0px));
             }
-            .header-top { margin-bottom: 0; }
             nav {
-                display: flex;
-                flex-direction: column;
-                opacity: 0;
-                transform: translateY(-12px);
-                pointer-events: none;
-                max-height: 0;
-                overflow: hidden;
-                transition: opacity 0.25s ease, transform 0.25s ease, max-height 0.35s ease;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                right: 0;
-                background: var(--white);
                 padding: 24px calc(24px + env(safe-area-inset-right, 0px)) 24px calc(24px + env(safe-area-inset-left, 0px));
                 padding-top: 0;
                 padding-bottom: 0;
-                border-bottom: 1px solid #EFEBE4;
-                border-bottom-color: transparent;
-                box-shadow: 0 10px 30px rgba(0,0,0,0.08);
             }
             nav.open {
-                opacity: 1;
-                transform: translateY(0);
-                pointer-events: auto;
-                max-height: 420px;
                 padding-top: 24px;
                 padding-bottom: 24px;
-                border-bottom-color: #EFEBE4;
-            }
-            nav ul { flex-direction: column; gap: 16px; align-items: center; }
-            nav li { text-align: center; opacity: 0; transform: translateY(8px); }
-            nav.open a {
-                color: var(--text-dark);
-                text-align: center;
-                width: 100%;
-                display: block;
-            }
-            nav.open a::after {
-                background-color: var(--text-dark);
-            }
-            nav.open li {
-                opacity: 1;
-                transform: translateY(0);
-                animation: menuItemIn 0.35s ease forwards;
-            }
-            nav.open li:nth-child(1) { animation-delay: 0.03s; }
-            nav.open li:nth-child(2) { animation-delay: 0.08s; }
-            nav.open li:nth-child(3) { animation-delay: 0.13s; }
-            nav.open li:nth-child(4) { animation-delay: 0.18s; }
-            nav.open li:nth-child(5) { animation-delay: 0.23s; }
-            nav.open li:nth-child(6) { animation-delay: 0.28s; }
-            nav.open li:nth-child(7) { animation-delay: 0.33s; }
-            nav.open li:nth-child(8) { animation-delay: 0.38s; }
-            .menu-icon {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                padding: 8px;
-                min-width: 44px;
-                min-height: 44px;
             }
             .services-grid { grid-template-columns: repeat(2, 1fr); }
             .retail-grid { grid-template-columns: repeat(2, 1fr); }
