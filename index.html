@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JOJO & FLO LONDON - BeautifulHair Styling</title>
+    <title>JOJO &amp; FLO LONDON - Beautiful Hair Styling</title>
     <link rel="icon" href="logos/jojoflo-fav.png" type="image/png">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css" rel="stylesheet">
     <!-- Uncomment below and add your kit ID from fonts.adobe.com (add Freight Text Pro Light + Book) to use Freight -->
@@ -224,58 +224,6 @@
             line-height: 1.1;
             text-shadow: 0 2px 20px rgba(0,0,0,0.3);
         }
-        .hero-search {
-            width: min(640px, 100%);
-            margin: 0 auto;
-        }
-        .hero-search__bar {
-            display: flex;
-            align-items: stretch;
-            background: rgba(255, 255, 255, 0.92);
-            border: 1px solid rgba(255, 255, 255, 0.5);
-            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
-            overflow: hidden;
-        }
-        .hero-search__icon {
-            display: flex;
-            align-items: center;
-            padding: 0 16px;
-            color: var(--text-light);
-            font-size: 20px;
-            flex-shrink: 0;
-        }
-        .hero-search__input {
-            flex: 1;
-            min-width: 0;
-            border: none;
-            background: transparent;
-            padding: 16px 8px;
-            font-family: var(--font-freight);
-            font-size: 16px;
-            color: var(--text-dark);
-        }
-        .hero-search__input::placeholder {
-            color: rgba(110, 104, 96, 0.85);
-        }
-        .hero-search__input:focus {
-            outline: none;
-        }
-        .hero-search__submit {
-            flex-shrink: 0;
-            padding: 16px 24px;
-            border: none;
-            background: var(--text-dark);
-            color: #fff;
-            font-family: var(--font-freight);
-            font-size: 12px;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            cursor: pointer;
-            transition: background 0.2s ease;
-        }
-        .hero-search__submit:hover {
-            background: #000;
-        }
         .visually-hidden {
             position: absolute;
             width: 1px;
@@ -456,6 +404,100 @@
                 transition-duration: 0.01ms;
                 transition-delay: 0ms;
             }
+        }
+
+        /* Search sticky button (left side, mirrors book button) */
+        .search-btn-sticky {
+            position: fixed;
+            left: 0;
+            right: auto;
+            top: auto;
+            bottom: max(28px, env(safe-area-inset-bottom, 0px));
+            z-index: 1001;
+            background-color: #000;
+            color: #fff;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.22);
+            padding: 18px 22px 18px max(22px, env(safe-area-inset-left, 0px));
+            max-width: fit-content;
+            white-space: nowrap;
+            text-align: left;
+            overflow: hidden;
+            border: none;
+            cursor: pointer;
+            font-family: var(--font-heading);
+            font-size: 12px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            display: inline-flex;
+            align-items: center;
+            gap: 0;
+            transition:
+                max-width 1.2s cubic-bezier(0.4, 0, 0.2, 1),
+                padding 1.2s cubic-bezier(0.4, 0, 0.2, 1),
+                background-color 0.3s ease,
+                box-shadow 0.3s ease,
+                transform 0.3s ease;
+        }
+        .search-btn-sticky__icon {
+            flex-shrink: 0;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+        }
+        .search-btn-sticky__field {
+            display: inline-flex;
+            align-items: center;
+            max-width: 0;
+            overflow: hidden;
+            opacity: 0;
+            transition:
+                max-width 1.2s cubic-bezier(0.32, 0.72, 0, 1),
+                opacity 0.5s ease;
+        }
+        .search-btn-sticky.is-expanded .search-btn-sticky__field {
+            max-width: 280px;
+            opacity: 1;
+            transition:
+                max-width 1.4s cubic-bezier(0.32, 0.72, 0, 1),
+                opacity 0.8s ease 0.15s;
+        }
+        .search-btn-sticky.is-expanded {
+            max-width: min(100vw, 24rem);
+            padding: 12px max(22px, env(safe-area-inset-left, 0px)) 12px 18px;
+        }
+        .search-btn-sticky__input {
+            border: none;
+            background: transparent;
+            color: #fff;
+            font-family: var(--font-freight);
+            font-size: 14px;
+            padding: 6px 8px 6px 12px;
+            width: 180px;
+            outline: none;
+        }
+        .search-btn-sticky__input::placeholder {
+            color: rgba(255,255,255,0.5);
+        }
+        .search-btn-sticky__submit {
+            flex-shrink: 0;
+            border: none;
+            background: rgba(255,255,255,0.15);
+            color: #fff;
+            font-family: var(--font-heading);
+            font-size: 11px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            padding: 8px 14px;
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+        .search-btn-sticky__submit:hover {
+            background: rgba(255,255,255,0.25);
+        }
+        .search-btn-sticky:hover {
+            background-color: #222;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35);
         }
 
         /* Booking modal (<dialog> popup) */
@@ -1220,7 +1262,7 @@
                 padding: 16px calc(20px + env(safe-area-inset-right, 0px)) 14px calc(20px + env(safe-area-inset-left, 0px));
             }
 
-            .hero { height: 500px; overflow: visible; margin-bottom: 80px; }
+            .hero { height: 500px; }
             .hero-title { font-size: 36px; }
             .hero-subtitle { font-size: 14px; letter-spacing: 2px; }
             .hero-btn { padding: 14px 28px; font-size: 12px; }
@@ -1238,19 +1280,14 @@
                 padding: 14px max(20px, env(safe-area-inset-right, 0px)) 14px 20px;
             }
             .hero-content { padding-top: 0; padding-bottom: 0; justify-content: center; }
-            .hero-search {
-                width: calc(100% - 32px);
-                padding: 0;
-                position: absolute;
-                bottom: -64px;
-                left: 16px;
-                right: 16px;
-                z-index: 3;
+            .search-btn-sticky {
+                bottom: max(20px, env(safe-area-inset-bottom, 0px));
+                padding: 14px 16px 14px max(16px, env(safe-area-inset-left, 0px));
             }
-            .hero-search__bar { flex-direction: column; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
-            .hero-search__icon { display: none; }
-            .hero-search__input { padding: 14px 16px; }
-            .hero-search__submit { width: 100%; }
+            .search-btn-sticky.is-expanded {
+                padding: 10px 14px 10px max(14px, env(safe-area-inset-left, 0px));
+            }
+            .search-btn-sticky__input { width: 140px; font-size: 13px; }
             .product-search-results { padding: 48px 24px 60px; }
             .product-search-results__title { font-size: 28px; }
             .product-search-results__grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
@@ -1346,16 +1383,7 @@
         <div class="hero-content">
             <h2 class="hero-subtitle">London's Premier Hair Stylist</h2>
             <h1 class="hero-title">Exquisite Hair Styling</h1>
-            <div class="hero-search" role="search">
-                <form class="hero-search__form" id="heroSearchForm">
-                    <label class="visually-hidden" for="heroSearchInput">Search salon products</label>
-                    <div class="hero-search__bar">
-                        <span class="hero-search__icon" aria-hidden="true"><i class="ri-search-line"></i></span>
-                        <input type="search" class="hero-search__input" id="heroSearchInput" name="q" placeholder="Search products by name or brand…" autocomplete="off">
-                        <button type="submit" class="hero-search__submit">Search</button>
-                    </div>
-                </form>
-            </div>
+            <div class="search-btn-sticky" id="searchOpenBtn" role="search" aria-expanded="false" aria-label="Search products"><span class="search-btn-sticky__icon"><i class="ri-search-line"></i></span><span class="search-btn-sticky__field"><input type="search" class="search-btn-sticky__input" id="heroSearchInput" name="q" placeholder="Search products…" autocomplete="off"><button type="button" class="search-btn-sticky__submit" id="heroSearchSubmit">Go</button></span></div>
             <button type="button" class="hero-btn book-btn-sticky" id="bookOpenBtn" aria-haspopup="dialog" aria-controls="bookDialog" aria-expanded="false" aria-label="Book an appointment"><span class="book-btn-sticky__text"><span class="book-btn-sticky__word">Book</span><span class="book-btn-sticky__more">An Appointment</span></span></button>
         </div>
     </section>
@@ -1407,7 +1435,6 @@
     <section class="philosophy">
         <span class="section-tag">Our Philosophy</span>
         <p class="philosophy-text">"Creating beauty that is both effortless and enduring. We believe in enhancing your natural elegance with masterful technique and personalized care."</p>
-        <p class="philosophy-desc">At JOJO & FLO, we combine the precision of London's finest styling with a relaxed, welcoming atmosphere. Our expert team is dedicated to providing you with a transformative experience that leaves you feeling confident and radiant.</p>
     </section>
 
     <section class="as-seen-in">
@@ -1815,8 +1842,9 @@
             }
 
             /* Hero product search */
-            var heroSearchForm = document.getElementById('heroSearchForm');
+            var searchOpenBtn = document.getElementById('searchOpenBtn');
             var heroSearchInput = document.getElementById('heroSearchInput');
+            var heroSearchSubmit = document.getElementById('heroSearchSubmit');
             var productSearchResults = document.getElementById('productSearchResults');
             var productSearchGrid = document.getElementById('productSearchGrid');
             var productSearchMeta = document.getElementById('productSearchMeta');
@@ -1895,10 +1923,36 @@
                 productSearchResults.scrollIntoView({ behavior: 'smooth', block: 'start' });
             }
 
-            if (heroSearchForm) {
-                heroSearchForm.addEventListener('submit', function(e) {
-                    e.preventDefault();
+            if (searchOpenBtn) {
+                searchOpenBtn.addEventListener('click', function(e) {
+                    if (!searchOpenBtn.classList.contains('is-expanded')) {
+                        searchOpenBtn.classList.add('is-expanded');
+                        searchOpenBtn.setAttribute('aria-expanded', 'true');
+                        setTimeout(function() { if (heroSearchInput) heroSearchInput.focus(); }, 300);
+                        e.stopPropagation();
+                        return;
+                    }
+                });
+                document.addEventListener('click', function(e) {
+                    if (!searchOpenBtn.classList.contains('is-expanded')) return;
+                    if (searchOpenBtn.contains(e.target)) return;
+                    if (productSearchResults && !productSearchResults.hidden) return;
+                    searchOpenBtn.classList.remove('is-expanded');
+                    searchOpenBtn.setAttribute('aria-expanded', 'false');
+                });
+            }
+            if (heroSearchSubmit) {
+                heroSearchSubmit.addEventListener('click', function(e) {
+                    e.stopPropagation();
                     renderSearchResults();
+                });
+            }
+            if (heroSearchInput) {
+                heroSearchInput.addEventListener('keydown', function(e) {
+                    if (e.key === 'Enter') {
+                        e.preventDefault();
+                        renderSearchResults();
+                    }
                 });
             }
             if (productSearchClose) {
