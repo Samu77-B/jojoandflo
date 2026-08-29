@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JOJO &amp; FLO LONDON - Beautiful Hair Styling</title>
     <link rel="icon" href="logos/jojoflo-fav.png" type="image/png">
+    <script>
+        try { localStorage.setItem('paysynk-preview-cart:jojo-flo-london', '1'); } catch (e) {}
+    </script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css" rel="stylesheet">
     <!-- Uncomment below and add your kit ID from fonts.adobe.com (add Freight Text Pro Light + Book) to use Freight -->
     <!-- <link rel="stylesheet" href="https://use.typekit.net/YOUR_KIT_ID.css"> -->
@@ -171,6 +174,7 @@
             min-height: 44px;
             z-index: 2;
         }
+        .header-cart-btn,
         .header-cart #paysynk-cart-launcher {
             position: static !important;
             right: auto !important;
@@ -180,6 +184,18 @@
             letter-spacing: 1.5px;
             text-transform: uppercase;
             cursor: pointer;
+            border: 1px solid var(--text-dark);
+            background: #fff;
+            color: var(--text-dark);
+            font-family: var(--font-freight);
+        }
+        .header-cart #paysynk-cart-launcher {
+            border: 0;
+        }
+        .paysynk-add-btn {
+            margin-top: 14px;
+            padding: 12px 22px;
+            font-size: 12px;
         }
 
         .menu-icon {
@@ -793,6 +809,16 @@
             width: 100%;
             max-width: 420px;
         }
+        .featured-products .product-card {
+            background: var(--white);
+            width: 100%;
+            max-width: 420px;
+        }
+        .featured-products .product-image {
+            height: 340px;
+            object-fit: contain;
+            background: #faf8f5;
+        }
 
         /* Brands */
         .brands {
@@ -1396,13 +1422,14 @@
 
     <header>
         <div class="header-top">
-            <div class="header-cart" id="headerCart"></div>
+            <div class="header-cart" id="headerCart">
+                <button type="button" class="header-cart-btn" id="headerCartBtn">Cart</button>
+            </div>
             <a href="#" class="logo">
                 <img src="logos/jojoflo_logo-blk.png" alt="JOJO & FLO LONDON">
             </a>
             <button class="menu-icon" id="menuBtn" aria-label="Menu"><i class="ri-menu-line"></i></button>
         </div>
-        <script src="https://www.paysynk.com/cart.js" data-store="jojo-flo-london" data-merchant-id="cmtbbv1k5000004jzbx1wq1s3" data-accent="#c5ad84" data-font="inherit" async></script>
         <nav id="mainNav">
             <ul>
                 <li><a href="#top">Home</a></li>
@@ -1510,10 +1537,7 @@
             <h2 class="section-title">Featured Products</h2>
             <div class="section-tag" style="border-bottom-color: #D6C6B3; color: #B0A08C;">Premium Hair Care</div>
         </div>
-        <div class="paysynk-embeds">
-            <div data-paysynk-product="shu-uemura-art-of-hair-ultimate-reset" data-store="jojo-flo-london"></div>
-        </div>
-        <script src="https://www.paysynk.com/embed.js" defer></script>
+        <div class="paysynk-embeds" id="paysynkEmbeds"></div>
     </section>
 
     <section class="brands" id="brands">
@@ -1772,6 +1796,7 @@
         </p>
     </dialog>
 
+    <script src="https://www.paysynk.com/cart.js" data-store="jojo-flo-london" data-merchant-id="cmtbbv1k5000004jzbx1wq1s3" data-accent="#c5ad84" data-font="inherit" async></script>
     <script>
         (function() {
             var bookDialog = document.getElementById('bookDialog');
@@ -1827,15 +1852,185 @@
                 });
             }
 
+            var PAYSYNK_STORE = 'jojo-flo-london';
+            var PAYSYNK_PRODUCTS_URL = 'https://www.paysynk.com/api/stores/' + PAYSYNK_STORE + '/products';
+            var PAYSYNK_CART_EVENT = 'paysynk:cart-updated';
+            var paysynkCatalog = null;
+            var paysynkCurrency = 'gbp';
+
+            try { localStorage.setItem('paysynk-preview-cart:' + PAYSYNK_STORE, '1'); } catch (e) {}
+
+            function formatPaysynkMoney(minor, currency) {
+                try {
+                    return new Intl.NumberFormat('en-GB', {
+                        style: 'currency',
+                        currency: (currency || 'gbp').toUpperCase()
+                    }).format((minor || 0) / 100);
+                } catch (e) {
+                    return '£' + ((minor || 0) / 100).toFixed(2);
+                }
+            }
+
+            function productImage(p) {
+                if (p.images && p.images[0]) return p.images[0];
+                if (p.variants && p.variants[0] && p.variants[0].imageUrl) return p.variants[0].imageUrl;
+                return '';
+            }
+
+            function addPaysynkToCart(product) {
+                var variant = product.variants && product.variants[0];
+                if (!variant) return;
+                var key = 'paysynk-cart:' + PAYSYNK_STORE;
+                var items = [];
+                try { items = JSON.parse(localStorage.getItem(key) || '[]'); } catch (e) { items = []; }
+                var existing = null;
+                for (var i = 0; i < items.length; i++) {
+                    if (items[i].variantId === variant.id) { existing = items[i]; break; }
+                }
+                if (existing) {
+                    existing.quantity = Math.min(variant.stockQty || 99, (existing.quantity || 0) + 1);
+                } else {
+                    items.push({
+                        variantId: variant.id,
+                        productId: product.id,
+                        title: product.title,
+                        optionsLabel: '',
+                        kind: product.kind || 'other',
+                        priceMinor: variant.priceMinor,
+                        quantity: 1,
+                        maxStock: variant.stockQty || 99
+                    });
+                }
+                localStorage.setItem(key, JSON.stringify(items));
+                try {
+                    window.dispatchEvent(new CustomEvent(PAYSYNK_CART_EVENT, {
+                        detail: { store: PAYSYNK_STORE, items: items }
+                    }));
+                } catch (e) {}
+                if (window.PaySynkCart) {
+                    window.PaySynkCart.refresh();
+                    window.PaySynkCart.open();
+                }
+            }
+
+            function paintFallbackProduct(el, p) {
+                var img = productImage(p);
+                var variant = (p.variants && p.variants[0]) || {};
+                el.style.display = '';
+                el.removeAttribute('data-paysynk-missing');
+                el.classList.add('product-card');
+                el.innerHTML = '';
+                if (img) {
+                    var image = document.createElement('img');
+                    image.className = 'product-image';
+                    image.src = img;
+                    image.alt = p.title || '';
+                    image.width = 400;
+                    image.height = 400;
+                    el.appendChild(image);
+                }
+                var info = document.createElement('div');
+                info.className = 'product-info';
+                var name = document.createElement('h3');
+                name.className = 'product-name';
+                name.textContent = p.title || '';
+                var price = document.createElement('p');
+                price.className = 'product-price';
+                price.textContent = formatPaysynkMoney(variant.priceMinor, paysynkCurrency);
+                var addBtn = document.createElement('button');
+                addBtn.type = 'button';
+                addBtn.className = 'hero-btn paysynk-add-btn';
+                addBtn.textContent = 'Add to cart';
+                addBtn.addEventListener('click', function() { addPaysynkToCart(p); });
+                info.appendChild(name);
+                info.appendChild(price);
+                info.appendChild(addBtn);
+                el.appendChild(info);
+            }
+
+            function restoreHiddenEmbeds() {
+                if (!paysynkCatalog) return;
+                document.querySelectorAll('[data-paysynk-product]').forEach(function(el) {
+                    var hidden = el.style.display === 'none' || el.getAttribute('data-paysynk-missing') === '1';
+                    var empty = !el.querySelector('img, h3, .product-name');
+                    if (!hidden && !empty) return;
+                    var slug = el.getAttribute('data-paysynk-product');
+                    for (var i = 0; i < paysynkCatalog.length; i++) {
+                        if (paysynkCatalog[i].slug === slug) {
+                            paintFallbackProduct(el, paysynkCatalog[i]);
+                            break;
+                        }
+                    }
+                });
+            }
+
+            function remountPaysynkEmbeds() {
+                var s = document.createElement('script');
+                s.src = 'https://www.paysynk.com/embed.js';
+                document.body.appendChild(s);
+                setTimeout(restoreHiddenEmbeds, 2500);
+            }
+
+            function loadPaysynkCatalog() {
+                if (paysynkCatalog) return Promise.resolve(paysynkCatalog);
+                return fetch(PAYSYNK_PRODUCTS_URL).then(function(res) {
+                    if (!res.ok) throw new Error('Failed to load products');
+                    return res.json();
+                }).then(function(data) {
+                    paysynkCatalog = data.products || [];
+                    if (data.store && data.store.currency) paysynkCurrency = data.store.currency;
+                    return paysynkCatalog;
+                });
+            }
+
+            function fillFeaturedFromPaysynk() {
+                var grid = document.getElementById('paysynkEmbeds');
+                if (!grid) return;
+                loadPaysynkCatalog().then(function(catalog) {
+                    grid.innerHTML = '';
+                    if (!catalog.length) {
+                        grid.innerHTML = '<p class="product-search-results__empty">Products will appear here when they are published in PaySynk.</p>';
+                        return;
+                    }
+                    catalog.forEach(function(p) {
+                        if (!p.slug) return;
+                        var el = document.createElement('div');
+                        el.setAttribute('data-paysynk-product', p.slug);
+                        el.setAttribute('data-store', PAYSYNK_STORE);
+                        paintFallbackProduct(el, p);
+                        grid.appendChild(el);
+                    });
+                    remountPaysynkEmbeds();
+                }).catch(function() {
+                    grid.innerHTML = '<p class="product-search-results__empty">Unable to load products just now. Please refresh.</p>';
+                });
+            }
+            fillFeaturedFromPaysynk();
+
             function placePaysynkCart() {
                 var launcher = document.getElementById('paysynk-cart-launcher');
                 var slot = document.getElementById('headerCart');
-                if (!launcher || !slot || launcher.parentNode === slot) return;
-                slot.appendChild(launcher);
+                var nativeBtn = document.getElementById('headerCartBtn');
+                if (launcher && slot && launcher.style.display !== 'none') {
+                    if (launcher.parentNode !== slot) slot.appendChild(launcher);
+                    if (nativeBtn) nativeBtn.hidden = true;
+                    return;
+                }
+                if (nativeBtn) nativeBtn.hidden = false;
             }
             placePaysynkCart();
             var cartObserver = new MutationObserver(placePaysynkCart);
             cartObserver.observe(document.body, { childList: true });
+            var headerCartBtn = document.getElementById('headerCartBtn');
+            if (headerCartBtn) {
+                headerCartBtn.addEventListener('click', function() {
+                    try { localStorage.setItem('paysynk-preview-cart:' + PAYSYNK_STORE, '1'); } catch (e) {}
+                    if (window.PaySynkCart) {
+                        window.PaySynkCart.refresh();
+                        window.PaySynkCart.open();
+                    }
+                });
+            }
 
             var menuBtn = document.getElementById('menuBtn');
             var menuIcon = menuBtn && menuBtn.querySelector('i');
@@ -1873,9 +2068,6 @@
             var productSearchMeta = document.getElementById('productSearchMeta');
             var productSearchEmpty = document.getElementById('productSearchEmpty');
             var productSearchClose = document.getElementById('productSearchClose');
-            var PAYSYNK_STORE = 'jojo-flo-london';
-            var PAYSYNK_PRODUCTS_URL = 'https://www.paysynk.com/api/stores/' + PAYSYNK_STORE + '/products';
-            var paysynkCatalog = null;
 
             function normalizeSearchText(s) {
                 return (s || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
@@ -1892,17 +2084,6 @@
                 );
             }
 
-            function loadPaysynkCatalog() {
-                if (paysynkCatalog) return Promise.resolve(paysynkCatalog);
-                return fetch(PAYSYNK_PRODUCTS_URL).then(function(res) {
-                    if (!res.ok) throw new Error('Failed to load products');
-                    return res.json();
-                }).then(function(data) {
-                    paysynkCatalog = data.products || [];
-                    return paysynkCatalog;
-                });
-            }
-
             function filterProducts(catalog, qRaw) {
                 var q = normalizeSearchText(qRaw || '').trim();
                 if (!q) return [];
@@ -1913,12 +2094,6 @@
                         return hay.indexOf(word) !== -1;
                     });
                 });
-            }
-
-            function remountPaysynkEmbeds() {
-                var s = document.createElement('script');
-                s.src = 'https://www.paysynk.com/embed.js';
-                document.body.appendChild(s);
             }
 
             function hideSearchResults() {
@@ -1960,6 +2135,7 @@
                         var el = document.createElement('div');
                         el.setAttribute('data-paysynk-product', p.slug);
                         el.setAttribute('data-store', PAYSYNK_STORE);
+                        paintFallbackProduct(el, p);
                         productSearchGrid.appendChild(el);
                     });
                     remountPaysynkEmbeds();

@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shu Uemura Art of Hair — Products | JOJO & FLO LONDON</title>
     <link rel="icon" href="../logos/jojoflo-fav.png" type="image/png">
+    <script>
+        try { localStorage.setItem('paysynk-preview-cart:jojo-flo-london', '1'); } catch (e) {}
+    </script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -37,9 +40,11 @@
         .header-cart {
             position: absolute; left: 0; display: flex; align-items: center; min-height: 44px; z-index: 2;
         }
+        .header-cart-btn,
         .header-cart #paysynk-cart-launcher {
             position: static !important; right: auto !important; bottom: auto !important;
             padding: 8px 14px !important; font-size: 12px !important; letter-spacing: 1.5px; text-transform: uppercase; cursor: pointer;
+            border: 1px solid var(--text-dark); background: #fff; color: var(--text-dark); font-family: var(--font-freight);
         }
         .menu-icon {
             display: none; position: absolute; right: 0; background: none; border: none; color: var(--text-dark);
@@ -100,13 +105,14 @@
     <header>
         <div class="header-inner">
             <div class="header-top">
-                <div class="header-cart" id="headerCart"></div>
+                <div class="header-cart" id="headerCart">
+                    <button type="button" class="header-cart-btn" id="headerCartBtn">Cart</button>
+                </div>
                 <a href="../index.html" class="logo">
                     <img src="../logos/jojoflo_logo-blk.png" alt="JOJO & FLO LONDON">
                 </a>
                 <button class="menu-icon" id="menuBtn" type="button" aria-label="Menu" aria-expanded="false"><i class="ri-menu-line" aria-hidden="true"></i></button>
             </div>
-            <script src="https://www.paysynk.com/cart.js" data-store="jojo-flo-london" data-merchant-id="cmtbbv1k5000004jzbx1wq1s3" data-accent="#c5ad84" data-font="inherit" async></script>
             <nav id="mainNav" aria-label="Primary">
                 <ul>
                     <li><a href="../index.html">Home</a></li>
@@ -139,16 +145,32 @@
             <p style="margin-top:12px"><a href="../index.html">Back to home</a></p>
         </div>
     </footer>
+    <script src="https://www.paysynk.com/cart.js" data-store="jojo-flo-london" data-merchant-id="cmtbbv1k5000004jzbx1wq1s3" data-accent="#c5ad84" data-font="inherit" async></script>
     <script>
 (function() {
     function placePaysynkCart() {
         var launcher = document.getElementById('paysynk-cart-launcher');
         var slot = document.getElementById('headerCart');
-        if (!launcher || !slot || launcher.parentNode === slot) return;
-        slot.appendChild(launcher);
+        var nativeBtn = document.getElementById('headerCartBtn');
+        if (launcher && slot && launcher.style.display !== 'none') {
+            if (launcher.parentNode !== slot) slot.appendChild(launcher);
+            if (nativeBtn) nativeBtn.hidden = true;
+            return;
+        }
+        if (nativeBtn) nativeBtn.hidden = false;
     }
     placePaysynkCart();
     new MutationObserver(placePaysynkCart).observe(document.body, { childList: true });
+    var headerCartBtn = document.getElementById('headerCartBtn');
+    if (headerCartBtn) {
+        headerCartBtn.addEventListener('click', function() {
+            try { localStorage.setItem('paysynk-preview-cart:jojo-flo-london', '1'); } catch (e) {}
+            if (window.PaySynkCart) {
+                window.PaySynkCart.refresh();
+                window.PaySynkCart.open();
+            }
+        });
+    }
 
     var menuBtn = document.getElementById('menuBtn');
     var mainNav = document.getElementById('mainNav');
