@@ -34,6 +34,13 @@
         .header-top { width: 100%; display: flex; justify-content: center; align-items: center; position: relative; }
         .logo { height: 44px; }
         .logo img { height: 100%; width: auto; object-fit: contain; }
+        .header-cart {
+            position: absolute; left: 0; display: flex; align-items: center; min-height: 44px; z-index: 2;
+        }
+        .header-cart #paysynk-cart-launcher {
+            position: static !important; right: auto !important; bottom: auto !important;
+            padding: 8px 14px !important; font-size: 12px !important; letter-spacing: 1.5px; text-transform: uppercase; cursor: pointer;
+        }
         .menu-icon {
             display: none; position: absolute; right: 0; background: none; border: none; color: var(--text-dark);
             font-size: 24px; cursor: pointer; padding: 6px;
@@ -93,11 +100,13 @@
     <header>
         <div class="header-inner">
             <div class="header-top">
+                <div class="header-cart" id="headerCart"></div>
                 <a href="../index.html" class="logo">
                     <img src="../logos/jojoflo_logo-blk.png" alt="JOJO & FLO LONDON">
                 </a>
                 <button class="menu-icon" id="menuBtn" type="button" aria-label="Menu" aria-expanded="false"><i class="ri-menu-line" aria-hidden="true"></i></button>
             </div>
+            <script src="https://www.paysynk.com/cart.js" data-store="jojo-flo-london" data-merchant-id="cmtbbv1k5000004jzbx1wq1s3" data-accent="#c5ad84" data-font="inherit" async></script>
             <nav id="mainNav" aria-label="Primary">
                 <ul>
                     <li><a href="../index.html">Home</a></li>
@@ -117,9 +126,8 @@
         <div class="page-intro">
             <span class="section-tag">Salon retail</span>
             <h1>Davines</h1>
-            <p class="intro-desc">Sustainable Italian hair care available in salon. Tap a product for details.</p>
+            <p class="intro-desc">Davines products will appear here as PaySynk embeds. Until then, shop featured products on the <a href="../index.html#products" style="text-decoration:underline;text-underline-offset:3px;">home page</a>.</p>
         </div>
-        <div class="retail-grid" id="productGrid"></div>
     </main>
     <footer>
         <div class="footer-inner">
@@ -127,27 +135,17 @@
             <p style="margin-top:12px"><a href="../index.html">Back to home</a></p>
         </div>
     </footer>
-    <script src="../assets/product-catalog.js"></script>
     <script>
 (function() {
-    var BRAND = "davines";
-    var grid = document.getElementById('productGrid');
-    var catalog = window.PRODUCT_CATALOG || [];
-    function esc(s) {
-        var d = document.createElement('div');
-        d.textContent = s;
-        return d.innerHTML;
+    function placePaysynkCart() {
+        var launcher = document.getElementById('paysynk-cart-launcher');
+        var slot = document.getElementById('headerCart');
+        if (!launcher || !slot || launcher.parentNode === slot) return;
+        slot.appendChild(launcher);
     }
-    catalog.filter(function(p) { return p.brand === BRAND; }).forEach(function(p) {
-        var a = document.createElement('a');
-        a.className = 'product-card';
-        a.href = 'product.html?id=' + encodeURIComponent(p.id);
-        a.innerHTML =
-            '<img class="product-image" src="../' + esc(p.image) + '" alt="' + esc(p.title) + '" width="400" height="400" loading="lazy">' +
-            '<div class="product-info"><h2 class="product-name">' + esc(p.title) + '</h2>' +
-            '<p class="product-hint">' + esc(p.price) + '</p></div>';
-        grid.appendChild(a);
-    });
+    placePaysynkCart();
+    new MutationObserver(placePaysynkCart).observe(document.body, { childList: true });
+
     var menuBtn = document.getElementById('menuBtn');
     var mainNav = document.getElementById('mainNav');
     if (menuBtn && mainNav) {

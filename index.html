@@ -23,6 +23,9 @@
             --text-light: #6E6860;
             --white: #FFFFFF;
             --hero-overlay: rgba(0, 0, 0, 0.2);
+            --paysynk-accent: #c5ad84;
+            --paysynk-accent-text: #2C2C2C;
+            --paysynk-font: inherit;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -71,7 +74,7 @@
             margin-bottom: 0;
         }
 
-        .logo { height: 50px; }
+        .logo { height: 50px; padding: 0 88px; }
         .logo img {
             height: 100%;
             width: auto;
@@ -158,6 +161,26 @@
         nav.open li:nth-child(8) { animation-delay: 0.38s; }
         nav.open li:nth-child(9) { animation-delay: 0.43s; }
         nav.open li:nth-child(10) { animation-delay: 0.48s; }
+
+        .header-cart {
+            position: absolute;
+            left: 0;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            min-height: 44px;
+            z-index: 2;
+        }
+        .header-cart #paysynk-cart-launcher {
+            position: static !important;
+            right: auto !important;
+            bottom: auto !important;
+            padding: 8px 14px !important;
+            font-size: 12px !important;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            cursor: pointer;
+        }
 
         .menu-icon {
             display: flex;
@@ -751,14 +774,19 @@
             display: inline-block;
         }
 
-        /* Featured Products */
+        /* Featured Products — PaySynk embeds */
         .featured-products { padding: 100px; background-color: var(--primary-bg); }
-        .featured-products .retail-grid { margin-top: 0; grid-template-columns: repeat(4, 1fr); }
-        .featured-products a.product-card { display: block; color: inherit; }
-        .featured-products .product-image {
-            height: 340px;
-            object-fit: contain;
-            background-color: #faf8f5;
+        .featured-products .paysynk-embeds {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 32px;
+            max-width: 1100px;
+            margin: 0 auto;
+            justify-items: center;
+        }
+        .featured-products [data-paysynk-product] {
+            width: 100%;
+            max-width: 420px;
         }
 
         /* Brands */
@@ -1244,7 +1272,7 @@
             }
             .services-grid { grid-template-columns: repeat(2, 1fr); }
             .retail-grid { grid-template-columns: repeat(2, 1fr); }
-            .featured-products .retail-grid { grid-template-columns: repeat(2, 1fr); }
+            .featured-products .paysynk-embeds { grid-template-columns: 1fr; }
             .gallery-track { width: calc(38 * 100% / 3); }
             .gallery-wrap { padding: 80px 60px; }
             .brands { padding: 80px 60px; }
@@ -1363,11 +1391,13 @@
 
     <header>
         <div class="header-top">
+            <div class="header-cart" id="headerCart"></div>
             <a href="#" class="logo">
                 <img src="logos/jojoflo_logo-blk.png" alt="JOJO & FLO LONDON">
             </a>
             <button class="menu-icon" id="menuBtn" aria-label="Menu"><i class="ri-menu-line"></i></button>
         </div>
+        <script src="https://www.paysynk.com/cart.js" data-store="jojo-flo-london" data-merchant-id="cmtbbv1k5000004jzbx1wq1s3" data-accent="#c5ad84" data-font="inherit" async></script>
         <nav id="mainNav">
             <ul>
                 <li><a href="#top">Home</a></li>
@@ -1475,36 +1505,10 @@
             <h2 class="section-title">Featured Products</h2>
             <div class="section-tag" style="border-bottom-color: #D6C6B3; color: #B0A08C;">Premium Hair Care</div>
         </div>
-        <div class="retail-grid">
-            <a href="brands/product.html?id=b7ad82cb4dd76c" class="product-card">
-                <img src="assets/site-products/Shu Uemura/Ultimate Reset/3474636610211_EN_1.webp" alt="Shu Uemura Ultimate Reset" class="product-image" width="400" height="400" loading="lazy">
-                <div class="product-info">
-                    <h3 class="product-name">Shu Uemura — Ultimate Reset</h3>
-                    <p class="product-price">Price on enquiry</p>
-                </div>
-            </a>
-            <a href="brands/product.html?id=f7e363c8ddc104" class="product-card">
-                <img src="assets/site-products/Shu Uemura/Izumi Tonic/3474637136512_EN_1.webp" alt="Shu Uemura Izumi Tonic" class="product-image" width="400" height="400" loading="lazy">
-                <div class="product-info">
-                    <h3 class="product-name">Shu Uemura — Izumi Tonic</h3>
-                    <p class="product-price">Price on enquiry</p>
-                </div>
-            </a>
-            <a href="brands/product.html?id=e8532828512ca5" class="product-card">
-                <img src="assets/site-products/Kérastase/Use these/3474637196738_PACKSHOT_01.jpg" alt="Kérastase — Use these" class="product-image" width="400" height="400" loading="lazy">
-                <div class="product-info">
-                    <h3 class="product-name">Kérastase — Use these</h3>
-                    <p class="product-price">Price on enquiry</p>
-                </div>
-            </a>
-            <a href="brands/product.html?id=d2d06b19a24877" class="product-card">
-                <img src="assets/site-products/Davines/75111_NOUNOU HAIR MASK 75ML/8004608253402_MAIN.jpg" alt="Davines NOUNOU hair mask" class="product-image" width="400" height="400" loading="lazy">
-                <div class="product-info">
-                    <h3 class="product-name">Davines — NOUNOU Hair Mask</h3>
-                    <p class="product-price">Price on enquiry</p>
-                </div>
-            </a>
+        <div class="paysynk-embeds">
+            <div data-paysynk-product="shu-uemura-art-of-hair-ultimate-reset" data-store="jojo-flo-london"></div>
         </div>
+        <script src="https://www.paysynk.com/embed.js" defer></script>
     </section>
 
     <section class="brands" id="brands">
@@ -1818,6 +1822,16 @@
                     bookOpenBtn.setAttribute('aria-expanded', 'false');
                 });
             }
+
+            function placePaysynkCart() {
+                var launcher = document.getElementById('paysynk-cart-launcher');
+                var slot = document.getElementById('headerCart');
+                if (!launcher || !slot || launcher.parentNode === slot) return;
+                slot.appendChild(launcher);
+            }
+            placePaysynkCart();
+            var cartObserver = new MutationObserver(placePaysynkCart);
+            cartObserver.observe(document.body, { childList: true });
 
             var menuBtn = document.getElementById('menuBtn');
             var menuIcon = menuBtn && menuBtn.querySelector('i');
