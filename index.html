@@ -317,6 +317,11 @@
             grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
             gap: 32px;
         }
+        .product-search-results__grid [data-paysynk-product] {
+            width: 100%;
+            max-width: 420px;
+            margin: 0 auto;
+        }
         .product-search-results__grid a.product-card {
             display: block;
             color: inherit;
@@ -1767,7 +1772,6 @@
         </p>
     </dialog>
 
-    <script src="assets/product-catalog.js"></script>
     <script>
         (function() {
             var bookDialog = document.getElementById('bookDialog');
@@ -1860,7 +1864,7 @@
                 }
             }
 
-            /* Hero product search */
+            /* Hero product search — PaySynk store catalog */
             var searchOpenBtn = document.getElementById('searchOpenBtn');
             var heroSearchInput = document.getElementById('heroSearchInput');
             var heroSearchSubmit = document.getElementById('heroSearchSubmit');
@@ -1869,26 +1873,38 @@
             var productSearchMeta = document.getElementById('productSearchMeta');
             var productSearchEmpty = document.getElementById('productSearchEmpty');
             var productSearchClose = document.getElementById('productSearchClose');
-            var catalog = window.PRODUCT_CATALOG || [];
-
-            function escHtml(s) {
-                var d = document.createElement('div');
-                d.textContent = s;
-                return d.innerHTML;
-            }
+            var PAYSYNK_STORE = 'jojo-flo-london';
+            var PAYSYNK_PRODUCTS_URL = 'https://www.paysynk.com/api/stores/' + PAYSYNK_STORE + '/products';
+            var paysynkCatalog = null;
 
             function normalizeSearchText(s) {
                 return (s || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
             }
 
             function productHaystack(p) {
+                var skuBits = '';
+                var variants = p.variants || [];
+                for (var i = 0; i < variants.length; i++) {
+                    skuBits += ' ' + (variants[i].sku || '');
+                }
                 return normalizeSearchText(
-                    (p.title || '') + ' ' + (p.line || '') + ' ' + (p.brandName || '') + ' ' + (p.brand || '') + ' ' + (p.description || '')
+                    (p.title || '') + ' ' + (p.slug || '') + ' ' + (p.description || '') + skuBits
                 );
             }
 
-            function filterProducts() {
-                var q = normalizeSearchText(heroSearchInput && heroSearchInput.value || '').trim();
+            function loadPaysynkCatalog() {
+                if (paysynkCatalog) return Promise.resolve(paysynkCatalog);
+                return fetch(PAYSYNK_PRODUCTS_URL).then(function(res) {
+                    if (!res.ok) throw new Error('Failed to load products');
+                    return res.json();
+                }).then(function(data) {
+                    paysynkCatalog = data.products || [];
+                    return paysynkCatalog;
+                });
+            }
+
+            function filterProducts(catalog, qRaw) {
+                var q = normalizeSearchText(qRaw || '').trim();
                 if (!q) return [];
                 var words = q.split(/\s+/).filter(Boolean);
                 return catalog.filter(function(p) {
@@ -1899,10 +1915,17 @@
                 });
             }
 
+            function remountPaysynkEmbeds() {
+                var s = document.createElement('script');
+                s.src = 'https://www.paysynk.com/embed.js';
+                document.body.appendChild(s);
+            }
+
             function hideSearchResults() {
                 if (!productSearchResults) return;
                 productSearchResults.classList.remove('is-visible');
                 productSearchResults.hidden = true;
+                if (productSearchGrid) productSearchGrid.innerHTML = '';
             }
 
             function renderSearchResults() {
@@ -1912,34 +1935,38 @@
                     hideSearchResults();
                     return;
                 }
-                var items = filterProducts();
                 productSearchResults.hidden = false;
                 productSearchResults.classList.add('is-visible');
                 productSearchGrid.innerHTML = '';
-                if (productSearchMeta) {
-                    productSearchMeta.textContent = items.length === 1
-                        ? '1 product found for “' + q + '”'
-                        : items.length + ' products found for “' + q + '”';
-                }
-                if (items.length === 0) {
-                    if (productSearchEmpty) productSearchEmpty.hidden = false;
-                    productSearchResults.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                    return;
-                }
                 if (productSearchEmpty) productSearchEmpty.hidden = true;
-                items.forEach(function(p) {
-                    var a = document.createElement('a');
-                    a.className = 'product-card';
-                    a.href = 'brands/product.html?id=' + encodeURIComponent(p.id);
-                    a.innerHTML =
-                        '<img class="product-image" src="' + escHtml(p.image) + '" alt="' + escHtml(p.title) + '" width="400" height="400" loading="lazy">' +
-                        '<div class="product-info">' +
-                        '<h3 class="product-name">' + escHtml(p.title) + '</h3>' +
-                        '<p class="product-price">' + escHtml(p.price) + '</p>' +
-                        '</div>';
-                    productSearchGrid.appendChild(a);
-                });
+                if (productSearchMeta) productSearchMeta.textContent = 'Searching…';
                 productSearchResults.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+                loadPaysynkCatalog().then(function(catalog) {
+                    var items = filterProducts(catalog, q);
+                    productSearchGrid.innerHTML = '';
+                    if (productSearchMeta) {
+                        productSearchMeta.textContent = items.length === 1
+                            ? '1 product found for “' + q + '”'
+                            : items.length + ' products found for “' + q + '”';
+                    }
+                    if (items.length === 0) {
+                        if (productSearchEmpty) productSearchEmpty.hidden = false;
+                        return;
+                    }
+                    if (productSearchEmpty) productSearchEmpty.hidden = true;
+                    items.forEach(function(p) {
+                        if (!p.slug) return;
+                        var el = document.createElement('div');
+                        el.setAttribute('data-paysynk-product', p.slug);
+                        el.setAttribute('data-store', PAYSYNK_STORE);
+                        productSearchGrid.appendChild(el);
+                    });
+                    remountPaysynkEmbeds();
+                }).catch(function() {
+                    if (productSearchMeta) productSearchMeta.textContent = 'Could not load the shop. Please try again.';
+                    if (productSearchEmpty) productSearchEmpty.hidden = false;
+                });
             }
 
             if (searchOpenBtn) {
