@@ -1537,7 +1537,13 @@
             <h2 class="section-title">Featured Products</h2>
             <div class="section-tag" style="border-bottom-color: #D6C6B3; color: #B0A08C;">Premium Hair Care</div>
         </div>
-        <div class="paysynk-embeds" id="paysynkEmbeds"></div>
+        <div class="paysynk-embeds" id="paysynkEmbeds">
+            <div data-paysynk-product="shu-uemura-art-of-hair-ultimate-reset" data-store="jojo-flo-london"></div>
+            <div data-paysynk-product="shu-uemura-art-of-hair-izumi-tonic" data-store="jojo-flo-london"></div>
+            <div data-paysynk-product="k-rastase-premi-re-concentr-d-calcifiant-ultra-r-parateur-45ml" data-store="jojo-flo-london"></div>
+            <div data-paysynk-product="davines-nounou-hair-mask-75ml" data-store="jojo-flo-london"></div>
+        </div>
+        <script src="https://www.paysynk.com/embed.js" defer></script>
     </section>
 
     <section class="brands" id="brands">
@@ -1855,6 +1861,12 @@
             var PAYSYNK_STORE = 'jojo-flo-london';
             var PAYSYNK_PRODUCTS_URL = 'https://www.paysynk.com/api/stores/' + PAYSYNK_STORE + '/products';
             var PAYSYNK_CART_EVENT = 'paysynk:cart-updated';
+            var FEATURED_SLUGS = [
+                'shu-uemura-art-of-hair-ultimate-reset',
+                'shu-uemura-art-of-hair-izumi-tonic',
+                'k-rastase-premi-re-concentr-d-calcifiant-ultra-r-parateur-45ml',
+                'davines-nounou-hair-mask-75ml'
+            ];
             var paysynkCatalog = null;
             var paysynkCurrency = 'gbp';
 
@@ -1986,23 +1998,25 @@
             function fillFeaturedFromPaysynk() {
                 var grid = document.getElementById('paysynkEmbeds');
                 if (!grid) return;
-                loadPaysynkCatalog().then(function(catalog) {
+                function renderFeatured(catalog) {
+                    catalog = catalog || [];
                     grid.innerHTML = '';
-                    if (!catalog.length) {
-                        grid.innerHTML = '<p class="product-search-results__empty">Products will appear here when they are published in PaySynk.</p>';
-                        return;
-                    }
-                    catalog.forEach(function(p) {
-                        if (!p.slug) return;
+                    FEATURED_SLUGS.forEach(function(slug) {
                         var el = document.createElement('div');
-                        el.setAttribute('data-paysynk-product', p.slug);
+                        el.setAttribute('data-paysynk-product', slug);
                         el.setAttribute('data-store', PAYSYNK_STORE);
-                        paintFallbackProduct(el, p);
+                        for (var i = 0; i < catalog.length; i++) {
+                            if (catalog[i].slug === slug) {
+                                paintFallbackProduct(el, catalog[i]);
+                                break;
+                            }
+                        }
                         grid.appendChild(el);
                     });
                     remountPaysynkEmbeds();
-                }).catch(function() {
-                    grid.innerHTML = '<p class="product-search-results__empty">Unable to load products just now. Please refresh.</p>';
+                }
+                loadPaysynkCatalog().then(renderFeatured).catch(function() {
+                    renderFeatured([]);
                 });
             }
             fillFeaturedFromPaysynk();
