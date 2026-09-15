@@ -175,6 +175,50 @@
         });
         info.appendChild(addBtn);
         el.appendChild(info);
+        if (typeof options.revealIndex === 'number') {
+            applyReveal(el, options.revealIndex, options.revealBaseDelay || 80);
+        }
+    }
+
+    function shouldSkipRevealChild(child) {
+        if (!child || child.hidden) return true;
+        if (child.classList.contains('retail-grid') || child.classList.contains('paysynk-embeds')) {
+            return true;
+        }
+        var id = child.id || '';
+        if (/Loading|Empty|Grid|Embeds/i.test(id)) return true;
+        return false;
+    }
+
+    function applyReveal(el, index, baseDelay) {
+        if (!el) return;
+        el.classList.add('reveal-item');
+        var delay = (baseDelay || 0) + (index || 0) * 55;
+        el.style.setProperty('--reveal-delay', delay + 'ms');
+    }
+
+    function revealContainer(container, baseDelay) {
+        var root = resolveEl(container);
+        if (!root) return;
+        var i = 0;
+        Array.prototype.forEach.call(root.children, function (child) {
+            if (shouldSkipRevealChild(child)) return;
+            applyReveal(child, i, baseDelay || 0);
+            i += 1;
+        });
+    }
+
+    function initMainStageReveal(selectors) {
+        if (!selectors) {
+            selectors = ['.shop-main', '.pdp-main', '.hero-content', '.featured-products'];
+        } else if (typeof selectors === 'string') {
+            selectors = [selectors];
+        }
+        selectors.forEach(function (sel) {
+            global.document.querySelectorAll(sel).forEach(function (main) {
+                revealContainer(main, 0);
+            });
+        });
     }
 
     function createProductSlot(slug) {
@@ -197,11 +241,11 @@
         function render(list) {
             list = list || [];
             grid.innerHTML = '';
-            slugs.forEach(function (slug) {
+            slugs.forEach(function (slug, idx) {
                 var el = createProductSlot(slug);
                 for (var i = 0; i < list.length; i++) {
                     if (list[i].slug === slug) {
-                        paintProductCard(el, list[i]);
+                        paintProductCard(el, list[i], { revealIndex: idx, revealBaseDelay: 90 });
                         break;
                     }
                 }
@@ -242,10 +286,16 @@
                     linkToProductPage: !!options.linkToProductPage,
                     productDetailHref: options.productDetailHref
                 };
-                items.forEach(function (p) {
+                items.forEach(function (p, idx) {
                     if (!p.slug) return;
                     var el = createProductSlot(p.slug);
-                    paintProductCard(el, p, cardOptions);
+                    var opts = {
+                        linkToProductPage: cardOptions.linkToProductPage,
+                        productDetailHref: cardOptions.productDetailHref,
+                        revealIndex: idx,
+                        revealBaseDelay: 90
+                    };
+                    paintProductCard(el, p, opts);
                     grid.appendChild(el);
                 });
             })
@@ -283,10 +333,16 @@
                     linkToProductPage: !!options.linkToProductPage,
                     productDetailHref: options.productDetailHref
                 };
-                items.forEach(function (p) {
+                items.forEach(function (p, idx) {
                     if (!p.slug) return;
                     var el = createProductSlot(p.slug);
-                    paintProductCard(el, p, cardOptions);
+                    var opts = {
+                        linkToProductPage: cardOptions.linkToProductPage,
+                        productDetailHref: cardOptions.productDetailHref,
+                        revealIndex: idx,
+                        revealBaseDelay: 90
+                    };
+                    paintProductCard(el, p, opts);
                     grid.appendChild(el);
                 });
             })
@@ -315,7 +371,7 @@
             if (!p) return null;
             slot.innerHTML = '';
             var el = createProductSlot(slug);
-            paintProductCard(el, p);
+            paintProductCard(el, p, { revealIndex: 0, revealBaseDelay: 40 });
             slot.appendChild(el);
             return p;
         });
@@ -419,6 +475,9 @@
         filterProducts: filterProducts,
         filterByBrand: filterByBrand,
         initHeaderCart: initHeaderCart,
-        initSiteHeaderMenu: initSiteHeaderMenu
+        initSiteHeaderMenu: initSiteHeaderMenu,
+        initMainStageReveal: initMainStageReveal,
+        revealContainer: revealContainer,
+        applyReveal: applyReveal
     };
 })(typeof window !== 'undefined' ? window : this);

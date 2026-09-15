@@ -14,6 +14,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Source+Serif+4:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../assets/site-header.css">
     <link rel="stylesheet" href="../assets/shop-pages.css">
+    <link rel="stylesheet" href="../assets/site-reveal.css">
     <style>
         :root {
             --font-freight: 'freight-text-pro', 'Source Serif 4', Georgia, serif;
@@ -99,6 +100,7 @@
     PaySynkShop.enablePreviewCart();
     PaySynkShop.initHeaderCart();
     PaySynkShop.initSiteHeaderMenu();
+    PaySynkShop.initMainStageReveal();
 
     var params = new URLSearchParams(window.location.search);
     var slug = params.get('slug');
@@ -133,6 +135,7 @@
         document.getElementById('bcBrand').textContent = brand.label;
         document.getElementById('bcTitle').textContent = p.title || 'Product';
         content.hidden = false;
+        PaySynkShop.revealContainer('#pdpContent', 20);
     }).catch(function () {
         empty.hidden = false;
     });
