@@ -9,6 +9,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Source+Serif+4:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/site-chrome.css">
     <style>
         :root {
             --font-freight: 'freight-text-pro', 'Source Serif 4', Georgia, serif;
@@ -168,15 +169,6 @@
         }
         .product-hint { font-size: 13px; color: var(--text-light); margin-top: 10px; }
 
-        footer {
-            background: #000;
-            color: #fff;
-            padding: 60px 24px 40px;
-        }
-        .footer-inner { max-width: 1200px; margin: 0 auto; text-align: center; }
-        .footer-inner p { font-size: 13px; color: rgba(255,255,255,0.5); }
-        .footer-inner a { color: rgba(255,255,255,0.7); text-decoration: underline; }
-
         @media (max-width: 768px) {
             header { padding: 16px 20px; }
             .menu-icon { display: flex; align-items: center; justify-content: center; }
@@ -249,12 +241,11 @@
         </div>
     </main>
 
-    <footer>
-        <div class="footer-inner">
-            <p>&copy; 2025 JOJO &amp; FLO LONDON. Sample shop pages for client review.</p>
-        </div>
-    </footer>
+    <footer></footer>
 
+    <script src="https://www.paysynk.com/cart.js" data-store="jojo-flo-london" data-merchant-id="cmtbbv1k5000004jzbx1wq1s3" data-accent="#c5ad84" data-font="inherit" async></script>
+    <script src="../../assets/paysynk-shop.js"></script>
+    <script src="../../assets/site-chrome.js"></script>
     <script>
         (function() {
             var menuBtn = document.getElementById('menuBtn');

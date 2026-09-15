@@ -1839,61 +1839,9 @@
 
     <script src="https://www.paysynk.com/cart.js" data-store="jojo-flo-london" data-merchant-id="cmtbbv1k5000004jzbx1wq1s3" data-accent="#c5ad84" data-font="inherit" async></script>
     <script src="assets/paysynk-shop.js"></script>
+    <script src="assets/site-chrome.js"></script>
     <script>
         (function() {
-            var bookDialog = document.getElementById('bookDialog');
-            var bookFrame = document.getElementById('bookFrame');
-            var bookOpenBtn = document.getElementById('bookOpenBtn');
-            var bookCloseBtn = document.getElementById('bookCloseBtn');
-            if (bookDialog && typeof bookDialog.showModal === 'function' && bookOpenBtn) {
-                var bookingUrl = bookFrame && bookFrame.getAttribute('data-src');
-                function collapseBookBtn() {
-                    bookOpenBtn.classList.remove('is-expanded');
-                    bookOpenBtn.setAttribute('aria-expanded', 'false');
-                }
-                function expandBookBtn() {
-                    bookOpenBtn.classList.add('is-expanded');
-                    bookOpenBtn.setAttribute('aria-expanded', 'true');
-                }
-                bookOpenBtn.addEventListener('click', function(e) {
-                    e.stopPropagation();
-                    if (!bookOpenBtn.classList.contains('is-expanded')) {
-                        expandBookBtn();
-                        return;
-                    }
-                    if (bookFrame && bookingUrl && !bookFrame.getAttribute('src')) {
-                        bookFrame.setAttribute('src', bookingUrl);
-                    }
-                    bookDialog.showModal();
-                });
-                document.addEventListener('click', function(e) {
-                    if (!bookOpenBtn.classList.contains('is-expanded')) return;
-                    if (bookOpenBtn.contains(e.target)) return;
-                    if (bookDialog.open) return;
-                    collapseBookBtn();
-                });
-                bookDialog.addEventListener('close', collapseBookBtn);
-                if (bookCloseBtn) {
-                    bookCloseBtn.addEventListener('click', function() { bookDialog.close(); });
-                }
-            } else if (bookOpenBtn) {
-                bookOpenBtn.addEventListener('click', function(e) {
-                    e.stopPropagation();
-                    if (!bookOpenBtn.classList.contains('is-expanded')) {
-                        bookOpenBtn.classList.add('is-expanded');
-                        bookOpenBtn.setAttribute('aria-expanded', 'true');
-                        return;
-                    }
-                    window.open('https://salonsynk.com/book/jojoandflo', 'salonBooking', 'width=520,height=760,scrollbars=yes,resizable=yes');
-                });
-                document.addEventListener('click', function(e) {
-                    if (!bookOpenBtn.classList.contains('is-expanded')) return;
-                    if (bookOpenBtn.contains(e.target)) return;
-                    bookOpenBtn.classList.remove('is-expanded');
-                    bookOpenBtn.setAttribute('aria-expanded', 'false');
-                });
-            }
-
             var FEATURED_SLUGS = [
                 'shu-uemura-art-of-hair-ultimate-reset',
                 'shu-uemura-art-of-hair-izumi-tonic',
@@ -1930,102 +1878,6 @@
                         });
                     });
                 }
-            }
-
-            /* Hero product search — PaySynk store catalog */
-            var searchOpenBtn = document.getElementById('searchOpenBtn');
-            var heroSearchInput = document.getElementById('heroSearchInput');
-            var heroSearchSubmit = document.getElementById('heroSearchSubmit');
-            var productSearchResults = document.getElementById('productSearchResults');
-            var productSearchGrid = document.getElementById('productSearchGrid');
-            var productSearchMeta = document.getElementById('productSearchMeta');
-            var productSearchEmpty = document.getElementById('productSearchEmpty');
-            var productSearchClose = document.getElementById('productSearchClose');
-
-            function hideSearchResults() {
-                if (!productSearchResults) return;
-                productSearchResults.classList.remove('is-visible');
-                productSearchResults.hidden = true;
-                if (productSearchGrid) productSearchGrid.innerHTML = '';
-            }
-
-            function renderSearchResults() {
-                if (!productSearchGrid || !productSearchResults) return;
-                var q = (heroSearchInput && heroSearchInput.value || '').trim();
-                if (!q) {
-                    hideSearchResults();
-                    return;
-                }
-                productSearchResults.hidden = false;
-                productSearchResults.classList.add('is-visible');
-                productSearchGrid.innerHTML = '';
-                if (productSearchEmpty) productSearchEmpty.hidden = true;
-                if (productSearchMeta) productSearchMeta.textContent = 'Searching…';
-                productSearchResults.scrollIntoView({ behavior: 'smooth', block: 'start' });
-
-                PaySynkShop.loadCatalog().then(function(catalog) {
-                    var items = PaySynkShop.filterProducts(catalog, q);
-                    productSearchGrid.innerHTML = '';
-                    if (productSearchMeta) {
-                        productSearchMeta.textContent = items.length === 1
-                            ? '1 product found for “' + q + '”'
-                            : items.length + ' products found for “' + q + '”';
-                    }
-                    if (items.length === 0) {
-                        if (productSearchEmpty) productSearchEmpty.hidden = false;
-                        return;
-                    }
-                    if (productSearchEmpty) productSearchEmpty.hidden = true;
-                    items.forEach(function(p, idx) {
-                        if (!p.slug) return;
-                        var el = PaySynkShop.createProductSlot(p.slug);
-                        PaySynkShop.paintProductCard(el, p, { revealIndex: idx, revealBaseDelay: 70 });
-                        productSearchGrid.appendChild(el);
-                    });
-                    PaySynkShop.revealContainer('#productSearchResults .product-search-results__inner', 0);
-                }).catch(function() {
-                    if (productSearchMeta) productSearchMeta.textContent = 'Could not load the shop. Please try again.';
-                    if (productSearchEmpty) productSearchEmpty.hidden = false;
-                });
-            }
-
-            if (searchOpenBtn) {
-                searchOpenBtn.addEventListener('click', function(e) {
-                    if (!searchOpenBtn.classList.contains('is-expanded')) {
-                        searchOpenBtn.classList.add('is-expanded');
-                        searchOpenBtn.setAttribute('aria-expanded', 'true');
-                        setTimeout(function() { if (heroSearchInput) heroSearchInput.focus(); }, 300);
-                        e.stopPropagation();
-                        return;
-                    }
-                });
-                document.addEventListener('click', function(e) {
-                    if (!searchOpenBtn.classList.contains('is-expanded')) return;
-                    if (searchOpenBtn.contains(e.target)) return;
-                    if (productSearchResults && !productSearchResults.hidden) return;
-                    searchOpenBtn.classList.remove('is-expanded');
-                    searchOpenBtn.setAttribute('aria-expanded', 'false');
-                });
-            }
-            if (heroSearchSubmit) {
-                heroSearchSubmit.addEventListener('click', function(e) {
-                    e.stopPropagation();
-                    renderSearchResults();
-                });
-            }
-            if (heroSearchInput) {
-                heroSearchInput.addEventListener('keydown', function(e) {
-                    if (e.key === 'Enter') {
-                        e.preventDefault();
-                        renderSearchResults();
-                    }
-                });
-            }
-            if (productSearchClose) {
-                productSearchClose.addEventListener('click', function() {
-                    hideSearchResults();
-                    if (heroSearchInput) heroSearchInput.value = '';
-                });
             }
 
             var galleryTrack = document.getElementById('galleryTrack');

@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="../assets/site-header.css">
     <link rel="stylesheet" href="../assets/shop-pages.css">
     <link rel="stylesheet" href="../assets/site-reveal.css">
+    <link rel="stylesheet" href="../assets/site-chrome.css">
     <style>
         :root {
             --font-freight: 'freight-text-pro', 'Source Serif 4', Georgia, serif;
@@ -43,9 +44,6 @@
         .product-name { font-weight: 300; font-size: clamp(26px, 3vw, 36px); line-height: 1.2; margin-bottom: 16px; }
         .product-price { font-size: 22px; color: #8a7a66; margin-bottom: 20px; }
         .pdp-note { font-size: 13px; color: var(--text-light); margin-top: 20px; max-width: 36em; }
-        footer { background: #000; color: #fff; padding: 48px 24px; text-align: center; }
-        footer p { font-size: 13px; color: rgba(255,255,255,0.5); }
-        footer a { color: rgba(255,255,255,0.7); text-decoration: underline; }
     </style>
 </head>
 <body class="site-subpage">
@@ -89,12 +87,10 @@
             <p class="pdp-note">Product details and checkout are powered by PaySynk. Manage inventory and pricing in your PaySynk dashboard.</p>
         </div>
     </main>
-    <footer>
-        <p>&copy; 2025 JOJO &amp; FLO LONDON</p>
-        <p style="margin-top:10px"><a href="../index.html">Home</a></p>
-    </footer>
+    <footer></footer>
     <script src="https://www.paysynk.com/cart.js" data-store="jojo-flo-london" data-merchant-id="cmtbbv1k5000004jzbx1wq1s3" data-accent="#c5ad84" data-font="inherit" async></script>
     <script src="../assets/paysynk-shop.js"></script>
+    <script src="../assets/site-chrome.js"></script>
     <script>
 (function() {
     PaySynkShop.enablePreviewCart();
