@@ -12,6 +12,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Source+Serif+4:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/site-header.css">
     <link rel="stylesheet" href="../assets/shop-pages.css">
     <style>
         :root {
@@ -27,35 +28,8 @@
         h1, h2, h3, h4, h5, h6 { font-family: var(--font-heading); }
         a { text-decoration: none; color: inherit; transition: color 0.2s ease; }
         ul { list-style: none; }
-        body { font-family: var(--font-freight); background: var(--primary-bg); color: var(--text-dark); min-height: 100vh; }
-        header {
-            background: #fff; color: var(--text-dark); padding: 20px 40px 18px; position: sticky; top: 0; z-index: 100;
-            border-bottom: 1px solid #EFEBE4;
-        }
-        .header-inner {
-            max-width: 1200px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: 18px;
-        }
-        .header-top { width: 100%; display: flex; justify-content: center; align-items: center; position: relative; }
-        .logo { height: 44px; }
-        .logo img { height: 100%; width: auto; object-fit: contain; }
-        .header-cart {
-            position: absolute; left: 0; display: flex; align-items: center; min-height: 44px; z-index: 2;
-        }
-        .header-cart-btn,
-        .header-cart #paysynk-cart-launcher {
-            position: static !important; right: auto !important; bottom: auto !important;
-            padding: 8px 14px !important; font-size: 12px !important; letter-spacing: 1.5px; text-transform: uppercase; cursor: pointer;
-            border: 1px solid var(--text-dark); background: #fff; color: var(--text-dark); font-family: var(--font-freight);
-        }
-        .menu-icon {
-            display: none; position: absolute; right: 0; background: none; border: none; color: var(--text-dark);
-            font-size: 24px; cursor: pointer; padding: 6px;
-        }
-        nav ul { display: flex; flex-wrap: wrap; gap: 28px; justify-content: center; }
-        nav a { font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(44, 44, 44, 0.88); }
-        nav a:hover { color: var(--text-dark); }
-        .nav-cta { color: var(--btn) !important; }
-        .shop-main { max-width: 1200px; margin: 0 auto; padding: 48px 24px 100px; }
+        body.site-subpage { font-family: var(--font-freight); background: var(--primary-bg); color: var(--text-dark); min-height: 100vh; }
+        .shop-main { max-width: 1200px; margin: 0 auto; padding: 24px 24px 100px; }
         .breadcrumb { font-size: 13px; color: var(--text-light); margin-bottom: 32px; }
         .breadcrumb a { text-decoration: underline; text-underline-offset: 3px; }
         .page-intro { margin-bottom: 48px; text-align: center; }
@@ -102,41 +76,32 @@
         .footer-inner { max-width: 1200px; margin: 0 auto; text-align: center; }
         .footer-inner p { font-size: 13px; color: rgba(255,255,255,0.5); }
         .footer-inner a { color: rgba(255,255,255,0.7); text-decoration: underline; }
-        @media (max-width: 768px) {
-            header { padding: 16px 20px; }
-            .menu-icon { display: flex; align-items: center; justify-content: center; }
-            nav {
-                display: flex; flex-direction: column; width: 100%; max-height: 0; overflow: hidden; opacity: 0;
-                transition: max-height 0.35s ease, opacity 0.25s ease;
-            }
-            nav.open { max-height: 400px; opacity: 1; margin-top: 8px; }
-            nav ul { flex-direction: column; gap: 16px; align-items: center; }
-        }
     </style>
 </head>
-<body>
-    <header>
-        <div class="header-inner">
-            <div class="header-top">
-                <div class="header-cart" id="headerCart">
-                    <button type="button" class="header-cart-btn" id="headerCartBtn">Cart</button>
-                </div>
-                <a href="../index.html" class="logo">
-                    <img src="../logos/jojoflo_logo-blk.png" alt="JOJO & FLO LONDON">
-                </a>
-                <button class="menu-icon" id="menuBtn" type="button" aria-label="Menu" aria-expanded="false"><i class="ri-menu-line" aria-hidden="true"></i></button>
+<body class="site-subpage">
+    <header class="site-header">
+        <div class="header-top">
+            <div class="header-cart" id="headerCart">
+                <button type="button" class="header-cart-btn" id="headerCartBtn">Cart</button>
             </div>
-            <nav id="mainNav" aria-label="Primary">
-                <ul>
-                    <li><a href="../index.html">Home</a></li>
-                    <li><a href="../index.html#services">Services</a></li>
-                    <li><a href="../products.html">Products</a></li>
-                    <li><a href="../index.html#brands">Brands</a></li>
-                    <li><a href="../index.html#contact">Contact</a></li>
-                    <li><a class="nav-cta" href="../index.html#contact">Book</a></li>
-                </ul>
-            </nav>
+            <a href="../index.html" class="logo">
+                <img src="../logos/jojoflo_logo-blk.png" alt="JOJO & FLO LONDON">
+            </a>
+            <button class="menu-icon" id="menuBtn" type="button" aria-label="Menu" aria-expanded="false"><i class="ri-menu-line" aria-hidden="true"></i></button>
         </div>
+        <nav id="mainNav" aria-label="Primary">
+            <ul>
+                <li><a href="../index.html#top">Home</a></li>
+                <li><a href="../index.html#about-us">About Us</a></li>
+                <li><a href="../index.html#services">Services</a></li>
+                <li><a href="../index.html#pricelist">Price List</a></li>
+                <li><a href="../products.html">Products</a></li>
+                <li><a href="../index.html#brands">Brands</a></li>
+                <li><a href="../index.html#gallery">Gallery</a></li>
+                <li><a href="../index.html#google-reviews">Testimonials</a></li>
+                <li><a href="../index.html#contact">Contact Us</a></li>
+            </ul>
+        </nav>
     </header>
     <main class="shop-main">
         <nav class="breadcrumb" aria-label="Breadcrumb">
@@ -168,32 +133,12 @@
 (function() {
     PaySynkShop.enablePreviewCart();
     PaySynkShop.initHeaderCart();
+    PaySynkShop.initSiteHeaderMenu();
     PaySynkShop.renderBrandGrid('#paysynkBrandGrid', 'kerastase', {
         loadingEl: '#paysynkBrandLoading',
         emptyEl: '#paysynkBrandEmpty',
         linkToProductPage: true
     });
-
-    var menuBtn = document.getElementById('menuBtn');
-    var mainNav = document.getElementById('mainNav');
-    if (menuBtn && mainNav) {
-        var icon = menuBtn.querySelector('i');
-        menuBtn.addEventListener('click', function() {
-            var open = mainNav.classList.toggle('open');
-            menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
-            if (icon) {
-                icon.classList.toggle('ri-menu-line', !open);
-                icon.classList.toggle('ri-close-line', open);
-            }
-        });
-        mainNav.querySelectorAll('a').forEach(function(link) {
-            link.addEventListener('click', function() {
-                mainNav.classList.remove('open');
-                menuBtn.setAttribute('aria-expanded', 'false');
-                if (icon) { icon.classList.add('ri-menu-line'); icon.classList.remove('ri-close-line'); }
-            });
-        });
-    }
 })();
     </script>
 </body>

@@ -179,32 +179,9 @@
 
     function createProductSlot(slug) {
         var el = document.createElement('div');
-        el.setAttribute('data-paysynk-product', slug);
-        el.setAttribute('data-store', STORE);
+        el.className = 'paysynk-product-slot';
+        el.setAttribute('data-product-slug', slug);
         return el;
-    }
-
-    function restoreHiddenEmbeds() {
-        if (!catalog) return;
-        global.document.querySelectorAll('[data-paysynk-product]').forEach(function (el) {
-            var hidden = el.style.display === 'none' || el.getAttribute('data-paysynk-missing') === '1';
-            var empty = !el.querySelector('img, h3, .product-name');
-            if (!hidden && !empty) return;
-            var slug = el.getAttribute('data-paysynk-product');
-            for (var i = 0; i < catalog.length; i++) {
-                if (catalog[i].slug === slug) {
-                    paintProductCard(el, catalog[i]);
-                    break;
-                }
-            }
-        });
-    }
-
-    function remountEmbeds() {
-        var s = global.document.createElement('script');
-        s.src = 'https://www.paysynk.com/embed.js';
-        global.document.body.appendChild(s);
-        global.setTimeout(restoreHiddenEmbeds, 2500);
     }
 
     function resolveEl(target) {
@@ -230,7 +207,6 @@
                 }
                 grid.appendChild(el);
             });
-            remountEmbeds();
         }
         loadCatalog()
             .then(render)
@@ -272,7 +248,6 @@
                     paintProductCard(el, p, cardOptions);
                     grid.appendChild(el);
                 });
-                remountEmbeds();
             })
             .catch(function () {
                 if (loadingEl) loadingEl.hidden = true;
@@ -314,7 +289,6 @@
                     paintProductCard(el, p, cardOptions);
                     grid.appendChild(el);
                 });
-                remountEmbeds();
             })
             .catch(function () {
                 if (loadingEl) loadingEl.hidden = true;
@@ -343,7 +317,6 @@
             var el = createProductSlot(slug);
             paintProductCard(el, p);
             slot.appendChild(el);
-            remountEmbeds();
             return p;
         });
     }
@@ -374,6 +347,31 @@
             var hay = productHaystack(p);
             return words.every(function (word) {
                 return hay.indexOf(word) !== -1;
+            });
+        });
+    }
+
+    function initSiteHeaderMenu() {
+        var menuBtn = global.document.getElementById('menuBtn');
+        var mainNav = global.document.getElementById('mainNav');
+        if (!menuBtn || !mainNav) return;
+        var icon = menuBtn.querySelector('i');
+        menuBtn.addEventListener('click', function () {
+            var open = mainNav.classList.toggle('open');
+            menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+            if (icon) {
+                icon.classList.toggle('ri-menu-line', !open);
+                icon.classList.toggle('ri-close-line', open);
+            }
+        });
+        mainNav.querySelectorAll('a').forEach(function (link) {
+            link.addEventListener('click', function () {
+                mainNav.classList.remove('open');
+                menuBtn.setAttribute('aria-expanded', 'false');
+                if (icon) {
+                    icon.classList.add('ri-menu-line');
+                    icon.classList.remove('ri-close-line');
+                }
             });
         });
     }
@@ -414,13 +412,13 @@
         paintProductCard: paintProductCard,
         createProductSlot: createProductSlot,
         addToCart: addToCart,
-        remountEmbeds: remountEmbeds,
         renderFeatured: renderFeatured,
         renderBrandGrid: renderBrandGrid,
         renderAllProductsGrid: renderAllProductsGrid,
         renderSingleProduct: renderSingleProduct,
         filterProducts: filterProducts,
         filterByBrand: filterByBrand,
-        initHeaderCart: initHeaderCart
+        initHeaderCart: initHeaderCart,
+        initSiteHeaderMenu: initSiteHeaderMenu
     };
 })(typeof window !== 'undefined' ? window : this);

@@ -51,9 +51,22 @@ button.hero-btn,
     cursor: pointer;
     transition: all 0.3s ease;
 }
-.header-cart-btn {
-    border-radius: 0;
+/* PaySynk cart widget — match site square cart button */
+.header-cart #paysynk-cart-launcher,
+#paysynk-cart-launcher {
+    border-radius: 0 !important;
+    background: #fff !important;
+    color: #2c2c2c !important;
+    border: 1px solid #2c2c2c !important;
+    box-shadow: none !important;
 }
+
+/* If PaySynk product widgets are present, square their buttons too */
+.paysynk-embeds button,
+[data-paysynk-product] button {
+    border-radius: 0 !important;
+}
+
 .shop-back-wrap {
     text-align: center;
     margin: 0 0 28px;

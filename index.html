@@ -14,6 +14,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&family=Source+Serif+4:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/shop-pages.css">
     <style>
         :root {
             --font-freight: 'freight-text-pro', 'Source Serif 4', Georgia, serif;
@@ -191,7 +192,11 @@
             font-family: var(--font-freight);
         }
         .header-cart #paysynk-cart-launcher {
-            border: 0;
+            border: 1px solid var(--text-dark) !important;
+            border-radius: 0 !important;
+            background: #fff !important;
+            color: var(--text-dark) !important;
+            box-shadow: none !important;
         }
         .paysynk-add-btn {
             display: inline-block;
@@ -1975,7 +1980,6 @@
                         PaySynkShop.paintProductCard(el, p);
                         productSearchGrid.appendChild(el);
                     });
-                    PaySynkShop.remountEmbeds();
                 }).catch(function() {
                     if (productSearchMeta) productSearchMeta.textContent = 'Could not load the shop. Please try again.';
                     if (productSearchEmpty) productSearchEmpty.hidden = false;
