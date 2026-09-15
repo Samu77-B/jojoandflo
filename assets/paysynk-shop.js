@@ -168,7 +168,7 @@
         }
         var addBtn = document.createElement('button');
         addBtn.type = 'button';
-        addBtn.className = 'paysynk-add-btn';
+        addBtn.className = 'hero-btn paysynk-add-btn';
         addBtn.textContent = 'Add to cart';
         addBtn.addEventListener('click', function () {
             addToCart(p);

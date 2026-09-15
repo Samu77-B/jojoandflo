@@ -1,0 +1,60 @@
+/* Shared square-corner buttons for shop / product pages (matches home .hero-btn) */
+.hero-btn {
+    display: inline-block;
+    padding: 18px 45px;
+    background-color: #c5ad84;
+    color: #2C2C2C;
+    font-family: 'freight-text-pro', 'Source Serif 4', Georgia, serif;
+    font-size: 14px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 0;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    text-align: center;
+}
+button.hero-btn,
+.paysynk-add-btn {
+    font: inherit;
+    font-family: 'freight-text-pro', 'Source Serif 4', Georgia, serif;
+}
+.hero-btn:hover,
+.paysynk-add-btn:hover {
+    background-color: #b39d6f;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+.hero-btn--outline {
+    background: transparent;
+    color: #2C2C2C;
+    border: 1px solid #6E6860;
+    box-shadow: none;
+}
+.hero-btn--outline:hover {
+    background: #2C2C2C;
+    color: #fff;
+    border-color: #2C2C2C;
+}
+.paysynk-add-btn {
+    display: inline-block;
+    margin-top: 14px;
+    padding: 18px 45px;
+    background-color: #c5ad84;
+    color: #2C2C2C;
+    font-size: 14px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 0;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+.header-cart-btn {
+    border-radius: 0;
+}
+.shop-back-wrap {
+    text-align: center;
+    margin: 0 0 28px;
+}
