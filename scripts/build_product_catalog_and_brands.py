@@ -1,7 +1,12 @@
 """
+Legacy asset pipeline for assets/site-products/ and product-catalog.js.
+
+Live shop pages use PaySynk (assets/paysynk-shop.js) — do not run step 3 expecting
+to refresh brand HTML; kerastase/davines/shu-uemura load products from the PaySynk API.
+
 1. Remove packshots under assets/site-products whose path suggests "in hand" / hands imagery.
-2. Build assets/product-catalog.js (window.PRODUCT_CATALOG) for brand grids + product detail page.
-3. Regenerate brands/*.html listing pages (JS-rendered grid, links to product.html?id=).
+2. Build assets/product-catalog.js (optional reference / old tooling only).
+3. (Deprecated) Previously regenerated brands/*.html from local folders.
 
 Run from repo root:  python scripts/build_product_catalog_and_brands.py
 """

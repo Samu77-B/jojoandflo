@@ -193,9 +193,23 @@
             border: 0;
         }
         .paysynk-add-btn {
+            display: inline-block;
             margin-top: 14px;
-            padding: 12px 22px;
-            font-size: 12px;
+            padding: 18px 45px;
+            background-color: #c5ad84;
+            color: var(--text-dark);
+            font-family: var(--font-freight);
+            font-size: 14px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .paysynk-add-btn:hover {
+            background-color: #b39d6f;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
         }
 
         .menu-icon {
@@ -1537,12 +1551,7 @@
             <h2 class="section-title">Featured Products</h2>
             <div class="section-tag" style="border-bottom-color: #D6C6B3; color: #B0A08C;">Premium Hair Care</div>
         </div>
-        <div class="paysynk-embeds" id="paysynkEmbeds">
-            <div data-paysynk-product="shu-uemura-art-of-hair-ultimate-reset" data-store="jojo-flo-london"></div>
-            <div data-paysynk-product="shu-uemura-art-of-hair-izumi-tonic" data-store="jojo-flo-london"></div>
-            <div data-paysynk-product="k-rastase-premi-re-concentr-d-calcifiant-ultra-r-parateur-45ml" data-store="jojo-flo-london"></div>
-        </div>
-        <script src="https://www.paysynk.com/embed.js" defer></script>
+        <div class="paysynk-embeds" id="paysynkEmbeds" aria-live="polite"></div>
     </section>
 
     <section class="brands" id="brands">
@@ -1802,6 +1811,7 @@
     </dialog>
 
     <script src="https://www.paysynk.com/cart.js" data-store="jojo-flo-london" data-merchant-id="cmtbbv1k5000004jzbx1wq1s3" data-accent="#c5ad84" data-font="inherit" async></script>
+    <script src="assets/paysynk-shop.js"></script>
     <script>
         (function() {
             var bookDialog = document.getElementById('bookDialog');
@@ -1857,192 +1867,15 @@
                 });
             }
 
-            var PAYSYNK_STORE = 'jojo-flo-london';
-            var PAYSYNK_PRODUCTS_URL = 'https://www.paysynk.com/api/stores/' + PAYSYNK_STORE + '/products';
-            var PAYSYNK_CART_EVENT = 'paysynk:cart-updated';
             var FEATURED_SLUGS = [
                 'shu-uemura-art-of-hair-ultimate-reset',
                 'shu-uemura-art-of-hair-izumi-tonic',
-                'k-rastase-premi-re-concentr-d-calcifiant-ultra-r-parateur-45ml'
+                'kerastase-premiere-concentre-decalcifiant-ultra-reparateur-45ml'
             ];
-            var paysynkCatalog = null;
-            var paysynkCurrency = 'gbp';
 
-            try { localStorage.setItem('paysynk-preview-cart:' + PAYSYNK_STORE, '1'); } catch (e) {}
-
-            function formatPaysynkMoney(minor, currency) {
-                try {
-                    return new Intl.NumberFormat('en-GB', {
-                        style: 'currency',
-                        currency: (currency || 'gbp').toUpperCase()
-                    }).format((minor || 0) / 100);
-                } catch (e) {
-                    return '£' + ((minor || 0) / 100).toFixed(2);
-                }
-            }
-
-            function productImage(p) {
-                if (p.images && p.images[0]) return p.images[0];
-                if (p.variants && p.variants[0] && p.variants[0].imageUrl) return p.variants[0].imageUrl;
-                return '';
-            }
-
-            function addPaysynkToCart(product) {
-                var variant = product.variants && product.variants[0];
-                if (!variant) return;
-                var key = 'paysynk-cart:' + PAYSYNK_STORE;
-                var items = [];
-                try { items = JSON.parse(localStorage.getItem(key) || '[]'); } catch (e) { items = []; }
-                var existing = null;
-                for (var i = 0; i < items.length; i++) {
-                    if (items[i].variantId === variant.id) { existing = items[i]; break; }
-                }
-                if (existing) {
-                    existing.quantity = Math.min(variant.stockQty || 99, (existing.quantity || 0) + 1);
-                } else {
-                    items.push({
-                        variantId: variant.id,
-                        productId: product.id,
-                        title: product.title,
-                        optionsLabel: '',
-                        kind: product.kind || 'other',
-                        priceMinor: variant.priceMinor,
-                        quantity: 1,
-                        maxStock: variant.stockQty || 99
-                    });
-                }
-                localStorage.setItem(key, JSON.stringify(items));
-                try {
-                    window.dispatchEvent(new CustomEvent(PAYSYNK_CART_EVENT, {
-                        detail: { store: PAYSYNK_STORE, items: items }
-                    }));
-                } catch (e) {}
-                if (window.PaySynkCart) {
-                    window.PaySynkCart.refresh();
-                    window.PaySynkCart.open();
-                }
-            }
-
-            function paintFallbackProduct(el, p) {
-                var img = productImage(p);
-                var variant = (p.variants && p.variants[0]) || {};
-                el.style.display = '';
-                el.removeAttribute('data-paysynk-missing');
-                el.classList.add('product-card');
-                el.innerHTML = '';
-                if (img) {
-                    var image = document.createElement('img');
-                    image.className = 'product-image';
-                    image.src = img;
-                    image.alt = p.title || '';
-                    image.width = 400;
-                    image.height = 400;
-                    el.appendChild(image);
-                }
-                var info = document.createElement('div');
-                info.className = 'product-info';
-                var name = document.createElement('h3');
-                name.className = 'product-name';
-                name.textContent = p.title || '';
-                var price = document.createElement('p');
-                price.className = 'product-price';
-                price.textContent = formatPaysynkMoney(variant.priceMinor, paysynkCurrency);
-                var addBtn = document.createElement('button');
-                addBtn.type = 'button';
-                addBtn.className = 'hero-btn paysynk-add-btn';
-                addBtn.textContent = 'Add to cart';
-                addBtn.addEventListener('click', function() { addPaysynkToCart(p); });
-                info.appendChild(name);
-                info.appendChild(price);
-                info.appendChild(addBtn);
-                el.appendChild(info);
-            }
-
-            function restoreHiddenEmbeds() {
-                if (!paysynkCatalog) return;
-                document.querySelectorAll('[data-paysynk-product]').forEach(function(el) {
-                    var hidden = el.style.display === 'none' || el.getAttribute('data-paysynk-missing') === '1';
-                    var empty = !el.querySelector('img, h3, .product-name');
-                    if (!hidden && !empty) return;
-                    var slug = el.getAttribute('data-paysynk-product');
-                    for (var i = 0; i < paysynkCatalog.length; i++) {
-                        if (paysynkCatalog[i].slug === slug) {
-                            paintFallbackProduct(el, paysynkCatalog[i]);
-                            break;
-                        }
-                    }
-                });
-            }
-
-            function remountPaysynkEmbeds() {
-                var s = document.createElement('script');
-                s.src = 'https://www.paysynk.com/embed.js';
-                document.body.appendChild(s);
-                setTimeout(restoreHiddenEmbeds, 2500);
-            }
-
-            function loadPaysynkCatalog() {
-                if (paysynkCatalog) return Promise.resolve(paysynkCatalog);
-                return fetch(PAYSYNK_PRODUCTS_URL).then(function(res) {
-                    if (!res.ok) throw new Error('Failed to load products');
-                    return res.json();
-                }).then(function(data) {
-                    paysynkCatalog = data.products || [];
-                    if (data.store && data.store.currency) paysynkCurrency = data.store.currency;
-                    return paysynkCatalog;
-                });
-            }
-
-            function fillFeaturedFromPaysynk() {
-                var grid = document.getElementById('paysynkEmbeds');
-                if (!grid) return;
-                function renderFeatured(catalog) {
-                    catalog = catalog || [];
-                    grid.innerHTML = '';
-                    FEATURED_SLUGS.forEach(function(slug) {
-                        var el = document.createElement('div');
-                        el.setAttribute('data-paysynk-product', slug);
-                        el.setAttribute('data-store', PAYSYNK_STORE);
-                        for (var i = 0; i < catalog.length; i++) {
-                            if (catalog[i].slug === slug) {
-                                paintFallbackProduct(el, catalog[i]);
-                                break;
-                            }
-                        }
-                        grid.appendChild(el);
-                    });
-                    remountPaysynkEmbeds();
-                }
-                loadPaysynkCatalog().then(renderFeatured).catch(function() {
-                    renderFeatured([]);
-                });
-            }
-            fillFeaturedFromPaysynk();
-
-            function placePaysynkCart() {
-                var launcher = document.getElementById('paysynk-cart-launcher');
-                var slot = document.getElementById('headerCart');
-                var nativeBtn = document.getElementById('headerCartBtn');
-                if (launcher && slot && launcher.style.display !== 'none') {
-                    if (launcher.parentNode !== slot) slot.appendChild(launcher);
-                    if (nativeBtn) nativeBtn.hidden = true;
-                    return;
-                }
-                if (nativeBtn) nativeBtn.hidden = false;
-            }
-            placePaysynkCart();
-            var cartObserver = new MutationObserver(placePaysynkCart);
-            cartObserver.observe(document.body, { childList: true });
-            var headerCartBtn = document.getElementById('headerCartBtn');
-            if (headerCartBtn) {
-                headerCartBtn.addEventListener('click', function() {
-                    try { localStorage.setItem('paysynk-preview-cart:' + PAYSYNK_STORE, '1'); } catch (e) {}
-                    if (window.PaySynkCart) {
-                        window.PaySynkCart.refresh();
-                        window.PaySynkCart.open();
-                    }
-                });
-            }
+            PaySynkShop.enablePreviewCart();
+            PaySynkShop.initHeaderCart();
+            PaySynkShop.renderFeatured('#paysynkEmbeds', FEATURED_SLUGS);
 
             var menuBtn = document.getElementById('menuBtn');
             var menuIcon = menuBtn && menuBtn.querySelector('i');
@@ -2081,33 +1914,6 @@
             var productSearchEmpty = document.getElementById('productSearchEmpty');
             var productSearchClose = document.getElementById('productSearchClose');
 
-            function normalizeSearchText(s) {
-                return (s || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-            }
-
-            function productHaystack(p) {
-                var skuBits = '';
-                var variants = p.variants || [];
-                for (var i = 0; i < variants.length; i++) {
-                    skuBits += ' ' + (variants[i].sku || '');
-                }
-                return normalizeSearchText(
-                    (p.title || '') + ' ' + (p.slug || '') + ' ' + (p.description || '') + skuBits
-                );
-            }
-
-            function filterProducts(catalog, qRaw) {
-                var q = normalizeSearchText(qRaw || '').trim();
-                if (!q) return [];
-                var words = q.split(/\s+/).filter(Boolean);
-                return catalog.filter(function(p) {
-                    var hay = productHaystack(p);
-                    return words.every(function(word) {
-                        return hay.indexOf(word) !== -1;
-                    });
-                });
-            }
-
             function hideSearchResults() {
                 if (!productSearchResults) return;
                 productSearchResults.classList.remove('is-visible');
@@ -2129,8 +1935,8 @@
                 if (productSearchMeta) productSearchMeta.textContent = 'Searching…';
                 productSearchResults.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
-                loadPaysynkCatalog().then(function(catalog) {
-                    var items = filterProducts(catalog, q);
+                PaySynkShop.loadCatalog().then(function(catalog) {
+                    var items = PaySynkShop.filterProducts(catalog, q);
                     productSearchGrid.innerHTML = '';
                     if (productSearchMeta) {
                         productSearchMeta.textContent = items.length === 1
@@ -2144,13 +1950,11 @@
                     if (productSearchEmpty) productSearchEmpty.hidden = true;
                     items.forEach(function(p) {
                         if (!p.slug) return;
-                        var el = document.createElement('div');
-                        el.setAttribute('data-paysynk-product', p.slug);
-                        el.setAttribute('data-store', PAYSYNK_STORE);
-                        paintFallbackProduct(el, p);
+                        var el = PaySynkShop.createProductSlot(p.slug);
+                        PaySynkShop.paintProductCard(el, p);
                         productSearchGrid.appendChild(el);
                     });
-                    remountPaysynkEmbeds();
+                    PaySynkShop.remountEmbeds();
                 }).catch(function() {
                     if (productSearchMeta) productSearchMeta.textContent = 'Could not load the shop. Please try again.';
                     if (productSearchEmpty) productSearchEmpty.hidden = false;
