@@ -1147,11 +1147,18 @@
         }
         .gallery-track {
             display: flex;
-            width: calc(38 * 100% / 3);
             transition: transform 0.6s ease;
+            cursor: grab;
+            touch-action: pan-y;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+        .gallery-track.is-dragging {
+            cursor: grabbing;
+            transition: none;
         }
         .gallery-item {
-            flex: 0 0 calc(100% / 38);
+            flex: 0 0 33.333%;
             aspect-ratio: 1;
             position: relative;
             overflow: hidden;
@@ -1342,7 +1349,6 @@
             .services-grid { grid-template-columns: repeat(2, 1fr); }
             .retail-grid { grid-template-columns: repeat(2, 1fr); }
             .featured-products .paysynk-embeds { grid-template-columns: 1fr; }
-            .gallery-track { width: calc(38 * 100% / 3); }
             .gallery-wrap { padding: 80px 60px; }
             .brands { padding: 80px 60px; }
             .brands-grid { gap: 40px 50px; }
@@ -1678,7 +1684,6 @@
             <div class="gallery-item"><img src="imgs/IMG_2148.jpg" alt="JoJo & Flo"><div class="gallery-overlay"><i class="ri-image-line gallery-icon"></i></div></div>
             <div class="gallery-item"><img src="imgs/IMG_2149.jpg" alt="JoJo & Flo"><div class="gallery-overlay"><i class="ri-image-line gallery-icon"></i></div></div>
             <div class="gallery-item"><img src="imgs/IMG_2150.jpg" alt="JoJo & Flo"><div class="gallery-overlay"><i class="ri-image-line gallery-icon"></i></div></div>
-            <div class="gallery-item"><img src="imgs/IMG_2151.jpg" alt="JoJo & Flo"><div class="gallery-overlay"><i class="ri-image-line gallery-icon"></i></div></div>
             <div class="gallery-item"><img src="imgs/IMG_2154.PNG" alt="JoJo & Flo"><div class="gallery-overlay"><i class="ri-image-line gallery-icon"></i></div></div>
             <div class="gallery-item"><img src="imgs/IMG_2155.PNG" alt="JoJo & Flo"><div class="gallery-overlay"><i class="ri-image-line gallery-icon"></i></div></div>
             <div class="gallery-item"><img src="imgs/IMG_2156.PNG" alt="JoJo & Flo"><div class="gallery-overlay"><i class="ri-image-line gallery-icon"></i></div></div>
@@ -1880,22 +1885,140 @@
                 }
             }
 
-            var galleryTrack = document.getElementById('galleryTrack');
-            if (galleryTrack) {
-                var galleryIndex = 0;
-                var totalSlides = 35;
-                setInterval(function() {
-                    galleryIndex++;
-                    if (galleryIndex >= totalSlides) {
-                        galleryTrack.style.transition = 'none';
-                        galleryTrack.style.transform = 'translateX(0)';
-                        galleryIndex = 0;
-                        galleryTrack.offsetHeight;
-                        galleryTrack.style.transition = '';
+            (function initGalleryCarousel() {
+                var gallery = document.querySelector('.gallery');
+                var track = document.getElementById('galleryTrack');
+                if (!gallery || !track) return;
+
+                var perView = 3;
+                var cloneCount = perView;
+                var slideCount = track.children.length - cloneCount;
+                if (slideCount < 1) return;
+
+                track.querySelectorAll('img').forEach(function (img) {
+                    img.draggable = false;
+                });
+
+                var index = 0;
+                var autoplayMs = 4500;
+                var autoplayId = null;
+                var isDragging = false;
+                var dragStartX = 0;
+                var dragStartTranslate = 0;
+                var currentTranslate = 0;
+                var pointerId = null;
+
+                function slideStepPx() {
+                    return gallery.offsetWidth / perView;
+                }
+
+                function clampIndex(i) {
+                    return Math.max(0, Math.min(slideCount, i));
+                }
+
+                function setTranslate(px, animate) {
+                    track.classList.toggle('is-dragging', !animate);
+                    track.style.transition = animate ? 'transform 0.6s ease' : 'none';
+                    track.style.transform = 'translateX(' + px + 'px)';
+                    currentTranslate = px;
+                }
+
+                function indexToTranslate(i) {
+                    return -i * slideStepPx();
+                }
+
+                function goTo(i, animate) {
+                    index = clampIndex(i);
+                    setTranslate(indexToTranslate(index), animate !== false);
+                }
+
+                function nextSlide() {
+                    if (isDragging) return;
+                    if (index >= slideCount) {
+                        goTo(0, false);
+                        return;
                     }
-                    galleryTrack.style.transform = 'translateX(-' + (galleryIndex * 100 / 38) + '%)';
-                }, 4500);
-            }
+                    goTo(index + 1, true);
+                }
+
+                function startAutoplay() {
+                    stopAutoplay();
+                    autoplayId = setInterval(nextSlide, autoplayMs);
+                }
+
+                function stopAutoplay() {
+                    if (autoplayId) {
+                        clearInterval(autoplayId);
+                        autoplayId = null;
+                    }
+                }
+
+                track.addEventListener('transitionend', function (e) {
+                    if (e.propertyName !== 'transform' || isDragging) return;
+                    if (index >= slideCount) {
+                        index = 0;
+                        setTranslate(0, false);
+                    }
+                });
+
+                function onPointerDown(e) {
+                    if (e.pointerType === 'mouse' && e.button !== 0) return;
+                    isDragging = true;
+                    pointerId = e.pointerId;
+                    dragStartX = e.clientX;
+                    dragStartTranslate = currentTranslate;
+                    stopAutoplay();
+                    track.setPointerCapture(e.pointerId);
+                    setTranslate(currentTranslate, false);
+                }
+
+                function onPointerMove(e) {
+                    if (!isDragging || e.pointerId !== pointerId) return;
+                    var dx = e.clientX - dragStartX;
+                    if (Math.abs(dx) > 8) e.preventDefault();
+                    setTranslate(dragStartTranslate + dx, false);
+                }
+
+                function onPointerUp(e) {
+                    if (!isDragging || e.pointerId !== pointerId) return;
+                    isDragging = false;
+                    pointerId = null;
+                    try { track.releasePointerCapture(e.pointerId); } catch (err) {}
+
+                    var dx = e.clientX - dragStartX;
+                    var threshold = slideStepPx() * 0.18;
+                    var target = index;
+                    if (dx < -threshold) target = index + 1;
+                    else if (dx > threshold) target = index - 1;
+                    else target = Math.round(-currentTranslate / slideStepPx());
+
+                    goTo(target, true);
+                    startAutoplay();
+                }
+
+                track.addEventListener('pointerdown', onPointerDown);
+                track.addEventListener('pointermove', onPointerMove, { passive: false });
+                track.addEventListener('pointerup', onPointerUp);
+                track.addEventListener('pointercancel', onPointerUp);
+                track.addEventListener('lostpointercapture', function () {
+                    if (isDragging) {
+                        isDragging = false;
+                        pointerId = null;
+                        goTo(Math.round(-currentTranslate / slideStepPx()), true);
+                        startAutoplay();
+                    }
+                });
+
+                gallery.addEventListener('mouseenter', stopAutoplay);
+                gallery.addEventListener('mouseleave', startAutoplay);
+
+                window.addEventListener('resize', function () {
+                    setTranslate(indexToTranslate(index), false);
+                });
+
+                goTo(0, false);
+                startAutoplay();
+            })();
 
             // Price List unlock
             var plContainer = document.getElementById('pricelistContainer');
