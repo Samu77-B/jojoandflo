@@ -910,10 +910,16 @@
             color: var(--text-dark);
             margin-bottom: 15px;
         }
-        .services-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px; }
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+            align-items: start;
+        }
         .service-card {
             text-align: center;
             padding: 40px 20px;
+            min-width: 0;
             transition: all 0.3s ease;
             border: 1px solid transparent;
         }
@@ -921,14 +927,27 @@
             border-color: #EFEBE4;
             background-color: #FCFBF9;
         }
-        .service-icon { font-size: 48px; color: #B0A08C; margin-bottom: 25px; font-weight: 100; }
+        .service-icon-wrap {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 48px;
+            margin: 0 auto 25px;
+            line-height: 0;
+        }
+        .service-icon {
+            font-size: 48px;
+            color: #B0A08C;
+            margin: 0;
+            font-weight: 100;
+            line-height: 1;
+        }
         .service-icon--blowdry {
-            display: inline-block;
+            display: block;
             width: 48px;
             height: 48px;
             object-fit: contain;
-            object-position: 54% center;
-            vertical-align: top;
+            object-position: center;
         }
         .service-name {
             font-weight: 300;
@@ -1451,6 +1470,7 @@
             .section-title { font-size: 28px; }
             .services-grid { grid-template-columns: 1fr; gap: 24px; }
             .service-card { padding: 30px; }
+            .service-icon-wrap { height: 32px; margin-bottom: 20px; }
             .service-icon { font-size: 32px; }
             .service-icon--blowdry { width: 32px; height: 32px; }
             .service-name { font-size: 18px; }
@@ -1616,22 +1636,24 @@
         </div>
         <div class="services-grid">
             <div class="service-card">
-                <i class="ri-scissors-cut-line service-icon"></i>
+                <div class="service-icon-wrap"><i class="ri-scissors-cut-line service-icon" aria-hidden="true"></i></div>
                 <h3 class="service-name">Precision Cutting</h3>
                 <p class="service-desc">Tailored cuts that complement your face shape and lifestyle, executed with masterful precision.</p>
             </div>
             <div class="service-card">
-                <i class="ri-palette-line service-icon"></i>
+                <div class="service-icon-wrap"><i class="ri-palette-line service-icon" aria-hidden="true"></i></div>
                 <h3 class="service-name">Bespoke Coloring</h3>
                 <p class="service-desc">From subtle balayage to vibrant transformations, our colorists create the perfect shade for you.</p>
             </div>
             <div class="service-card">
-                <i class="ri-sparkling-line service-icon"></i>
+                <div class="service-icon-wrap"><i class="ri-sparkling-line service-icon" aria-hidden="true"></i></div>
                 <h3 class="service-name">Luxury Treatments</h3>
                 <p class="service-desc">Revitalizing hair masks and scalp treatments to restore health and shine to your locks.</p>
             </div>
             <div class="service-card">
-                <img src="imgs/blowdry.png" alt="" width="48" height="48" class="service-icon service-icon--blowdry" decoding="async">
+                <div class="service-icon-wrap">
+                    <img src="imgs/blowdry.png" alt="" width="48" height="48" class="service-icon service-icon--blowdry" decoding="async">
+                </div>
                 <h3 class="service-name">Styling & Blow Dry</h3>
                 <p class="service-desc">Expert styling and finishes that bring out the best in your cut and colour.</p>
             </div>
@@ -1729,17 +1751,17 @@
         </div>
         <div class="treatments-grid">
             <div class="service-card">
-                <i class="ri-sparkling-line service-icon"></i>
+                <div class="service-icon-wrap"><i class="ri-sparkling-line service-icon" aria-hidden="true"></i></div>
                 <h3 class="service-name">Keratin Treatment</h3>
                 <p class="service-desc">Smoothing and shine-enhancing treatment for frizz-free, manageable hair.</p>
             </div>
             <div class="service-card">
-                <i class="ri-heart-pulse-line service-icon"></i>
+                <div class="service-icon-wrap"><i class="ri-heart-pulse-line service-icon" aria-hidden="true"></i></div>
                 <h3 class="service-name">Deep Conditioning</h3>
                 <p class="service-desc">Intensive hydration and repair for damaged or over-processed hair.</p>
             </div>
             <div class="service-card">
-                <i class="ri-hand-sanitizer-line service-icon"></i>
+                <div class="service-icon-wrap"><i class="ri-hand-sanitizer-line service-icon" aria-hidden="true"></i></div>
                 <h3 class="service-name">Scalp Therapy</h3>
                 <p class="service-desc">Nourishing scalp treatments for healthier hair from root to tip.</p>
             </div>
