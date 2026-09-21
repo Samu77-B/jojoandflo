@@ -922,6 +922,15 @@
             background-color: #FCFBF9;
         }
         .service-icon { font-size: 48px; color: #B0A08C; margin-bottom: 25px; font-weight: 100; }
+        .service-icon--blowdry {
+            display: block;
+            width: 48px;
+            height: 48px;
+            font-size: 0;
+            background-color: #B0A08C;
+            -webkit-mask: url('imgs/blowdry.png') center / contain no-repeat;
+            mask: url('imgs/blowdry.png') center / contain no-repeat;
+        }
         .service-name {
             font-weight: 300;
             font-size: 22px;
@@ -1444,6 +1453,7 @@
             .services-grid { grid-template-columns: 1fr; gap: 24px; }
             .service-card { padding: 30px; }
             .service-icon { font-size: 32px; }
+            .service-icon--blowdry { width: 32px; height: 32px; }
             .service-name { font-size: 18px; }
 
             .retail-grid { grid-template-columns: 1fr 1fr; gap: 16px; }
@@ -1622,7 +1632,7 @@
                 <p class="service-desc">Revitalizing hair masks and scalp treatments to restore health and shine to your locks.</p>
             </div>
             <div class="service-card">
-                <i class="ri-brush-3-line service-icon"></i>
+                <span class="service-icon service-icon--blowdry" role="img" aria-label="Hair dryer"></span>
                 <h3 class="service-name">Styling & Blow Dry</h3>
                 <p class="service-desc">Expert styling and finishes that bring out the best in your cut and colour.</p>
             </div>
