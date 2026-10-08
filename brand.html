@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Brand colours &amp; fonts | JOJO &amp; FLO LONDON (client)</title>
+    <link rel="icon" href="logos/jojoflo-fav.png" type="image/png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Grand+Hotel&family=Montserrat:wght@300;400;500;600&family=Qwigley&family=Source+Serif+4:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --font-freight: 'Source Serif 4', Georgia, serif;
+            --font-heading: 'Cinzel', Georgia, serif;
+            --font-section-title: 'Montserrat', 'Segoe UI', sans-serif;
+            --font-script: 'Qwigley', cursive;
+            --font-script-alt: 'Grand Hotel', cursive;
+            --primary-bg: #F9F7F2;
+            --secondary-bg: #EFEBE4;
+            --accent-color: #D6C6B3;
+            --text-dark: #2C2C2C;
+            --text-light: #6E6860;
+            --white: #FFFFFF;
+            --btn: #c5ad84;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: var(--font-freight);
+            background: var(--primary-bg);
+            color: var(--text-dark);
+            padding: 48px 24px 80px;
+        }
+        .wrap { max-width: 980px; margin: 0 auto; }
+        .eyebrow {
+            font-size: 12px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--text-light);
+            margin-bottom: 12px;
+        }
+        h1 {
+            font-family: var(--font-heading);
+            font-weight: 400;
+            font-size: clamp(32px, 5vw, 48px);
+            margin-bottom: 12px;
+        }
+        .lede {
+            color: var(--text-light);
+            line-height: 1.7;
+            max-width: 640px;
+            margin-bottom: 48px;
+        }
+        h2 {
+            font-family: var(--font-heading);
+            font-weight: 400;
+            font-size: 22px;
+            letter-spacing: 1px;
+            margin: 48px 0 20px;
+        }
+        .note {
+            font-size: 14px;
+            color: var(--text-light);
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        .swatches {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 16px;
+        }
+        .swatch {
+            background: #fff;
+            border: 1px solid #e8e2d8;
+            overflow: hidden;
+        }
+        .swatch__chip { height: 88px; }
+        .swatch__meta { padding: 12px 14px 16px; }
+        .swatch__name { font-family: var(--font-section-title); font-size: 13px; margin-bottom: 4px; }
+        .swatch__hex { font-size: 12px; color: var(--text-light); letter-spacing: 0.04em; }
+        .fonts {
+            display: grid;
+            gap: 20px;
+        }
+        .font-card {
+            background: #fff;
+            border: 1px solid #e8e2d8;
+            padding: 28px;
+        }
+        .font-card h3 { font-family: var(--font-section-title); font-size: 13px; letter-spacing: 1px; text-transform: uppercase; color: var(--text-light); margin-bottom: 12px; }
+        .sample-heading { font-family: var(--font-heading); font-size: 36px; font-weight: 400; }
+        .sample-title { font-family: var(--font-section-title); font-size: 32px; font-weight: 300; }
+        .sample-body { font-size: 18px; line-height: 1.7; }
+        .qwigley-regular { font-family: var(--font-script); font-weight: 400; font-style: normal; }
+        .sample-script { font-family: var(--font-script); font-size: 64px; line-height: 1.1; }
+        .sample-script-alt { font-family: var(--font-script-alt); font-size: 48px; line-height: 1.2; }
+        .btns { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 12px; }
+        .btn {
+            display: inline-block;
+            padding: 14px 28px;
+            font-family: var(--font-freight);
+            font-size: 12px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            border: none;
+            cursor: default;
+        }
+        .section-demo { padding: 36px; margin-top: 8px; }
+        .section-demo p { max-width: 520px; line-height: 1.7; }
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <p class="eyebrow">Client reference · not linked from the public site</p>
+        <h1>Brand colours &amp; fonts</h1>
+        <p class="lede">Current website palette and type, plus the new button, section, and handwriting options for review. This page is excluded from search and the main navigation.</p>
+
+        <h2>Current colours</h2>
+        <div class="swatches">
+            <article class="swatch"><div class="swatch__chip" style="background:#F9F7F2"></div><div class="swatch__meta"><p class="swatch__name">Primary background</p><p class="swatch__hex">#F9F7F2</p></div></article>
+            <article class="swatch"><div class="swatch__chip" style="background:#EFEBE4"></div><div class="swatch__meta"><p class="swatch__name">Secondary background</p><p class="swatch__hex">#EFEBE4</p></div></article>
+            <article class="swatch"><div class="swatch__chip" style="background:#D6C6B3"></div><div class="swatch__meta"><p class="swatch__name">Accent</p><p class="swatch__hex">#D6C6B3</p></div></article>
+            <article class="swatch"><div class="swatch__chip" style="background:#c5ad84"></div><div class="swatch__meta"><p class="swatch__name">Button (current)</p><p class="swatch__hex">#c5ad84</p></div></article>
+            <article class="swatch"><div class="swatch__chip" style="background:#2C2C2C"></div><div class="swatch__meta"><p class="swatch__name">Text dark</p><p class="swatch__hex">#2C2C2C</p></div></article>
+            <article class="swatch"><div class="swatch__chip" style="background:#6E6860"></div><div class="swatch__meta"><p class="swatch__name">Text light</p><p class="swatch__hex">#6E6860</p></div></article>
+            <article class="swatch"><div class="swatch__chip" style="background:#FFFFFF; border-bottom:1px solid #eee"></div><div class="swatch__meta"><p class="swatch__name">White</p><p class="swatch__hex">#FFFFFF</p></div></article>
+        </div>
+
+        <h2>New possible button colours</h2>
+        <p class="note">#Fle0d0 is not a valid hex value (L is not a hex digit). Shown below as the likely intended shade #F1E0D0.</p>
+        <div class="swatches">
+            <article class="swatch"><div class="swatch__chip" style="background:#F1E0D0"></div><div class="swatch__meta"><p class="swatch__name">Button option A</p><p class="swatch__hex">#F1E0D0 (from #Fle0d0)</p></div></article>
+            <article class="swatch"><div class="swatch__chip" style="background:#e4e0d8"></div><div class="swatch__meta"><p class="swatch__name">Button option B</p><p class="swatch__hex">#e4e0d8</p></div></article>
+            <article class="swatch"><div class="swatch__chip" style="background:#574B37"></div><div class="swatch__meta"><p class="swatch__name">Button option C</p><p class="swatch__hex">#574B37</p></div></article>
+        </div>
+        <div class="btns">
+            <span class="btn" style="background:#F1E0D0; color:#2C2C2C">Book an appointment</span>
+            <span class="btn" style="background:#e4e0d8; color:#2C2C2C">Book an appointment</span>
+            <span class="btn" style="background:#574B37; color:#fff">Book an appointment</span>
+        </div>
+
+        <h2>New possible section colours</h2>
+        <div class="swatches">
+            <article class="swatch"><div class="swatch__chip" style="background:#e4e0d8"></div><div class="swatch__meta"><p class="swatch__name">Section option A</p><p class="swatch__hex">#e4e0d8</p></div></article>
+            <article class="swatch"><div class="swatch__chip" style="background:#F0EFEA"></div><div class="swatch__meta"><p class="swatch__name">Section option B</p><p class="swatch__hex">#F0EFEA</p></div></article>
+            <article class="swatch"><div class="swatch__chip" style="background:#BFBFBF"></div><div class="swatch__meta"><p class="swatch__name">Section option C</p><p class="swatch__hex">#BFBFBF</p></div></article>
+            <article class="swatch"><div class="swatch__chip" style="background:#EAEAE9"></div><div class="swatch__meta"><p class="swatch__name">Section option D</p><p class="swatch__hex">#EAEAE9</p></div></article>
+        </div>
+        <div class="section-demo" style="background:#e4e0d8"><p>Section on #e4e0d8 — Creating beauty that is both effortless and enduring.</p></div>
+        <div class="section-demo" style="background:#F0EFEA"><p>Section on #F0EFEA — Creating beauty that is both effortless and enduring.</p></div>
+        <div class="section-demo" style="background:#BFBFBF"><p>Section on #BFBFBF — Creating beauty that is both effortless and enduring.</p></div>
+        <div class="section-demo" style="background:#EAEAE9"><p>Section on #EAEAE9 — Creating beauty that is both effortless and enduring.</p></div>
+
+        <h2>Current fonts</h2>
+        <div class="fonts">
+            <div class="font-card">
+                <h3>Cinzel — headings</h3>
+                <p class="sample-heading">JOJO &amp; FLO LONDON</p>
+            </div>
+            <div class="font-card">
+                <h3>Montserrat — section titles</h3>
+                <p class="sample-title">Jojo &amp; Flo<br>London</p>
+            </div>
+            <div class="font-card">
+                <h3>Source Serif 4 — body</h3>
+                <p class="sample-body">Precision cuts, classic styling, and modern grooming for the discerning gentleman.</p>
+            </div>
+        </div>
+
+        <h2>New possible font</h2>
+        <div class="fonts">
+            <div class="font-card">
+                <h3>Qwigley — handwriting</h3>
+                <p class="sample-script qwigley-regular">Price List</p>
+                <p class="sample-script qwigley-regular">Ladies’ Highlights</p>
+            </div>
+            <div class="font-card">
+                <h3>Grand Hotel — also loaded in the same Google Fonts request</h3>
+                <p class="sample-script-alt">Jojo &amp; Flo</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

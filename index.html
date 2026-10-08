@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JOJO &amp; FLO LONDON - Beautiful Hair Styling</title>
+    <title>JOJO &amp; FLO LONDON - London’s Leading Hair Stylist</title>
     <link rel="icon" href="logos/jojoflo-fav.png" type="image/png">
     <link rel="preload" as="image" fetchpriority="high" imagesrcset="imgs/Hero_01a-640w.avif 640w, imgs/Hero_01a-1280w.avif 1280w, imgs/Hero_01a.avif 2016w" imagesizes="100vw">
     <script>
@@ -14,7 +14,7 @@
     <!-- <link rel="stylesheet" href="https://use.typekit.net/YOUR_KIT_ID.css"> -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&family=Source+Serif+4:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Grand+Hotel&family=Montserrat:wght@300;400;500;600&family=Qwigley&family=Source+Serif+4:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/shop-pages.css">
     <link rel="stylesheet" href="assets/site-reveal.css">
     <style>
@@ -22,6 +22,7 @@
             --font-freight: 'freight-text-pro', 'Source Serif 4', Georgia, serif;
             --font-heading: 'Cinzel', Georgia, 'Times New Roman', serif;
             --font-section-title: 'Montserrat', 'Segoe UI', sans-serif;
+            --font-script: 'Qwigley', cursive;
             --primary-bg: #F9F7F2;
             --secondary-bg: #EFEBE4;
             --accent-color: #D6C6B3;
@@ -178,7 +179,9 @@
             z-index: 2;
         }
         .header-cart-btn,
-        .header-cart #paysynk-cart-launcher {
+        .header-cart #paysynk-cart-launcher,
+        .header-cart #paysynk-cart-launcher:focus,
+        .header-cart #paysynk-cart-launcher:focus-visible {
             position: static !important;
             right: auto !important;
             bottom: auto !important;
@@ -187,18 +190,13 @@
             letter-spacing: 1.5px;
             text-transform: uppercase;
             cursor: pointer;
-            border: 1px solid var(--text-dark);
+            border: none !important;
+            outline: none !important;
+            box-shadow: none !important;
             border-radius: 0;
-            background: #fff;
+            background: transparent !important;
             color: var(--text-dark);
             font-family: var(--font-freight);
-        }
-        .header-cart #paysynk-cart-launcher {
-            border: 1px solid var(--text-dark) !important;
-            border-radius: 0 !important;
-            background: #fff !important;
-            color: var(--text-dark) !important;
-            box-shadow: none !important;
         }
         .paysynk-add-btn {
             display: inline-block;
@@ -291,13 +289,14 @@
         }
         .hero-title {
             font-family: var(--font-section-title);
-            font-size: 84px;
+            font-size: 72px;
             font-weight: 300;
             letter-spacing: 1px;
             margin-bottom: 32px;
-            line-height: 1.2;
+            line-height: 1.15;
             text-shadow: 0 2px 20px rgba(0,0,0,0.3);
         }
+        .hero-title__place { display: block; }
         .visually-hidden {
             position: absolute;
             width: 1px;
@@ -722,6 +721,18 @@
             margin-bottom: 0;
             line-height: 1.6;
         }
+        .about-more {
+            display: inline-block;
+            font-family: var(--font-freight);
+            font-size: 13px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--text-dark);
+            border-bottom: 1px solid var(--text-dark);
+            padding-bottom: 2px;
+            margin: 4px 0 28px;
+        }
+        .about-more:hover { opacity: 0.7; }
         .about-us-actions {
             display: flex;
             flex-wrap: wrap;
@@ -810,13 +821,30 @@
             background-color: var(--white);
             text-align: center;
         }
-        .google-reviews .reviews-strip {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 40px;
-            flex-wrap: wrap;
+        .google-reviews .reviews-carousel {
+            position: relative;
+            max-width: 960px;
+            margin: 0 auto;
+            overflow: hidden;
         }
+        .google-reviews .reviews-viewport {
+            overflow: hidden;
+            width: 100%;
+        }
+        .google-reviews .reviews-track {
+            display: flex;
+            width: 200%;
+            transition: transform 0.55s ease;
+        }
+        .google-reviews .reviews-page {
+            width: 50%;
+            flex: 0 0 50%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            padding: 0 8px;
+        }
+        .google-reviews .review-card { min-width: 0; }
         .google-reviews .stars { color: #E8A317; font-size: 24px; margin-bottom: 12px; }
         .google-reviews .rating-text {
             font-family: var(--font-freight);
@@ -832,25 +860,81 @@
             margin-top: 8px;
             display: inline-block;
         }
+        .google-reviews .reviews-nav {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 28px;
+        }
+        .google-reviews .reviews-nav button {
+            width: 42px;
+            height: 42px;
+            border: 1px solid var(--text-dark);
+            background: transparent;
+            color: var(--text-dark);
+            cursor: pointer;
+            font-size: 18px;
+        }
+        .google-reviews .reviews-nav button:hover {
+            background: var(--text-dark);
+            color: #fff;
+        }
+        .google-reviews .reviews-dots {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 16px;
+        }
+        .google-reviews .reviews-dots button {
+            width: 8px;
+            height: 8px;
+            padding: 0;
+            border: none;
+            border-radius: 50%;
+            background: #d5cfc6;
+            cursor: pointer;
+        }
+        .google-reviews .reviews-dots button.is-active { background: var(--text-dark); }
 
-        /* Featured Products — PaySynk embeds */
+        /* Featured Products — brand categories */
         .featured-products { padding: 100px; background-color: var(--primary-bg); }
-        .featured-products .paysynk-embeds {
+        .featured-categories {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            grid-template-columns: repeat(3, 1fr);
             gap: 32px;
             max-width: 1100px;
             margin: 0 auto;
-            justify-items: center;
         }
-        .featured-products [data-paysynk-product] {
-            width: 100%;
-            max-width: 420px;
-        }
-        .featured-products .product-card {
+        .featured-category {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             background: var(--white);
+            padding: 40px 28px 36px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .featured-category:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 16px 32px rgba(0,0,0,0.06);
+        }
+        .featured-category img {
             width: 100%;
-            max-width: 420px;
+            max-width: 220px;
+            height: 120px;
+            object-fit: contain;
+            margin-bottom: 24px;
+        }
+        .featured-category h3 {
+            font-family: var(--font-section-title);
+            font-weight: 400;
+            font-size: 18px;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+        .featured-category p {
+            font-size: 14px;
+            color: var(--text-light);
         }
         .featured-products__actions {
             text-align: center;
@@ -858,12 +942,6 @@
         }
         .featured-products__shop-all {
             text-decoration: none;
-        }
-
-        .featured-products .product-image {
-            height: 340px;
-            object-fit: contain;
-            background: #faf8f5;
         }
 
         /* Brands */
@@ -1011,12 +1089,65 @@
             background-color: var(--secondary-bg);
             text-align: center;
         }
+        .pricelist .section-title {
+            font-family: var(--font-script);
+            font-size: 72px;
+            font-weight: 400;
+            letter-spacing: 0;
+            text-transform: none;
+        }
         .pricelist__container {
             position: relative;
-            max-width: 700px;
+            max-width: 920px;
             margin: 0 auto;
             overflow: hidden;
-            border-radius: 4px;
+            background: var(--white);
+        }
+        .pricelist-menu {
+            display: none;
+            text-align: left;
+            padding: 48px 40px 36px;
+        }
+        .pricelist__container.is-unlocked .pricelist-menu { display: block; }
+        .pricelist-menu__grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px 56px;
+        }
+        .pricelist-menu__col h3,
+        .pricelist-menu h3 {
+            font-family: var(--font-script);
+            font-size: 36px;
+            font-weight: 400;
+            color: #574B37;
+            margin: 8px 0 14px;
+            letter-spacing: 0;
+            text-transform: none;
+        }
+        .pricelist-menu__row {
+            display: flex;
+            justify-content: space-between;
+            gap: 16px;
+            padding: 6px 0;
+            font-size: 15px;
+            color: var(--text-dark);
+            border-bottom: 1px dotted #e4e0d8;
+        }
+        .pricelist-menu__row span:last-child {
+            color: var(--text-light);
+            white-space: nowrap;
+        }
+        .pricelist-menu__notes {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-top: 28px;
+            padding-top: 20px;
+            border-top: 1px solid #e4e0d8;
+            font-size: 13px;
+            color: var(--text-light);
+            font-style: italic;
+            text-align: center;
         }
         .pricelist__placeholder {
             width: 100%;
@@ -1251,14 +1382,22 @@
         }
 
         /* Mens Hair */
-        .mens-hair { padding: 120px 100px; background-color: var(--primary-bg); }
-        .mens-hair-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 60px; align-items: center; }
+        .mens-hair {
+            padding: 120px 100px;
+            background-color: var(--primary-bg);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
         .mens-hair-image {
             width: 100%;
-            height: 400px;
+            height: 450px;
             object-fit: cover;
+            object-position: center 20%;
             background-color: #f0f0f0;
         }
+        .mens-hair-content .section-title { text-align: left; margin-bottom: 20px; }
         .mens-hair-content p {
             font-family: var(--font-freight);
             font-size: 16px;
@@ -1386,7 +1525,7 @@
             }
             .services-grid { grid-template-columns: repeat(2, 1fr); }
             .retail-grid { grid-template-columns: repeat(2, 1fr); }
-            .featured-products .paysynk-embeds { grid-template-columns: 1fr; }
+            .featured-categories { grid-template-columns: 1fr; max-width: 420px; }
             .gallery-wrap { padding: 80px 60px; }
             .brands { padding: 80px 60px; }
             .brands-grid { gap: 40px 50px; }
@@ -1397,10 +1536,10 @@
             .about-us-image { height: 360px; }
             .weddings { grid-template-columns: 1fr; gap: 40px; }
             .weddings-image { order: -1; height: 350px; }
-            .mens-hair-grid { grid-template-columns: 1fr; }
-            .mens-hair-image { order: -1; height: 300px; }
+            .mens-hair { grid-template-columns: 1fr; gap: 40px; }
+            .mens-hair-image { order: -1; height: 350px; }
             .google-reviews { padding: 60px 40px; }
-            .google-reviews .reviews-strip { flex-direction: column; gap: 24px; }
+            .google-reviews .reviews-page { grid-template-columns: 1fr; gap: 28px; }
         }
 
         @media (max-width: 768px) {
@@ -1409,7 +1548,7 @@
             }
 
             .hero { height: 500px; }
-            .hero-title { font-size: 36px; }
+            .hero-title { font-size: 40px; }
             .hero-subtitle { font-size: 14px; letter-spacing: 2px; }
             .hero-btn { padding: 14px 28px; font-size: 12px; }
             .book-btn-sticky {
@@ -1463,16 +1602,20 @@
             .brand-logo img { max-width: 140px; }
             .services { padding: 60px 24px; }
             .pricelist { padding: 60px 24px; }
+            .pricelist .section-title { font-size: 52px; }
+            .pricelist-menu { padding: 28px 20px; }
+            .pricelist-menu__grid { grid-template-columns: 1fr; }
+            .pricelist-menu__notes { grid-template-columns: 1fr; }
             .pricelist__overlay-title { font-size: 20px; }
             .pricelist__overlay-desc { font-size: 14px; }
+            .google-reviews .reviews-page { grid-template-columns: 1fr; }
             .treatments { padding: 60px 24px; }
             .treatments-grid { grid-template-columns: 1fr; }
             .weddings { padding: 60px 24px; gap: 32px; }
             .weddings-image { height: 280px; }
             .weddings-content .section-title { text-align: center; }
-            .mens-hair { padding: 60px 24px; }
-            .mens-hair-grid { gap: 32px; }
-            .mens-hair-image { height: 250px; }
+            .mens-hair { padding: 60px 24px; gap: 32px; }
+            .mens-hair-image { height: 280px; }
             .mens-hair-content .section-title { text-align: center; }
             .discount-signup { padding: 80px 24px; }
             .discount-form { flex-direction: column; }
@@ -1537,8 +1680,8 @@
             <img class="hero__media" src="imgs/Hero_01a-1280w.webp" srcset="imgs/Hero_01a-640w.webp 640w, imgs/Hero_01a-1280w.webp 1280w, imgs/Hero_01a.webp 2016w" sizes="100vw" alt="" width="2016" height="1344" fetchpriority="high" decoding="async">
         </picture>
         <div class="hero-content">
-            <h2 class="hero-subtitle">London's Premier Hair Stylist</h2>
-            <h1 class="hero-title">Beautiful Hair Styling</h1>
+            <h2 class="hero-subtitle">London’s Leading Hair Stylist</h2>
+            <h1 class="hero-title">Jojo &amp; Flo<span class="hero-title__place">London</span></h1>
             <div class="search-btn-sticky" id="searchOpenBtn" role="search" aria-expanded="false" aria-label="Search products"><span class="search-btn-sticky__icon"><i class="ri-search-line"></i></span><span class="search-btn-sticky__field"><input type="search" class="search-btn-sticky__input" id="heroSearchInput" name="q" placeholder="Search products…" autocomplete="off"><button type="button" class="search-btn-sticky__submit" id="heroSearchSubmit">Go</button></span></div>
             <button type="button" class="hero-btn book-btn-sticky" id="bookOpenBtn" aria-haspopup="dialog" aria-controls="bookDialog" aria-expanded="false" aria-label="Book an appointment"><span class="book-btn-sticky__text"><span class="book-btn-sticky__word">Book</span><span class="book-btn-sticky__more">An Appointment</span></span></button>
         </div>
@@ -1561,8 +1704,8 @@
         <div class="about-us-content">
             <span class="section-tag">Who we are</span>
             <h2 class="section-title">About Us</h2>
-            <p>JOJO &amp; FLO LONDON is a boutique hair salon in Palmers Green, offering refined cutting, colouring, and styling in a calm, welcoming space. Our team combines technical expertise with a personal approach, so every visit feels tailored to you.</p>
-            <p>We work with leading professional brands including Kérastase, Davines, and Shu Uemura Art of Hair — available in-salon and to take home — and pride ourselves on honest advice, beautiful results, and service you will want to return to.</p>
+            <p>JOJO &amp; FLO was founded by sisters Joanna and Florie Yerou, two of the UK's leading hairdressers. With over 30 years of combined experience, they began their careers at the world-renowned John Frieda salon in London's Mayfair, progressing from apprentices to Senior Stylists before becoming educators at the John Frieda Training School.</p>
+            <a href="our-story.html" class="about-more">More</a>
             <div class="about-us-highlights">
                 <div class="about-us-highlight">
                     <h3>Expert team</h3>
@@ -1590,7 +1733,7 @@
 
     <section class="philosophy">
         <span class="section-tag">Our Philosophy</span>
-        <p class="philosophy-text">"Creating beauty that is both effortless and enduring. We believe in enhancing your natural elegance with masterful technique and personalized care."</p>
+        <p class="philosophy-text">"Creating beauty that is both effortless and enduring. We believe in enhancing your natural elegance with masterful technique and personalised care."</p>
     </section>
 
     <section class="as-seen-in">
@@ -1606,19 +1749,42 @@
     <section class="google-reviews" id="google-reviews">
         <span class="section-tag">Trusted by Our Clients</span>
         <h2 class="section-title" style="margin-bottom: 20px;">What Our Clients Say</h2>
-        <div class="reviews-strip">
-            <div>
-                <div class="stars"><i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i></div>
-                <p class="rating-text">"The level of care and expertise at Jojo & Flo is unmatched. I've never felt more confident with my hair."</p>
-                <a href="#" class="review-link">— Sarah J. on Google</a>
+        <div class="reviews-carousel" id="reviewsCarousel">
+            <div class="reviews-viewport">
+                <div class="reviews-track" id="reviewsTrack">
+                    <div class="reviews-page">
+                        <div class="review-card">
+                            <div class="stars"><i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i></div>
+                            <p class="rating-text">"The level of care and expertise at Jojo &amp; Flo is unmatched. I've never felt more confident with my hair."</p>
+                            <a href="#" class="review-link">— Sarah J. on Google</a>
+                        </div>
+                        <div class="review-card">
+                            <div class="stars"><i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i></div>
+                            <p class="rating-text">"Absolutely delightful experience from start to finish. Wouldn't go anywhere else."</p>
+                            <a href="#" class="review-link">— Emma M. on Google</a>
+                        </div>
+                    </div>
+                    <div class="reviews-page">
+                        <div class="review-card">
+                            <div class="stars"><i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i></div>
+                            <p class="rating-text">"Colour that actually lasts and still looks like me. The consultation was thorough and the result is beautiful."</p>
+                            <a href="#" class="review-link">— Priya K. on Google</a>
+                        </div>
+                        <div class="review-card">
+                            <div class="stars"><i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i></div>
+                            <p class="rating-text">"Best gents cut I've had in North London. Sharp, quick, and they listened to exactly what I wanted."</p>
+                            <a href="#" class="review-link">— James T. on Google</a>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div>
-                <div class="stars"><i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i></div>
-                <p class="rating-text">"Absolutely delightful experience from start to finish. Wouldn't go anywhere else."</p>
-                <a href="#" class="review-link">— Emma M. on Google</a>
+            <div class="reviews-nav">
+                <button type="button" id="reviewsPrev" aria-label="Previous reviews"><i class="ri-arrow-left-line"></i></button>
+                <button type="button" id="reviewsNext" aria-label="Next reviews"><i class="ri-arrow-right-line"></i></button>
             </div>
+            <div class="reviews-dots" id="reviewsDots"></div>
         </div>
-        <a href="#" class="review-link" style="margin-top: 32px;">Read more reviews on Google</a>
+        <a href="https://www.google.com/maps/search/?api=1&query=JOJO+%26+FLO+LONDON+310+Green+Lanes" class="review-link" style="margin-top: 32px;" target="_blank" rel="noopener">Read more reviews on Google</a>
     </section>
 
     <section class="featured-products" id="products">
@@ -1626,7 +1792,23 @@
             <h2 class="section-title">Featured Products</h2>
             <div class="section-tag" style="border-bottom-color: #D6C6B3; color: #B0A08C;">Premium Hair Care</div>
         </div>
-        <div class="paysynk-embeds" id="paysynkEmbeds" aria-live="polite"></div>
+        <div class="featured-categories">
+            <a href="brands/kerastase.html" class="featured-category">
+                <img src="logos/Kerastase-logo-500x281.png" alt="Kérastase">
+                <h3>Kérastase</h3>
+                <p>Luxury haircare, in salon and to take home.</p>
+            </a>
+            <a href="brands/davines.html" class="featured-category">
+                <img src="logos/davines.png" alt="Davines">
+                <h3>Davines</h3>
+                <p>Sustainable professional formulas.</p>
+            </a>
+            <a href="brands/shu-uemura.html" class="featured-category">
+                <img src="logos/shuuemura.png" alt="Shu Uemura Art of Hair">
+                <h3>Shu Uemura</h3>
+                <p>Art of Hair — colour, shine, and repair.</p>
+            </a>
+        </div>
         <p class="featured-products__actions">
             <a href="products.html" class="hero-btn featured-products__shop-all">Shop all products</a>
         </p>
@@ -1692,6 +1874,72 @@
                 <div class="pricelist__placeholder-line medium"></div>
                 <div class="pricelist__placeholder-line"></div>
                 <div class="pricelist__placeholder-line short"></div>
+            </div>
+            <div class="pricelist-menu" id="pricelistMenu">
+                <div class="pricelist-menu__grid">
+                    <div class="pricelist-menu__col">
+                        <h3>Ladies’ Highlights</h3>
+                        <div class="pricelist-menu__row"><span>Full Head</span><span>From £175.00</span></div>
+                        <div class="pricelist-menu__row"><span>Half Head</span><span>From £130.00</span></div>
+                        <div class="pricelist-menu__row"><span>T-Section/Parting</span><span>From £90.00</span></div>
+                        <div class="pricelist-menu__row"><span>Balayage with Highlights</span><span>From £200.00</span></div>
+                        <h3>Colour Menu</h3>
+                        <div class="pricelist-menu__row"><span>Root Tint</span><span>From £65.00</span></div>
+                        <div class="pricelist-menu__row"><span>Full Head</span><span>From £80.00</span></div>
+                        <div class="pricelist-menu__row"><span>Full Head Tint</span><span>From £85.00</span></div>
+                        <div class="pricelist-menu__row"><span>Roots/T-Section</span><span>From £75.00</span></div>
+                        <div class="pricelist-menu__row"><span>Root Colour &amp; Balayage</span><span>From £130.00</span></div>
+                        <div class="pricelist-menu__row"><span>Balayage Refresh</span><span>From £110.00</span></div>
+                        <h3>Colour Correction</h3>
+                        <div class="pricelist-menu__row"><span>Balayage</span><span>From £200.00 – £250.00</span></div>
+                        <div class="pricelist-menu__row"><span>Tint</span><span>From £150.00</span></div>
+                        <div class="pricelist-menu__row"><span>Correction/Colour Change (per hour)</span><span>From £150.00</span></div>
+                        <div class="pricelist-menu__row"><span>Bleach Bath/Toner</span><span>From £60.00</span></div>
+                        <div class="pricelist-menu__row"><span>Bleach</span><span>From £100.00</span></div>
+                        <h3>Express Services</h3>
+                        <div class="pricelist-menu__row"><span>Masking/Gloss</span><span>From £75.00</span></div>
+                        <h3>Consultations</h3>
+                        <div class="pricelist-menu__row"><span>Consultation</span><span>From £40.00</span></div>
+                    </div>
+                    <div class="pricelist-menu__col">
+                        <h3>Styling</h3>
+                        <div class="pricelist-menu__row"><span>Cut &amp; Blow Dry</span><span>From £75.00 – £110.00</span></div>
+                        <div class="pricelist-menu__row"><span>Blow Dry</span><span>From £40.00 – £60.00</span></div>
+                        <div class="pricelist-menu__row"><span>Fashion Styling</span><span>From £75.00</span></div>
+                        <div class="pricelist-menu__row"><span>Gents Cut</span><span>From £55.00 – £85.00</span></div>
+                        <div class="pricelist-menu__row"><span>Under 10s Cut</span><span>From £45.00 – £55.00</span></div>
+                        <div class="pricelist-menu__row"><span>Hair Up</span><span>From £75.00 – £110.00</span></div>
+                        <div class="pricelist-menu__row"><span>Brazilian Blow Dry</span><span>From £250.00</span></div>
+                        <div class="pricelist-menu__row"><span>Girls Cut</span><span>From £45.00 – £85.00</span></div>
+                        <div class="pricelist-menu__row"><span>Long Hair Dressing</span><span>From £55.00 – £85.00</span></div>
+                        <div class="pricelist-menu__row"><span>Hair Extensions</span><span>From £75.00 – £150.00</span></div>
+                        <h3>Parties</h3>
+                        <div class="pricelist-menu__row"><span>Gel Manicure</span><span>From £40.00</span></div>
+                        <div class="pricelist-menu__row"><span>Highlights</span><span>From £175.00</span></div>
+                        <div class="pricelist-menu__row"><span>Tint</span><span>From £85.00</span></div>
+                        <div class="pricelist-menu__row"><span>Hair Tip</span><span>From £100.00</span></div>
+                        <div class="pricelist-menu__row"><span>Creative Colour</span><span>From £100.00</span></div>
+                        <h3>Treatments</h3>
+                        <div class="pricelist-menu__row"><span>Hair Mask</span><span>From £25.00</span></div>
+                        <div class="pricelist-menu__row"><span>Perm</span><span>From £100.00</span></div>
+                        <div class="pricelist-menu__row"><span>Set</span><span>From £25.00</span></div>
+                        <div class="pricelist-menu__row"><span>Balayage</span><span>From £100.00</span></div>
+                        <div class="pricelist-menu__row"><span>Full Head</span><span>From £85.00</span></div>
+                        <div class="pricelist-menu__row"><span>T-Section</span><span>From £75.00</span></div>
+                        <div class="pricelist-menu__row"><span>Hair Tip</span><span>From £100.00</span></div>
+                        <div class="pricelist-menu__row"><span>Scalp Treatment</span><span>From £25.00</span></div>
+                        <div class="pricelist-menu__row"><span>Deep Condition</span><span>From £25.00</span></div>
+                        <div class="pricelist-menu__row"><span>Moisture Treatment</span><span>From £40.00</span></div>
+                        <div class="pricelist-menu__row"><span>Protein Conditioning</span><span>From £65.00</span></div>
+                        <div class="pricelist-menu__row"><span>Fibre/Bond Treatment</span><span>From £50.00</span></div>
+                        <div class="pricelist-menu__row"><span>Balayage/Root Refresh</span><span>From £85.00</span></div>
+                    </div>
+                </div>
+                <div class="pricelist-menu__notes">
+                    <p>All colour services include a complimentary consultation</p>
+                    <p>Prices may vary depending on hair length and thickness</p>
+                    <p>310 Green Lanes, Palmers Green, London N13 5TT</p>
+                </div>
             </div>
             <img alt="JOJO &amp; FLO LONDON Price List" class="pricelist__image" draggable="false" id="pricelistImage" style="display:none;">
             <div class="pricelist__overlay" id="pricelistOverlay">
@@ -1785,7 +2033,7 @@
     </section>
 
     <section class="weddings" id="weddings">
-        <img src="https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=2070&auto=format&fit=crop" alt="Bridal Hair Styling" class="weddings-image">
+        <img src="imgs/bridal-party.jpg" alt="Bridal party with styled hair" class="weddings-image">
         <div class="weddings-content">
             <span class="section-tag">Special Occasions</span>
             <h2 class="section-title">Wedding, events &amp; editorials</h2>
@@ -1795,13 +2043,13 @@
     </section>
 
     <section class="mens-hair" id="mens-hair">
+        <img src="imgs/mens-hair.jpg" alt="Men's haircut and styling" class="mens-hair-image">
         <div class="mens-hair-content">
             <span class="section-tag">For Him</span>
             <h2 class="section-title">Men's Hair</h2>
             <p>Precision cuts, classic styling, and modern grooming for the discerning gentleman. Our barbers and stylists deliver sharp, tailored looks that suit your lifestyle.</p>
             <button class="hero-btn">View Men's Services</button>
         </div>
-        <img src="https://images.unsplash.com/photo-1622286342621-4bd786c2447c?q=80&w=1200&auto=format&fit=crop" alt="Men's Haircut" class="mens-hair-image">
     </section>
 
     <section class="discount-signup" id="signup">
@@ -1894,16 +2142,57 @@
     <script src="assets/site-chrome.js"></script>
     <script>
         (function() {
-            var FEATURED_SLUGS = [
-                'shu-uemura-art-of-hair-ultimate-reset',
-                'shu-uemura-art-of-hair-izumi-tonic',
-                'kerastase-premiere-concentre-decalcifiant-ultra-reparateur-45ml'
-            ];
-
             PaySynkShop.enablePreviewCart();
             PaySynkShop.initHeaderCart();
             PaySynkShop.initMainStageReveal();
-            PaySynkShop.renderFeatured('#paysynkEmbeds', FEATURED_SLUGS);
+
+            (function initReviewsCarousel() {
+                var track = document.getElementById('reviewsTrack');
+                var prev = document.getElementById('reviewsPrev');
+                var next = document.getElementById('reviewsNext');
+                var dotsWrap = document.getElementById('reviewsDots');
+                if (!track) return;
+                var pages = track.querySelectorAll('.reviews-page').length;
+                var page = 0;
+                var timer = null;
+
+                function renderDots() {
+                    if (!dotsWrap) return;
+                    dotsWrap.innerHTML = '';
+                    for (var i = 0; i < pages; i++) {
+                        var b = document.createElement('button');
+                        b.type = 'button';
+                        b.setAttribute('aria-label', 'Show reviews ' + (i + 1));
+                        if (i === page) b.className = 'is-active';
+                        b.addEventListener('click', function (idx) {
+                            return function () { goTo(idx); };
+                        }(i));
+                        dotsWrap.appendChild(b);
+                    }
+                }
+
+                function goTo(i) {
+                    page = (i + pages) % pages;
+                    track.style.transform = 'translateX(' + (-page * 50) + '%)';
+                    if (dotsWrap) {
+                        var buttons = dotsWrap.querySelectorAll('button');
+                        buttons.forEach(function (btn, idx) {
+                            btn.classList.toggle('is-active', idx === page);
+                        });
+                    }
+                    resetTimer();
+                }
+
+                function resetTimer() {
+                    if (timer) clearInterval(timer);
+                    timer = setInterval(function () { goTo(page + 1); }, 8000);
+                }
+
+                if (prev) prev.addEventListener('click', function () { goTo(page - 1); });
+                if (next) next.addEventListener('click', function () { goTo(page + 1); });
+                renderDots();
+                resetTimer();
+            })();
 
             var menuBtn = document.getElementById('menuBtn');
             var menuIcon = menuBtn && menuBtn.querySelector('i');
@@ -2083,9 +2372,10 @@
             }
 
             function unlockPricelist(token) {
-                if (!plImage || !token) return;
-                plImage.src = '/api/pricelist-image?token=' + encodeURIComponent(token);
-                plImage.style.display = 'block';
+                if (!token) return;
+                if (plImage) {
+                    plImage.src = '/api/pricelist-image?token=' + encodeURIComponent(token);
+                }
                 if (plContainer) plContainer.classList.add('is-unlocked');
                 if (plActions) plActions.style.display = 'flex';
                 if (plDownload) {

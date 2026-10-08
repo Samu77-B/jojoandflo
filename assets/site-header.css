@@ -56,7 +56,9 @@ body.site-subpage {
 }
 
 .site-header .header-cart-btn,
-.site-header .header-cart #paysynk-cart-launcher {
+.site-header .header-cart #paysynk-cart-launcher,
+.site-header .header-cart #paysynk-cart-launcher:focus,
+.site-header .header-cart #paysynk-cart-launcher:focus-visible {
     position: static !important;
     right: auto !important;
     bottom: auto !important;
@@ -65,9 +67,10 @@ body.site-subpage {
     letter-spacing: 1.5px !important;
     text-transform: uppercase !important;
     cursor: pointer;
-    border: 1px solid var(--text-dark) !important;
+    border: none !important;
+    outline: none !important;
     border-radius: 0 !important;
-    background: #fff !important;
+    background: transparent !important;
     color: var(--text-dark) !important;
     font-family: var(--font-freight) !important;
     box-shadow: none !important;
