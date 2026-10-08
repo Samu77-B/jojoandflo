@@ -433,12 +433,44 @@
     }
 
     function initHeaderCart() {
+        function decorateCartLauncher(launcher) {
+            launcher.style.setProperty('position', 'relative', 'important');
+            launcher.style.setProperty('right', 'auto', 'important');
+            launcher.style.setProperty('bottom', 'auto', 'important');
+            launcher.style.setProperty('width', '40px', 'important');
+            launcher.style.setProperty('height', '40px', 'important');
+            launcher.style.setProperty('min-width', '40px', 'important');
+            launcher.style.setProperty('padding', '0', 'important');
+            launcher.style.setProperty('display', 'inline-flex', 'important');
+            launcher.style.setProperty('align-items', 'center', 'important');
+            launcher.style.setProperty('justify-content', 'center', 'important');
+            launcher.style.setProperty('font-size', '0', 'important');
+            launcher.style.setProperty('line-height', '0', 'important');
+            launcher.style.setProperty('border-radius', '0', 'important');
+            launcher.style.setProperty('box-shadow', 'none', 'important');
+            var text = '';
+            for (var i = 0; i < launcher.childNodes.length; i++) {
+                if (launcher.childNodes[i].nodeType === 3) text += launcher.childNodes[i].textContent || '';
+            }
+            if (!text) text = launcher.textContent || '';
+            var match = String(text).match(/(\d+)/);
+            if (match) launcher.setAttribute('data-count', match[1]);
+            else launcher.removeAttribute('data-count');
+            launcher.setAttribute('aria-label', match ? 'Open cart, ' + match[1] + ' items' : 'Open cart');
+            if (!launcher.querySelector('.header-cart-icon')) {
+                var icon = global.document.createElement('i');
+                icon.className = 'ri-shopping-bag-line header-cart-icon';
+                icon.setAttribute('aria-hidden', 'true');
+                launcher.insertBefore(icon, launcher.firstChild);
+            }
+        }
         function placePaysynkCart() {
             var launcher = global.document.getElementById('paysynk-cart-launcher');
             var slot = global.document.getElementById('headerCart');
             var nativeBtn = global.document.getElementById('headerCartBtn');
             if (launcher && slot && launcher.style.display !== 'none') {
                 if (launcher.parentNode !== slot) slot.appendChild(launcher);
+                decorateCartLauncher(launcher);
                 if (nativeBtn) nativeBtn.hidden = true;
                 return;
             }
@@ -446,7 +478,9 @@
         }
         placePaysynkCart();
         new global.MutationObserver(placePaysynkCart).observe(global.document.body, {
-            childList: true
+            childList: true,
+            subtree: true,
+            characterData: true
         });
         var headerCartBtn = global.document.getElementById('headerCartBtn');
         if (headerCartBtn) {

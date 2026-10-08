@@ -51,19 +51,24 @@ button.hero-btn,
     cursor: pointer;
     transition: all 0.3s ease;
 }
-/* PaySynk cart widget — no box / outline */
+/* PaySynk cart widget — square icon button in the header */
 .header-cart #paysynk-cart-launcher,
 .header-cart #paysynk-cart-launcher:focus,
 .header-cart #paysynk-cart-launcher:focus-visible,
 #paysynk-cart-launcher,
 #paysynk-cart-launcher:focus,
 #paysynk-cart-launcher:focus-visible {
+    width: 40px !important;
+    height: 40px !important;
+    min-width: 40px !important;
+    padding: 0 !important;
     border: none !important;
     outline: none !important;
     box-shadow: none !important;
-    background: transparent !important;
-    color: #2c2c2c !important;
+    background: #c5ad84 !important;
+    color: transparent !important;
     border-radius: 0 !important;
+    font-size: 0 !important;
 }
 
 /* If PaySynk product widgets are present, square their buttons too */
