@@ -51,6 +51,11 @@ button.hero-btn,
     cursor: pointer;
     transition: all 0.3s ease;
 }
+.header-cart-btn[hidden],
+.header-cart:has(#paysynk-cart-launcher) .header-cart-btn {
+    display: none !important;
+}
+
 /* PaySynk cart widget — square icon button in the header */
 .header-cart #paysynk-cart-launcher,
 .header-cart #paysynk-cart-launcher:focus,

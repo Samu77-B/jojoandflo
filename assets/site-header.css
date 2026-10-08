@@ -59,6 +59,11 @@ body.site-subpage {
     z-index: 2;
 }
 
+.site-header .header-cart-btn[hidden],
+.site-header .header-cart:has(#paysynk-cart-launcher) .header-cart-btn {
+    display: none !important;
+}
+
 .site-header .header-cart-btn,
 .site-header .header-cart #paysynk-cart-launcher,
 .site-header .header-cart #paysynk-cart-launcher:focus,

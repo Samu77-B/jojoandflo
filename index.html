@@ -184,6 +184,10 @@
             min-height: 40px;
             z-index: 2;
         }
+        .header-cart-btn[hidden],
+        .header-cart:has(#paysynk-cart-launcher) .header-cart-btn {
+            display: none !important;
+        }
         .header-cart-btn,
         .header-cart #paysynk-cart-launcher,
         .header-cart #paysynk-cart-launcher:focus,
