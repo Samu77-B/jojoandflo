@@ -340,15 +340,16 @@
             text-shadow: 0 2px 10px rgba(0,0,0,0.2);
         }
         .hero-title {
-            font-family: var(--font-section-title);
-            font-size: 72px;
-            font-weight: 300;
-            letter-spacing: 1px;
-            margin-bottom: 32px;
-            line-height: 1.15;
-            text-shadow: 0 2px 20px rgba(0,0,0,0.3);
+            margin: 0 0 32px;
+            line-height: 0;
         }
-        .hero-title__place { display: block; }
+        .hero-title__logo {
+            display: block;
+            width: min(90vw, 720px);
+            height: auto;
+            margin: 0 auto;
+            filter: drop-shadow(0 2px 20px rgba(0,0,0,0.3));
+        }
         .visually-hidden {
             position: absolute;
             width: 1px;
@@ -1601,7 +1602,7 @@
             .logo { height: 40px; padding: 0; }
 
             .hero { height: 500px; }
-            .hero-title { font-size: 40px; }
+            .hero-title__logo { width: min(86vw, 420px); }
             .hero-subtitle { font-size: 14px; letter-spacing: 2px; }
             .hero-btn { padding: 14px 28px; font-size: 12px; }
             .book-btn-sticky {
@@ -1734,7 +1735,7 @@
         </picture>
         <div class="hero-content">
             <h2 class="hero-subtitle">London’s Leading Hair Stylist</h2>
-            <h1 class="hero-title">Jojo &amp; Flo<span class="hero-title__place">London</span></h1>
+            <h1 class="hero-title"><img class="hero-title__logo" src="logos/jojoflo_logo-wht.png" alt="JOJO &amp; FLO London" width="1734" height="412"></h1>
             <div class="search-btn-sticky" id="searchOpenBtn" role="search" aria-expanded="false" aria-label="Search products"><span class="search-btn-sticky__icon"><i class="ri-search-line"></i></span><span class="search-btn-sticky__field"><input type="search" class="search-btn-sticky__input" id="heroSearchInput" name="q" placeholder="Search products…" autocomplete="off"><button type="button" class="search-btn-sticky__submit" id="heroSearchSubmit">Go</button></span></div>
             <button type="button" class="hero-btn book-btn-sticky" id="bookOpenBtn" aria-haspopup="dialog" aria-controls="bookDialog" aria-expanded="false" aria-label="Book an appointment"><span class="book-btn-sticky__text"><span class="book-btn-sticky__word">Book</span><span class="book-btn-sticky__more">An Appointment</span></span></button>
         </div>
