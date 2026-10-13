@@ -963,7 +963,8 @@
             flex-direction: column;
             align-items: center;
             background: var(--white);
-            padding: 40px 28px 36px;
+            padding: 0 0 32px;
+            overflow: hidden;
             text-align: center;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
@@ -973,9 +974,11 @@
         }
         .featured-category img {
             width: 100%;
-            max-width: 220px;
-            height: 120px;
-            object-fit: contain;
+            max-width: none;
+            height: auto;
+            aspect-ratio: 1 / 1;
+            object-fit: cover;
+            object-position: center;
             margin-bottom: 24px;
         }
         .featured-category h3 {
@@ -984,10 +987,12 @@
             font-size: 18px;
             letter-spacing: 1px;
             margin-bottom: 8px;
+            padding: 0 28px;
         }
         .featured-category p {
             font-size: 14px;
             color: var(--text-light);
+            padding: 0 28px;
         }
         .featured-products__actions {
             text-align: center;
@@ -1848,17 +1853,17 @@
         </div>
         <div class="featured-categories">
             <a href="brands/kerastase.html" class="featured-category">
-                <img src="logos/Kerastase-logo-500x281.png" alt="Kérastase">
+                <img src="imgs/featured-kerastase.jpg" alt="Kérastase Première haircare" width="800" height="800">
                 <h3>Kérastase</h3>
                 <p>Luxury haircare, in salon and to take home.</p>
             </a>
             <a href="brands/davines.html" class="featured-category">
-                <img src="logos/davines.png" alt="Davines">
+                <img src="imgs/featured-davines.jpg" alt="Davines Nounou haircare" width="800" height="799">
                 <h3>Davines</h3>
                 <p>Sustainable professional formulas.</p>
             </a>
             <a href="brands/shu-uemura.html" class="featured-category">
-                <img src="logos/shuuemura.png" alt="Shu Uemura Art of Hair">
+                <img src="imgs/featured-shu-uemura.jpg" alt="Shu Uemura Art of Hair Ultimate Reset" width="424" height="424">
                 <h3>Shu Uemura</h3>
                 <p>Art of Hair — colour, shine, and repair.</p>
             </a>
