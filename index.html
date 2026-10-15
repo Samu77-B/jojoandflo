@@ -1462,10 +1462,9 @@
         }
         .mens-hair-image {
             width: 100%;
-            height: 450px;
-            object-fit: cover;
-            object-position: center 20%;
-            background-color: #f0f0f0;
+            height: auto;
+            display: block;
+            object-fit: contain;
         }
         .mens-hair-content .section-title { text-align: left; margin-bottom: 20px; }
         .mens-hair-content p {
@@ -1607,7 +1606,7 @@
             .weddings { grid-template-columns: 1fr; gap: 40px; }
             .weddings-image { order: -1; height: 350px; }
             .mens-hair { grid-template-columns: 1fr; gap: 40px; }
-            .mens-hair-image { order: -1; height: 350px; }
+            .mens-hair-image { order: -1; }
             .vouchers { grid-template-columns: 1fr; gap: 40px; padding: 80px 60px; }
             .vouchers-image { order: -1; }
             .google-reviews { padding: 60px 40px; }
@@ -1689,7 +1688,6 @@
             .weddings-image { height: 280px; }
             .weddings-content .section-title { text-align: center; }
             .mens-hair { padding: 60px 24px; gap: 32px; }
-            .mens-hair-image { height: 280px; }
             .mens-hair-content .section-title { text-align: center; }
             .discount-signup { padding: 80px 24px; }
             .discount-form { flex-direction: column; }
@@ -2125,7 +2123,7 @@
     </section>
 
     <section class="mens-hair" id="mens-hair">
-        <img src="imgs/mens-hair.jpg" alt="Men's haircut and styling" class="mens-hair-image">
+        <img src="imgs/mens-hair2.png" alt="Men's haircut and styling" class="mens-hair-image" width="738" height="715" loading="lazy">
         <div class="mens-hair-content">
             <span class="section-tag">For Him</span>
             <h2 class="section-title">Men's Hair</h2>
