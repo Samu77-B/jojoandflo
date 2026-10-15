@@ -1366,35 +1366,6 @@
             opacity: 0.5;
             cursor: not-allowed;
         }
-        .pricelist__actions {
-            display: none;
-            margin-top: 24px;
-        }
-        .pricelist__container.is-unlocked ~ .pricelist__actions {
-            display: flex;
-            justify-content: center;
-            gap: 16px;
-        }
-        .pricelist__save-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 14px 28px;
-            background-color: #c5ad84;
-            color: var(--text-dark);
-            border: none;
-            border-radius: 0;
-            font-family: var(--font-freight);
-            font-size: 14px;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            text-decoration: none;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-        .pricelist__save-btn:hover {
-            background-color: #b39d6f;
-        }
         .pricelist__error {
             font-family: var(--font-freight);
             font-size: 13px;
@@ -1815,7 +1786,7 @@
                     <p>Skilled stylists and colourists for cuts, colour, treatments, and special-occasion hair.</p>
                 </div>
                 <div class="about-us-highlight">
-                    <h3>Premium products</h3>
+                    <h3>Luxury products</h3>
                     <p>Curated retail and in-salon care from brands we trust and use every day.</p>
                 </div>
                 <div class="about-us-highlight">
@@ -2067,9 +2038,6 @@
                     <p class="pricelist__error" id="pricelistError"></p>
                 </form>
             </div>
-        </div>
-        <div class="pricelist__actions" id="pricelistActions">
-            <a id="pricelistDownload" class="pricelist__save-btn" style="display:none;"><i class="ri-download-2-line"></i> Save Price List</a>
         </div>
     </section>
 
@@ -2477,9 +2445,7 @@
             var plEmailInput = document.getElementById('pricelistEmail');
             var plSubmitBtn = document.getElementById('pricelistSubmitBtn');
             var plError = document.getElementById('pricelistError');
-            var plActions = document.getElementById('pricelistActions');
             var plImage = document.getElementById('pricelistImage');
-            var plDownload = document.getElementById('pricelistDownload');
 
             function getPricelistToken() {
                 try { return localStorage.getItem('jf_pl_token') || ''; } catch(e) { return ''; }
@@ -2491,12 +2457,6 @@
                     plImage.src = '/api/pricelist-image?token=' + encodeURIComponent(token);
                 }
                 if (plContainer) plContainer.classList.add('is-unlocked');
-                if (plActions) plActions.style.display = 'flex';
-                if (plDownload) {
-                    plDownload.href = '/api/pricelist-image?token=' + encodeURIComponent(token) + '&dl=1';
-                    plDownload.setAttribute('download', 'JoJo-and-Flo-Price-List-Summer-2026.png');
-                    plDownload.style.display = 'inline-flex';
-                }
             }
 
             var existingToken = getPricelistToken();

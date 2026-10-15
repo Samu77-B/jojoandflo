@@ -16,11 +16,6 @@ export default function handler(req, res) {
 
     res.setHeader('Content-Type', 'image/png');
     res.setHeader('Cache-Control', 'private, max-age=3600');
-
-    if (req.query.dl === '1') {
-      res.setHeader('Content-Disposition', 'attachment; filename="JoJo-and-Flo-Price-List-Summer-2026.png"');
-    }
-
     res.status(200).send(imgBuffer);
   } catch (err) {
     console.error('Image serve error:', err);
