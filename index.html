@@ -1007,6 +1007,39 @@
             text-decoration: none;
         }
 
+        /* In-store vouchers */
+        .vouchers {
+            padding: 120px 100px;
+            background-color: var(--secondary-bg);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+        .vouchers-image {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 2752 / 1536;
+            object-fit: contain;
+            background-color: #f7f4ef;
+        }
+        .vouchers-content .section-title {
+            text-align: left;
+            margin-bottom: 20px;
+        }
+        .vouchers-content p {
+            font-family: var(--font-freight);
+            font-size: 16px;
+            color: var(--text-light);
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+        .vouchers-content .hero-btn {
+            display: inline-block;
+            text-decoration: none;
+            margin-top: 8px;
+        }
+
         /* Brands */
         .brands {
             padding: 100px 100px;
@@ -1604,6 +1637,8 @@
             .weddings-image { order: -1; height: 350px; }
             .mens-hair { grid-template-columns: 1fr; gap: 40px; }
             .mens-hair-image { order: -1; height: 350px; }
+            .vouchers { grid-template-columns: 1fr; gap: 40px; padding: 80px 60px; }
+            .vouchers-image { order: -1; }
             .google-reviews { padding: 60px 40px; }
             .google-reviews .reviews-page { grid-template-columns: 1fr; gap: 28px; }
         }
@@ -1662,6 +1697,8 @@
             .philosophy-desc { font-size: 14px; }
             .google-reviews { padding: 60px 24px; }
             .featured-products { padding: 60px 24px; }
+            .vouchers { padding: 60px 24px; gap: 32px; }
+            .vouchers-content .section-title { text-align: center; }
             .gallery-wrap { padding: 60px 24px; }
             .brands { padding: 60px 24px; }
             .brands-grid { gap: 32px; flex-direction: column; }
@@ -1770,7 +1807,7 @@
         <div class="about-us-content">
             <span class="section-tag">Who we are</span>
             <h2 class="section-title">About Us</h2>
-            <p>JOJO &amp; FLO was founded by sisters Joanna and Florie Yerou, two of the UK's leading hairdressers. With over 30 years of combined experience, they began their careers at the world-renowned John Frieda salon in London's Mayfair, progressing from apprentices to Senior Stylists before becoming educators at the John Frieda Training School.</p>
+            <p>JOJO &amp; FLO was founded by sisters Joanna and Florie Yerou, two of the UK's leading hairdressers. With over 30 years experience in the hairdressing industry Est. 25 Years ago they began their careers at the world-renowned John Frieda salon in London's Mayfair, progressing from apprentices to Senior Stylists before becoming educators at the John Frieda Training School.</p>
             <a href="our-story.html" class="about-more">More</a>
             <div class="about-us-highlights">
                 <div class="about-us-highlight">
@@ -1878,6 +1915,17 @@
         <p class="featured-products__actions">
             <a href="products.html" class="hero-btn featured-products__shop-all">Shop all products</a>
         </p>
+    </section>
+
+    <section class="vouchers" id="vouchers">
+        <div class="vouchers-content">
+            <span class="section-tag">Gifts</span>
+            <h2 class="section-title">Pick-up in store vouchers</h2>
+            <p>Treat someone special to JOJO &amp; FLO. Our gift vouchers can be redeemed on any product or service in salon, and are ready to collect from the desk at 310 Green Lanes, Palmers Green.</p>
+            <p>Choose a £5 or £10 voucher — or ask in salon if you would like a different amount. We will have it waiting for you to pick up on your next visit.</p>
+            <a href="#contact" class="hero-btn">Visit us to collect</a>
+        </div>
+        <img src="imgs/jojo&amp;flo-vouchers.jpg" alt="JOJO &amp; FLO LONDON £5 and £10 gift vouchers" class="vouchers-image" width="2752" height="1536" loading="lazy">
     </section>
 
     <section class="brands" id="brands">
