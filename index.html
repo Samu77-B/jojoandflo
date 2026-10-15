@@ -1069,6 +1069,7 @@
             align-items: stretch;
             background: #1a1a1a;
             min-height: 460px;
+            scroll-margin-top: 88px;
         }
         .christmas-image-slot {
             position: relative;
@@ -1088,13 +1089,20 @@
             justify-content: center;
         }
         .christmas-image-slot.has-image {
-            background: #1a1a1a;
+            background: #000;
         }
         .christmas-image {
             width: 100%;
             height: 100%;
             object-fit: cover;
             display: block;
+        }
+        .christmas-image--icon {
+            width: min(86%, 540px);
+            height: auto;
+            max-height: 380px;
+            object-fit: contain;
+            padding: 40px 32px 36px;
         }
         .christmas-image-slot__hint {
             text-align: center;
@@ -1939,9 +1947,8 @@
             <p>Secure your cut, colour, or party styling before the diary fills. Book online in a few clicks.</p>
             <a class="hero-btn" href="http://tinyurl.com/y6t4hlo3/" target="_blank" rel="noopener noreferrer">Book</a>
         </div>
-        <!-- Replace the slot below with your photo: imgs/christmas-bookings.jpg -->
-        <div class="christmas-image-slot">
-            <span class="christmas-image-slot__hint">Your image<br>imgs/christmas-bookings.jpg</span>
+        <div class="christmas-image-slot has-image">
+            <img src="imgs/xmas-icon.png" alt="Festive hair styling icons" class="christmas-image christmas-image--icon" width="613" height="476">
         </div>
     </section>
 
@@ -2020,7 +2027,7 @@
                 <p>Sustainable professional formulas.</p>
             </a>
             <a href="brands/shu-uemura.html" class="featured-category">
-                <img src="imgs/featured-shu-uemura.jpg" alt="Shu Uemura Art of Hair" width="800" height="600">
+                <img src="assets/site-products/Shu-Uemura-Prod-Image.png" alt="Shu Uemura Art of Hair" width="555" height="695">
                 <h3>Shu Uemura</h3>
                 <p class="featured-partnership">JOJO &amp; FLO Products partnership with Shu Uemura</p>
                 <p>Art of Hair — colour, shine, and repair.</p>
