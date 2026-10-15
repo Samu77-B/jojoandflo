@@ -4,7 +4,7 @@
 (function (global) {
     'use strict';
 
-    var BOOKING_URL = 'https://salonsynk.com/book/jojoandflo';
+    var BOOKING_URL = 'http://tinyurl.com/y6t4hlo3/';
     var boundMarker = 'data-site-chrome-bound';
 
     function getSiteRoots() {
@@ -103,9 +103,11 @@
             '<input type="search" class="search-btn-sticky__input" id="heroSearchInput" name="q" placeholder="Search products…" autocomplete="off">' +
             '<button type="button" class="search-btn-sticky__submit" id="heroSearchSubmit">Go</button>' +
             '</span></div>' +
-            '<button type="button" class="hero-btn book-btn-sticky" id="bookOpenBtn" aria-haspopup="dialog" aria-controls="bookDialog" aria-expanded="false" aria-label="Book an appointment">' +
+            '<a class="hero-btn book-btn-sticky" id="bookOpenBtn" href="' +
+            BOOKING_URL +
+            '" target="_blank" rel="noopener noreferrer" aria-expanded="false" aria-label="Book an appointment">' +
             '<span class="book-btn-sticky__text"><span class="book-btn-sticky__word">Book</span><span class="book-btn-sticky__more">An Appointment</span></span>' +
-            '</button>'
+            '</a>'
         );
     }
 
@@ -169,63 +171,34 @@
     }
 
     function initBooking() {
-        var bookDialog = global.document.getElementById('bookDialog');
-        var bookFrame = global.document.getElementById('bookFrame');
         var bookOpenBtn = global.document.getElementById('bookOpenBtn');
-        var bookCloseBtn = global.document.getElementById('bookCloseBtn');
         if (!bookOpenBtn || bookOpenBtn.getAttribute(boundMarker) === '1') return;
         bookOpenBtn.setAttribute(boundMarker, '1');
+        bookOpenBtn.setAttribute('href', BOOKING_URL);
+        bookOpenBtn.setAttribute('target', '_blank');
+        bookOpenBtn.setAttribute('rel', 'noopener noreferrer');
+        bookOpenBtn.removeAttribute('aria-haspopup');
+        bookOpenBtn.removeAttribute('aria-controls');
 
-        if (bookDialog && typeof bookDialog.showModal === 'function') {
-            var bookingUrl = bookFrame && bookFrame.getAttribute('data-src');
-            function collapseBookBtn() {
-                bookOpenBtn.classList.remove('is-expanded');
-                bookOpenBtn.setAttribute('aria-expanded', 'false');
-            }
-            function expandBookBtn() {
+        bookOpenBtn.addEventListener('click', function (e) {
+            e.stopPropagation();
+            if (!bookOpenBtn.classList.contains('is-expanded')) {
+                e.preventDefault();
                 bookOpenBtn.classList.add('is-expanded');
                 bookOpenBtn.setAttribute('aria-expanded', 'true');
+                return;
             }
-            bookOpenBtn.addEventListener('click', function (e) {
-                e.stopPropagation();
-                if (!bookOpenBtn.classList.contains('is-expanded')) {
-                    expandBookBtn();
-                    return;
-                }
-                if (bookFrame && bookingUrl && !bookFrame.getAttribute('src')) {
-                    bookFrame.setAttribute('src', bookingUrl);
-                }
-                bookDialog.showModal();
-            });
-            global.document.addEventListener('click', function (e) {
-                if (!bookOpenBtn.classList.contains('is-expanded')) return;
-                if (bookOpenBtn.contains(e.target)) return;
-                if (bookDialog.open) return;
-                collapseBookBtn();
-            });
-            bookDialog.addEventListener('close', collapseBookBtn);
-            if (bookCloseBtn) {
-                bookCloseBtn.addEventListener('click', function () {
-                    bookDialog.close();
-                });
+            if (bookOpenBtn.tagName !== 'A') {
+                e.preventDefault();
+                global.open(BOOKING_URL, '_blank', 'noopener,noreferrer');
             }
-        } else {
-            bookOpenBtn.addEventListener('click', function (e) {
-                e.stopPropagation();
-                if (!bookOpenBtn.classList.contains('is-expanded')) {
-                    bookOpenBtn.classList.add('is-expanded');
-                    bookOpenBtn.setAttribute('aria-expanded', 'true');
-                    return;
-                }
-                global.open(BOOKING_URL, 'salonBooking', 'width=520,height=760,scrollbars=yes,resizable=yes');
-            });
-            global.document.addEventListener('click', function (e) {
-                if (!bookOpenBtn.classList.contains('is-expanded')) return;
-                if (bookOpenBtn.contains(e.target)) return;
-                bookOpenBtn.classList.remove('is-expanded');
-                bookOpenBtn.setAttribute('aria-expanded', 'false');
-            });
-        }
+        });
+        global.document.addEventListener('click', function (e) {
+            if (!bookOpenBtn.classList.contains('is-expanded')) return;
+            if (bookOpenBtn.contains(e.target)) return;
+            bookOpenBtn.classList.remove('is-expanded');
+            bookOpenBtn.setAttribute('aria-expanded', 'false');
+        });
     }
 
     function initSearch(homeRoot) {

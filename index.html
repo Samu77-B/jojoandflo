@@ -486,6 +486,8 @@
             text-align: left;
             overflow: hidden;
             border-radius: 0;
+            text-decoration: none;
+            color: #fff;
             transition:
                 max-width 1.6s cubic-bezier(0.4, 0, 0.2, 1),
                 padding 1.6s cubic-bezier(0.4, 0, 0.2, 1),
@@ -524,6 +526,9 @@
             transition:
                 max-width 1.6s cubic-bezier(0.32, 0.72, 0, 1),
                 opacity 1.1s ease 0.18s;
+        }
+        .book-btn-sticky:visited {
+            color: #fff;
         }
         .book-btn-sticky:hover {
             background-color: #222;
@@ -1742,7 +1747,7 @@
             <h2 class="hero-subtitle">London’s Leading Hair Stylist</h2>
             <h1 class="hero-title"><img class="hero-title__logo" src="logos/jojoflo_logo-wht-nw.png" alt="JOJO &amp; FLO London" width="1733" height="411"></h1>
             <div class="search-btn-sticky" id="searchOpenBtn" role="search" aria-expanded="false" aria-label="Search products"><span class="search-btn-sticky__icon"><i class="ri-search-line"></i></span><span class="search-btn-sticky__field"><input type="search" class="search-btn-sticky__input" id="heroSearchInput" name="q" placeholder="Search products…" autocomplete="off"><button type="button" class="search-btn-sticky__submit" id="heroSearchSubmit">Go</button></span></div>
-            <button type="button" class="hero-btn book-btn-sticky" id="bookOpenBtn" aria-haspopup="dialog" aria-controls="bookDialog" aria-expanded="false" aria-label="Book an appointment"><span class="book-btn-sticky__text"><span class="book-btn-sticky__word">Book</span><span class="book-btn-sticky__more">An Appointment</span></span></button>
+            <a class="hero-btn book-btn-sticky" id="bookOpenBtn" href="http://tinyurl.com/y6t4hlo3/" target="_blank" rel="noopener noreferrer" aria-expanded="false" aria-label="Book an appointment"><span class="book-btn-sticky__text"><span class="book-btn-sticky__word">Book</span><span class="book-btn-sticky__more">An Appointment</span></span></a>
         </div>
     </section>
 
@@ -2188,11 +2193,11 @@
                 class="book-dialog__frame"
                 title="Book at JoJo &amp; Flo — SalonSynk"
                 loading="lazy"
-                data-src="https://salonsynk.com/book/jojoandflo"
+                data-src="http://tinyurl.com/y6t4hlo3/"
             ></iframe>
         </div>
         <p class="book-dialog__hint">
-            If the form does not load here (some networks block embeds), <a href="https://salonsynk.com/book/jojoandflo" target="_blank" rel="noopener noreferrer">open booking in a new tab</a>.
+            If the form does not load here (some networks block embeds), <a href="http://tinyurl.com/y6t4hlo3/" target="_blank" rel="noopener noreferrer">open booking in a new tab</a>.
         </p>
     </dialog>
 
