@@ -83,8 +83,23 @@
     background: #faf8f5;
 }
 .product-search-results__grid .product-info {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
     padding: 20px;
     text-align: center;
+}
+.product-search-results__grid .product-detail-link {
+    display: block;
+    width: 100%;
+    margin: 0 0 10px;
+}
+.product-search-results__grid .paysynk-add-btn {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 14px 20px;
+    white-space: nowrap;
 }
 .product-search-results__empty {
     text-align: center;

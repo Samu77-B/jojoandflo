@@ -37,10 +37,23 @@ button.hero-btn,
     color: #fff;
     border-color: #2C2C2C;
 }
-.paysynk-add-btn {
-    display: inline-block;
+.product-info {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+.product-detail-link {
+    display: block;
+    width: 100%;
+    text-align: center;
+    margin: 0 0 10px;
+}
+button.hero-btn.paysynk-add-btn {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
     margin-top: 14px;
-    padding: 18px 45px;
+    padding: 14px 20px;
     background-color: #c5ad84;
     color: #2C2C2C;
     font-size: 14px;
@@ -50,6 +63,7 @@ button.hero-btn,
     border-radius: 0;
     cursor: pointer;
     transition: all 0.3s ease;
+    white-space: nowrap;
 }
 .header-cart-btn[hidden],
 .header-cart:has(#paysynk-cart-launcher) .header-cart-btn {

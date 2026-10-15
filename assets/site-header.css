@@ -167,7 +167,8 @@ body.site-subpage {
     opacity: 1;
     transform: translateY(0);
     pointer-events: auto;
-    max-height: 480px;
+    max-height: min(70vh, 640px);
+    overflow-y: auto;
     padding-top: 24px;
     padding-bottom: 24px;
     border-bottom-color: #efebe4;
