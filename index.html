@@ -17,6 +17,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Grand+Hotel&family=Montserrat:wght@300;400;500;600&family=Qwigley&family=Source+Serif+4:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/shop-pages.css">
     <link rel="stylesheet" href="assets/site-reveal.css">
+    <link rel="stylesheet" href="assets/site-chrome.css">
     <style>
         :root {
             --font-freight: 'freight-text-pro', 'Source Serif 4', Georgia, serif;
@@ -1052,6 +1053,89 @@
             margin-top: 8px;
         }
 
+        .featured-category p.featured-partnership {
+            font-size: 11px;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: #B0A08C;
+            padding: 0 24px;
+            margin-bottom: 8px;
+            line-height: 1.5;
+        }
+
+        .christmas {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: stretch;
+            background: #1a1a1a;
+            min-height: 460px;
+        }
+        .christmas-image-slot {
+            position: relative;
+            min-height: 420px;
+            background:
+                linear-gradient(180deg, rgba(197, 173, 132, 0.08), rgba(197, 173, 132, 0.02)),
+                repeating-linear-gradient(
+                    -45deg,
+                    rgba(255, 255, 255, 0.03),
+                    rgba(255, 255, 255, 0.03) 12px,
+                    transparent 12px,
+                    transparent 24px
+                ),
+                #242424;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .christmas-image-slot.has-image {
+            background: #1a1a1a;
+        }
+        .christmas-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        .christmas-image-slot__hint {
+            text-align: center;
+            color: rgba(197, 173, 132, 0.85);
+            font-family: var(--font-section-title);
+            font-size: 12px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            padding: 24px;
+            border: 1px solid rgba(197, 173, 132, 0.35);
+        }
+        .christmas-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 80px 72px;
+        }
+        .christmas-content .section-tag {
+            align-self: flex-start;
+            color: #c5ad84;
+            border-bottom-color: #c5ad84;
+        }
+        .christmas-content .section-title {
+            text-align: left;
+            color: #f4efe8;
+            margin-bottom: 20px;
+        }
+        .christmas-content p {
+            font-family: var(--font-freight);
+            font-size: 17px;
+            color: rgba(244, 239, 232, 0.72);
+            line-height: 1.8;
+            margin-bottom: 28px;
+            max-width: 420px;
+        }
+        .christmas-content .hero-btn {
+            display: inline-block;
+            width: fit-content;
+            text-decoration: none;
+        }
+
         /* Brands */
         .brands {
             padding: 100px 100px;
@@ -1621,6 +1705,9 @@
             .mens-hair-image { order: -1; }
             .vouchers { grid-template-columns: 1fr; gap: 40px; padding: 80px 60px; }
             .vouchers-image { order: -1; }
+            .christmas { grid-template-columns: 1fr; }
+            .christmas-image-slot { min-height: 280px; order: -1; }
+            .christmas-content { padding: 56px 60px; }
             .google-reviews { padding: 60px 40px; }
             .google-reviews .reviews-page { grid-template-columns: 1fr; gap: 28px; }
         }
@@ -1681,6 +1768,10 @@
             .featured-products { padding: 60px 24px; }
             .vouchers { padding: 60px 24px; gap: 32px; }
             .vouchers-content .section-title { text-align: center; }
+            .christmas-content { padding: 48px 24px 64px; }
+            .christmas-content .section-title { text-align: center; }
+            .christmas-content p { margin-left: auto; margin-right: auto; text-align: center; }
+            .christmas-content .hero-btn { margin: 0 auto; }
             .gallery-wrap { padding: 60px 24px; }
             .brands { padding: 60px 24px; }
             .brands-grid { gap: 32px; flex-direction: column; }
@@ -1814,6 +1905,19 @@
         </div>
     </section>
 
+    <section class="christmas" id="christmas-bookings">
+        <div class="christmas-content">
+            <span class="section-tag">Festive season</span>
+            <h2 class="section-title">We are now taking Christmas bookings</h2>
+            <p>Secure your cut, colour, or party styling before the diary fills. Book online in a few clicks.</p>
+            <a class="hero-btn" href="http://tinyurl.com/y6t4hlo3/" target="_blank" rel="noopener noreferrer">Book</a>
+        </div>
+        <!-- Replace the slot below with your photo: imgs/christmas-bookings.jpg -->
+        <div class="christmas-image-slot">
+            <span class="christmas-image-slot__hint">Your image<br>imgs/christmas-bookings.jpg</span>
+        </div>
+    </section>
+
     <section class="philosophy">
         <span class="section-tag">Our Philosophy</span>
         <p class="philosophy-text">"Creating beauty that is both effortless and enduring. We believe in enhancing your natural elegance with masterful technique and personalised care."</p>
@@ -1879,16 +1983,19 @@
             <a href="brands/kerastase.html" class="featured-category">
                 <img src="imgs/featured-kerastase.jpg" alt="Kérastase Première haircare" width="800" height="800">
                 <h3>Kérastase</h3>
+                <p class="featured-partnership">JOJO &amp; FLO Products partnership with Kérastase</p>
                 <p>Luxury haircare, in salon and to take home.</p>
             </a>
             <a href="brands/davines.html" class="featured-category">
                 <img src="imgs/featured-davines.jpg" alt="Davines Nounou haircare" width="800" height="799">
                 <h3>Davines</h3>
+                <p class="featured-partnership">JOJO &amp; FLO Products partnership with Davines</p>
                 <p>Sustainable professional formulas.</p>
             </a>
             <a href="brands/shu-uemura.html" class="featured-category">
                 <img src="imgs/featured-shu-uemura.jpg" alt="Shu Uemura Art of Hair" width="800" height="600">
                 <h3>Shu Uemura</h3>
+                <p class="featured-partnership">JOJO &amp; FLO Products partnership with Shu Uemura</p>
                 <p>Art of Hair — colour, shine, and repair.</p>
             </a>
         </div>
@@ -2153,6 +2260,7 @@
         </form>
     </section>
 
+    <!-- Site designed and built by Paradigm Studio — https://paradigmstudio.net -->
     <footer id="contact">
         <div class="footer-content">
             <div class="footer-column" style="flex: 1.5; padding-right: 50px;">
@@ -2179,6 +2287,7 @@
                     <li><a href="https://maps.google.com/?q=310+Green+Lanes+London+N13+5TT" target="_blank" rel="noopener">310 Green Lanes, London N13 5TT</a></li>
                     <li><a href="tel:+442088826400">020 8882 6400</a></li>
                     <li><a href="mailto:hello@jojoandflo.com">hello@jojoandflo.com</a></li>
+                    <li><a href="mailto:recruitingthebest@jojoandflow.com">recruitingthebest@jojoandflow.com</a></li>
                 </ul>
             </div>
             <div class="footer-column">
@@ -2197,7 +2306,11 @@
         <div class="footer-bottom">
             <div>
                 <p>&copy; 2025 JOJO & FLO LONDON. All Rights Reserved.</p>
-                <p class="footer-credit">Website by <a href="https://paradigmstudio.net" target="_blank" rel="noopener">paradigmstudio.net</a></p>
+                <p class="footer-legal">
+                    <a href="terms.html">Terms</a>
+                    <a href="privacy.html">Privacy</a>
+                    <a href="offers.html">Offers &amp; Events</a>
+                </p>
             </div>
             <div class="social-icons">
                 <a href="#"><i class="ri-facebook-circle-fill"></i></a>

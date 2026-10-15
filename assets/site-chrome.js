@@ -1,5 +1,6 @@
 /**
  * Shared footer, sticky book/search controls, and booking dialog for all site pages.
+ * Designed and built by Paradigm Studio — https://paradigmstudio.net
  */
 (function (global) {
     'use strict';
@@ -55,6 +56,7 @@
             '<li><a href="https://maps.google.com/?q=310+Green+Lanes+London+N13+5TT" target="_blank" rel="noopener">310 Green Lanes, London N13 5TT</a></li>' +
             '<li><a href="tel:+442088826400">020 8882 6400</a></li>' +
             '<li><a href="mailto:hello@jojoandflo.com">hello@jojoandflo.com</a></li>' +
+            '<li><a href="mailto:recruitingthebest@jojoandflow.com">recruitingthebest@jojoandflow.com</a></li>' +
             '</ul></div>' +
             '<div class="footer-column">' +
             '<h4 class="footer-heading">Hours</h4>' +
@@ -70,7 +72,11 @@
             '<div class="footer-bottom">' +
             '<div>' +
             '<p>&copy; 2025 JOJO &amp; FLO LONDON. All Rights Reserved.</p>' +
-            '<p class="footer-credit">Website by <a href="https://paradigmstudio.net" target="_blank" rel="noopener">paradigmstudio.net</a></p>' +
+            '<p class="footer-legal">' +
+            '<a href="' + home + 'terms.html">Terms</a>' +
+            '<a href="' + home + 'privacy.html">Privacy</a>' +
+            '<a href="' + home + 'offers.html">Offers &amp; Events</a>' +
+            '</p>' +
             '</div>' +
             '<div class="social-icons">' +
             '<a href="#" aria-label="Facebook"><i class="ri-facebook-circle-fill"></i></a>' +
@@ -145,6 +151,14 @@
         while (tpl.firstChild) global.document.body.appendChild(tpl.firstChild);
     }
 
+    function footerLegalHtml(home) {
+        return (
+            '<a href="' + home + 'terms.html">Terms</a>' +
+            '<a href="' + home + 'privacy.html">Privacy</a>' +
+            '<a href="' + home + 'offers.html">Offers &amp; Events</a>'
+        );
+    }
+
     function ensureFooter(homeRoot) {
         var footer = global.document.querySelector('footer');
         if (!footer) {
@@ -153,9 +167,25 @@
         }
         footer.id = 'contact';
         footer.classList.add('site-footer');
+        footer.setAttribute('data-studio', 'Paradigm Studio — https://paradigmstudio.net');
         if (!footer.querySelector('.footer-content')) {
             footer.innerHTML = footerHtml(homeRoot);
         }
+        ensureFooterLegal(homeRoot);
+    }
+
+    function ensureFooterLegal(homeRoot) {
+        var bottom = global.document.querySelector('.footer-bottom > div');
+        if (!bottom) return;
+        var legal = bottom.querySelector('.footer-legal');
+        if (!legal) {
+            legal = global.document.createElement('p');
+            legal.className = 'footer-legal';
+            var credit = bottom.querySelector('.footer-credit');
+            if (credit) bottom.insertBefore(legal, credit);
+            else bottom.appendChild(legal);
+        }
+        legal.innerHTML = footerLegalHtml(homeRoot);
     }
 
     function ensureWidgets() {
@@ -311,12 +341,54 @@
         }
     }
 
+    function cookieBarHtml(home) {
+        return (
+            '<div class="cookie-bar" id="cookieBar" hidden role="dialog" aria-label="Cookie consent">' +
+            '<p class="cookie-bar__text">We use cookies to run the site and remember your preferences. ' +
+            '<a href="' + home + 'privacy.html">Privacy</a></p>' +
+            '<div class="cookie-bar__actions">' +
+            '<button type="button" class="cookie-bar__btn cookie-bar__btn--ghost" id="cookieReject">Essential only</button>' +
+            '<button type="button" class="cookie-bar__btn cookie-bar__btn--solid" id="cookieAccept">Accept</button>' +
+            '</div></div>'
+        );
+    }
+
+    function setCookieConsent(value) {
+        try {
+            global.localStorage.setItem('jf_cookie_consent', value);
+        } catch (e) {}
+        var bar = global.document.getElementById('cookieBar');
+        if (bar) bar.hidden = true;
+        global.document.body.classList.remove('cookie-bar-visible');
+    }
+
+    function initCookieBar(homeRoot) {
+        var existing = '';
+        try {
+            existing = global.localStorage.getItem('jf_cookie_consent') || '';
+        } catch (e) {}
+        if (existing === 'accepted' || existing === 'essential') return;
+
+        if (!global.document.getElementById('cookieBar')) {
+            appendHtmlToBody(cookieBarHtml(homeRoot));
+        }
+        var bar = global.document.getElementById('cookieBar');
+        var accept = global.document.getElementById('cookieAccept');
+        var reject = global.document.getElementById('cookieReject');
+        if (!bar) return;
+        bar.hidden = false;
+        global.document.body.classList.add('cookie-bar-visible');
+        if (accept) accept.addEventListener('click', function () { setCookieConsent('accepted'); });
+        if (reject) reject.addEventListener('click', function () { setCookieConsent('essential'); });
+    }
+
     function initSiteChrome() {
         var roots = getSiteRoots();
         ensureFooter(roots.homeRoot);
         ensureWidgets();
         initBooking();
         initSearch(roots.homeRoot);
+        initCookieBar(roots.homeRoot);
     }
 
     global.SiteChrome = { init: initSiteChrome, getSiteRoots: getSiteRoots };
