@@ -1707,7 +1707,29 @@
             .vouchers-image { order: -1; }
             .christmas { grid-template-columns: 1fr; }
             .christmas-image-slot { min-height: 280px; order: -1; }
-            .christmas-content { padding: 56px 60px; }
+            .christmas-content { padding: 56px 60px; align-items: center; }
+            .vouchers-content,
+            .weddings-content,
+            .mens-hair-content,
+            .christmas-content {
+                text-align: center;
+            }
+            .vouchers-content .section-title,
+            .weddings-content .section-title,
+            .mens-hair-content .section-title,
+            .christmas-content .section-title {
+                text-align: center;
+            }
+            .christmas-content .section-tag { align-self: center; }
+            .christmas-content p { margin-left: auto; margin-right: auto; }
+            .vouchers-content .hero-btn,
+            .weddings-content .hero-btn,
+            .mens-hair-content .hero-btn,
+            .christmas-content .hero-btn {
+                display: inline-block;
+                margin-left: auto;
+                margin-right: auto;
+            }
             .google-reviews { padding: 60px 40px; }
             .google-reviews .reviews-page { grid-template-columns: 1fr; gap: 28px; }
         }
@@ -1757,7 +1779,6 @@
             .about-us-image { height: 280px; order: -1; }
             .about-us-content .section-title { text-align: center; }
             .about-us-highlights { grid-template-columns: 1fr; gap: 20px; }
-            .about-us-actions { justify-content: center; }
             .philosophy { padding: 60px 24px; }
             .as-seen-in { padding: 48px 24px; }
             .as-seen-in__logos { gap: 32px; }
@@ -1772,6 +1793,12 @@
             .christmas-content .section-title { text-align: center; }
             .christmas-content p { margin-left: auto; margin-right: auto; text-align: center; }
             .christmas-content .hero-btn { margin: 0 auto; }
+            .about-us-content { text-align: center; }
+            .about-us-actions {
+                justify-content: center;
+                flex-direction: column;
+                align-items: center;
+            }
             .gallery-wrap { padding: 60px 24px; }
             .brands { padding: 60px 24px; }
             .brands-grid { gap: 32px; flex-direction: column; }

@@ -159,3 +159,16 @@
     margin-top: 8px;
     text-decoration: none;
 }
+
+@media (max-width: 768px) {
+    .waiver-card .hero-btn,
+    .info-main a.hero-btn,
+    .info-main a.recruit-cta {
+        display: block;
+        width: fit-content;
+        max-width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+    }
+}

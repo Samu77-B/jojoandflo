@@ -564,8 +564,11 @@ body.cookie-bar-visible .search-btn-sticky {
         gap: 10px;
         padding: 12px 16px calc(12px + env(safe-area-inset-bottom, 0px));
     }
+    .cookie-bar__text {
+        text-align: center;
+    }
     .cookie-bar__actions {
-        justify-content: flex-end;
+        justify-content: center;
     }
     body.cookie-bar-visible {
         padding-bottom: calc(150px + env(safe-area-inset-bottom, 0px));
