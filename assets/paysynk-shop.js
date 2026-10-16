@@ -158,6 +158,12 @@
             priceMinor > 0 ? formatMoney(priceMinor, currency) : 'Price on enquiry';
         info.appendChild(name);
         info.appendChild(price);
+        if (options.showDescription && p.description) {
+            var desc = document.createElement('p');
+            desc.className = 'product-description';
+            desc.textContent = p.description;
+            info.appendChild(desc);
+        }
         if (options.linkToProductPage && p.slug) {
             var detailPrefix = options.productDetailHref || 'product.html?slug=';
             var detail = document.createElement('a');
@@ -371,7 +377,11 @@
             if (!p) return null;
             slot.innerHTML = '';
             var el = createProductSlot(slug);
-            paintProductCard(el, p, { revealIndex: 0, revealBaseDelay: 40 });
+            paintProductCard(el, p, {
+                showDescription: true,
+                revealIndex: 0,
+                revealBaseDelay: 40
+            });
             slot.appendChild(el);
             return p;
         });
