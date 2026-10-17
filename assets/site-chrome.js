@@ -77,6 +77,7 @@
             '<a href="' + home + 'privacy.html">Privacy</a>' +
             '<a href="' + home + 'offers.html">Offers &amp; Events</a>' +
             '</p>' +
+            '<p class="footer-credit">Website by <a href="https://paradigmstudio.net" target="_blank" rel="noopener">Paradigm Studio</a></p>' +
             '</div>' +
             '<div class="social-icons">' +
             '<a href="#" aria-label="Facebook"><i class="ri-facebook-circle-fill"></i></a>' +
@@ -172,6 +173,7 @@
             footer.innerHTML = footerHtml(homeRoot);
         }
         ensureFooterLegal(homeRoot);
+        ensureFooterCredit();
     }
 
     function ensureFooterLegal(homeRoot) {
@@ -186,6 +188,19 @@
             else bottom.appendChild(legal);
         }
         legal.innerHTML = footerLegalHtml(homeRoot);
+    }
+
+    function ensureFooterCredit() {
+        var bottom = global.document.querySelector('.footer-bottom > div');
+        if (!bottom) return;
+        var credit = bottom.querySelector('.footer-credit');
+        if (!credit) {
+            credit = global.document.createElement('p');
+            credit.className = 'footer-credit';
+            bottom.appendChild(credit);
+        }
+        credit.innerHTML =
+            'Website by <a href="https://paradigmstudio.net" target="_blank" rel="noopener">Paradigm Studio</a>';
     }
 
     function ensureWidgets() {
