@@ -77,7 +77,7 @@
             '<a href="' + home + 'privacy.html">Privacy</a>' +
             '<a href="' + home + 'offers.html">Offers &amp; Events</a>' +
             '</p>' +
-            '<p class="footer-credit">Website by <a href="https://paradigmstudio.net" target="_blank" rel="noopener">Paradigm Studio</a></p>' +
+            '<p class="footer-credit" hidden>Website by <a href="https://paradigmstudio.net" target="_blank" rel="noopener">Paradigm Studio</a></p>' +
             '</div>' +
             '<div class="social-icons">' +
             '<a href="#" aria-label="Facebook"><i class="ri-facebook-circle-fill"></i></a>' +
@@ -199,6 +199,7 @@
             credit.className = 'footer-credit';
             bottom.appendChild(credit);
         }
+        credit.hidden = true;
         credit.innerHTML =
             'Website by <a href="https://paradigmstudio.net" target="_blank" rel="noopener">Paradigm Studio</a>';
     }

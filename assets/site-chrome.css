@@ -434,6 +434,7 @@ footer#contact .footer-bottom p {
 }
 footer.site-footer .footer-credit,
 footer#contact .footer-credit {
+    display: none;
     font-size: 12px;
     margin-top: 8px;
     color: rgba(255, 255, 255, 0.5);
