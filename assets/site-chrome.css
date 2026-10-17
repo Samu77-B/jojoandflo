@@ -377,7 +377,7 @@ footer.site-footer,
 footer#contact {
     background-color: #000;
     color: #fff;
-    padding: 100px 100px 50px;
+    padding: 100px 100px 80px;
 }
 footer.site-footer .footer-content,
 footer#contact .footer-content {
@@ -481,10 +481,6 @@ footer#contact .social-icons a:hover {
     color: #fff;
 }
 
-body.site-subpage {
-    padding-bottom: max(72px, calc(28px + env(safe-area-inset-bottom, 0px)));
-}
-
 .cookie-bar {
     position: fixed;
     left: 0;
@@ -547,11 +543,9 @@ body.site-subpage {
 .cookie-bar__btn--solid:hover {
     background: #d4c09a;
 }
-body.cookie-bar-visible {
-    padding-bottom: calc(90px + env(safe-area-inset-bottom, 0px));
-}
-body.site-subpage.cookie-bar-visible {
-    padding-bottom: calc(160px + env(safe-area-inset-bottom, 0px));
+body.cookie-bar-visible footer.site-footer,
+body.cookie-bar-visible footer#contact {
+    padding-bottom: calc(140px + env(safe-area-inset-bottom, 0px));
 }
 body.cookie-bar-visible .book-btn-sticky,
 body.cookie-bar-visible .search-btn-sticky {
@@ -571,11 +565,9 @@ body.cookie-bar-visible .search-btn-sticky {
     .cookie-bar__actions {
         justify-content: center;
     }
-    body.cookie-bar-visible {
-        padding-bottom: calc(150px + env(safe-area-inset-bottom, 0px));
-    }
-    body.site-subpage.cookie-bar-visible {
-        padding-bottom: calc(230px + env(safe-area-inset-bottom, 0px));
+    body.cookie-bar-visible footer.site-footer,
+    body.cookie-bar-visible footer#contact {
+        padding-bottom: calc(180px + env(safe-area-inset-bottom, 0px));
     }
     body.cookie-bar-visible .book-btn-sticky,
     body.cookie-bar-visible .search-btn-sticky {
@@ -644,7 +636,7 @@ body.cookie-bar-visible .search-btn-sticky {
     }
     footer.site-footer,
     footer#contact {
-        padding: 60px 24px 40px;
+        padding: 60px 24px 72px;
     }
     footer.site-footer .footer-bottom,
     footer#contact .footer-bottom {
