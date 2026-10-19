@@ -1648,6 +1648,12 @@
             pointer-events: none;
         }
         .gallery-item:hover img { transform: scale(1.05); }
+        .gallery-item--video .gallery-overlay {
+            opacity: 0.45;
+            background-color: rgba(44, 44, 44, 0.35);
+        }
+        .gallery-item--video:hover .gallery-overlay { opacity: 0.7; }
+        .gallery-item--video .gallery-icon { font-size: 48px; }
         .gallery-overlay {
             position: absolute;
             inset: 0;
@@ -1664,8 +1670,8 @@
         .gallery-lightbox {
             position: fixed;
             inset: 0;
-            z-index: 2000;
-            background: rgba(12, 12, 12, 0.94);
+            z-index: 20000;
+            background: #0c0c0c;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -1680,7 +1686,8 @@
             visibility: visible;
             pointer-events: auto;
         }
-        .gallery-lightbox__img {
+        .gallery-lightbox__img,
+        .gallery-lightbox__video {
             max-width: min(100%, 1100px);
             max-height: calc(100vh - 80px);
             width: auto;
@@ -1688,6 +1695,12 @@
             object-fit: contain;
             box-shadow: 0 16px 48px rgba(0, 0, 0, 0.4);
         }
+        .gallery-lightbox__video {
+            width: min(100%, 420px);
+            background: #000;
+        }
+        .gallery-lightbox__img[hidden],
+        .gallery-lightbox__video[hidden] { display: none !important; }
         .gallery-lightbox__close {
             position: absolute;
             top: max(12px, env(safe-area-inset-top, 0px));
@@ -1705,6 +1718,12 @@
         }
         .gallery-lightbox__close:hover { color: #D6C6B3; }
         body.gallery-lightbox-open { overflow: hidden; }
+        body.gallery-lightbox-open header,
+        body.gallery-lightbox-open .book-btn-sticky,
+        body.gallery-lightbox-open .cookie-bar {
+            visibility: hidden;
+            pointer-events: none;
+        }
 
         /* Treatments */
         .treatments { padding: 120px 100px; background-color: var(--secondary-bg); }
@@ -2005,6 +2024,7 @@
             .gallery-wrap { padding: 60px 24px; }
             .gallery-item { flex: 0 0 41.666%; }
             .gallery-overlay { opacity: 0.28; }
+            .gallery-item--video .gallery-overlay { opacity: 0.5; }
             .gallery-item:hover .gallery-overlay,
             .gallery-item:focus-visible .gallery-overlay { opacity: 1; }
             .brands { padding: 60px 24px; }
@@ -2474,6 +2494,7 @@
             <div class="gallery-item"><img src="imgs/hero1.PNG" alt="JoJo & Flo Salon"><div class="gallery-overlay"><i class="ri-image-line gallery-icon"></i></div></div>
             <div class="gallery-item"><img src="imgs/hero2.PNG" alt="JoJo & Flo Salon"><div class="gallery-overlay"><i class="ri-image-line gallery-icon"></i></div></div>
             <div class="gallery-item"><img src="imgs/hero3.PNG" alt="JoJo & Flo Salon"><div class="gallery-overlay"><i class="ri-image-line gallery-icon"></i></div></div>
+            <div class="gallery-item gallery-item--video" data-video="imgs/instagram/DJKIXuytRxm.mp4"><img src="imgs/instagram/DJKIXuytRxm.jpg" alt="JOJO &amp; FLO Instagram reel"><div class="gallery-overlay"><i class="ri-play-circle-line gallery-icon" aria-hidden="true"></i></div></div>
             <div class="gallery-item"><img src="imgs/hero4.PNG" alt="JoJo & Flo Salon"><div class="gallery-overlay"><i class="ri-image-line gallery-icon"></i></div></div>
             <div class="gallery-item"><img src="imgs/img01.png" alt="JoJo & Flo"><div class="gallery-overlay"><i class="ri-image-line gallery-icon"></i></div></div>
             <div class="gallery-item"><img src="imgs/img02.png" alt="JoJo & Flo"><div class="gallery-overlay"><i class="ri-image-line gallery-icon"></i></div></div>
@@ -2482,6 +2503,7 @@
             <div class="gallery-item"><img src="imgs/img06.png" alt="JoJo & Flo"><div class="gallery-overlay"><i class="ri-image-line gallery-icon"></i></div></div>
             <div class="gallery-item"><img src="imgs/IMG_2148.jpg" alt="JoJo & Flo"><div class="gallery-overlay"><i class="ri-image-line gallery-icon"></i></div></div>
             <div class="gallery-item"><img src="imgs/IMG_2149.jpg" alt="JoJo & Flo"><div class="gallery-overlay"><i class="ri-image-line gallery-icon"></i></div></div>
+            <div class="gallery-item gallery-item--video" data-video="imgs/instagram/DGgWH7LtDlN.mp4"><img src="imgs/instagram/DGgWH7LtDlN.jpg" alt="JOJO &amp; FLO Instagram reel"><div class="gallery-overlay"><i class="ri-play-circle-line gallery-icon" aria-hidden="true"></i></div></div>
             <div class="gallery-item"><img src="imgs/IMG_2150.jpg" alt="JoJo & Flo"><div class="gallery-overlay"><i class="ri-image-line gallery-icon"></i></div></div>
             <div class="gallery-item"><img src="imgs/IMG_2154.PNG" alt="JoJo & Flo"><div class="gallery-overlay"><i class="ri-image-line gallery-icon"></i></div></div>
             <div class="gallery-item"><img src="imgs/IMG_2155.PNG" alt="JoJo & Flo"><div class="gallery-overlay"><i class="ri-image-line gallery-icon"></i></div></div>
@@ -2492,6 +2514,7 @@
             <div class="gallery-item"><img src="imgs/IMG_2160.PNG" alt="JoJo & Flo"><div class="gallery-overlay"><i class="ri-image-line gallery-icon"></i></div></div>
             <div class="gallery-item"><img src="imgs/IMG_2161.PNG" alt="JoJo & Flo"><div class="gallery-overlay"><i class="ri-image-line gallery-icon"></i></div></div>
             <div class="gallery-item"><img src="imgs/IMG_2162.PNG" alt="JoJo & Flo"><div class="gallery-overlay"><i class="ri-image-line gallery-icon"></i></div></div>
+            <div class="gallery-item gallery-item--video" data-video="imgs/instagram/DGgMgg7tkqr.mp4"><img src="imgs/instagram/DGgMgg7tkqr.jpg" alt="JOJO &amp; FLO Instagram reel"><div class="gallery-overlay"><i class="ri-play-circle-line gallery-icon" aria-hidden="true"></i></div></div>
             <div class="gallery-item"><img src="imgs/IMG_2163.PNG" alt="JoJo & Flo"><div class="gallery-overlay"><i class="ri-image-line gallery-icon"></i></div></div>
             <div class="gallery-item"><img src="imgs/IMG_2164.PNG" alt="JoJo & Flo"><div class="gallery-overlay"><i class="ri-image-line gallery-icon"></i></div></div>
             <div class="gallery-item"><img src="imgs/IMG_2165.PNG" alt="JoJo & Flo"><div class="gallery-overlay"><i class="ri-image-line gallery-icon"></i></div></div>
@@ -2510,9 +2533,10 @@
             <div class="gallery-item"><img src="imgs/hero2.PNG" alt="JoJo & Flo Salon"><div class="gallery-overlay"><i class="ri-image-line gallery-icon"></i></div></div>
             </div>
         </div>
-        <div class="gallery-lightbox" id="galleryLightbox" role="dialog" aria-modal="true" aria-label="Gallery image">
-            <button type="button" class="gallery-lightbox__close" id="galleryLightboxClose" aria-label="Close image"><i class="ri-close-line" aria-hidden="true"></i></button>
-            <img class="gallery-lightbox__img" id="galleryLightboxImg" alt="">
+        <div class="gallery-lightbox" id="galleryLightbox" role="dialog" aria-modal="true" aria-label="Gallery media">
+            <button type="button" class="gallery-lightbox__close" id="galleryLightboxClose" aria-label="Close"><i class="ri-close-line" aria-hidden="true"></i></button>
+            <img class="gallery-lightbox__img" id="galleryLightboxImg" alt="" hidden>
+            <video class="gallery-lightbox__video" id="galleryLightboxVideo" controls playsinline hidden></video>
         </div>
     </section>
 
@@ -2626,7 +2650,7 @@
             </div>
             <div class="social-icons">
                 <a href="#"><i class="ri-facebook-circle-fill"></i></a>
-                <a href="#"><i class="ri-instagram-fill"></i></a>
+                <a href="https://www.instagram.com/jojoandflo/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="ri-instagram-fill"></i></a>
                 <a href="#"><i class="ri-pinterest-fill"></i></a>
             </div>
         </div>
@@ -2742,8 +2766,12 @@
                 var track = document.getElementById('galleryTrack');
                 var lightbox = document.getElementById('galleryLightbox');
                 var lightboxImg = document.getElementById('galleryLightboxImg');
+                var lightboxVideo = document.getElementById('galleryLightboxVideo');
                 var lightboxClose = document.getElementById('galleryLightboxClose');
                 if (!gallery || !track) return;
+                if (lightbox && lightbox.parentNode !== document.body) {
+                    document.body.appendChild(lightbox);
+                }
 
                 var perView = 3;
                 var cloneCount = perView;
@@ -2751,9 +2779,10 @@
                 if (slideCount < 1) return;
 
                 track.querySelectorAll('.gallery-item').forEach(function (item) {
+                    var isVideo = item.classList.contains('gallery-item--video');
                     item.setAttribute('role', 'button');
                     item.setAttribute('tabindex', '0');
-                    item.setAttribute('aria-label', 'View larger image');
+                    item.setAttribute('aria-label', isVideo ? 'Play video' : 'View larger image');
                 });
                 track.querySelectorAll('img').forEach(function (img) {
                     img.draggable = false;
@@ -2768,6 +2797,7 @@
                 var dragStartTranslate = 0;
                 var currentTranslate = 0;
                 var pointerId = null;
+                var pressItem = null;
                 var lightboxOpen = false;
 
                 function slideStepPx() {
@@ -2776,11 +2806,35 @@
                 }
 
                 function openLightbox(item) {
-                    if (!lightbox || !lightboxImg || !item) return;
+                    if (!lightbox || !item) return;
+                    var videoSrc = item.getAttribute('data-video');
                     var img = item.querySelector('img');
-                    if (!img) return;
-                    lightboxImg.src = img.currentSrc || img.src;
-                    lightboxImg.alt = img.alt || '';
+
+                    if (videoSrc && lightboxVideo) {
+                        if (lightboxImg) {
+                            lightboxImg.hidden = true;
+                            lightboxImg.removeAttribute('src');
+                        }
+                        lightboxVideo.hidden = false;
+                        lightboxVideo.src = videoSrc;
+                        lightboxVideo.poster = img ? (img.currentSrc || img.src) : '';
+                        lightboxVideo.currentTime = 0;
+                        var playPromise = lightboxVideo.play();
+                        if (playPromise && playPromise.catch) playPromise.catch(function () {});
+                    } else {
+                        if (!lightboxImg || !img) return;
+                        if (lightboxVideo) {
+                            lightboxVideo.pause();
+                            lightboxVideo.removeAttribute('src');
+                            lightboxVideo.removeAttribute('poster');
+                            lightboxVideo.hidden = true;
+                            lightboxVideo.load();
+                        }
+                        lightboxImg.hidden = false;
+                        lightboxImg.src = img.currentSrc || img.src;
+                        lightboxImg.alt = img.alt || '';
+                    }
+
                     lightbox.classList.add('is-open');
                     document.body.classList.add('gallery-lightbox-open');
                     lightboxOpen = true;
@@ -2793,7 +2847,17 @@
                     lightbox.classList.remove('is-open');
                     document.body.classList.remove('gallery-lightbox-open');
                     lightboxOpen = false;
-                    if (lightboxImg) lightboxImg.removeAttribute('src');
+                    if (lightboxImg) {
+                        lightboxImg.removeAttribute('src');
+                        lightboxImg.hidden = true;
+                    }
+                    if (lightboxVideo) {
+                        lightboxVideo.pause();
+                        lightboxVideo.removeAttribute('src');
+                        lightboxVideo.removeAttribute('poster');
+                        lightboxVideo.hidden = true;
+                        lightboxVideo.load();
+                    }
                     startAutoplay();
                 }
 
@@ -2846,6 +2910,16 @@
                     }
                 });
 
+                function hitGalleryItem(e) {
+                    var el = e.target;
+                    if (el && el.closest) {
+                        var fromTarget = el.closest('.gallery-item');
+                        if (fromTarget) return fromTarget;
+                    }
+                    var node = document.elementFromPoint(e.clientX, e.clientY);
+                    return node && node.closest ? node.closest('.gallery-item') : null;
+                }
+
                 function onPointerDown(e) {
                     if (e.pointerType === 'mouse' && e.button !== 0) return;
                     if (lightboxOpen) return;
@@ -2854,32 +2928,37 @@
                     pointerId = e.pointerId;
                     dragStartX = e.clientX;
                     dragStartTranslate = currentTranslate;
+                    pressItem = hitGalleryItem(e);
                     stopAutoplay();
-                    track.setPointerCapture(e.pointerId);
-                    setTranslate(currentTranslate, false);
                 }
 
                 function onPointerMove(e) {
                     if (!isDragging || e.pointerId !== pointerId) return;
                     var dx = e.clientX - dragStartX;
-                    if (Math.abs(dx) > 8) {
+                    if (!dragMoved && Math.abs(dx) > 28) {
                         dragMoved = true;
-                        e.preventDefault();
+                        try { track.setPointerCapture(e.pointerId); } catch (err) {}
+                        setTranslate(currentTranslate, false);
                     }
+                    if (!dragMoved) return;
+                    e.preventDefault();
                     setTranslate(dragStartTranslate + dx, false);
                 }
 
-                function onPointerUp(e) {
-                    if (!isDragging || e.pointerId !== pointerId) return;
+                function finishPointer(e) {
+                    if (pointerId == null || (e && e.pointerId !== pointerId)) return;
+                    var wasDrag = dragMoved;
+                    var dx = e ? (e.clientX - dragStartX) : 0;
+                    var tappedItem = pressItem || (e ? hitGalleryItem(e) : null);
                     isDragging = false;
                     pointerId = null;
-                    try { track.releasePointerCapture(e.pointerId); } catch (err) {}
+                    pressItem = null;
+                    try { if (e) track.releasePointerCapture(e.pointerId); } catch (err) {}
 
-                    var dx = e.clientX - dragStartX;
-                    if (!dragMoved && Math.abs(dx) < 8) {
-                        var item = e.target.closest ? e.target.closest('.gallery-item') : null;
-                        goTo(index, true);
-                        if (item) openLightbox(item);
+                    if (!wasDrag) {
+                        // Open on pointerup — waiting for click fails when the carousel
+                        // track moves or pointer capture interferes with the click event.
+                        if (tappedItem && !lightboxOpen) openLightbox(tappedItem);
                         else startAutoplay();
                         return;
                     }
@@ -2896,23 +2975,17 @@
 
                 track.addEventListener('pointerdown', onPointerDown);
                 track.addEventListener('pointermove', onPointerMove, { passive: false });
-                track.addEventListener('pointerup', onPointerUp);
-                track.addEventListener('pointercancel', onPointerUp);
+                track.addEventListener('pointerup', finishPointer);
+                track.addEventListener('pointercancel', finishPointer);
                 track.addEventListener('click', function (e) {
-                    if (dragMoved) {
+                    // Suppress synthetic click after a drag; taps already open on pointerup.
+                    if (dragMoved || lightboxOpen) {
                         e.preventDefault();
-                        return;
+                        e.stopPropagation();
                     }
-                    var item = e.target.closest ? e.target.closest('.gallery-item') : null;
-                    if (item && !lightboxOpen) openLightbox(item);
-                });
+                }, true);
                 track.addEventListener('lostpointercapture', function () {
-                    if (isDragging) {
-                        isDragging = false;
-                        pointerId = null;
-                        goTo(Math.round(-currentTranslate / slideStepPx()), true);
-                        startAutoplay();
-                    }
+                    if (isDragging && dragMoved) finishPointer({ pointerId: pointerId, clientX: dragStartX });
                 });
 
                 gallery.addEventListener('mouseenter', function () {

@@ -82,7 +82,7 @@
             '</div>' +
             '<div class="social-icons">' +
             '<a href="#" aria-label="Facebook"><i class="ri-facebook-circle-fill"></i></a>' +
-            '<a href="#" aria-label="Instagram"><i class="ri-instagram-fill"></i></a>' +
+            '<a href="https://www.instagram.com/jojoandflo/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="ri-instagram-fill"></i></a>' +
             '<a href="#" aria-label="Pinterest"><i class="ri-pinterest-fill"></i></a>' +
             '</div></div>'
         );
