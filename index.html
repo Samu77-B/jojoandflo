@@ -177,6 +177,7 @@
         nav.open li:nth-child(8) { animation-delay: 0.38s; }
         nav.open li:nth-child(9) { animation-delay: 0.43s; }
         nav.open li:nth-child(10) { animation-delay: 0.48s; }
+        nav.open li:nth-child(11) { animation-delay: 0.53s; }
 
         .header-cart {
             grid-column: 1;
@@ -1251,6 +1252,137 @@
             line-height: 1.6;
         }
 
+        /* Kérastase K-SCAN */
+        .kscan {
+            padding: 120px 100px;
+            background-color: var(--primary-bg);
+            scroll-margin-top: 140px;
+        }
+        .kscan-intro {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+            gap: 80px;
+            align-items: start;
+            margin-bottom: 72px;
+        }
+        .kscan-media {
+            position: relative;
+            overflow: hidden;
+            background: #111;
+            aspect-ratio: 1 / 1;
+        }
+        .kscan-media video {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .kscan-content .section-title {
+            text-align: left;
+            margin-bottom: 20px;
+        }
+        .kscan-title-name { white-space: nowrap; }
+        .kscan-content p {
+            font-family: var(--font-freight);
+            font-size: 16px;
+            color: var(--text-light);
+            line-height: 1.8;
+            margin-bottom: 20px;
+            max-width: 520px;
+        }
+        .kscan-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px 28px;
+            margin: 8px 0 28px;
+            font-family: var(--font-freight);
+            font-size: 14px;
+            color: var(--text-dark);
+            letter-spacing: 0.04em;
+        }
+        .kscan-meta span {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-light);
+        }
+        .kscan-meta i {
+            color: #B0A08C;
+            font-size: 16px;
+        }
+        .kscan-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+        }
+        .kscan-actions .hero-btn {
+            display: inline-block;
+            text-decoration: none;
+        }
+        .kscan-actions a.hero-btn--outline {
+            background: transparent;
+            color: var(--text-dark);
+            border: 1px solid var(--text-light);
+        }
+        .kscan-actions a.hero-btn--outline:hover {
+            background: var(--text-dark);
+            color: var(--white);
+            border-color: var(--text-dark);
+        }
+        .kscan-lights,
+        .kscan-steps {
+            display: grid;
+            gap: 28px;
+        }
+        .kscan-lights {
+            grid-template-columns: repeat(3, 1fr);
+            margin-bottom: 48px;
+        }
+        .kscan-light,
+        .kscan-step {
+            background: var(--white);
+            padding: 32px 28px;
+            border: 1px solid transparent;
+            transition: border-color 0.3s ease, background-color 0.3s ease;
+        }
+        .kscan-light:hover,
+        .kscan-step:hover {
+            border-color: #EFEBE4;
+            background-color: #FCFBF9;
+        }
+        .kscan-light i,
+        .kscan-step-num {
+            display: block;
+            color: #B0A08C;
+            margin-bottom: 16px;
+        }
+        .kscan-light i { font-size: 28px; }
+        .kscan-step-num {
+            font-family: var(--font-heading);
+            font-size: 13px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+        .kscan-light h3,
+        .kscan-step h3 {
+            font-family: var(--font-heading);
+            font-size: 18px;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+            margin-bottom: 10px;
+        }
+        .kscan-light p,
+        .kscan-step p {
+            font-family: var(--font-freight);
+            font-size: 14px;
+            color: var(--text-light);
+            line-height: 1.7;
+            margin: 0;
+        }
+        .kscan-steps {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
         /* Retail */
         .retail { padding: 100px; background-color: var(--primary-bg); }
         .retail-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 50px; }
@@ -1761,6 +1893,15 @@
             .mens-hair-image { order: -1; }
             .vouchers { grid-template-columns: 1fr; gap: 40px; padding: 80px 60px; }
             .vouchers-image { order: -1; }
+            .kscan { padding: 80px 60px; }
+            .kscan-intro { grid-template-columns: 1fr; gap: 40px; }
+            .kscan-media { order: -1; max-width: 520px; margin: 0 auto; width: 100%; }
+            .kscan-content { text-align: center; }
+            .kscan-content .section-title { text-align: center; }
+            .kscan-content p { margin-left: auto; margin-right: auto; }
+            .kscan-meta { justify-content: center; }
+            .kscan-actions { justify-content: center; }
+            .kscan-steps { grid-template-columns: repeat(2, 1fr); }
             .christmas { grid-template-columns: 1fr; }
             .christmas-image-slot { min-height: 280px; order: -1; }
             .christmas-content { padding: 56px 60px; align-items: center; }
@@ -1845,6 +1986,12 @@
             .featured-products { padding: 60px 24px; }
             .vouchers { padding: 60px 24px; gap: 32px; }
             .vouchers-content .section-title { text-align: center; }
+            .kscan { padding: 60px 24px; }
+            .kscan-intro { gap: 32px; margin-bottom: 48px; }
+            .kscan-lights,
+            .kscan-steps { grid-template-columns: 1fr; gap: 16px; }
+            .kscan-light,
+            .kscan-step { padding: 24px 20px; }
             .christmas-content { padding: 48px 24px 64px; }
             .christmas-content .section-title { text-align: center; }
             .christmas-content p { margin-left: auto; margin-right: auto; text-align: center; }
@@ -1924,6 +2071,7 @@
                 <li><a href="#top">Home</a></li>
                 <li><a href="#about-us">About Us</a></li>
                 <li><a href="#services">Services</a></li>
+                <li><a href="#k-scan">K-SCAN</a></li>
                 <li><a href="#pricelist">Price List</a></li>
                 <li><a href="products.html">Products</a></li>
                 <li><a href="#brands">Brands</a></li>
@@ -2145,6 +2293,77 @@
         </div>
     </section>
 
+    <section class="kscan" id="k-scan">
+        <div class="kscan-intro">
+            <div class="kscan-media">
+                <video
+                    autoplay
+                    muted
+                    loop
+                    playsinline
+                    preload="metadata"
+                    poster="imgs/kscan-poster.jpg"
+                    aria-label="Kérastase K-SCAN diagnostic device"
+                >
+                    <source src="imgs/kscan-hero.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="kscan-content">
+                <span class="section-tag">New in salon</span>
+                <h2 class="section-title">Kérastase <span class="kscan-title-name">K-SCAN</span></h2>
+                <p>An AI-powered hair and scalp diagnosis, exclusive to Kérastase partner salons. Developed over two years by L'Oréal Advanced Research, K-SCAN bridges professional expertise and computer vision to deliver ultra-personalised hair care.</p>
+                <p>A 4K camera and three-light imaging reveal what the naked eye cannot. Results appear in real time on a companion tablet, so you and your stylist can see microscopic scalp and fibre conditions together — then leave with a tailored in-salon and at-home prescription.</p>
+                <div class="kscan-meta">
+                    <span><i class="ri-time-line" aria-hidden="true"></i> 5–10 minutes</span>
+                    <span><i class="ri-price-tag-3-line" aria-hidden="true"></i> From £40, often redeemable</span>
+                </div>
+                <div class="kscan-actions">
+                    <a class="hero-btn" href="http://tinyurl.com/y6t4hlo3/" target="_blank" rel="noopener noreferrer">Book a consultation</a>
+                    <a class="hero-btn hero-btn--outline" href="#pricelist">View price list</a>
+                </div>
+            </div>
+        </div>
+        <div class="kscan-lights">
+            <article class="kscan-light">
+                <i class="ri-sun-line" aria-hidden="true"></i>
+                <h3>UV Light</h3>
+                <p>Identifies hidden dandruff particles and porphyrin — bacterial activity on the scalp that is not visible in ordinary light.</p>
+            </article>
+            <article class="kscan-light">
+                <i class="ri-contrast-2-line" aria-hidden="true"></i>
+                <h3>Cross-Polarised Light</h3>
+                <p>Uncovers subcutaneous inflammation, redness, and sensitivity beneath the surface of the scalp.</p>
+            </article>
+            <article class="kscan-light">
+                <i class="ri-lightbulb-line" aria-hidden="true"></i>
+                <h3>White LED Light</h3>
+                <p>Measures surface oiliness, follicle density, and overall hair strand thickness in 4K resolution.</p>
+            </article>
+        </div>
+        <div class="kscan-steps">
+            <article class="kscan-step">
+                <span class="kscan-step-num">01 — Scan</span>
+                <h3>See the invisible</h3>
+                <p>Your stylist parts the hair and captures micro-level images of scalp and fibre with the handheld K-SCAN camera. About 2–5 minutes.</p>
+            </article>
+            <article class="kscan-step">
+                <span class="kscan-step-num">02 — Analyse</span>
+                <h3>AI diagnosis</h3>
+                <p>The companion app scores oil, hydration, fibre thickness, density, and irritation — trained on more than 12,000 global hair and scalp samples.</p>
+            </article>
+            <article class="kscan-step">
+                <span class="kscan-step-num">03 — Prescribe</span>
+                <h3>A personalised plan</h3>
+                <p>A tailored prescription covering in-salon treatments such as Kérastase Fusio-Dose, plus shampoos, serums, and masks to take home.</p>
+            </article>
+            <article class="kscan-step">
+                <span class="kscan-step-num">04 — Track</span>
+                <h3>Before &amp; after</h3>
+                <p>Scans are archived so we can compare scalp health and treatment progress with visual evidence at your next visit.</p>
+            </article>
+        </div>
+    </section>
+
     <section class="pricelist" id="pricelist">
         <div class="section-header">
             <h2 class="section-title">Price List</h2>
@@ -2187,6 +2406,7 @@
                         <div class="pricelist-menu__row"><span>Masking/Gloss</span><span>From £75.00</span></div>
                         <h3>Consultations</h3>
                         <div class="pricelist-menu__row"><span>Consultation</span><span>From £40.00</span></div>
+                        <div class="pricelist-menu__row"><span>Kérastase K-SCAN</span><span>From £40.00</span></div>
                     </div>
                     <div class="pricelist-menu__col">
                         <h3>Styling</h3>
@@ -2367,6 +2587,7 @@
                     <li><a href="#top">Home</a></li>
                     <li><a href="#about-us">About Us</a></li>
                     <li><a href="#services">Services</a></li>
+                    <li><a href="#k-scan">K-SCAN</a></li>
                     <li><a href="#pricelist">Price List</a></li>
                     <li><a href="#gallery">Gallery</a></li>
                 </ul>

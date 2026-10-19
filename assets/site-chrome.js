@@ -47,6 +47,7 @@
             '<li><a href="' + home + 'index.html#top">Home</a></li>' +
             '<li><a href="' + home + 'index.html#about-us">About Us</a></li>' +
             '<li><a href="' + home + 'index.html#services">Services</a></li>' +
+            '<li><a href="' + home + 'index.html#k-scan">K-SCAN</a></li>' +
             '<li><a href="' + home + 'index.html#pricelist">Price List</a></li>' +
             '<li><a href="' + home + 'index.html#gallery">Gallery</a></li>' +
             '</ul></div>' +
