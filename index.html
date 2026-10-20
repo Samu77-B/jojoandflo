@@ -1527,6 +1527,7 @@
         .pricelist-menu__row {
             display: flex;
             justify-content: space-between;
+            align-items: baseline;
             gap: 16px;
             padding: 8px 0;
             font-family: var(--font-freight);
@@ -1534,11 +1535,16 @@
             color: var(--text-dark);
             border-bottom: 1px dotted #e4e0d8;
         }
+        .pricelist-menu__row span:first-child {
+            min-width: 0;
+            flex: 1 1 auto;
+        }
         .pricelist-menu__row span:last-child {
             font-family: var(--font-freight);
             color: #B0A08C;
             letter-spacing: 1px;
             white-space: nowrap;
+            flex: 0 0 auto;
         }
         .pricelist-menu__notes {
             display: grid;
@@ -1899,6 +1905,23 @@
             transition: all 0.3s ease;
         }
         .discount-form button:hover { background-color: #b39d6f; }
+        .discount-form button:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+        .discount-form__message {
+            width: 100%;
+            margin: 16px 0 0;
+            font-family: var(--font-freight);
+            font-size: 15px;
+            line-height: 1.5;
+            display: none;
+        }
+        .discount-form__message.is-visible { display: block; }
+        .discount-form__message.is-success { color: #c5ad84; }
+        .discount-form__message.is-error { color: #e8b4b4; }
+        .discount-form.is-success input,
+        .discount-form.is-success button { display: none; }
 
         /* Footer */
         footer {
@@ -1909,11 +1932,13 @@
         .footer-content {
             display: flex;
             justify-content: space-between;
+            gap: 32px;
             border-bottom: 1px solid rgba(255,255,255,0.1);
             padding-bottom: 60px;
             margin-bottom: 40px;
         }
-        .footer-column { flex: 1; }
+        .footer-column { flex: 1; min-width: 0; }
+        .footer-column--brand { flex: 1.5; padding-right: 50px; }
         .footer-logo img { height: 40px; margin-bottom: 30px; }
         .footer-heading {
             font-size: 14px;
@@ -1927,6 +1952,8 @@
             font-family: var(--font-freight);
             font-size: 15px;
             color: rgba(255,255,255,0.7);
+            overflow-wrap: anywhere;
+            word-break: break-word;
         }
         .footer-links a:hover { color: #fff; }
         .footer-bottom {
@@ -1948,7 +1975,7 @@
         .social-icons a { color: rgba(255,255,255,0.7); font-size: 20px; }
         .social-icons a:hover { color: #fff; }
 
-        /* ========== MOBILE RESPONSIVE ========== */
+        /* ========== TABLET + MOBILE RESPONSIVE ========== */
         @media (max-width: 1024px) {
             header {
                 align-items: stretch;
@@ -1967,24 +1994,49 @@
                 padding-top: 24px;
                 padding-bottom: 24px;
             }
+            .services { padding: 80px 40px; }
             .services-grid { grid-template-columns: repeat(2, 1fr); }
+            .retail { padding: 80px 40px; }
             .retail-grid { grid-template-columns: repeat(2, 1fr); }
+            .featured-products { padding: 80px 40px; }
             .featured-categories { grid-template-columns: 1fr; max-width: 420px; }
-            .gallery-wrap { padding: 80px 60px; }
-            .brands { padding: 80px 60px; }
+            .treatments { padding: 80px 40px; }
+            .gallery-wrap { padding: 80px 40px; }
+            .brands { padding: 80px 40px; }
             .brands-grid { gap: 40px 50px; }
-            .philosophy { padding: 80px 60px; }
+            .philosophy { padding: 80px 40px; }
             .philosophy-text { font-size: 28px; }
             .treatments-grid { grid-template-columns: repeat(2, 1fr); }
-            .about-us { padding: 80px 60px; gap: 48px; }
-            .about-us-image { height: 360px; }
+            .about-us {
+                padding: 80px 40px;
+                grid-template-columns: 1fr;
+                gap: 40px;
+                align-items: start;
+            }
+            .about-us-image {
+                height: 380px;
+                order: -1;
+            }
+            .about-us-content { text-align: center; }
+            .about-us-content .section-title { text-align: center; }
+            .about-us-highlights {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 28px 40px;
+                text-align: left;
+                max-width: 640px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+            .about-us-actions {
+                justify-content: center;
+            }
             .weddings { grid-template-columns: 1fr; gap: 40px; }
             .weddings-image { order: -1; height: 350px; }
             .mens-hair { grid-template-columns: 1fr; gap: 40px; }
             .mens-hair-image { order: -1; }
-            .vouchers { grid-template-columns: 1fr; gap: 40px; padding: 80px 60px; }
+            .vouchers { grid-template-columns: 1fr; gap: 40px; padding: 80px 40px; }
             .vouchers-image { order: -1; }
-            .kscan { padding: 80px 60px; }
+            .kscan { padding: 80px 40px; }
             .kscan-intro { grid-template-columns: 1fr; gap: 40px; }
             .kscan-media { order: -1; max-width: 520px; margin: 0 auto; width: 100%; }
             .kscan-content { text-align: center; }
@@ -1995,7 +2047,7 @@
             .kscan-steps { grid-template-columns: repeat(2, 1fr); }
             .christmas { grid-template-columns: 1fr; }
             .christmas-image-slot { min-height: 280px; order: -1; }
-            .christmas-content { padding: 56px 60px; align-items: center; }
+            .christmas-content { padding: 56px 40px; align-items: center; }
             .vouchers-content,
             .weddings-content,
             .mens-hair-content,
@@ -2020,6 +2072,33 @@
             }
             .google-reviews { padding: 60px 40px; }
             .google-reviews .reviews-page { grid-template-columns: 1fr; gap: 28px; }
+            .pricelist { padding: 80px 40px; }
+            .pricelist-menu { padding: 36px 28px; }
+            .pricelist-menu__grid { grid-template-columns: 1fr; gap: 8px; }
+            .pricelist-menu__notes { grid-template-columns: 1fr; }
+            .discount-signup { padding: 80px 40px; }
+            .discount-form {
+                flex-direction: column;
+                align-items: stretch;
+                max-width: 420px;
+            }
+            .discount-form input[type="email"] {
+                min-width: 0;
+                width: 100%;
+            }
+            .discount-form button { width: 100%; }
+            footer { padding: 80px 40px 72px; }
+            .footer-content {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 40px 48px;
+            }
+            .footer-column--brand {
+                grid-column: 1 / -1;
+                flex: none;
+                padding-right: 0;
+            }
+            .footer-column { flex: none; }
         }
 
         @media (max-width: 768px) {
@@ -2061,12 +2140,18 @@
 
             .about-us {
                 padding: 60px 24px;
-                grid-template-columns: 1fr;
                 gap: 32px;
             }
-            .about-us-image { height: 280px; order: -1; }
-            .about-us-content .section-title { text-align: center; }
-            .about-us-highlights { grid-template-columns: 1fr; gap: 20px; }
+            .about-us-image { height: 280px; }
+            .about-us-highlights {
+                grid-template-columns: 1fr;
+                gap: 20px;
+                text-align: center;
+            }
+            .about-us-actions {
+                flex-direction: column;
+                align-items: center;
+            }
             .philosophy { padding: 60px 24px; }
             .as-seen-in { padding: 48px 24px; }
             .as-seen-in__logos { gap: 32px; }
@@ -2087,12 +2172,6 @@
             .christmas-content .section-title { text-align: center; }
             .christmas-content p { margin-left: auto; margin-right: auto; text-align: center; }
             .christmas-content .hero-btn { margin: 0 auto; }
-            .about-us-content { text-align: center; }
-            .about-us-actions {
-                justify-content: center;
-                flex-direction: column;
-                align-items: center;
-            }
             .gallery-wrap { padding: 60px 24px; }
             .gallery-item { flex: 0 0 41.666%; }
             .gallery-overlay { opacity: 0.28; }
@@ -2106,11 +2185,8 @@
             .services { padding: 60px 24px; }
             .pricelist { padding: 60px 24px; }
             .pricelist-menu { padding: 28px 20px; }
-            .pricelist-menu__grid { grid-template-columns: 1fr; }
-            .pricelist-menu__notes { grid-template-columns: 1fr; }
             .pricelist__overlay-title { font-size: 20px; }
             .pricelist__overlay-desc { font-size: 14px; }
-            .google-reviews .reviews-page { grid-template-columns: 1fr; }
             .treatments { padding: 60px 24px; }
             .treatments-grid { grid-template-columns: 1fr; }
             .weddings { padding: 60px 24px; gap: 32px; }
@@ -2119,8 +2195,6 @@
             .mens-hair { padding: 60px 24px; gap: 32px; }
             .mens-hair-content .section-title { text-align: center; }
             .discount-signup { padding: 80px 24px; }
-            .discount-form { flex-direction: column; }
-            .discount-form input[type="email"] { min-width: 100%; }
             .section-header { margin-bottom: 40px; }
             .section-title { font-size: 28px; }
             .services-grid { grid-template-columns: 1fr; gap: 24px; }
@@ -2134,10 +2208,12 @@
             .product-image { height: 200px; }
             .product-info { padding: 20px; }
             .product-name { font-size: 16px; }
-            .footer-content { flex-direction: column; gap: 40px; padding-bottom: 40px; }
-            .footer-column[style*="flex: 1.5"] { flex: none !important; padding-right: 0 !important; }
-            .footer-column { flex: none; }
             footer { padding: 60px 24px 72px; }
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 36px;
+                padding-bottom: 40px;
+            }
             .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
         }
 
@@ -2639,16 +2715,17 @@
         <span class="section-tag">Exclusive Offer</span>
         <h2 class="section-title">Get 10% Off Your First Visit</h2>
         <p>Sign up to receive our welcome offer and be the first to hear about new services, products, and special events.</p>
-        <form class="discount-form" action="#" method="post">
-            <input type="email" name="email" placeholder="Enter your email address" required>
-            <button type="submit">Sign Up</button>
+        <form class="discount-form" id="discountForm" novalidate>
+            <input type="email" name="email" id="discountEmail" placeholder="Enter your email address" required autocomplete="email">
+            <button type="submit" id="discountSubmitBtn">Sign Up</button>
+            <p class="discount-form__message" id="discountMessage" role="status" aria-live="polite"></p>
         </form>
     </section>
 
     <!-- Site designed and built by Paradigm Studio — https://paradigmstudio.net -->
     <footer id="contact">
         <div class="footer-content">
-            <div class="footer-column" style="flex: 1.5; padding-right: 50px;">
+            <div class="footer-column footer-column--brand">
                 <div class="footer-logo">
                     <img src="logos/jojoflo_logo-wht.png" alt="JOJO & FLO LONDON">
                 </div>
@@ -3066,6 +3143,53 @@
                 goTo(0, false);
                 startAutoplay();
             })();
+
+            // Discount / welcome offer signup
+            var discountForm = document.getElementById('discountForm');
+            var discountEmail = document.getElementById('discountEmail');
+            var discountSubmitBtn = document.getElementById('discountSubmitBtn');
+            var discountMessage = document.getElementById('discountMessage');
+
+            function showDiscountMessage(text, type) {
+                if (!discountMessage) return;
+                discountMessage.textContent = text;
+                discountMessage.className = 'discount-form__message is-visible is-' + type;
+            }
+
+            if (discountForm) {
+                discountForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    var email = (discountEmail && discountEmail.value || '').trim();
+                    if (!email) {
+                        showDiscountMessage('Please enter your email address.', 'error');
+                        return;
+                    }
+
+                    discountSubmitBtn.disabled = true;
+                    discountSubmitBtn.textContent = 'Signing up…';
+                    showDiscountMessage('', 'error');
+                    if (discountMessage) discountMessage.className = 'discount-form__message';
+
+                    fetch('/api/discount-signup', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ email: email })
+                    })
+                    .then(function(res) {
+                        if (!res.ok) throw new Error('Request failed');
+                        return res.json();
+                    })
+                    .then(function() {
+                        discountForm.classList.add('is-success');
+                        showDiscountMessage('Thank you — you\'re signed up for our welcome offer.', 'success');
+                    })
+                    .catch(function() {
+                        showDiscountMessage('Something went wrong. Please try again.', 'error');
+                        discountSubmitBtn.disabled = false;
+                        discountSubmitBtn.textContent = 'Sign Up';
+                    });
+                });
+            }
 
             // Price List unlock
             var plContainer = document.getElementById('pricelistContainer');

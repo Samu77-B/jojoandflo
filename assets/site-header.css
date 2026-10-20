@@ -134,7 +134,6 @@ body.site-subpage {
     justify-content: center;
     grid-column: 3;
     justify-self: end;
-    font-size: 24px;
     cursor: pointer;
     color: var(--text-dark);
     background: none;
@@ -142,6 +141,80 @@ body.site-subpage {
     padding: 8px;
     min-width: 44px;
     min-height: 44px;
+    font-size: 24px;
+}
+.site-header .menu-icon__box {
+    position: relative;
+    display: block;
+    width: 22px;
+    height: 18px;
+}
+.site-header .menu-icon__bar {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: currentColor;
+    border-radius: 1px;
+    transform-origin: center;
+    transition:
+        top 0.35s ease,
+        transform 0.35s ease,
+        opacity 0.25s ease,
+        width 0.35s ease,
+        left 0.35s ease;
+}
+.site-header .menu-icon__bar--top { top: 1px; }
+.site-header .menu-icon__bar--mid { top: 8px; }
+.site-header .menu-icon__bar--bot { top: 15px; }
+.site-header .menu-icon__ring {
+    position: absolute;
+    bottom: 0;
+    width: 7px;
+    height: 7px;
+    border: 1.75px solid currentColor;
+    border-radius: 50%;
+    box-sizing: border-box;
+    opacity: 0;
+    transform: scale(0.35);
+    transition: opacity 0.28s ease, transform 0.35s ease;
+    pointer-events: none;
+}
+.site-header .menu-icon__ring--left { left: 1px; }
+.site-header .menu-icon__ring--right { right: 1px; }
+.site-header .menu-icon:hover .menu-icon__bar--top,
+.site-header .menu-icon:focus-visible .menu-icon__bar--top,
+.site-header .menu-icon.is-open .menu-icon__bar--top {
+    top: 3px;
+    left: 1px;
+    width: 20px;
+    transform: rotate(42deg);
+}
+.site-header .menu-icon:hover .menu-icon__bar--mid,
+.site-header .menu-icon:focus-visible .menu-icon__bar--mid,
+.site-header .menu-icon.is-open .menu-icon__bar--mid {
+    opacity: 0;
+    transform: scaleX(0.2);
+}
+.site-header .menu-icon:hover .menu-icon__bar--bot,
+.site-header .menu-icon:focus-visible .menu-icon__bar--bot,
+.site-header .menu-icon.is-open .menu-icon__bar--bot {
+    top: 3px;
+    left: 1px;
+    width: 20px;
+    transform: rotate(-42deg);
+}
+.site-header .menu-icon:hover .menu-icon__ring,
+.site-header .menu-icon:focus-visible .menu-icon__ring,
+.site-header .menu-icon.is-open .menu-icon__ring {
+    opacity: 1;
+    transform: scale(1);
+}
+@media (prefers-reduced-motion: reduce) {
+    .site-header .menu-icon__bar,
+    .site-header .menu-icon__ring {
+        transition: none;
+    }
 }
 
 .site-header nav {
@@ -184,6 +257,35 @@ body.site-subpage {
     padding: 0;
 }
 
+.site-header nav li {
+    text-align: center;
+    opacity: 0;
+    transform: translateY(8px);
+}
+
+.site-header nav.open li {
+    opacity: 1;
+    transform: translateY(0);
+    animation: siteHeaderMenuItemIn 0.35s ease forwards;
+}
+
+.site-header nav.open li:nth-child(1) { animation-delay: 0.03s; }
+.site-header nav.open li:nth-child(2) { animation-delay: 0.08s; }
+.site-header nav.open li:nth-child(3) { animation-delay: 0.13s; }
+.site-header nav.open li:nth-child(4) { animation-delay: 0.18s; }
+.site-header nav.open li:nth-child(5) { animation-delay: 0.23s; }
+.site-header nav.open li:nth-child(6) { animation-delay: 0.28s; }
+.site-header nav.open li:nth-child(7) { animation-delay: 0.33s; }
+.site-header nav.open li:nth-child(8) { animation-delay: 0.38s; }
+.site-header nav.open li:nth-child(9) { animation-delay: 0.43s; }
+.site-header nav.open li:nth-child(10) { animation-delay: 0.48s; }
+.site-header nav.open li:nth-child(11) { animation-delay: 0.53s; }
+
+@keyframes siteHeaderMenuItemIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
 .site-header nav a {
     font-family: var(--font-freight);
     font-size: 13px;
@@ -191,14 +293,37 @@ body.site-subpage {
     letter-spacing: 1.5px;
     color: rgba(44, 44, 44, 0.92);
     text-decoration: none;
+    position: relative;
 }
 
 .site-header nav.open a {
     color: var(--text-dark);
+    display: block;
+    width: 100%;
+    text-align: center;
+}
+
+.site-header nav a::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background-color: rgba(44, 44, 44, 0.45);
+    transition: width 0.3s ease;
 }
 
 .site-header nav a:hover {
     color: var(--text-dark);
+}
+
+.site-header nav a:hover::after {
+    width: 100%;
+}
+
+.site-header nav.open a::after {
+    background-color: var(--text-dark);
 }
 
 @media (max-width: 768px) {

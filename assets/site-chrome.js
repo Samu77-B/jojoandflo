@@ -34,7 +34,7 @@
     function footerHtml(home) {
         return (
             '<div class="footer-content">' +
-            '<div class="footer-column footer-column--brand" style="flex: 1.5; padding-right: 50px;">' +
+            '<div class="footer-column footer-column--brand">' +
             '<div class="footer-logo">' +
             '<img src="' + home + 'logos/jojoflo_logo-wht.png" alt="JOJO &amp; FLO LONDON">' +
             '</div>' +

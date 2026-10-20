@@ -421,23 +421,27 @@
         var menuBtn = global.document.getElementById('menuBtn');
         var mainNav = global.document.getElementById('mainNav');
         if (!menuBtn || !mainNav) return;
+        if (menuBtn.getAttribute('data-menu-bound') === '1') return;
+        menuBtn.setAttribute('data-menu-bound', '1');
+
         var icon = menuBtn.querySelector('i');
-        menuBtn.addEventListener('click', function () {
-            var open = mainNav.classList.toggle('open');
+
+        function setMenuOpen(open) {
+            mainNav.classList.toggle('open', open);
+            menuBtn.classList.toggle('is-open', open);
             menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
             if (icon) {
                 icon.classList.toggle('ri-menu-line', !open);
                 icon.classList.toggle('ri-close-line', open);
             }
+        }
+
+        menuBtn.addEventListener('click', function () {
+            setMenuOpen(!mainNav.classList.contains('open'));
         });
         mainNav.querySelectorAll('a').forEach(function (link) {
             link.addEventListener('click', function () {
-                mainNav.classList.remove('open');
-                menuBtn.setAttribute('aria-expanded', 'false');
-                if (icon) {
-                    icon.classList.add('ri-menu-line');
-                    icon.classList.remove('ri-close-line');
-                }
+                setMenuOpen(false);
             });
         });
     }
