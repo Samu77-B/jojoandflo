@@ -1102,12 +1102,20 @@
             gap: 80px;
             align-items: center;
         }
+        .vouchers-media {
+            width: 100%;
+            overflow: hidden;
+            aspect-ratio: 4 / 3;
+            background-color: #fff;
+        }
         .vouchers-image {
             width: 100%;
-            height: auto;
-            aspect-ratio: 2752 / 1536;
-            object-fit: contain;
-            background-color: #f7f4ef;
+            height: 100%;
+            object-fit: cover;
+            object-position: center 46%;
+            transform: scale(1.5);
+            transform-origin: center center;
+            display: block;
         }
         .vouchers-content .section-title {
             text-align: left;
@@ -1700,15 +1708,18 @@
         }
         .gallery-track {
             display: flex;
-            transition: transform 0.6s ease;
+            transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
             cursor: grab;
             touch-action: pan-y;
             user-select: none;
             -webkit-user-select: none;
+            -webkit-user-drag: none;
+            will-change: transform;
         }
         .gallery-track.is-dragging {
             cursor: grabbing;
             transition: none;
+            touch-action: none;
         }
         .gallery-item {
             flex: 0 0 33.333%;
@@ -1717,6 +1728,7 @@
             overflow: hidden;
             min-width: 0;
             cursor: pointer;
+            -webkit-touch-callout: none;
         }
         .gallery-item img {
             width: 100%;
@@ -1724,8 +1736,13 @@
             object-fit: cover;
             transition: transform 0.5s ease;
             pointer-events: none;
+            -webkit-user-drag: none;
+            user-select: none;
         }
         .gallery-item:hover img { transform: scale(1.05); }
+        .gallery-item:not(.gallery-item--video) .gallery-overlay {
+            display: none;
+        }
         .gallery-item--video .gallery-overlay {
             opacity: 0.45;
             background-color: rgba(44, 44, 44, 0.35);
@@ -2035,7 +2052,8 @@
             .mens-hair { grid-template-columns: 1fr; gap: 40px; }
             .mens-hair-image { order: -1; }
             .vouchers { grid-template-columns: 1fr; gap: 40px; padding: 80px 40px; }
-            .vouchers-image { order: -1; }
+            .vouchers-media { order: -1; }
+            .vouchers-image { transform: scale(1.55); }
             .kscan { padding: 80px 40px; }
             .kscan-intro { grid-template-columns: 1fr; gap: 40px; }
             .kscan-media { order: -1; max-width: 520px; margin: 0 auto; width: 100%; }
@@ -2174,10 +2192,9 @@
             .christmas-content .hero-btn { margin: 0 auto; }
             .gallery-wrap { padding: 60px 24px; }
             .gallery-item { flex: 0 0 41.666%; }
-            .gallery-overlay { opacity: 0.28; }
             .gallery-item--video .gallery-overlay { opacity: 0.5; }
-            .gallery-item:hover .gallery-overlay,
-            .gallery-item:focus-visible .gallery-overlay { opacity: 1; }
+            .gallery-item--video:hover .gallery-overlay,
+            .gallery-item--video:focus-visible .gallery-overlay { opacity: 0.7; }
             .brands { padding: 60px 24px; }
             .brands-grid { gap: 32px; flex-direction: column; }
             .brand-logo { height: 64px; }
@@ -2394,19 +2411,19 @@
                 <img src="imgs/featured-kerastase.jpg" alt="Kérastase Première haircare" width="800" height="800">
                 <h3>Kérastase</h3>
                 <p class="featured-partnership">JOJO &amp; FLO Products partnership with Kérastase</p>
-                <p>Luxury haircare, in salon and to take home.</p>
+                <p>Kérastase provides high-performance, science-backed treatments tailored to specific hair and scalp concerns like severe damage, dryness, and color protection.</p>
             </a>
             <a href="brands/davines.html" class="featured-category">
                 <img src="imgs/featured-davines.jpg" alt="Davines Nounou haircare" width="800" height="799">
                 <h3>Davines</h3>
                 <p class="featured-partnership">JOJO &amp; FLO Products partnership with Davines</p>
-                <p>Sustainable professional formulas.</p>
+                <p>Davines focuses on sustainable, eco-conscious haircare using botanical ingredients to nourish, balance, and maintain overall hair and scalp health.</p>
             </a>
             <a href="brands/shu-uemura.html" class="featured-category">
                 <img src="assets/site-products/Shu-Uemura-Prod-Image.png" alt="Shu Uemura Art of Hair" width="555" height="695">
                 <h3>Shu Uemura</h3>
                 <p class="featured-partnership">JOJO &amp; FLO Products partnership with Shu Uemura</p>
-                <p>Art of Hair — colour, shine, and repair.</p>
+                <p>Shu Uemura Art of Hair delivers ultra-lightweight, luxurious formulas enriched with rare Japanese botanicals designed to deeply purify, restore silkiness, and enhance natural shine without adding weight.</p>
             </a>
         </div>
         <p class="featured-products__actions">
@@ -2419,10 +2436,12 @@
             <span class="section-tag">Gifts</span>
             <h2 class="section-title">Pick-up in store vouchers</h2>
             <p>Treat someone special to JOJO &amp; FLO. Our gift vouchers can be redeemed on any product or service in salon, and are ready to collect from the desk at 310 Green Lanes, Palmers Green.</p>
-            <p>Choose a £5 or £10 voucher — or ask in salon if you would like a different amount. We will have it waiting for you to pick up on your next visit.</p>
+            <p>Choose a voucher — or ask in salon if you would like a different amount. We will have it waiting for you to pick up on your next visit.</p>
             <a href="#contact" class="hero-btn">Visit us to collect</a>
         </div>
-        <img src="imgs/jojo&amp;flo-vouchers.jpg" alt="JOJO &amp; FLO LONDON £5 and £10 gift vouchers" class="vouchers-image" width="2752" height="1536" loading="lazy">
+        <div class="vouchers-media">
+            <img src="imgs/jojo&amp;flo-vouchers.jpg" alt="JOJO &amp; FLO LONDON £5 and £10 gift vouchers" class="vouchers-image" width="2752" height="1536" loading="lazy">
+        </div>
     </section>
 
     <section class="brands" id="brands">
@@ -2914,16 +2933,44 @@
                 var autoplayId = null;
                 var isDragging = false;
                 var dragMoved = false;
+                var dragAxis = null;
                 var dragStartX = 0;
+                var dragStartY = 0;
                 var dragStartTranslate = 0;
                 var currentTranslate = 0;
                 var pointerId = null;
                 var pressItem = null;
                 var lightboxOpen = false;
+                var lastMoveX = 0;
+                var lastMoveTime = 0;
+                var velocityX = 0;
+                var SNAP_EASE = 'transform 0.45s cubic-bezier(0.22, 1, 0.36, 1)';
 
                 function slideStepPx() {
                     var item = track.querySelector('.gallery-item');
                     return item ? item.getBoundingClientRect().width : gallery.offsetWidth / perView;
+                }
+
+                function readTranslateX() {
+                    var style = window.getComputedStyle(track);
+                    var transform = style.transform;
+                    if (!transform || transform === 'none') return currentTranslate;
+                    try {
+                        if (typeof DOMMatrixReadOnly !== 'undefined') {
+                            return new DOMMatrixReadOnly(transform).m41;
+                        }
+                    } catch (err) {}
+                    var match = transform.match(/matrix\(([^)]+)\)/);
+                    if (match) {
+                        var parts = match[1].split(',');
+                        if (parts.length >= 6) return parseFloat(parts[4]) || 0;
+                    }
+                    var match3d = transform.match(/matrix3d\(([^)]+)\)/);
+                    if (match3d) {
+                        var parts3d = match3d[1].split(',');
+                        if (parts3d.length >= 13) return parseFloat(parts3d[12]) || 0;
+                    }
+                    return currentTranslate;
                 }
 
                 function openLightbox(item) {
@@ -2988,8 +3035,8 @@
 
                 function setTranslate(px, animate) {
                     track.classList.toggle('is-dragging', !animate);
-                    track.style.transition = animate ? 'transform 0.6s ease' : 'none';
-                    track.style.transform = 'translateX(' + px + 'px)';
+                    track.style.transition = animate ? SNAP_EASE : 'none';
+                    track.style.transform = 'translate3d(' + px + 'px, 0, 0)';
                     currentTranslate = px;
                 }
 
@@ -3046,9 +3093,17 @@
                     if (lightboxOpen) return;
                     isDragging = true;
                     dragMoved = false;
+                    dragAxis = null;
                     pointerId = e.pointerId;
                     dragStartX = e.clientX;
+                    dragStartY = e.clientY;
+                    lastMoveX = e.clientX;
+                    lastMoveTime = performance.now();
+                    velocityX = 0;
+                    // Freeze mid-autoplay so the finger starts from the visible position.
+                    currentTranslate = readTranslateX();
                     dragStartTranslate = currentTranslate;
+                    setTranslate(currentTranslate, false);
                     pressItem = hitGalleryItem(e);
                     stopAutoplay();
                 }
@@ -3056,13 +3111,39 @@
                 function onPointerMove(e) {
                     if (!isDragging || e.pointerId !== pointerId) return;
                     var dx = e.clientX - dragStartX;
-                    if (!dragMoved && Math.abs(dx) > 28) {
+                    var dy = e.clientY - dragStartY;
+                    var absX = Math.abs(dx);
+                    var absY = Math.abs(dy);
+
+                    if (!dragMoved) {
+                        if (absX < 6 && absY < 6) return;
+                        if (dragAxis == null) {
+                            dragAxis = absY > absX ? 'y' : 'x';
+                        }
+                        if (dragAxis === 'y') {
+                            // Let the page scroll vertically.
+                            isDragging = false;
+                            pointerId = null;
+                            pressItem = null;
+                            track.classList.remove('is-dragging');
+                            startAutoplay();
+                            return;
+                        }
                         dragMoved = true;
                         try { track.setPointerCapture(e.pointerId); } catch (err) {}
-                        setTranslate(currentTranslate, false);
                     }
+
                     if (!dragMoved) return;
                     e.preventDefault();
+
+                    var now = performance.now();
+                    var dt = now - lastMoveTime;
+                    if (dt > 0) {
+                        velocityX = (e.clientX - lastMoveX) / dt;
+                    }
+                    lastMoveX = e.clientX;
+                    lastMoveTime = now;
+
                     setTranslate(dragStartTranslate + dx, false);
                 }
 
@@ -3071,10 +3152,12 @@
                     var wasDrag = dragMoved;
                     var dx = e ? (e.clientX - dragStartX) : 0;
                     var tappedItem = pressItem || (e ? hitGalleryItem(e) : null);
+                    var releaseId = pointerId;
                     isDragging = false;
                     pointerId = null;
                     pressItem = null;
-                    try { if (e) track.releasePointerCapture(e.pointerId); } catch (err) {}
+                    dragAxis = null;
+                    try { if (e) track.releasePointerCapture(releaseId); } catch (err) {}
 
                     if (!wasDrag) {
                         // Open on pointerup — waiting for click fails when the carousel
@@ -3084,13 +3167,21 @@
                         return;
                     }
 
-                    var threshold = slideStepPx() * 0.18;
-                    var target = index;
-                    if (dx < -threshold) target = index + 1;
-                    else if (dx > threshold) target = index - 1;
-                    else target = Math.round(-currentTranslate / slideStepPx());
+                    var step = slideStepPx();
+                    var threshold = step * 0.12;
+                    var flicked = Math.abs(velocityX) > 0.45;
+                    var target = Math.round(-currentTranslate / step);
+
+                    if (flicked) {
+                        target = velocityX < 0 ? index + 1 : index - 1;
+                    } else if (dx < -threshold) {
+                        target = index + 1;
+                    } else if (dx > threshold) {
+                        target = index - 1;
+                    }
 
                     goTo(target, true);
+                    velocityX = 0;
                     startAutoplay();
                 }
 
@@ -3106,14 +3197,16 @@
                     }
                 }, true);
                 track.addEventListener('lostpointercapture', function () {
-                    if (isDragging && dragMoved) finishPointer({ pointerId: pointerId, clientX: dragStartX });
+                    if (isDragging && dragMoved) {
+                        finishPointer({ pointerId: pointerId, clientX: lastMoveX || dragStartX });
+                    }
                 });
 
                 gallery.addEventListener('mouseenter', function () {
-                    if (!lightboxOpen) stopAutoplay();
+                    if (!lightboxOpen && !isDragging) stopAutoplay();
                 });
                 gallery.addEventListener('mouseleave', function () {
-                    if (!lightboxOpen) startAutoplay();
+                    if (!lightboxOpen && !isDragging) startAutoplay();
                 });
 
                 track.addEventListener('keydown', function (e) {
