@@ -1,7 +1,30 @@
 {
+  "redirects": [
+    { "source": "/index.full.html", "destination": "/", "permanent": false },
+    { "source": "/our-story.html", "destination": "/", "permanent": false },
+    { "source": "/our-story", "destination": "/", "permanent": false },
+    { "source": "/products.html", "destination": "/", "permanent": false },
+    { "source": "/products", "destination": "/", "permanent": false },
+    { "source": "/brand.html", "destination": "/", "permanent": false },
+    { "source": "/brand", "destination": "/", "permanent": false },
+    { "source": "/terms.html", "destination": "/", "permanent": false },
+    { "source": "/terms", "destination": "/", "permanent": false },
+    { "source": "/privacy.html", "destination": "/", "permanent": false },
+    { "source": "/privacy", "destination": "/", "permanent": false },
+    { "source": "/offers.html", "destination": "/", "permanent": false },
+    { "source": "/offers", "destination": "/", "permanent": false },
+    { "source": "/mobile.html", "destination": "/", "permanent": false },
+    { "source": "/mobile", "destination": "/", "permanent": false },
+    { "source": "/shop", "destination": "/", "permanent": false },
+    { "source": "/shop/:path*", "destination": "/", "permanent": false },
+    { "source": "/brands", "destination": "/", "permanent": false },
+    { "source": "/brands/:path*", "destination": "/", "permanent": false },
+    { "source": "/Products", "destination": "/", "permanent": false },
+    { "source": "/Products/:path*", "destination": "/", "permanent": false },
+    { "source": "/archive", "destination": "/", "permanent": false },
+    { "source": "/archive/:path*", "destination": "/", "permanent": false }
+  ],
   "rewrites": [
-    { "source": "/", "destination": "/index.html" },
-    { "source": "/mobile", "destination": "/mobile.html" },
-    { "source": "/imgs/pricelist-summer2026.png", "destination": "/api/pricelist-image" }
+    { "source": "/", "destination": "/index.html" }
   ]
 }
