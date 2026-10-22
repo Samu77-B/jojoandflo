@@ -12,7 +12,7 @@ export default async function handler(req, res) {
   }
 
   const RESEND_API_KEY = process.env.RESEND_API_KEY;
-  const NOTIFY_EMAIL = process.env.PRICELIST_NOTIFY_EMAIL || 'banningp@gmail.com';
+  const NOTIFY_EMAIL = process.env.PRICELIST_NOTIFY_EMAIL || 'hello@jojoandflo.com';
 
   const token = generateToken(email);
 
