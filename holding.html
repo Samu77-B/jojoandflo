@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JOJO &amp; FLO LONDON</title>
+    <meta name="description" content="JOJO &amp; FLO London — Mayfair-trained hairdressing in Palmers Green. The salon is open; our new website is on its way.">
+    <meta name="robots" content="noindex, follow">
+    <link rel="icon" href="logos/jojoflo-fav.png" type="image/png">
+    <link rel="preload" as="image" fetchpriority="high" imagesrcset="imgs/Hero_01a-640w.avif 640w, imgs/Hero_01a-1280w.avif 1280w, imgs/Hero_01a.avif 2016w" imagesizes="100vw">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Montserrat:wght@300;400;500&family=Source+Serif+4:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --font-body: 'Source Serif 4', Georgia, serif;
+            --font-heading: 'Cinzel', Georgia, serif;
+            --font-ui: 'Montserrat', 'Segoe UI', sans-serif;
+            --text: #f7f3eb;
+            --text-muted: rgba(247, 243, 235, 0.78);
+            --accent: #c5ad84;
+            --accent-hover: #d4c19a;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html, body { height: 100%; }
+
+        body {
+            font-family: var(--font-body);
+            color: var(--text);
+            background: #1a1816;
+            overflow-x: hidden;
+        }
+
+        a { color: inherit; text-decoration: none; }
+
+        .holding {
+            position: relative;
+            min-height: 100vh;
+            min-height: 100dvh;
+            display: grid;
+            place-items: center;
+            padding: 48px 24px;
+            isolation: isolate;
+        }
+
+        .holding__media {
+            position: absolute;
+            inset: 0;
+            z-index: -2;
+            overflow: hidden;
+        }
+
+        .holding__media img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center 28%;
+            transform: scale(1.06);
+            animation: hold-zoom 18s ease-out forwards;
+        }
+
+        .holding__veil {
+            position: absolute;
+            inset: 0;
+            z-index: -1;
+            background:
+                linear-gradient(180deg, rgba(18, 16, 14, 0.55) 0%, rgba(18, 16, 14, 0.42) 42%, rgba(18, 16, 14, 0.72) 100%),
+                radial-gradient(ellipse at 50% 35%, rgba(197, 173, 132, 0.12), transparent 55%);
+        }
+
+        .holding__content {
+            width: min(560px, 100%);
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 22px;
+        }
+
+        .holding__logo {
+            height: clamp(52px, 8vw, 72px);
+            width: auto;
+            max-width: min(320px, 78vw);
+            object-fit: contain;
+            opacity: 0;
+            transform: translateY(14px);
+            animation: hold-rise 0.9s ease 0.15s forwards;
+        }
+
+        .holding__rule {
+            width: 48px;
+            height: 1px;
+            background: var(--accent);
+            opacity: 0;
+            transform: scaleX(0.4);
+            animation: hold-rule 0.7s ease 0.45s forwards;
+        }
+
+        .holding__headline {
+            font-family: var(--font-ui);
+            font-weight: 300;
+            font-size: clamp(28px, 5vw, 40px);
+            letter-spacing: 0.04em;
+            line-height: 1.2;
+            opacity: 0;
+            transform: translateY(16px);
+            animation: hold-rise 0.9s ease 0.55s forwards;
+        }
+
+        .holding__copy {
+            font-size: clamp(16px, 2.2vw, 18px);
+            font-weight: 300;
+            line-height: 1.7;
+            color: var(--text-muted);
+            max-width: 36em;
+            opacity: 0;
+            transform: translateY(16px);
+            animation: hold-rise 0.9s ease 0.7s forwards;
+        }
+
+        .holding__actions {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 8px;
+            opacity: 0;
+            transform: translateY(16px);
+            animation: hold-rise 0.9s ease 0.9s forwards;
+        }
+
+        .holding__btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            min-height: 48px;
+            padding: 0 26px;
+            font-family: var(--font-ui);
+            font-size: 12px;
+            font-weight: 500;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            border: 1px solid transparent;
+            transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
+        }
+
+        .holding__btn--primary {
+            background: var(--accent);
+            color: #2c2c2c;
+        }
+
+        .holding__btn--primary:hover {
+            background: var(--accent-hover);
+            transform: translateY(-1px);
+        }
+
+        .holding__btn--ghost {
+            background: transparent;
+            color: var(--text);
+            border-color: rgba(247, 243, 235, 0.35);
+        }
+
+        .holding__btn--ghost:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            transform: translateY(-1px);
+        }
+
+        .holding__meta {
+            margin-top: 10px;
+            font-family: var(--font-ui);
+            font-size: 11px;
+            font-weight: 400;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            opacity: 0;
+            animation: hold-rise 0.9s ease 1.05s forwards;
+        }
+
+        .holding__meta a:hover { color: var(--accent); }
+
+        .holding__meta span[aria-hidden="true"] {
+            margin: 0 10px;
+            opacity: 0.45;
+        }
+
+        @keyframes hold-zoom {
+            from { transform: scale(1.06); }
+            to { transform: scale(1); }
+        }
+
+        @keyframes hold-rise {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes hold-rule {
+            to { opacity: 1; transform: scaleX(1); }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .holding__media img,
+            .holding__logo,
+            .holding__rule,
+            .holding__headline,
+            .holding__copy,
+            .holding__actions,
+            .holding__meta {
+                animation: none;
+                opacity: 1;
+                transform: none;
+            }
+            .holding__media img { transform: scale(1); }
+        }
+
+        @media (max-width: 520px) {
+            .holding { padding: 36px 20px 48px; }
+            .holding__actions { width: 100%; flex-direction: column; }
+            .holding__btn { width: 100%; }
+            .holding__meta {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                letter-spacing: 0.1em;
+            }
+            .holding__meta span[aria-hidden="true"] { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <main class="holding">
+        <div class="holding__media" aria-hidden="true">
+            <picture>
+                <source
+                    type="image/avif"
+                    srcset="imgs/Hero_01a-640w.avif 640w, imgs/Hero_01a-1280w.avif 1280w, imgs/Hero_01a.avif 2016w"
+                    sizes="100vw">
+                <source
+                    type="image/webp"
+                    srcset="imgs/Hero_01a-640w.webp 640w, imgs/Hero_01a-1280w.webp 1280w, imgs/Hero_01a.webp 2016w"
+                    sizes="100vw">
+                <img src="imgs/Hero_01a.png" alt="" width="2016" height="1344" fetchpriority="high" decoding="async">
+            </picture>
+        </div>
+        <div class="holding__veil" aria-hidden="true"></div>
+
+        <div class="holding__content">
+            <img class="holding__logo" src="logos/jojoflo_logo-wht-nw.png" alt="JOJO &amp; FLO LONDON" width="320" height="72">
+            <div class="holding__rule" aria-hidden="true"></div>
+            <h1 class="holding__headline">Our new website is almost ready</h1>
+            <p class="holding__copy">
+                The salon is open as usual in Palmers Green. Book online, call us, or follow along on Instagram while we finish the full site.
+            </p>
+            <div class="holding__actions">
+                <a class="holding__btn holding__btn--primary" href="http://tinyurl.com/y6t4hlo3/" target="_blank" rel="noopener noreferrer">
+                    Book an appointment
+                </a>
+                <a class="holding__btn holding__btn--ghost" href="https://www.instagram.com/jojoandflo/" target="_blank" rel="noopener noreferrer">
+                    <i class="ri-instagram-line" aria-hidden="true"></i>
+                    Instagram
+                </a>
+            </div>
+            <p class="holding__meta">
+                <a href="https://maps.google.com/?q=310+Green+Lanes+London+N13+5TT" target="_blank" rel="noopener">310 Green Lanes, N13</a>
+                <span aria-hidden="true">·</span>
+                <a href="tel:+442088826400">020 8882 6400</a>
+            </p>
+        </div>
+    </main>
+</body>
+</html>

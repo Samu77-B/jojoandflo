@@ -1,6 +1,7 @@
 User-agent: *
 Allow: /
-Disallow: /index.full.html
+Disallow: /index.html
+Disallow: /review-ozqg962avh
 Disallow: /our-story
 Disallow: /our-story.html
 Disallow: /products
@@ -17,3 +18,5 @@ Disallow: /shop/
 Disallow: /brands/
 Disallow: /Products/
 Disallow: /archive/
+Disallow: /index.full.html
+Disallow: /holding.html
