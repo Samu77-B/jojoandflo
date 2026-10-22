@@ -1,7 +1,8 @@
 User-agent: *
 Allow: /
-Disallow: /index.html
+Disallow: /home.html
 Disallow: /review-ozqg962avh
+Disallow: /index.html
 Disallow: /our-story
 Disallow: /our-story.html
 Disallow: /products

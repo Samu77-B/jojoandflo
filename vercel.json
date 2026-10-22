@@ -1,7 +1,6 @@
 {
   "rewrites": [
-    { "source": "/", "destination": "/holding.html" },
-    { "source": "/review-ozqg962avh", "destination": "/index.html" }
+    { "source": "/review-ozqg962avh", "destination": "/home.html" }
   ],
   "redirects": [
     { "source": "/index.full.html", "destination": "/review-ozqg962avh", "permanent": false },

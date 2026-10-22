@@ -6,6 +6,8 @@
     'use strict';
 
     var BOOKING_URL = 'http://tinyurl.com/y6t4hlo3/';
+    /* Temporary review home while holding page owns /. Restore to index.html when launching. */
+    var HOME_PAGE = '/review-ozqg962avh';
     var boundMarker = 'data-site-chrome-bound';
 
     function getSiteRoots() {
@@ -44,12 +46,12 @@
             '<div class="footer-column">' +
             '<h4 class="footer-heading">Navigation</h4>' +
             '<ul class="footer-links">' +
-            '<li><a href="' + home + 'index.html#top">Home</a></li>' +
-            '<li><a href="' + home + 'index.html#about-us">About Us</a></li>' +
-            '<li><a href="' + home + 'index.html#services">Services</a></li>' +
-            '<li><a href="' + home + 'index.html#k-scan">K-SCAN</a></li>' +
-            '<li><a href="' + home + 'index.html#pricelist">Price List</a></li>' +
-            '<li><a href="' + home + 'index.html#gallery">Gallery</a></li>' +
+            '<li><a href="' + HOME_PAGE + '#top">Home</a></li>' +
+            '<li><a href="' + HOME_PAGE + '#about-us">About Us</a></li>' +
+            '<li><a href="' + HOME_PAGE + '#services">Services</a></li>' +
+            '<li><a href="' + HOME_PAGE + '#k-scan">K-SCAN</a></li>' +
+            '<li><a href="' + HOME_PAGE + '#pricelist">Price List</a></li>' +
+            '<li><a href="' + HOME_PAGE + '#gallery">Gallery</a></li>' +
             '</ul></div>' +
             '<div class="footer-column">' +
             '<h4 class="footer-heading">Contact</h4>' +
