@@ -6,9 +6,16 @@
     'use strict';
 
     var BOOKING_URL = 'http://tinyurl.com/y6t4hlo3/';
-    /* Temporary review home while holding page owns /. Restore to index.html when launching. */
-    var HOME_PAGE = '/review-ozqg962avh';
+    /* Temporary review base while holding page owns /. Clear REVIEW_BASE and use index.html when launching. */
+    var REVIEW_BASE = '/review-ozqg962avh';
+    var HOME_PAGE = REVIEW_BASE;
     var boundMarker = 'data-site-chrome-bound';
+
+    function reviewUrl(path) {
+        if (!path) return REVIEW_BASE || '/';
+        if (path.charAt(0) !== '/') path = '/' + path;
+        return (REVIEW_BASE || '') + path;
+    }
 
     function getSiteRoots() {
         var el = global.document.currentScript;
@@ -76,9 +83,9 @@
             '<div>' +
             '<p>&copy; 2025 JOJO &amp; FLO LONDON. All Rights Reserved.</p>' +
             '<p class="footer-legal">' +
-            '<a href="' + home + 'terms.html">Terms</a>' +
-            '<a href="' + home + 'privacy.html">Privacy</a>' +
-            '<a href="' + home + 'offers.html">Offers &amp; Events</a>' +
+            '<a href="' + reviewUrl('/terms.html') + '">Terms</a>' +
+            '<a href="' + reviewUrl('/privacy.html') + '">Privacy</a>' +
+            '<a href="' + reviewUrl('/offers.html') + '">Offers &amp; Events</a>' +
             '</p>' +
             '<p class="footer-credit" hidden>Website by <a href="https://paradigmstudio.net" target="_blank" rel="noopener">Paradigm Studio</a></p>' +
             '</div>' +
@@ -155,11 +162,11 @@
         while (tpl.firstChild) global.document.body.appendChild(tpl.firstChild);
     }
 
-    function footerLegalHtml(home) {
+    function footerLegalHtml() {
         return (
-            '<a href="' + home + 'terms.html">Terms</a>' +
-            '<a href="' + home + 'privacy.html">Privacy</a>' +
-            '<a href="' + home + 'offers.html">Offers &amp; Events</a>'
+            '<a href="' + reviewUrl('/terms.html') + '">Terms</a>' +
+            '<a href="' + reviewUrl('/privacy.html') + '">Privacy</a>' +
+            '<a href="' + reviewUrl('/offers.html') + '">Offers &amp; Events</a>'
         );
     }
 
@@ -190,7 +197,7 @@
             if (credit) bottom.insertBefore(legal, credit);
             else bottom.appendChild(legal);
         }
-        legal.innerHTML = footerLegalHtml(homeRoot);
+        legal.innerHTML = footerLegalHtml();
     }
 
     function ensureFooterCredit() {
@@ -263,7 +270,7 @@
         var productSearchEmpty = global.document.getElementById('productSearchEmpty');
         var productSearchClose = global.document.getElementById('productSearchClose');
         var shop = global.PaySynkShop;
-        var detailPrefix = homeRoot + 'brands/product.html?slug=';
+        var detailPrefix = reviewUrl('/brands/product.html') + '?slug=';
 
         function hideSearchResults() {
             if (!productSearchResults) return;
@@ -364,7 +371,7 @@
         return (
             '<div class="cookie-bar" id="cookieBar" hidden role="dialog" aria-label="Cookie consent">' +
             '<p class="cookie-bar__text">We use cookies to run the site and remember your preferences. ' +
-            '<a href="' + home + 'privacy.html">Privacy</a></p>' +
+            '<a href="' + reviewUrl('/privacy.html') + '">Privacy</a></p>' +
             '<div class="cookie-bar__actions">' +
             '<button type="button" class="cookie-bar__btn cookie-bar__btn--ghost" id="cookieReject">Essential only</button>' +
             '<button type="button" class="cookie-bar__btn cookie-bar__btn--solid" id="cookieAccept">Accept</button>' +
